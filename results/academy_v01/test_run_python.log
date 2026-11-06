@@ -1,0 +1,21 @@
+﻿usage: academy [-h] [--config CONFIG] [--override OVERRIDE]
+               {splits,calibrate,smoke,train,eval,ood,checkpoints,verify-restore,evren-discovery,evren-smoke,evren-pilot,evren-offline,evren-train,evren-status}
+               ...
+
+positional arguments:
+  {splits,calibrate,smoke,train,eval,ood,checkpoints,verify-restore,evren-discovery,evren-smoke,evren-pilot,evren-offline,evren-train,evren-status}
+
+options:
+  -h, --help            show this help message and exit
+  --config CONFIG
+  --override OVERRIDE   flat override key=value, e.g. evaluation.seeds=8
+splits computed: train=147 val=49 test=49 ood=25 (solvable=245)
+offline pilot: approved=2 rejected=0
+registry: C:\Users\USER\AppData\Local\Temp\tmpt_0lgu26
+  approved tasks: 2
+  rejected candidates: 0
+  usage: requests=0 prompt=0 completion=0 total=0
+registry: C:\Users\USER\AppData\Local\Temp\tmpskgn78yi
+  approved tasks: 0
+  rejected candidates: 0
+  usage: requests=0 prompt=0 completion=0 total=0

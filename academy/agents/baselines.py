@@ -243,8 +243,10 @@ class QLearningPolicy:
         self.epsilon = state["epsilon"]
         self.Q = {}
         for row in state["Q"]:
-            sig = tuple(tuple(x) for x in row[:-1])
-            self.Q[(sig, row[-1][0])] = row[-1][1]
+            sig = tuple(tuple(x) for x in row[:-2])
+            action = row[-2][0]
+            value = row[-1]
+            self.Q[(sig, action)] = value
         self.episodes = state["episodes"]
         self.successes = state["successes"]
 
@@ -393,12 +395,13 @@ class BayesPlannerPolicy:
             self.successes += 1
 
     def save_state(self) -> dict:
+        from ..envs.tasks import _config_to_dict
         return {
             "seed": self.seed,
             "rng": _rng_state_safe(self.rng),
             "k": self.k,
             "plan_max_expand": self.plan_max_expand,
-            "particles": [c.key for c in self.particles],
+            "particles": [_config_to_dict(c) for c in self.particles],
             "weights": self.weights,
             "noise_q": self.noise_q,
             "plan_cache": {str(k): list(v) for k, v in list(self.plan_cache.items())[:4000]},
@@ -407,12 +410,24 @@ class BayesPlannerPolicy:
         }
 
     def load_state(self, state: dict) -> None:
+        from ..envs.tasks import _dict_to_config
+        from ..envs.gridworld import EnvConfig
         self.seed = state["seed"]
         _rng_from_state(self.rng, state)
         self.k = state["k"]
         self.plan_max_expand = state["plan_max_expand"]
-        by_key = {c.key: c for c in self.hyp_space}
-        self.particles = [by_key[tuple(k)] for k in state["particles"]]
+        parts = state["particles"]
+        self.particles = []
+        for d in parts:
+            if isinstance(d, dict):
+                self.particles.append(_dict_to_config(d))
+            else:
+                # legacy format: tuple of (topology, str(frozenset), ...)
+                topology, d1s, d2s, b1, b2 = d
+                self.particles.append(EnvConfig(
+                    topology=topology,
+                    d1_rule=eval(d1s), d2_rule=eval(d2s),
+                    d1_delay=b1, d2_delay=b2))
         self.weights = state["weights"]
         self.noise_q = state["noise_q"]
         self.plan_cache = {}

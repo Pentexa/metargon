@@ -1,0 +1,34 @@
+=== evaluation pool: val ===
+n_seeds=6
+  metargon_full        success=0.667 (CI 0.604-0.729) steps=33.7 n=240
+  metargon_noreplay    success=0.667 (CI 0.604-0.729) steps=33.7 n=240
+  random               success=0.054 (CI 0.025-0.083) steps=78.5 n=240
+  episodic             success=0.054 (CI 0.025-0.083) steps=78.5 n=240
+  qlearning            success=0.350 (CI 0.292-0.412) steps=57.2 n=240
+  bayes                success=0.504 (CI 0.442-0.571) steps=61.6 n=240
+  oracle               success=1.000 (CI 1.000-1.000) steps=12.5 n=240
+=== evaluation pool: test ===
+n_seeds=6
+  metargon_full        success=0.500 (CI 0.438-0.562) steps=46.5 n=240
+  metargon_noreplay    success=0.500 (CI 0.438-0.562) steps=46.5 n=240
+  random               success=0.033 (CI 0.013-0.054) steps=78.9 n=240
+  episodic             success=0.037 (CI 0.017-0.062) steps=78.6 n=240
+  qlearning            success=0.233 (CI 0.179-0.283) steps=64.8 n=240
+  bayes                success=0.275 (CI 0.217-0.329) steps=69.4 n=240
+  oracle               success=1.000 (CI 1.000-1.000) steps=16.5 n=240
+=== evaluation pool: ood ===
+n_seeds=6
+  metargon_full        success=0.500 (CI 0.442-0.562) steps=47.5 n=240
+  metargon_noreplay    success=0.500 (CI 0.442-0.562) steps=47.5 n=240
+  random               success=0.013 (CI 0.000-0.029) steps=79.9 n=240
+  episodic             success=0.013 (CI 0.000-0.029) steps=79.9 n=240
+  qlearning            success=0.000 (CI 0.000-0.000) steps=80.0 n=240
+  bayes                success=0.208 (CI 0.158-0.263) steps=74.5 n=240
+  oracle               success=1.000 (CI 1.000-1.000) steps=16.5 n=240
+model bayes: 871699 bytes (JSON state)
+model episodic: 18330 bytes (JSON state)
+model metargon_full: 145657 bytes (JSON state)
+model metargon_noreplay: 147045 bytes (JSON state)
+model oracle: 9929 bytes (JSON state)
+model qlearning: 152169 bytes (JSON state)
+model random: 9923 bytes (JSON state)

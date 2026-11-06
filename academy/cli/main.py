@@ -361,10 +361,10 @@ def cmd_verify_restore(args, cfg):
 def stream_spec_for(splits, snap):
     from academy.envs.tasks import EpisodeSpec, difficulty_of
     cfg0 = splits["train"][0]
-    return EpisodeSpec(config=cfg0.config, max_steps=80, noise_q=0.0,
+    return EpisodeSpec(config=cfg0, max_steps=80, noise_q=0.0,
                        spec_seed=int(snap["extra"].get("spec_seed", 7)),
                        pool_tag="train",
-                       difficulty=difficulty_of(cfg0.config))
+                       difficulty=difficulty_of(cfg0))
 
 
 # ===========================================================================

@@ -30,6 +30,8 @@ def main():
         if not f.startswith("train_") or not f.endswith(".json"):
             continue
         data = load_json(os.path.join(RESULTS, f))
+        if "curve" not in data:
+            continue
         policy = data["policy"]
         for c in data["curve"]:
             rows.append([policy, c["episode"], c["success"], c["steps"],
