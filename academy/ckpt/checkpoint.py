@@ -19,6 +19,24 @@ def config_fingerprint(cfg: dict) -> str:
     return hashlib.sha256(canonical.encode("utf-8")).hexdigest()[:16]
 
 
+def rng_state_safe(rng):
+    """Serialize a random.Random state JSON-safely (tuples -> lists)."""
+    st = rng.getstate()
+    return {"version": st[0], "internal": list(st[1]), "gauss": st[2]}
+
+
+def rng_from_state(rng, state):
+    """Restore a random.Random state from either the JSON-safe dict form
+    or the legacy tuple form."""
+    rng_state = state.get("rng")
+    if isinstance(rng_state, dict):
+        rng.setstate((rng_state["version"], tuple(rng_state["internal"]),
+                      rng_state["gauss"]))
+    else:
+        rng.setstate(tuple(rng_state))
+    return rng
+
+
 def _atomic_write_json(path: str, data: dict) -> None:
     os.makedirs(os.path.dirname(path), exist_ok=True)
     tmp = path + f".tmp.{os.getpid()}"

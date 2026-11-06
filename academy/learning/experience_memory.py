@@ -5,6 +5,7 @@ from __future__ import annotations
 import random
 
 from ..core.interfaces import Experience, ExperienceMemory
+from ..ckpt.checkpoint import rng_from_state, rng_state_safe
 
 
 class BoundedExperienceMemory(ExperienceMemory):
@@ -38,7 +39,7 @@ class BoundedExperienceMemory(ExperienceMemory):
         return {
             "capacity": self.capacity,
             "seed": self.seed,
-            "rng": self.rng.getstate(),
+            "rng": rng_state_safe(self.rng),
             "cursor": self._cursor,
             "buffer": [
                 {
@@ -56,10 +57,10 @@ class BoundedExperienceMemory(ExperienceMemory):
         }
 
     def load_state(self, state: dict) -> None:
-        from ..gridworld import Observation
+        from ..envs.gridworld import Observation
         self.capacity = state["capacity"]
         self.seed = state["seed"]
-        self.rng.setstate(tuple(state["rng"]))
+        rng_from_state(self.rng, state)
         self._cursor = state["cursor"]
         self.buffer = []
         for d in state["buffer"]:

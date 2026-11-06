@@ -1,0 +1,56 @@
+{
+ "policy": "metargon_full",
+ "episodes": 8,
+ "success_rate": 0.625,
+ "curve": [
+  {
+   "episode": 0,
+   "success": true,
+   "steps": 10,
+   "door_events": 2
+  },
+  {
+   "episode": 1,
+   "success": false,
+   "steps": 80,
+   "door_events": 1
+  },
+  {
+   "episode": 2,
+   "success": false,
+   "steps": 80,
+   "door_events": 1
+  },
+  {
+   "episode": 3,
+   "success": true,
+   "steps": 31,
+   "door_events": 6
+  },
+  {
+   "episode": 4,
+   "success": true,
+   "steps": 15,
+   "door_events": 2
+  },
+  {
+   "episode": 5,
+   "success": true,
+   "steps": 13,
+   "door_events": 2
+  },
+  {
+   "episode": 6,
+   "success": false,
+   "steps": 80,
+   "door_events": 1
+  },
+  {
+   "episode": 7,
+   "success": true,
+   "steps": 19,
+   "door_events": 2
+  }
+ ],
+ "wall_s": 7.586602199997287
+}

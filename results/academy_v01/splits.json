@@ -2,626 +2,788 @@
  "counts": {
   "enumerated": 624,
   "ood": 25,
-  "solvable": 260,
-  "test": 52,
-  "train": 156,
-  "val": 52
+  "solvable": 245,
+  "test": 49,
+  "train": 147,
+  "val": 49
  },
  "ood": [
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP2"
@@ -629,1219 +791,1370 @@
  ],
  "test": [
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
@@ -1849,3512 +2162,4246 @@
  ],
  "train": [
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP2"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
@@ -5362,1180 +6409,1377 @@
  ],
  "val": [
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
+   "d2_conjunctive": true,
+   "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": false,
+   "d1_conjunctive": true,
+   "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
-   "d2_delay": true,
+   "d2_conjunctive": true,
+   "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "load",
+      "P1",
+      "A"
+     ]
     ]
    ],
-   "d2_delay": true,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "topology": "TP1"
+   "topology": "TP2"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ],
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": true,
+   "d1_conjunctive": true,
+   "d1_delay": false,
    "d1_rule": [
     [
-     "sw",
-     "S2",
-     false
+     [
+      "empty",
+      "P1"
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "loadany",
-     "P1"
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     false
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "loadany",
-     "P1"
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "empty",
-     "P1"
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "empty",
-     "P2"
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": false,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     true
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "empty",
-     "P2"
+     [
+      "empty",
+      "P2"
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": true,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
+     [
+      "loadany",
+      "P1"
+     ]
     ]
    ],
-   "d2_delay": false,
-   "d2_rule": [
-    [
-     "load",
-     "P1",
-     "A"
-    ],
-    [
-     "sw",
-     "S1",
-     true
-    ]
-   ],
-   "topology": "TP1"
-  },
-  {
-   "d1_delay": true,
-   "d1_rule": [
-    [
-     "empty",
-     "P1"
-    ],
-    [
-     "sw",
-     "S2",
-     false
-    ]
-   ],
+   "d2_conjunctive": true,
    "d2_delay": true,
    "d2_rule": [
     [
-     "sw",
-     "S1",
-     false
-    ],
-    [
-     "sw",
-     "S2",
-     true
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"
   },
   {
+   "d1_conjunctive": true,
    "d1_delay": false,
    "d1_rule": [
     [
-     "load",
-     "P1",
-     "A"
+     [
+      "sw",
+      "S2",
+      false
+     ]
     ]
    ],
+   "d2_conjunctive": true,
    "d2_delay": false,
    "d2_rule": [
     [
-     "empty",
-     "P2"
-    ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
     [
-     "sw",
-     "S1",
-     false
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP2"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "topology": "TP1"
+  },
+  {
+   "d1_conjunctive": true,
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_conjunctive": true,
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
     ]
    ],
    "topology": "TP1"

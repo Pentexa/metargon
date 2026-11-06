@@ -228,12 +228,41 @@ class CompositionalMemory:
                 break
         return cands
 
-    def observe_event(self, before_atoms: frozenset, door: str, opened: bool):
+    def observe_event(self, before_atoms: frozenset, door: str, opened: bool,
+                      after_atoms: Optional[frozenset] = None):
+        """Called when a door's state visibly changed this step. Candidate
+        hypotheses are generated from the context *before* the event and
+        from the *after* state (for persistent doors the true cause often
+        only appears in the after-state)."""
         consequence = consequence_key(door, opened)
-        for ante in self._candidate_antecedents(before_atoms):
-            h = self._add(ante, consequence)
-            if h is not None and ante <= before_atoms:
-                self._support(h)
+        contexts = [before_atoms]
+        if after_atoms is not None:
+            contexts.append(after_atoms)
+        seen = set()
+        for atoms in contexts:
+            for ante in self._candidate_antecedents(atoms):
+                if ante in seen:
+                    continue
+                seen.add(ante)
+                h = self._add(ante, consequence)
+                if h is not None and ante <= atoms:
+                    self._support(h)
+
+    def observe_maintain(self, atoms: frozenset, door: str) -> None:
+        """Called every step a door stays open. Hypotheses predicting the
+        open state whose antecedent continuously holds are supported
+        (persistent-cause inductive bias)."""
+        consequence = consequence_key(door, True)
+        for h in self.hypotheses:
+            if h.door != door or h.consequence != consequence or not h.usable:
+                continue
+            if h.antecedent <= atoms:
+                c = self._continuous_true.get(h.h_id, 0) + 1
+                self._continuous_true[h.h_id] = c
+                if c >= 1:
+                    self._support(h)
+            else:
+                self._continuous_true.pop(h.h_id, None)
 
     def observe_nonevent(self, atoms: frozenset, door: str, wants_open: bool):
         consequence = consequence_key(door, wants_open)

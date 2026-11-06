@@ -251,10 +251,14 @@ class BayesPlannerPolicy:
         self.belief = make_state()
         self.plan_cache = {}
         self.noise_q = 0.0
+        self.current_plan = []        # follow-one-plan-until-invalid
+        self.current_plan_config = None
 
     def episode_start(self, noise_q: float = 0.0):
         self.belief = make_state()
         self.noise_q = noise_q
+        self.current_plan = []
+        self.current_plan_config = None
         # plan cache is keyed by state + sampled hypothesis; it is kept
         # across episodes (bounded) so repeated states are not re-planned.
 
@@ -313,7 +317,14 @@ class BayesPlannerPolicy:
 
     def act(self, obs) -> str:
         self._sync(obs)
-        # posterior sampling: pick one hypothesis, plan optimally under it
+        # follow the current plan while it remains executable under belief
+        while self.current_plan:
+            a = self.current_plan[0]
+            if public_next(self.belief, a) is not None:
+                self.current_plan.pop(0)
+                return a
+            self.current_plan.pop(0)
+        # plan is exhausted/invalid: posterior sampling, plan under sample
         c = self.rng.choices(self.particles, weights=self.weights, k=1)[0]
         sig = (self.belief.pos, self.belief.objs["A"], self.belief.objs["B"],
                self.belief.switch_state["S1"], self.belief.switch_state["S2"],
@@ -328,8 +339,10 @@ class BayesPlannerPolicy:
                 # FIFO eviction of the cache (bounded memory)
                 for key in list(self.plan_cache)[:2000]:
                     del self.plan_cache[key]
-        if plan:
-            return plan[0]
+        self.current_plan = list(plan)
+        self.current_plan_config = c
+        if self.current_plan:
+            return self.current_plan.pop(0)
         v = valid_actions(self.belief)
         return self.rng.choice(v if v else ACTIONS)
 
@@ -352,6 +365,7 @@ class OraclePolicy:
     def episode_start(self, config=None):
         self.config = config
         self.belief = make_state()
+        self.current_plan = []
         # keep plan cache across episodes (state key includes the config)
 
     def _sync(self, obs):
@@ -369,6 +383,12 @@ class OraclePolicy:
 
     def act(self, obs) -> str:
         self._sync(obs)
+        while self.current_plan:
+            a = self.current_plan[0]
+            if public_next(self.belief, a) is not None:
+                self.current_plan.pop(0)
+                return a
+            self.current_plan.pop(0)
         sig = (self.belief.pos, self.belief.objs["A"], self.belief.objs["B"],
                self.belief.switch_state["S1"], self.belief.switch_state["S2"],
                self.belief.plate_load["P1"], self.belief.plate_load["P2"],
@@ -377,8 +397,12 @@ class OraclePolicy:
         if plan is None:
             plan = ground_truth_plan(self.belief, self.config) or []
             self.plan_cache[sig] = plan
-        if plan:
-            return plan[0]
+            if len(self.plan_cache) > 8000:
+                for key in list(self.plan_cache)[:2000]:
+                    del self.plan_cache[key]
+        self.current_plan = list(plan)
+        if self.current_plan:
+            return self.current_plan.pop(0)
         v = valid_actions(self.belief)
         return self.rng.choice(v if v else ACTIONS)
 

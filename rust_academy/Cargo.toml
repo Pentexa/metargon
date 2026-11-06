@@ -1,0 +1,8 @@
+[package]
+name = "metargon-academy-kernel"
+version = "0.1.0"
+edition = "2021"
+description = "METARGON Academy v0.1 bounded inference kernel (compositional hypothesis memory + rule evaluation)"
+license = "MIT"
+
+[dependencies]

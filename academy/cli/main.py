@@ -36,6 +36,14 @@ from academy.learning.loop import (  # noqa: E402
 )
 from academy.eval.evaluator import Evaluator, compare_all  # noqa: E402
 from academy.ckpt.checkpoint import CheckpointManager  # noqa: E402
+from academy.evren.pilot import (  # noqa: E402
+    RESULTS_EVREN_DIR, build_provider, evren_cfg, load_splits,
+    registry_paths, run_experiment, run_pilot,
+)
+from academy.evren.provider import (  # noqa: E402
+    PRIMARY_TEACHER, SECONDARY_TEACHER, api_key_from_env,
+)
+from academy.evren.task_registry import TaskRegistry  # noqa: E402
 
 
 def policy_factories(cfg):
@@ -359,6 +367,158 @@ def stream_spec_for(splits, snap):
                        difficulty=difficulty_of(cfg0.config))
 
 
+# ===========================================================================
+# EVREN teacher integration commands
+# ===========================================================================
+def cmd_evren_discovery(args, cfg):
+    """Resolve exact model IDs from the provider's discovery endpoint."""
+    provider = build_provider(cfg, run_id="evren-discovery")
+    key_present = bool(api_key_from_env(evren_cfg(cfg).get("api_key_env", "EVREN_API_KEY")))
+    if not key_present:
+        print("EVREN_API_KEY is not set — cannot authenticate discovery.")
+        print("Add it to the environment or to a git-ignored .env file.")
+        return 1
+    try:
+        models = provider.discover_models()
+    except Exception as exc:
+        print(f"discovery failed: {exc}")
+        return 1
+    for display in (PRIMARY_TEACHER, SECONDARY_TEACHER):
+        try:
+            mid = provider.resolve_model(display, models=models)
+            print(f"{display} -> {mid}")
+        except Exception as exc:
+            print(f"{display} -> unresolved ({exc})")
+    return 0
+
+
+def cmd_evren_smoke(args, cfg):
+    """EXACTLY ONE authorized connection smoke test (GET /models). No other
+    API calls are made by this command."""
+    provider = build_provider(cfg, run_id="evren-smoke")
+    key_present = bool(api_key_from_env(evren_cfg(cfg).get("api_key_env", "EVREN_API_KEY")))
+    if not key_present:
+        print("EVREN_API_KEY is not set — cannot authenticate. "
+              "Add it to the environment or .env, then run again.")
+        return 1
+    print("evren smoke test: one authorized connection check...")
+    try:
+        models = provider.discover_models()
+        n_models = len(models)
+        ids = [m.get("id") for m in models if isinstance(m, dict) and m.get("id")]
+        print(f"OK: connected to {provider.cfg.base_url}; "
+              f"{n_models} models discovered")
+        for display in (PRIMARY_TEACHER, SECONDARY_TEACHER):
+            try:
+                mid = provider.resolve_model(display, models=models)
+                print(f"  {display} -> {mid}")
+            except Exception as exc:
+                print(f"  {display} -> unresolved ({exc})")
+        return 0
+    except Exception as exc:
+        print(f"FAILED: {exc}")
+        return 1
+
+
+def cmd_evren_pilot(args, cfg):
+    splits = load_splits(cfg)
+    e = evren_cfg(cfg)
+    n = args.n or int(e.get("pilot_n", 10))
+    results_dir = registry_paths(cfg)
+    summary = run_pilot(cfg, splits, n=n, teacher=args.teacher or "primary",
+                        force_offline=args.offline,
+                        results_dir=results_dir,
+                        run_id=f"evren-pilot-{args.teacher or 'primary'}")
+    print(f"pilot: source={summary['source']} requested={summary['requested']} "
+          f"approved={summary['approved']} rejected={summary['rejected']}")
+    if summary.get("fallback_reason"):
+        print(f"  fallback: {summary['fallback_reason']}")
+    if summary.get("quota_calls"):
+        q = summary["quota_calls"]
+        print(f"  quota: calls={q['calls']} max={q['max_calls']} "
+              f"tokens={q['total_tokens']}")
+    from academy.evren.task_registry import TaskRegistry
+    registry = TaskRegistry(results_dir, run_id=summary["run_id"])
+    tok = registry.token_summary()
+    print(f"  token usage: prompt={tok['totals']['prompt_tokens']} "
+          f"completion={tok['totals']['completion_tokens']} "
+          f"requests={tok['totals']['requests']} "
+          f"errors={tok['error_count']}")
+    return 0
+
+
+def cmd_evren_offline(args, cfg):
+    splits = load_splits(cfg)
+    e = evren_cfg(cfg)
+    n = args.n or int(e.get("pilot_n", 10))
+    results_dir = registry_paths(cfg)
+    summary = run_pilot(cfg, splits, n=n, force_offline=True,
+                        results_dir=results_dir,
+                        run_id="evren-offline")
+    print(f"offline pilot: approved={summary['approved']} "
+          f"rejected={summary['rejected']}")
+    return 0
+
+
+def cmd_evren_train(args, cfg):
+    splits = load_splits(cfg)
+    results_dir = registry_paths(cfg)
+    registry = TaskRegistry(results_dir, run_id="evren-exp")
+    e = evren_cfg(cfg)
+    episodes = args.episodes or int(e.get("exp_episodes", 120))
+    p_teacher = args.p_teacher if args.p_teacher is not None else float(
+        e.get("exp_p_teacher", 0.5))
+    eval_seeds = args.eval_seeds or int(e.get("exp_eval_seeds", 4))
+    eval_episodes = args.eval_episodes or int(
+        e.get("exp_eval_episodes_per_seed", 60))
+    summary = run_experiment(
+        cfg, splits, registry,
+        episodes=episodes, p_teacher=p_teacher,
+        seed=int(e.get("seed", 0)),
+        max_steps=cfg.get("world", {}).get("max_steps", 80),
+        eval_seeds=eval_seeds,
+        eval_episodes_per_seed=eval_episodes,
+        results_dir=results_dir, run_id="evren-exp")
+    b, t = summary["baseline"], summary["teacher"]
+    print("== EVREN teacher experiment ==")
+    print(f"  episodes={summary['episodes']} p_teacher={summary['p_teacher']} "
+          f"teacher_train={summary['teacher_train_tasks']} "
+          f"teacher_holdout={summary['teacher_holdout_tasks']}")
+    for name, s in (("baseline", b), ("teacher", t)):
+        print(f"  {name}: train_success={s['train_success']:.3f} "
+              f"classic_test={s['classic_test']['success_rate']:.3f} "
+              f"teacher_holdout={s['teacher_holdout']['success_rate']:.3f}")
+    fg = summary["forgetting"]
+    print(f"  forgetting probe: baseline={fg['baseline_probe']['success_rate']:.3f} "
+          f"teacher={fg['teacher_probe']['success_rate']:.3f} "
+          f"delta={fg['forgetting_delta_teacher_vs_baseline']:+.3f}")
+    print(f"  summary written to {os.path.join(results_dir, 'experiment_summary.json')}")
+    return 0
+
+
+def cmd_evren_status(args, cfg):
+    results_dir = registry_paths(cfg)
+    if not os.path.isdir(results_dir):
+        print("no EVREN results yet; run `evren-pilot` first")
+        return 0
+    registry = TaskRegistry(results_dir, run_id="evren")
+    s = registry.summary()
+    print(f"registry: {s['directory']}")
+    print(f"  approved tasks: {s['approved_count']}")
+    print(f"  rejected candidates: {s['rejected_count']}")
+    tok = s["usage"]["totals"]
+    print(f"  usage: requests={tok['requests']} "
+          f"prompt={tok['prompt_tokens']} completion={tok['completion_tokens']} "
+          f"total={tok['total_tokens']}")
+    for m, st in sorted(s["usage"]["by_model"].items()):
+        print(f"    {m}: requests={st['requests']} tokens={st['total_tokens']}")
+    if s["usage"]["error_count"]:
+        print(f"  api errors ({s['usage']['error_count']}):")
+        for e in s["usage"]["errors"][-5:]:
+            print(f"    [{e.get('status')}] {e.get('error', '')[:120]}")
+    return 0
+
+
 def main(argv=None):
     parser = argparse.ArgumentParser(prog="academy")
     parser.add_argument("--config", default=DEFAULT_CONFIG_PATH)
@@ -380,6 +540,23 @@ def main(argv=None):
     p_ck.add_argument("--policy", default=None)
     p_vr = sub.add_parser("verify-restore")
     p_vr.add_argument("--policy", default=None)
+
+    # -- EVREN teacher integration --------------------------------------
+    sub.add_parser("evren-discovery")
+    sub.add_parser("evren-smoke")
+    p_ep = sub.add_parser("evren-pilot")
+    p_ep.add_argument("--n", type=int, default=None)
+    p_ep.add_argument("--offline", action="store_true")
+    p_ep.add_argument("--teacher", choices=["primary", "secondary"],
+                      default="primary")
+    p_eo = sub.add_parser("evren-offline")
+    p_eo.add_argument("--n", type=int, default=None)
+    p_et = sub.add_parser("evren-train")
+    p_et.add_argument("--episodes", type=int, default=None)
+    p_et.add_argument("--p-teacher", type=float, default=None)
+    p_et.add_argument("--eval-seeds", type=int, default=None)
+    p_et.add_argument("--eval-episodes", type=int, default=None)
+    sub.add_parser("evren-status")
     parser.add_argument("--override", action="append", default=None,
                         help="flat override key=value, e.g. evaluation.seeds=8")
 
@@ -413,6 +590,18 @@ def main(argv=None):
         return cmd_checkpoints(args, cfg)
     if args.command == "verify-restore":
         return cmd_verify_restore(args, cfg)
+    if args.command == "evren-discovery":
+        return cmd_evren_discovery(args, cfg)
+    if args.command == "evren-smoke":
+        return cmd_evren_smoke(args, cfg)
+    if args.command == "evren-pilot":
+        return cmd_evren_pilot(args, cfg)
+    if args.command == "evren-offline":
+        return cmd_evren_offline(args, cfg)
+    if args.command == "evren-train":
+        return cmd_evren_train(args, cfg)
+    if args.command == "evren-status":
+        return cmd_evren_status(args, cfg)
     parser.print_help()
     return 1
 

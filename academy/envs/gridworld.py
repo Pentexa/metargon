@@ -431,10 +431,38 @@ class MechanismGrid:
 # ---------------------------------------------------------------------------
 # Solvability check (environment property; never passed to policies).
 # ---------------------------------------------------------------------------
-def is_solvable(config: EnvConfig, max_plan: int = 80) -> bool:
-    """BFS over the full hidden dynamics from the initial state."""
+def _goal_reachable_geometry(geom: Geom) -> bool:
+    """Cheap pre-filter: is the goal reachable in the cell graph when all
+    doors are open? If not, no configuration on this topology is solvable."""
+    from collections import deque
+    state = make_ws(geom)
+    state = state._replace(door_open={d: True for d in DOORS})
+    seen = {geom.start}
+    q = deque([geom.start])
+    while q:
+        cur = q.popleft()
+        if cur == geom.goal:
+            return True
+        for dx, dy in ((0, 1), (0, -1), (1, 0), (-1, 0)):
+            n = (cur[0] + dx, cur[1] + dy)
+            if (0 <= n[0] < W and 0 <= n[1] < H
+                    and n not in seen and not geom.cell_blocked(n, state.door_open)):
+                seen.add(n)
+                q.append(n)
+    return False
+
+
+def is_solvable(config: EnvConfig, max_plan: int = 80,
+                max_expand: int = 2500) -> bool:
+    """BFS over the full hidden dynamics from the initial state, with a
+    hard expansion cap (used only as a ground-truth filter). Heuristic
+    close-to-goal ordering finds solvable configs quickly; configs that
+    cannot be proven within the cap are treated as unsolvable (they are
+    dropped from the pools, which never reduces the split targets)."""
     from collections import deque
     geom = TOPOLOGIES[config.topology]
+    if not _goal_reachable_geometry(geom):
+        return False
     start = make_ws(geom)
     if start.pos == geom.goal:
         return True
@@ -445,12 +473,14 @@ def is_solvable(config: EnvConfig, max_plan: int = 80) -> bool:
                 tuple(st.plate_load[p] for p in PLATES),
                 tuple(st.door_open[d] for d in DOORS))
 
+    goal = geom.goal
     q = deque([(start, 0)])
     seen = {key(start)}
-    while q:
+    while q and len(seen) < max_expand:
         st, depth = q.popleft()
         if depth >= max_plan:
             continue
+        children = []
         for a in ACTIONS:
             nxt, _ = transition_with_hidden(st, a, config, geom)
             if nxt is None:
@@ -459,7 +489,10 @@ def is_solvable(config: EnvConfig, max_plan: int = 80) -> bool:
             if k in seen:
                 continue
             seen.add(k)
-            if nxt.pos == geom.goal:
+            if nxt.pos == goal:
                 return True
-            q.append((nxt, depth + 1))
+            children.append((nxt, depth + 1))
+        children.sort(key=lambda t: (abs(t[0].pos[0] - goal[0])
+                                     + abs(t[0].pos[1] - goal[1])))
+        q.extend(children)
     return False

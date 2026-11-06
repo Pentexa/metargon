@@ -32,6 +32,57 @@ python3 python/metargon_world.py --seeds 30 --episodes 240 --json results/statef
 
 The quick demo shows a hidden key-only gate changing to switch-only. Its display prints the evaluator's hidden mode **for the human only**; the agent is not passed that value.
 
+## Academy (v0.1) — student-agent framework
+
+`academy/` is the current research line: a reproducible continual-learning
+platform with a student agent, curriculum manager, bounded experience
+memory, frozen evaluation pools, and crash-safe checkpoints (stdlib only).
+
+```bash
+python -m academy.cli.main splits            # compute/persist immutable task splits
+python -m academy.cli.main smoke             # tiny end-to-end smoke experiment
+python -m academy.cli.main calibrate         # measured difficulty schedule
+python -m academy.cli.main train             # matched training across policies
+python -m academy.cli.main eval --kind test  # frozen-pool evaluation
+```
+
+## EVREN LLM integration — curriculum teacher (not the decision brain)
+
+EVREN-hosted language models act strictly as **curriculum teachers**: they
+propose structured procedural tasks (environment wiring only), which the
+Academy validates against strict schemas, tests with an independent solver,
+and only then feeds to the student. Teachers never see student internals,
+never supply solutions/hints, and are never consulted during evaluation.
+
+- Provider: OpenAI-compatible, base URL `https://evren-llmapi.ssyz.org.tr/v1`,
+  API key read from `EVREN_API_KEY` (or git-ignored `.env`). Never hardcoded.
+- Models: primary teacher **GLM-5.3**, secondary **DeepSeek V4.1 Flash**
+  (exact IDs resolved from the provider's `/models` discovery endpoint).
+- Budget: default **10 teacher calls per run**; unlimited usage is
+  explicitly disabled unless `allow_unlimited = true` is set.
+
+```bash
+# one authorized connection smoke test (exactly one API call)
+python -m academy.cli.main evren-smoke
+
+# reproducible 10-task pilot (GLM-5.3), validates and persists everything
+python -m academy.cli.main evren-pilot
+
+# same pipeline but purely offline (no EVREN needed)
+python -m academy.cli.main evren-offline --n 10
+
+# train baseline vs teacher-condition, evaluate transfer + forgetting
+python -m academy.cli.main evren-train
+
+# inspect approved tasks, rejected candidates, token usage, API errors
+python -m academy.cli.main evren-status
+```
+
+All EVREN artifacts land in `results/academy_v01/evren/` (approved tasks with
+provenance, rejected candidates, usage log, experiment summaries). See
+`docs/EVREN_INTEGRATION_REPORT.md` for the full method, verification, and
+results.
+
 ## Core benchmark — most discriminative condition
 
 30 matched seeds, 240 episodes per seed, seven actions maximum per episode. Mean success across seeds:

@@ -69,3 +69,26 @@ snapshot_limits = [40, 80, 160, 240]   # learning-curve snapshot points
 dir = "checkpoints/academy_v01"
 every_episodes = 20        # crash-safe snapshot cadence (training)
 keep_last = 5
+
+# =============================================================================
+# EVREN LLM integration (curriculum teacher only — never the decision brain)
+# =============================================================================
+[evren]
+enabled = true
+base_url = "https://evren-llmapi.ssyz.org.tr/v1"
+api_key_env = "EVREN_API_KEY"     # never hardcoded; read at call time
+primary_teacher = "GLM-5.3"
+secondary_teacher = "DeepSeek V4.1 Flash"
+# Per-run call budget (teacher calls, not student decisions). The default is
+# 10. Increase ONLY explicitly (config or --override); negative/unlimited is
+# forbidden unless allow_unlimited is explicitly set to true.
+max_calls_per_run = 10
+allow_unlimited = false
+max_total_tokens = 0               # 0 = no token cap beyond call cap
+timeout = 60.0                     # seconds (connect + read)
+max_retries = 3                    # exponential backoff on 429/5xx
+max_tokens = 1024                  # completion output limit (per call)
+temperature = 0.7
+seed = 20261107
+pilot_n = 10                       # reproducible pilot size
+registry_dir = "results/academy_v01/evren"

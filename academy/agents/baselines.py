@@ -27,10 +27,19 @@ from ..envs.gridworld import (
     ACTIONS, DOORS, EnvConfig, TOPOLOGIES, make_ws, public_next,
     transition_with_hidden,
 )
+from ..ckpt.checkpoint import rng_from_state, rng_state_safe
 
 LAMBDA_LL = 0.02
-K_PARTICLES = 48
-PLAN_MAX_EXPAND = 4000
+
+
+def _rng_state_safe(rng):
+    return rng_state_safe(rng)
+
+
+def _rng_from_state(rng, state):
+    return rng_from_state(rng, state)
+K_PARTICLES = 24
+PLAN_MAX_EXPAND = 2500
 QL_ALPHA = 0.30
 QL_GAMMA = 0.95
 QL_EPSILON0 = 0.35
@@ -65,11 +74,11 @@ class RandomPolicy:
         pass
 
     def save_state(self) -> dict:
-        return {"seed": self.seed, "rng": self.rng.getstate()}
+        return {"seed": self.seed, "rng": _rng_state_safe(self.rng)}
 
     def load_state(self, state: dict) -> None:
         self.seed = state["seed"]
-        self.rng.setstate(tuple(state["rng"]))
+        _rng_from_state(self.rng, state)
 
     def diagnostics(self) -> dict:
         return {}
@@ -125,7 +134,7 @@ class EpisodicPolicy:
     def save_state(self) -> dict:
         return {
             "seed": self.seed,
-            "rng": self.rng.getstate(),
+            "rng": _rng_state_safe(self.rng),
             "max_mem": self.max_mem,
             "mem": {str(k): list(v) for k, v in self.mem.items()},
             "episodes": self.episodes,
@@ -134,7 +143,7 @@ class EpisodicPolicy:
 
     def load_state(self, state: dict) -> None:
         self.seed = state["seed"]
-        self.rng.setstate(tuple(state["rng"]))
+        _rng_from_state(self.rng, state)
         self.max_mem = state["max_mem"]
         self.mem = {eval(k): deque(v) for k, v in state["mem"].items()}
         self.episodes = state["episodes"]
@@ -215,7 +224,7 @@ class QLearningPolicy:
     def save_state(self) -> dict:
         return {
             "seed": self.seed,
-            "rng": self.rng.getstate(),
+            "rng": _rng_state_safe(self.rng),
             "alpha": self.alpha, "gamma": self.gamma,
             "epsilon0": self.epsilon0, "eps_min": self.eps_min,
             "epsilon": self.epsilon,
@@ -226,7 +235,7 @@ class QLearningPolicy:
 
     def load_state(self, state: dict) -> None:
         self.seed = state["seed"]
-        self.rng.setstate(tuple(state["rng"]))
+        _rng_from_state(self.rng, state)
         self.alpha = state["alpha"]
         self.gamma = state["gamma"]
         self.epsilon0 = state["epsilon0"]
@@ -261,8 +270,8 @@ class BayesPlannerPolicy:
         self.plan_max_expand = plan_max_expand
         self.geom = None
 
-        from .gridworld import EnvConfig as EC
-        from academy.envs.tasks import CORE_RULESETS
+        from ..envs.gridworld import EnvConfig as EC
+        from ..envs.tasks import CORE_RULESETS
         self._core_d1 = CORE_RULESETS["TP1"][0]
         self._core_d2 = CORE_RULESETS["TP1"][1]
         self.hyp_space = [
@@ -386,7 +395,7 @@ class BayesPlannerPolicy:
     def save_state(self) -> dict:
         return {
             "seed": self.seed,
-            "rng": self.rng.getstate(),
+            "rng": _rng_state_safe(self.rng),
             "k": self.k,
             "plan_max_expand": self.plan_max_expand,
             "particles": [c.key for c in self.particles],
@@ -399,7 +408,7 @@ class BayesPlannerPolicy:
 
     def load_state(self, state: dict) -> None:
         self.seed = state["seed"]
-        self.rng.setstate(tuple(state["rng"]))
+        _rng_from_state(self.rng, state)
         self.k = state["k"]
         self.plan_max_expand = state["plan_max_expand"]
         by_key = {c.key: c for c in self.hyp_space}
@@ -433,7 +442,7 @@ class OraclePolicy:
 
     def episode_start(self, spec, geom=None):
         self.geom = geom
-        self.config = spec.env_config
+        self.config = spec.config
         # keep plan cache across episodes (state key includes the config)
 
     def act(self, obs) -> str:
@@ -491,11 +500,11 @@ class OraclePolicy:
         pass
 
     def save_state(self) -> dict:
-        return {"seed": self.seed, "rng": self.rng.getstate()}
+        return {"seed": self.seed, "rng": _rng_state_safe(self.rng)}
 
     def load_state(self, state: dict) -> None:
         self.seed = state["seed"]
-        self.rng.setstate(tuple(state["rng"]))
+        _rng_from_state(self.rng, state)
 
     def diagnostics(self) -> dict:
         return {}

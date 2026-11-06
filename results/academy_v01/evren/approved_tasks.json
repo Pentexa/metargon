@@ -1,0 +1,553 @@
+[
+ {
+  "approved_at": 1794006924.7665381,
+  "completion_tokens": 0,
+  "difficulty_intent": "hard",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "difficulty_intent": "hard",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-1",
+   "topology": "TP2"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-1",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.7665381,
+  "completion_tokens": 0,
+  "difficulty_intent": "hard",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    [
+     [
+      "loadany",
+      "P1"
+     ]
+    ]
+   ],
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ]
+    ]
+   ],
+   "difficulty_intent": "hard",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-2",
+   "topology": "TP1"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-2",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.7665381,
+  "completion_tokens": 0,
+  "difficulty_intent": "hard",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    [
+     [
+      "loadany",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "load",
+      "P2",
+      "B"
+     ]
+    ],
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "difficulty_intent": "hard",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-6",
+   "topology": "TP1"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-6",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.7665381,
+  "completion_tokens": 0,
+  "difficulty_intent": "hard",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ],
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "difficulty_intent": "hard",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-8",
+   "topology": "TP1"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-8",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.7665381,
+  "completion_tokens": 0,
+  "difficulty_intent": "medium",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ],
+    [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "difficulty_intent": "medium",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-10",
+   "topology": "TP2"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-10",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.782159,
+  "completion_tokens": 0,
+  "difficulty_intent": "hard",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ],
+    [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "difficulty_intent": "hard",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-12",
+   "topology": "TP2"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-12",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.782159,
+  "completion_tokens": 0,
+  "difficulty_intent": "easy",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "difficulty_intent": "easy",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-19",
+   "topology": "TP2"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-19",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.782159,
+  "completion_tokens": 0,
+  "difficulty_intent": "medium",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": false,
+   "d1_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ]
+   ],
+   "difficulty_intent": "medium",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-25",
+   "topology": "TP2"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-25",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.797787,
+  "completion_tokens": 0,
+  "difficulty_intent": "hard",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_delay": false,
+   "d2_rule": [
+    [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ],
+    [
+     [
+      "loadany",
+      "P2"
+     ]
+    ]
+   ],
+   "difficulty_intent": "hard",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-26",
+   "topology": "TP1"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-26",
+  "temperature": 0.0,
+  "total_tokens": 0
+ },
+ {
+  "approved_at": 1794006924.797787,
+  "completion_tokens": 0,
+  "difficulty_intent": "medium",
+  "latency_ms": 0.0,
+  "max_tokens": 0,
+  "model": "offline",
+  "model_id": "offline_generator",
+  "prompt_tokens": 0,
+  "proposal": {
+   "d1_delay": true,
+   "d1_rule": [
+    [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ]
+   ],
+   "d2_delay": true,
+   "d2_rule": [
+    [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ]
+   ],
+   "difficulty_intent": "medium",
+   "rationale": "offline procedural generator (deterministic seed 20261107)",
+   "task_id": "offline-20261107-27",
+   "topology": "TP2"
+  },
+  "provenance_note": "offline_generator",
+  "rationale": "offline procedural generator (deterministic seed 20261107)",
+  "seed": 20261107,
+  "task_id": "offline-20261107-27",
+  "temperature": 0.0,
+  "total_tokens": 0
+ }
+]

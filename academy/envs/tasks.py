@@ -217,28 +217,43 @@ def compute_splits(pool_split_seed: int = 20260901):
 
 
 def _config_to_dict(c: EnvConfig) -> dict:
+    """Serialize a config to JSON (internal splits format).
+
+    Encoding is *unambiguous*: clause lists plus a conjunctive flag per
+    rule (the teacher-proposal grammar is distinct from this internal
+    format). A conjunctive rule has exactly one clause.
+    """
     def ser(r):
-        if isinstance(r, tuple):
+        if isinstance(r, tuple):          # disjunctive
             return [sorted(x) for x in r]
-        return sorted(r)
+        return [sorted(r)]                # conjunctive: single clause
     return {
         "topology": c.topology,
         "d1_rule": ser(c.d1_rule),
+        "d1_conjunctive": not isinstance(c.d1_rule, tuple),
         "d2_rule": ser(c.d2_rule),
+        "d2_conjunctive": not isinstance(c.d2_rule, tuple),
         "d1_delay": c.d1_delay,
         "d2_delay": c.d2_delay,
     }
 
 
 def _dict_to_config(d: dict) -> EnvConfig:
-    def deser(r):
-        if r and isinstance(r[0], list):
-            return tuple(frozenset(x) for x in r)
-        return frozenset(r)
+    def deser(r, conjunctive):
+        clauses = [frozenset(map(tuple, clause)) for clause in r]
+        if conjunctive:
+            return clauses[0]             # exactly one clause
+        return tuple(clauses)
+
+    # legacy files (pre-flag) fall back to a shape heuristic
+    def legacy_flag(r):
+        return not (r and isinstance(r[0], list)
+                    and r[0] and isinstance(r[0][0], list))
+
     return EnvConfig(
         topology=d["topology"],
-        d1_rule=deser(d["d1_rule"]),
-        d2_rule=deser(d["d2_rule"]),
+        d1_rule=deser(d["d1_rule"], d.get("d1_conjunctive", legacy_flag(d["d1_rule"]))),
+        d2_rule=deser(d["d2_rule"], d.get("d2_conjunctive", legacy_flag(d["d2_rule"]))),
         d1_delay=d["d1_delay"],
         d2_delay=d["d2_delay"],
     )

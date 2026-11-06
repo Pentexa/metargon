@@ -23,8 +23,8 @@ import random
 from collections import deque
 
 from lab_env import (
-    ACTIONS, DOORS, DOOR_CELL, GOAL, PLATES, PLATE_CELL, SWITCH_CELL,
-    SWITCHES, WALLS, WS, make_state, public_next,
+    ACTIONS, DOORS, DOOR_CELL, GOAL, MOVE_ACTIONS, PLATES, PLATE_CELL,
+    SWITCH_CELL, SWITCHES, WALLS, WS, make_state, public_next,
 )
 
 
@@ -38,8 +38,8 @@ from compositional_memory import (
 )
 
 # pre-registered planner budgets
-MAX_EXPANSIONS = 1500        # node expansions per probe BFS
-PROBE_MAX_PLANS = 4          # probe plans evaluated per decision
+MAX_EXPANSIONS = 700         # node expansions per probe BFS
+PROBE_MAX_PLANS = 3          # probe plans evaluated per decision
 MAX_HYPOTHESES_AGENT = 128   # memory budget (matches memory default)
 
 ALL_SINGLES = (
@@ -91,12 +91,36 @@ def atoms_of_state(st: WS) -> frozenset:
     return frozenset(out)
 
 
+def _violates_protected(nxt: WS, protected: frozenset, target: frozenset) -> bool:
+    """True if the transition destroys a protected atom (a condition that is
+    keeping a door open) that is not itself being re-established by the
+    plan target."""
+    if not protected:
+        return False
+    after = atoms_of_state(nxt)
+    for p in protected:
+        if p in target:
+            continue
+        if p not in after:
+            return True
+    return False
+
+
 def plan_to_atoms(state: WS, target: frozenset, max_expand: int = MAX_EXPANSIONS,
-                  on_expand=None):
+                  on_expand=None, cache=None, protected=frozenset()):
     """Shortest plan (public physics only) to a state whose atoms are a
-    superset of `target`. Returns the action list, or None."""
+    superset of `target`. Plans are constrained not to destroy `protected`
+    atoms (conditions keeping doors open) unless the target itself needs
+    to change them. Returns the action list, or None. `cache` is an
+    optional policy-level {(state_key, target) -> plan | None} bounded
+    dictionary."""
     if target <= atoms_of_state(state):
         return []
+    key = (state_key(state), target, protected) if cache is not None else None
+    if cache is not None:
+        hit = cache.get(key)
+        if hit is not None:
+            return list(hit) if hit else None
     start_key = state_key(state)
     queue = deque([(state, [])])
     seen = {start_key}
@@ -114,16 +138,34 @@ def plan_to_atoms(state: WS, target: frozenset, max_expand: int = MAX_EXPANSIONS
                 on_expand()
             np = path + [a]
             if target <= atoms_of_state(nxt):
+                if cache is not None:
+                    cache[key] = tuple(np)
+                    if len(cache) > 3000:
+                        for kk in list(cache)[:500]:
+                            del cache[kk]
                 return np
+            if _violates_protected(nxt, protected, target):
+                continue
             queue.append((nxt, np))
+    if cache is not None:
+        cache[key] = None
+        if len(cache) > 3000:
+            for kk in list(cache)[:500]:
+                del cache[kk]
     return None
 
 
 def plan_to_pos(state: WS, target_pos, max_expand: int = MAX_EXPANSIONS,
-                on_expand=None):
-    """Shortest plan (public physics only) to occupy target_pos."""
+                on_expand=None, cache=None, protected=frozenset()):
+    """Shortest plan (public physics only) to occupy target_pos, without
+    destroying `protected` atoms."""
     if state.pos == target_pos:
         return []
+    key = (state_key(state), target_pos, protected) if cache is not None else None
+    if cache is not None:
+        hit = cache.get(key)
+        if hit is not None:
+            return list(hit) if hit else None
     start_key = state_key(state)
     queue = deque([(state, [])])
     seen = {start_key}
@@ -141,8 +183,20 @@ def plan_to_pos(state: WS, target_pos, max_expand: int = MAX_EXPANSIONS,
                 on_expand()
             np = path + [a]
             if nxt.pos == target_pos:
+                if cache is not None:
+                    cache[key] = tuple(np)
+                    if len(cache) > 3000:
+                        for kk in list(cache)[:500]:
+                            del cache[kk]
                 return np
+            if _violates_protected(nxt, protected, frozenset()):
+                continue
             queue.append((nxt, np))
+    if cache is not None:
+        cache[key] = None
+        if len(cache) > 3000:
+            for kk in list(cache)[:500]:
+                del cache[kk]
     return None
 
 
@@ -165,9 +219,15 @@ class MetargonV09:
         self._passed = {"D1": False, "D2": False}
         self._far_anchor = {"D1": (4, 1), "D2": (6, 2)}
         self._start_anchor = {"D1": (0, 4), "D2": (4, 1)}
+        # static far-region test: east of the barrier column
+        self._far_x = {"D1": 3, "D2": 5}
         self._pending_probe = {}                  # door -> (antecedent, deadline)
         self._PROBE_TIMEOUT = 10                  # steps before a probe is
                                                   # deemed failed (no event)
+        self._plan_cache = {}                     # bounded plan cache
+                                                  # {(state_key, target) -> plan}
+        self._current_plan = []                   # follow plan while valid
+        self._recent_protect = {}                 # door -> (atoms, expiry_step)
 
     # -- perception ------------------------------------------------------
     def _sync(self, obs):
@@ -190,16 +250,50 @@ class MetargonV09:
         doors["D2"] = obs.d2
         b = b._replace(door_open=doors)
         self.belief = b
-        # mark doors passed when we are on their far side
-        comp, _ = self._components()
+        # mark doors passed only when the agent is physically on the far
+        # side (east of the barrier); component equality is not usable
+        # because an open door merges both sides into one component
         for door in DOORS:
             if not doors[door]:
                 continue
-            far = self._far_anchor[door]
-            if far in comp and comp.get(self.belief.pos) == comp[far]:
+            if self.belief.pos[0] > self._far_x[door]:
                 self._passed[door] = True
 
     # -- planner ---------------------------------------------------------
+    def _protected_atoms(self) -> frozenset:
+        """Atoms that currently satisfy a usable hypothesis for any door
+        (open or closed/armed), plus atoms that were true when a door just
+        opened (recent causal credit). Planning must not destroy these
+        inadvertently."""
+        out = set()
+        now = atoms_of_state(self.belief)
+        for door in DOORS:
+            h = self.memory.best_for_door(door, opens=True)
+            if h is not None and h.antecedent <= now:
+                out.update(h.antecedent)
+        for door, (atoms, expiry) in self._recent_protect.items():
+            if self.memory.step <= expiry:
+                out.update(atoms)
+        return frozenset(out)
+
+    def _conflicts_with_protected(self, ante: frozenset) -> bool:
+        """A non-hypothesis probe should not flip an atom that is currently
+        load-bearing for another door (protected)."""
+        protected = self._protected_atoms()
+        if not protected:
+            return False
+        for p in protected:
+            k = p[0]
+            if k == "sw":
+                for a in ante:
+                    if a[0] == "sw" and a[1] == p[1] and a[2] != p[2]:
+                        return True
+            elif k == "load":
+                for a in ante:
+                    if a[0] == "load" and a[1] == p[1] and a[2] != p[2]:
+                        return True
+        return False
+
     def _novel_singles(self, door):
         tried = self.tried[door]
         return [s for s in ALL_SINGLES if s not in tried]
@@ -280,12 +374,14 @@ class MetargonV09:
         def on_expand():
             self.planner_ops += 1
         pattern = (self.belief.door_open["D1"], self.belief.door_open["D2"])
+        protected = self._protected_atoms()
         # 0. If a door is open and we have not yet passed through it, go
         # through it: this is how the agent reaches unexplored mechanisms.
         for door in DOORS:
             if self.belief.door_open[door] and not self._passed[door]:
                 plan = plan_to_pos(self.belief, self._far_anchor[door],
-                                   on_expand=on_expand)
+                                   on_expand=on_expand, cache=self._plan_cache,
+                                   protected=protected)
                 if plan is not None:
                     return plan, door
         # 1. If the goal is reachable under the current belief, just go.
@@ -293,46 +389,88 @@ class MetargonV09:
         if (pattern not in self._goal_infeasible
                 or self._step_since_goal_check >= 8
                 or self.belief.pos == GOAL):
-            plan = plan_to_pos(self.belief, GOAL, on_expand=on_expand)
+            plan = plan_to_pos(self.belief, GOAL, on_expand=on_expand,
+                               cache=self._plan_cache, protected=protected)
             self._step_since_goal_check = 0
             if plan is not None:
                 return plan, None
             self._goal_infeasible[pattern] = True
         # 2. Gather candidate probes for each closed door: hypothesis-backed
-        # antecedents first, then untried singles, then conjunctive pairs.
+        # antecedents first (by confidence), then untried singles, then
+        # conjunctive pairs. Singles/pairs are ranked by "needs action"
+        # and distance so the most relevant probe is tried first.
         candidates = []
+        best_ante = {}
+        now_atoms = atoms_of_state(self.belief)
         for door in DOORS:
             if self.belief.door_open[door]:
                 continue
             hyps = self.memory.query(door, opens=True)
             for h in hyps[:3]:
-                candidates.append((door, h.antecedent, 0))   # priority 0
+                candidates.append((door, h.antecedent, 0, h.confidence))
+            if hyps:
+                best_ante[door] = hyps[0].antecedent
             probes = self._novel_singles(door) + self._conjunctive_probes(door)
+            probes = [s for s in probes if not self._conflicts_with_protected(s)]
+
+            def rank_key(ante):
+                needs = 0 if ante <= now_atoms else 1
+                d = min(
+                    (abs(self.belief.pos[0] - cell[0])
+                     + abs(self.belief.pos[1] - cell[1]))
+                    for atom in ante
+                    for cell in [PLATE_CELL[atom[1]] if atom[0] in ("load", "loadany")
+                                 else SWITCH_CELL[atom[1]]]
+                )
+                return (needs, d)
+            probes.sort(key=rank_key)
             for s in probes[:PROBE_MAX_PLANS]:
-                candidates.append((door, s, 1))              # priority 1
-        # 3. feasibility filter (cheap), then plan the cheapest feasible one
+                candidates.append((door, s, 1, 0.0))
+        # 2b. compositional cross-door probe: satisfy verified antecedents
+        # for two closed doors simultaneously (keeps both doors open at once)
+        if len(best_ante) >= 2:
+            doors_c = [d for d in DOORS if d in best_ante]
+            merged = frozenset().union(*(best_ante[d] for d in doors_c))
+            if merged not in self.tried[doors_c[0]] and merged not in self.tried[doors_c[1]]:
+                candidates.append((doors_c[0], merged, 0, 1.0))
+        # 3. feasibility filter (cheap), then plan the best feasible one:
+        # hypothesis-backed (priority 0) candidates are preferred, by
+        # confidence, with plan length as the final tie-breaker
         best = None
         evaluated = 0
-        for door, ante, prio in candidates:
+        now_atoms = atoms_of_state(self.belief)
+        for door, ante, prio, conf in candidates:
             if ante in self.tried[door]:
+                continue
+            # prefer candidates that still require action (not already true)
+            if prio == 1 and ante <= now_atoms:
+                # already arranged: mark as probed; the missing piece is a
+                # different atom, so do not pick this one
+                self.tried[door].add(ante)
                 continue
             if not self._target_feasible(ante):
                 self.tried[door].add(ante)
                 continue
-            plan = plan_to_atoms(self.belief, ante, on_expand=on_expand)
+            plan = plan_to_atoms(self.belief, ante, on_expand=on_expand,
+                                 cache=self._plan_cache, protected=protected)
             self.plan_calls += 1
             evaluated += 1
             if plan:
-                if best is None or len(plan) < len(best[0]):
-                    best = (plan, door, ante)
+                ck = (prio, -conf)
+                if (best is None or ck < best[3]
+                        or (ck == best[3] and len(plan) < len(best[0]))):
+                    best = (plan, door, ante, ck)
             elif prio == 0:
                 # a hypothesis-backed probe that cannot be executed right now
                 # is not marked failed; it may become feasible later.
                 pass
-            if evaluated >= PROBE_MAX_PLANS:
+            else:
+                # single/pair probe: no executable plan found; move on
+                self.tried[door].add(ante)
+            if evaluated >= PROBE_MAX_PLANS + 2:
                 break
         if best is not None:
-            plan, door, ante = best
+            plan, door, ante, _ = best
             self._pending_probe[door] = (ante, self.memory.step
                                          + len(plan) + self._PROBE_TIMEOUT)
             return plan, door
@@ -340,6 +478,10 @@ class MetargonV09:
 
     def _random_valid(self):
         valid = [a for a in ACTIONS if public_next(self.belief, a) is not None]
+        # avoid blind switch toggling in fallback (breaks open-door states)
+        moves = [a for a in valid if a in MOVE_ACTIONS or a.startswith("Push")]
+        if moves:
+            return self.rng.choice(moves)
         if not valid:
             return self.rng.choice(ACTIONS)
         return self.rng.choice(valid)
@@ -352,9 +494,21 @@ class MetargonV09:
 
     def act(self, obs) -> str:
         self._sync(obs)
-        plan, _ = self._choose_probe()
+        protected = self._protected_atoms()
+        # follow the current plan while its actions remain executable and
+        # do not destroy currently protected atoms
+        while self._current_plan:
+            a = self._current_plan[0]
+            nxt = public_next(self.belief, a)
+            if nxt is not None and not _violates_protected(
+                    nxt, protected, frozenset()):
+                self._current_plan.pop(0)
+                return a
+            self._current_plan.pop(0)
+        plan, door = self._choose_probe()
         if plan:
-            return plan[0]
+            self._current_plan = list(plan)
+            return self._current_plan.pop(0)
         return self._random_valid()
 
     def observe_outcome(self, obs_before, action, res):
@@ -368,19 +522,28 @@ class MetargonV09:
             before_open = getattr(obs_before, "d1" if door == "D1" else "d2")
             after_open = getattr(after_obs, "d1" if door == "D1" else "d2")
             if not before_open and after_open:
-                self.memory.observe_event(before_atoms, door, True)
+                # The event happened *during* this transition: the context
+                # both before and after the action may contain the cause.
+                ctx = before_atoms | after_atoms
+                self.memory.observe_event(ctx, door, True)
                 self._passed[door] = False
                 self._pending_probe.pop(door, None)
+                # causal credit: keep the post-transition context protected
+                # for a short window (protects cold-start discoveries)
+                self._recent_protect[door] = (ctx,
+                                              self.memory.step + 12)
                 any_event = True
             elif before_open and not after_open:
-                self.memory.observe_event(before_atoms, door, False)
+                ctx = before_atoms | after_atoms
+                self.memory.observe_event(ctx, door, False)
                 any_event = True
         if any_event:
             # component structure changed: every door's probe memory may be
-            # stale, so clear all of them
+            # stale, so clear all of them, plus any in-flight plan
             for d in DOORS:
                 self.tried[d] = set()
             self._goal_infeasible.clear()
+            self._current_plan = []
         # nonevents for doors that did not change as expected
         for door in DOORS:
             after_open = getattr(after_obs, "d1" if door == "D1" else "d2")

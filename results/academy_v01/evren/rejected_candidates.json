@@ -1,0 +1,342 @@
+[
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', True), ('load', 'P1', 'A')})",
+   "frozenset({('load', 'P2', 'B')})",
+   "True",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-3",
+  "validated_at": 1794006918.5318737
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P1')})",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P2')})",
+   "True",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-4",
+  "validated_at": 1794006918.683488
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', False)})",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P2')})",
+   "False",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-5",
+  "validated_at": 1794006918.8397348
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', True), ('empty', 'P1')})",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P2')})",
+   "True",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-7",
+  "validated_at": 1794006919.260924
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', True)})",
+   "frozenset({('empty', 'P2')})",
+   "True",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "task already exists in a training or evaluation pool"
+  ],
+  "solvable": true,
+  "status": "duplicate",
+  "task_id": "offline-20261107-9",
+  "validated_at": 1794006920.2838168
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('load', 'P1', 'A')})",
+   "frozenset({('sw', 'S2', True), ('sw', 'S1', False)})",
+   "False",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "task belongs to a frozen evaluation pool (val/test/ood); it is rejected"
+  ],
+  "solvable": true,
+  "status": "eval_contamination",
+  "task_id": "offline-20261107-11",
+  "validated_at": 1794006920.41435
+ },
+ {
+  "key": [
+   "TP2",
+   "frozenset({('sw', 'S2', True)})",
+   "frozenset({('load', 'P1', 'A')})",
+   "True",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-13",
+  "validated_at": 1794006920.5549757
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', True)})",
+   "frozenset({('loadany', 'P2')})",
+   "False",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-14",
+  "validated_at": 1794006920.7943277
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('empty', 'P1')})",
+   "frozenset({('load', 'P1', 'A'), ('load', 'P2', 'B')})",
+   "False",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-15",
+  "validated_at": 1794006921.2294526
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P1')})",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P2')})",
+   "True",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-16",
+  "validated_at": 1794006921.730991
+ },
+ {
+  "key": [
+   "TP1",
+   "(frozenset({('empty', 'P1'), ('sw', 'S2', False)}), frozenset({('sw', 'S2', True)}))",
+   "(frozenset({('load', 'P1', 'A'), ('load', 'P2', 'B')}), frozenset({('load', 'P1', 'A'), ('load', 'P2', 'B')}))",
+   "True",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-17",
+  "validated_at": 1794006921.8872445
+ },
+ {
+  "key": [
+   "TP2",
+   "frozenset({('empty', 'P1'), ('sw', 'S2', False)})",
+   "frozenset({('load', 'P1', 'A'), ('load', 'P2', 'B')})",
+   "False",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-18",
+  "validated_at": 1794006922.747033
+ },
+ {
+  "key": [
+   "TP2",
+   "frozenset({('empty', 'P1'), ('sw', 'S2', False)})",
+   "frozenset({('loadany', 'P2')})",
+   "True",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-20",
+  "validated_at": 1794006923.2385569
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P1')})",
+   "frozenset({('load', 'P2', 'B')})",
+   "False",
+   "True"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-21",
+  "validated_at": 1794006923.6062222
+ },
+ {
+  "key": [
+   "TP1",
+   "frozenset({('sw', 'S2', False), ('loadany', 'P1')})",
+   "frozenset({('sw', 'S1', False), ('load', 'P2', 'B')})",
+   "False",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-22",
+  "validated_at": 1794006923.8290136
+ },
+ {
+  "key": [
+   "TP2",
+   "frozenset({('sw', 'S2', False)})",
+   "frozenset({('loadany', 'P2')})",
+   "True",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "independent solver found no goal-reaching plan within 80 steps"
+  ],
+  "solvable": false,
+  "status": "impossible",
+  "task_id": "offline-20261107-23",
+  "validated_at": 1794006924.0288715
+ },
+ {
+  "key": [
+   "TP2",
+   "frozenset({('sw', 'S2', False)})",
+   "frozenset({('sw', 'S1', False), ('empty', 'P1')})",
+   "False",
+   "False"
+  ],
+  "meta": {
+   "seed": 20261107,
+   "source": "offline_generator"
+  },
+  "reasons": [
+   "task belongs to a frozen evaluation pool (val/test/ood); it is rejected"
+  ],
+  "solvable": true,
+  "status": "eval_contamination",
+  "task_id": "offline-20261107-24",
+  "validated_at": 1794006924.4057596
+ }
+]

@@ -1,0 +1,12 @@
+{
+ "random": {
+  "wall_s": 0.045,
+  "success_rate": 0.0,
+  "mean_steps": 80.0
+ },
+ "qlearning": {
+  "wall_s": 0.045,
+  "success_rate": 0.0,
+  "mean_steps": 80.0
+ }
+}
