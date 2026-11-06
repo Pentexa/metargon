@@ -1,0 +1,58 @@
+
+STABLE
+  passive              acc=67.12% pulses=0.0 utility=0.6712
+  probe                acc=69.52% pulses=200.0 utility=0.6927
+  random               acc=68.27% pulses=99.0 utility=0.6814
+  bayes_voi            acc=68.91% pulses=70.0 utility=0.6883
+  corvid               acc=68.48% pulses=93.4 utility=0.6836
+  predictive           acc=68.48% pulses=82.8 utility=0.6838
+  uniform_outcomes     acc=68.56% pulses=103.7 utility=0.6843
+  no_outcome_label     acc=68.44% pulses=68.0 utility=0.6836
+  predictive minus bayes_voi -0.43% [-0.81%, -0.04%]
+
+SHIFT
+  passive              acc=67.36% pulses=0.0 utility=0.6736
+  probe                acc=68.67% pulses=200.0 utility=0.6843
+  random               acc=67.87% pulses=99.0 utility=0.6775
+  bayes_voi            acc=68.08% pulses=66.4 utility=0.6799
+  corvid               acc=68.07% pulses=91.1 utility=0.6796
+  predictive           acc=67.99% pulses=83.7 utility=0.6789
+  uniform_outcomes     acc=67.88% pulses=100.1 utility=0.6775
+  no_outcome_label     acc=67.85% pulses=63.3 utility=0.6777
+  predictive minus bayes_voi -0.08% [-0.35%, +0.22%]
+
+IID
+  passive              acc=67.75% pulses=0.0 utility=0.6775
+  probe                acc=68.28% pulses=200.0 utility=0.6803
+  random               acc=67.95% pulses=99.0 utility=0.6782
+  bayes_voi            acc=68.02% pulses=72.4 utility=0.6793
+  corvid               acc=68.08% pulses=91.3 utility=0.6796
+  predictive           acc=67.95% pulses=78.5 utility=0.6786
+  uniform_outcomes     acc=68.08% pulses=98.3 utility=0.6795
+  no_outcome_label     acc=67.99% pulses=56.2 utility=0.6792
+  predictive minus bayes_voi -0.06% [-0.29%, +0.17%]
+
+NOVEL
+  passive              acc=66.62% pulses=0.0 utility=0.6662
+  probe                acc=68.38% pulses=200.0 utility=0.6813
+  random               acc=67.51% pulses=99.0 utility=0.6738
+  bayes_voi            acc=68.12% pulses=68.3 utility=0.6804
+  corvid               acc=67.69% pulses=94.0 utility=0.6757
+  predictive           acc=67.92% pulses=86.6 utility=0.6781
+  uniform_outcomes     acc=67.81% pulses=98.9 utility=0.6768
+  no_outcome_label     acc=67.99% pulses=71.6 utility=0.6790
+  predictive minus bayes_voi -0.20% [-0.53%, +0.15%]
+
+SHAM
+  passive              acc=67.12% pulses=0.0 utility=0.6712
+  probe                acc=65.62% pulses=200.0 utility=0.6538
+  random               acc=66.37% pulses=99.0 utility=0.6625
+  bayes_voi            acc=66.69% pulses=55.6 utility=0.6662
+  corvid               acc=66.39% pulses=85.5 utility=0.6628
+  predictive           acc=66.71% pulses=58.6 utility=0.6664
+  uniform_outcomes     acc=66.42% pulses=96.1 utility=0.6630
+  no_outcome_label     acc=66.75% pulses=43.5 utility=0.6670
+  predictive minus bayes_voi +0.02% [-0.27%, +0.30%]
+
+Saved results/predictive_world_model_30seeds.json
+Synthetic only. One-step response model, not general world intelligence.

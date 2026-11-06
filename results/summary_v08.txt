@@ -1,0 +1,81 @@
+METARGON v0.8 — stateful hidden-rule transfer evaluation
+
+stable:
+     always_key: success 93.65%, steps 10.37, first mechanism match 34.67%
+  always_switch: success 93.65%, steps 8.51, first mechanism match 65.33%
+         random: success 93.65%, steps 9.34, first mechanism match 51.43%
+       win_stay: success 93.65%, steps 6.51, first mechanism match 98.44%
+          bayes: success 93.65%, steps 6.51, first mechanism match 98.44%
+       metargon: success 93.65%, steps 6.51, first mechanism match 98.44%
+         oracle: success 93.65%, steps 6.42, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)
+
+shift:
+     always_key: success 93.28%, steps 9.44, first mechanism match 50.08%
+  always_switch: success 93.28%, steps 9.44, first mechanism match 49.92%
+         random: success 93.28%, steps 9.49, first mechanism match 49.18%
+       win_stay: success 93.28%, steps 6.60, first mechanism match 97.19%
+          bayes: success 93.28%, steps 6.60, first mechanism match 97.19%
+       metargon: success 93.28%, steps 6.60, first mechanism match 97.19%
+         oracle: success 93.28%, steps 6.43, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)
+
+rapid_shift:
+     always_key: success 93.56%, steps 9.44, first mechanism match 50.31%
+  always_switch: success 93.56%, steps 9.45, first mechanism match 49.69%
+         random: success 93.56%, steps 9.41, first mechanism match 50.54%
+       win_stay: success 93.56%, steps 7.29, first mechanism match 85.69%
+          bayes: success 93.56%, steps 7.29, first mechanism match 85.69%
+       metargon: success 93.56%, steps 7.29, first mechanism match 85.69%
+         oracle: success 93.56%, steps 6.42, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)
+
+iid:
+     always_key: success 93.49%, steps 9.42, first mechanism match 49.93%
+  always_switch: success 93.49%, steps 9.43, first mechanism match 50.07%
+         random: success 93.49%, steps 9.33, first mechanism match 51.44%
+       win_stay: success 93.49%, steps 9.45, first mechanism match 49.81%
+          bayes: success 93.49%, steps 9.45, first mechanism match 49.81%
+       metargon: success 93.49%, steps 9.45, first mechanism match 49.81%
+         oracle: success 93.49%, steps 6.43, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)
+
+novel:
+     always_key: success 93.94%, steps 10.40, first mechanism match 33.69%
+  always_switch: success 93.94%, steps 8.45, first mechanism match 66.31%
+         random: success 93.94%, steps 9.44, first mechanism match 49.82%
+       win_stay: success 93.94%, steps 6.50, first mechanism match 98.50%
+          bayes: success 93.94%, steps 6.50, first mechanism match 98.50%
+       metargon: success 93.94%, steps 6.50, first mechanism match 98.50%
+         oracle: success 93.94%, steps 6.40, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)
+
+noisy_gate:
+     always_key: success 80.21%, steps 9.30, first mechanism match 50.31%
+  always_switch: success 80.21%, steps 9.30, first mechanism match 49.69%
+         random: success 80.21%, steps 9.30, first mechanism match 50.54%
+       win_stay: success 80.21%, steps 8.60, first mechanism match 71.53%
+          bayes: success 80.21%, steps 8.60, first mechanism match 71.53%
+       metargon: success 80.21%, steps 8.60, first mechanism match 71.53%
+         oracle: success 80.21%, steps 7.74, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)
+
+tight_budget:
+     always_key: success 49.94%, steps 6.50, first mechanism match 50.08%
+  always_switch: success 49.94%, steps 6.50, first mechanism match 49.92%
+         random: success 49.24%, steps 6.51, first mechanism match 49.18%
+       win_stay: success 85.24%, steps 6.15, first mechanism match 91.04%
+          bayes: success 88.79%, steps 6.11, first mechanism match 95.31%
+       metargon: success 85.24%, steps 6.15, first mechanism match 91.04%
+         oracle: success 92.88%, steps 6.07, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.036, paired CI (0.030555555555555506, 0.04055555555555565)
+
+sham:
+     always_key: success 80.40%, steps 8.92, first mechanism match 34.67%
+  always_switch: success 80.40%, steps 8.94, first mechanism match 65.33%
+         random: success 80.40%, steps 8.93, first mechanism match 51.43%
+       win_stay: success 80.40%, steps 8.92, first mechanism match 47.14%
+          bayes: success 80.40%, steps 8.92, first mechanism match 47.14%
+       metargon: success 80.40%, steps 8.92, first mechanism match 47.14%
+         oracle: success 80.40%, steps 8.98, first mechanism match 100.00%
+  delta steps Metargon–Bayes: +0.000, paired CI (0.0, 0.0)

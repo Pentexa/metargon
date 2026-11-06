@@ -1,0 +1,10 @@
+[package]
+name = "metargon-core"
+version = "0.8.0"
+edition = "2021"
+description = "Bounded-memory, sparse-label active-sensing research kernel"
+license = "MIT"
+
+[lib]
+name = "metargon_core"
+path = "src/lib.rs"

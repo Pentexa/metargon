@@ -1,0 +1,58 @@
+
+stable      accuracy    diagnostics   pulses   labels
+passive         67.12%       200     0.0      80
+probe           69.52%       200   200.0      80
+random          68.27%       200    99.0      80
+uncertainty     69.21%       200   109.1      80
+plug_in_error   68.97%       200    81.0      80
+bayes_voi       68.91%       200    70.0      80
+corvid          68.48%       200    93.4      80
+oracle          70.13%       200   100.2      80
+CORVID - Bayes-VOI: -0.43% (95% bootstrap [-0.85%, -0.02%])
+
+shift       accuracy    diagnostics   pulses   labels
+passive         67.36%       200     0.0      80
+probe           68.67%       200   200.0      80
+random          67.87%       200    99.0      80
+uncertainty     68.49%       200   114.1      80
+plug_in_error   68.08%       200    77.4      80
+bayes_voi       68.08%       200    66.4      80
+corvid          68.07%       200    91.1      80
+oracle          69.97%       200    98.6      80
+CORVID - Bayes-VOI: -0.00% (95% bootstrap [-0.28%, +0.29%])
+
+iid         accuracy    diagnostics   pulses   labels
+passive         67.75%       200     0.0      80
+probe           68.28%       200   200.0      80
+random          67.95%       200    99.0      80
+uncertainty     67.98%       200   106.7      80
+plug_in_error   68.00%       200    88.6      80
+bayes_voi       68.02%       200    72.4      80
+corvid          68.08%       200    91.3      80
+oracle          70.08%       200    99.4      80
+CORVID - Bayes-VOI: +0.06% (95% bootstrap [-0.24%, +0.36%])
+
+novel       accuracy    diagnostics   pulses   labels
+passive         66.62%       200     0.0      80
+probe           68.38%       200   200.0      80
+random          67.51%       200    99.0      80
+uncertainty     68.10%       200   106.8      80
+plug_in_error   68.17%       200    83.0      80
+bayes_voi       68.12%       200    68.3      80
+corvid          67.69%       200    94.0      80
+oracle          69.20%       200   100.2      80
+CORVID - Bayes-VOI: -0.43% (95% bootstrap [-0.82%, -0.05%])
+
+sham        accuracy    diagnostics   pulses   labels
+passive         67.12%       200     0.0      80
+probe           65.62%       200   200.0      80
+random          66.37%       200    99.0      80
+uncertainty     65.69%       200   109.1      80
+plug_in_error   66.74%       200    64.9      80
+bayes_voi       66.69%       200    55.6      80
+corvid          66.39%       200    85.5      80
+oracle          66.44%       200   100.2      80
+CORVID - Bayes-VOI: -0.30% (95% bootstrap [-0.60%, -0.02%])
+Saved results/causal_probe_30seeds.json
+
+Simulation only; physical cost equality and biological fidelity NOT established.
