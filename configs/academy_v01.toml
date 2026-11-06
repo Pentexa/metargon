@@ -1,0 +1,71 @@
+# =============================================================================
+# METARGON Academy v0.1 — deterministic training configuration
+# =============================================================================
+# Every value here is pre-registered. Changing any value invalidates the
+# config fingerprint and produces a different experiment identity.
+# All splits are derived from `pool_split` and are immutable for a run.
+
+[meta]
+name = "academy_v01"
+version = "0.1.0"
+author = "METARGON Research"
+created = "2026-11-07"
+
+[seeds]
+pool_split = 20260901      # split generation seed (immutable)
+run = 20261107             # training-loop seed
+eval = 20261108            # evaluation seed (paired across policies)
+ood = 20261109             # OOD evaluation seed
+
+[world]
+width = 7
+height = 5
+max_steps = 80             # generous episode budget
+tight_steps = 44           # tight-budget condition
+noise_q = 0.08             # corrupted-reading probability (noisy condition)
+
+[taskgen]
+train_n = 100
+val_n = 25
+test_n = 25
+ood_n = 25                 # OOD configuration count (fully held out)
+
+[training]
+mode = "curriculum"        # "curriculum" | "sequential"
+episodes_per_block = 40
+total_episodes = 480       # per-policy training budget
+eval_every = 120           # frozen-val evaluation during training (curves)
+replay_on = true
+replay_capacity = 4000
+replay_batch = 64
+replay_frequency = 8       # replay pass every K episodes
+q_alpha = 0.30
+q_gamma = 0.95
+q_eps0 = 0.35
+q_eps_min = 0.05
+episodic_mem_max = 400
+planner_max_expand = 1500
+probe_max_plans = 4
+memory_max_hypotheses = 128
+memory_verify_support = 3
+memory_max_contradict = 2
+memory_predict_threshold = 1
+memory_contradict_window = 3
+
+[curriculum]
+difficulty_labels = ["easy", "medium", "hard"]
+success_target = 0.85
+min_confidence = 0.60
+window = 20                # episodes used for measured progress
+harder_epsilon = 0.10      # promote bin when success >= target - eps
+easier_epsilon = 0.20      # demote bin when success < target - eps
+
+[evaluation]
+seeds = 30                 # paired evaluation seeds (30 where feasible)
+episodes_per_seed = 240
+snapshot_limits = [40, 80, 160, 240]   # learning-curve snapshot points
+
+[checkpoint]
+dir = "checkpoints/academy_v01"
+every_episodes = 20        # crash-safe snapshot cadence (training)
+keep_last = 5

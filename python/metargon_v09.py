@@ -205,14 +205,14 @@ class MetargonV09:
         return [s for s in ALL_SINGLES if s not in tried]
 
     def _conjunctive_probes(self, door):
-        """Pair probes built from atoms whose singleton probes were already
-        tried for this door without producing an event."""
+        """Pair probes built from atoms that are either currently true or
+        whose singleton probe was already tried for this door."""
         tried = self.tried[door]
         singles = [s for s in ALL_SINGLES if s in tried]
-        # atoms that participated in any tried singleton
         atoms_pool = set()
         for s in singles:
             atoms_pool.update(s)
+        atoms_pool.update(atoms_of_state(self.belief))
         out = []
         for p in ALL_PAIRS:
             if p in tried or p in out:
@@ -334,7 +334,7 @@ class MetargonV09:
         if best is not None:
             plan, door, ante = best
             self._pending_probe[door] = (ante, self.memory.step
-                                         + self._PROBE_TIMEOUT)
+                                         + len(plan) + self._PROBE_TIMEOUT)
             return plan, door
         return None, None
 
@@ -363,17 +363,24 @@ class MetargonV09:
         after_obs = res.observation
         after_atoms = atoms_from_observation(after_obs)
         # infer door events from the observation stream (no privileged channel)
+        any_event = False
         for door in DOORS:
             before_open = getattr(obs_before, "d1" if door == "D1" else "d2")
             after_open = getattr(after_obs, "d1" if door == "D1" else "d2")
             if not before_open and after_open:
                 self.memory.observe_event(before_atoms, door, True)
-                self.tried[door] = set()   # new info resets probe memory
                 self._passed[door] = False
                 self._pending_probe.pop(door, None)
+                any_event = True
             elif before_open and not after_open:
                 self.memory.observe_event(before_atoms, door, False)
-                self.tried[door] = set()
+                any_event = True
+        if any_event:
+            # component structure changed: every door's probe memory may be
+            # stale, so clear all of them
+            for d in DOORS:
+                self.tried[d] = set()
+            self._goal_infeasible.clear()
         # nonevents for doors that did not change as expected
         for door in DOORS:
             after_open = getattr(after_obs, "d1" if door == "D1" else "d2")
