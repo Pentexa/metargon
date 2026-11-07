@@ -1,10 +1,16 @@
 <div align="center">
 
+<img src="images/banner.png" alt="METARGON banner" width="100%" />
+
 # 🐦‍⬛ METARGON
 
 ### Learning a changing world.
 
 **A crow-inspired research project exploring how compact agents learn hidden rules, remember evidence, plan actions, and adapt when the environment changes.**
+
+<p align="center">
+  <img src="images/logomet.png" alt="METARGON logo" width="120" />
+</p>
 
 [![Status](https://img.shields.io/badge/status-experimental-7c3aed?style=flat-square)](#research-status)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
