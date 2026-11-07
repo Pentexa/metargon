@@ -314,3 +314,6 @@ pub mod v07;
 
 /// New v0.8 bounded gate-transition belief tracker.
 pub mod v08;
+
+/// New v0.9 bounded compositional causal memory.
+pub mod v09;

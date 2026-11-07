@@ -85,6 +85,17 @@ class QLearningTests(unittest.TestCase):
 
 
 class BayesTests(unittest.TestCase):
+<<<<<<< HEAD
+    def test_bayes_solves_easy_config(self):
+        # The model-based Bayesian planner (particle filter over the
+        # declared family + ground-truth planning under the sampled
+        # hypothesis) must solve the easy config consistently.
+        p = BayesPlannerPolicy(11)
+        successes = 0
+        for _ in range(10):
+            p.episode_start(noise_q=0.0)
+            w = LabWorld(EASY, ep_seed=3, noise_q=0.0, max_steps=80)
+=======
     def test_posterior_concentrates_on_true_config(self):
         # plant a config, feed observations for a few episodes under it,
         # and check that the particle with maximal weight is *consistent*
@@ -103,11 +114,16 @@ class BayesTests(unittest.TestCase):
             w = LabWorld(c_true, ep_seed=3, noise_q=0.0, max_steps=80)
             from lab_env import make_state
             actions = []
+>>>>>>> origin/main
             while not w.finished and w.steps < w.max_steps:
                 obs = w.observe()
                 a = p.act(obs)
                 res = w.step(a)
                 p.observe_outcome(obs, a, res)
+<<<<<<< HEAD
+            successes += int(w.finished)
+        self.assertGreaterEqual(successes, 5)
+=======
                 actions.append(a)
             histories.append((make_state(), actions))
         best = max(range(len(p.particles)), key=lambda i: p.weights[i])
@@ -127,6 +143,7 @@ class BayesTests(unittest.TestCase):
             return seq
 
         self.assertEqual(door_seq(cand), door_seq(c_true))
+>>>>>>> origin/main
 
     def test_model_class_is_declared_family(self):
         p = BayesPlannerPolicy(1)
