@@ -1,0 +1,4521 @@
+{
+  "metadata": {
+    "name": "METARGON",
+    "version": "0.9",
+    "seeds": 8,
+    "episodes_per_seed": 100,
+    "conditions": [
+      "stable",
+      "shift",
+      "rapid_shift",
+      "iid",
+      "novel",
+      "noisy_obs",
+      "tight_budget"
+    ],
+    "policies": [
+      "random",
+      "episodic",
+      "qlearning",
+      "bayes",
+      "metargon",
+      "oracle"
+    ],
+    "deployable_ranking": [
+      "random",
+      "episodic",
+      "qlearning",
+      "bayes",
+      "metargon"
+    ],
+    "same_pre_generated_worlds": true,
+    "oracle_has_hidden_config": true,
+    "env": "Mechanism Lab (lab_env.py)",
+    "parallel": true,
+    "workers": 6
+  },
+  "summary": {
+    "stable": {
+      "random": {
+        "success_rate": 0.0025,
+        "first_half_success": 0.005,
+        "second_half_success": 0.0,
+        "mean_steps": 79.97125,
+        "cpu_s": 2.0413029749997804,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.0025,
+        "first_half_success": 0.005,
+        "second_half_success": 0.0,
+        "mean_steps": 79.97125,
+        "cpu_s": 2.044259725002121,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0,
+        "mean_steps": 80.0,
+        "cpu_s": 2.2552513250011543,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.775,
+        "first_half_success": 0.76,
+        "second_half_success": 0.79,
+        "mean_steps": 45.63375,
+        "cpu_s": 27.70711646250129,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.35125,
+        "first_half_success": 0.3825,
+        "second_half_success": 0.32,
+        "mean_steps": 61.1175,
+        "cpu_s": 32.54272595000293,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "first_half_success": 1.0,
+        "second_half_success": 1.0,
+        "mean_steps": 17.75,
+        "cpu_s": 0.3073848749991157,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.42375,
+        "paired_bootstrap_95pct": [
+          -0.68125,
+          -0.17000000000000004
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.35125,
+        "paired_bootstrap_95pct": [
+          0.09749999999999999,
+          0.6
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.34875,
+        "paired_bootstrap_95pct": [
+          0.0925,
+          0.59875
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.775,
+        "paired_bootstrap_95pct": [
+          0.6825,
+          0.8612500000000001
+        ]
+      }
+    },
+    "shift": {
+      "random": {
+        "success_rate": 0.00625,
+        "first_half_success": 0.005,
+        "second_half_success": 0.0075,
+        "mean_steps": 79.87125,
+        "cpu_s": 1.8675885125012428,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.007500000000000001,
+        "first_half_success": 0.005,
+        "second_half_success": 0.01,
+        "mean_steps": 79.76,
+        "cpu_s": 2.1800065124989487,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.00125,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0025,
+        "mean_steps": 79.9625,
+        "cpu_s": 2.30390636249831,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.80625,
+        "first_half_success": 0.76,
+        "second_half_success": 0.8525,
+        "mean_steps": 41.41125,
+        "cpu_s": 22.961380474995167,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.46375,
+        "first_half_success": 0.3825,
+        "second_half_success": 0.5449999999999999,
+        "mean_steps": 55.2225,
+        "cpu_s": 25.341469274997507,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "first_half_success": 1.0,
+        "second_half_success": 1.0,
+        "mean_steps": 20.625,
+        "cpu_s": 0.411017249996803,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.3425,
+        "paired_bootstrap_95pct": [
+          -0.515,
+          -0.15874999999999997
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.4625,
+        "paired_bootstrap_95pct": [
+          0.2875,
+          0.65625
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.45625,
+        "paired_bootstrap_95pct": [
+          0.28125,
+          0.65
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.805,
+        "paired_bootstrap_95pct": [
+          0.7362500000000001,
+          0.87
+        ]
+      }
+    },
+    "rapid_shift": {
+      "random": {
+        "success_rate": 0.005,
+        "first_half_success": 0.0025,
+        "second_half_success": 0.0075,
+        "mean_steps": 79.89875,
+        "cpu_s": 2.3470577624957514,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.00375,
+        "first_half_success": 0.0025,
+        "second_half_success": 0.005,
+        "mean_steps": 79.9025,
+        "cpu_s": 2.585674050000307,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0,
+        "mean_steps": 80.0,
+        "cpu_s": 2.243768749998708,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.76875,
+        "first_half_success": 0.7424999999999999,
+        "second_half_success": 0.795,
+        "mean_steps": 44.65625,
+        "cpu_s": 32.68487113750052,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.40750000000000003,
+        "first_half_success": 0.4,
+        "second_half_success": 0.415,
+        "mean_steps": 59.207499999999996,
+        "cpu_s": 29.65496454999993,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 0.9125,
+        "first_half_success": 0.95,
+        "second_half_success": 0.875,
+        "mean_steps": 26.55,
+        "cpu_s": 0.7743625000002794,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.36125,
+        "paired_bootstrap_95pct": [
+          -0.5575,
+          -0.16124999999999998
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.40750000000000003,
+        "paired_bootstrap_95pct": [
+          0.20125,
+          0.61125
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.40375,
+        "paired_bootstrap_95pct": [
+          0.1975,
+          0.60875
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.76875,
+        "paired_bootstrap_95pct": [
+          0.715,
+          0.81375
+        ]
+      }
+    },
+    "iid": {
+      "random": {
+        "success_rate": 0.00375,
+        "first_half_success": 0.0025,
+        "second_half_success": 0.005,
+        "mean_steps": 79.97749999999999,
+        "cpu_s": 2.496682987493841,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.00375,
+        "first_half_success": 0.0025,
+        "second_half_success": 0.005,
+        "mean_steps": 79.97749999999999,
+        "cpu_s": 2.5382283625003765,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0025,
+        "first_half_success": 0.0,
+        "second_half_success": 0.005,
+        "mean_steps": 79.97125,
+        "cpu_s": 2.8861872124998627,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.79,
+        "first_half_success": 0.78,
+        "second_half_success": 0.8,
+        "mean_steps": 43.0375,
+        "cpu_s": 39.31674917499731,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.53625,
+        "first_half_success": 0.6025,
+        "second_half_success": 0.47,
+        "mean_steps": 53.80375,
+        "cpu_s": 82.21383221249744,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 0.78875,
+        "first_half_success": 0.785,
+        "second_half_success": 0.7925,
+        "mean_steps": 39.9775,
+        "cpu_s": 1.1952971999962756,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.25375,
+        "paired_bootstrap_95pct": [
+          -0.31124999999999997,
+          -0.19625
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.5337500000000001,
+        "paired_bootstrap_95pct": [
+          0.46875,
+          0.6
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.5325,
+        "paired_bootstrap_95pct": [
+          0.46749999999999997,
+          0.5962500000000001
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.7875,
+        "paired_bootstrap_95pct": [
+          0.7462500000000001,
+          0.82875
+        ]
+      }
+    },
+    "novel": {
+      "random": {
+        "success_rate": 0.00625,
+        "first_half_success": 0.005,
+        "second_half_success": 0.0075,
+        "mean_steps": 79.90375,
+        "cpu_s": 3.1708408375034196,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.0075,
+        "first_half_success": 0.005,
+        "second_half_success": 0.01,
+        "mean_steps": 79.885,
+        "cpu_s": 2.9183677999972133,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.005,
+        "first_half_success": 0.0,
+        "second_half_success": 0.01,
+        "mean_steps": 79.83875,
+        "cpu_s": 2.778733999999531,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.785,
+        "first_half_success": 0.76,
+        "second_half_success": 0.8099999999999999,
+        "mean_steps": 43.691250000000004,
+        "cpu_s": 33.61839950000285,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.3125,
+        "first_half_success": 0.3825,
+        "second_half_success": 0.2425,
+        "mean_steps": 62.47125,
+        "cpu_s": 27.336741524997706,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 0.9375,
+        "first_half_success": 1.0,
+        "second_half_success": 0.875,
+        "mean_steps": 25.25,
+        "cpu_s": 0.42587051250120567,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.4725,
+        "paired_bootstrap_95pct": [
+          -0.685,
+          -0.23624999999999996
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.3075,
+        "paired_bootstrap_95pct": [
+          0.08125,
+          0.565
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.305,
+        "paired_bootstrap_95pct": [
+          0.08,
+          0.565
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.78,
+        "paired_bootstrap_95pct": [
+          0.71375,
+          0.84
+        ]
+      }
+    },
+    "noisy_obs": {
+      "random": {
+        "success_rate": 0.0025,
+        "first_half_success": 0.0025,
+        "second_half_success": 0.0025,
+        "mean_steps": 79.985,
+        "cpu_s": 2.1981077999989793,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.0025,
+        "first_half_success": 0.0025,
+        "second_half_success": 0.0025,
+        "mean_steps": 79.985,
+        "cpu_s": 2.227274100001523,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0,
+        "mean_steps": 80.0,
+        "cpu_s": 2.660891850000553,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.73125,
+        "first_half_success": 0.74,
+        "second_half_success": 0.7225,
+        "mean_steps": 48.1,
+        "cpu_s": 27.173562849999144,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.3375,
+        "first_half_success": 0.33749999999999997,
+        "second_half_success": 0.3375,
+        "mean_steps": 68.63375,
+        "cpu_s": 118.61397636249967,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 0.98375,
+        "first_half_success": 0.9875,
+        "second_half_success": 0.98,
+        "mean_steps": 21.38,
+        "cpu_s": 1.1263808374988002,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.39375,
+        "paired_bootstrap_95pct": [
+          -0.52125,
+          -0.2825
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.3375,
+        "paired_bootstrap_95pct": [
+          0.195,
+          0.49
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.335,
+        "paired_bootstrap_95pct": [
+          0.195,
+          0.4825
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.73125,
+        "paired_bootstrap_95pct": [
+          0.6375000000000001,
+          0.8212499999999999
+        ]
+      }
+    },
+    "tight_budget": {
+      "random": {
+        "success_rate": 0.0,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0,
+        "mean_steps": 44.0,
+        "cpu_s": 0.7531338374992629,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.0,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0,
+        "mean_steps": 44.0,
+        "cpu_s": 0.7738058999984787,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.00125,
+        "first_half_success": 0.0,
+        "second_half_success": 0.0025,
+        "mean_steps": 44.0,
+        "cpu_s": 0.8754997625019314,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.6487499999999999,
+        "first_half_success": 0.6075,
+        "second_half_success": 0.69,
+        "mean_steps": 32.05,
+        "cpu_s": 14.215160825002386,
+        "peak_mem_mb": null
+      },
+      "metargon": {
+        "success_rate": 0.45,
+        "first_half_success": 0.3575,
+        "second_half_success": 0.5425,
+        "mean_steps": 35.36375,
+        "cpu_s": 11.053567074999592,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "first_half_success": 1.0,
+        "second_half_success": 1.0,
+        "mean_steps": 20.625,
+        "cpu_s": 0.24102521250097197,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon_minus_bayes": {
+        "success_delta": -0.19874999999999998,
+        "paired_bootstrap_95pct": [
+          -0.39125,
+          0.013750000000000026
+        ]
+      },
+      "comparison:metargon_minus_qlearning": {
+        "success_delta": 0.44875,
+        "paired_bootstrap_95pct": [
+          0.26875,
+          0.64
+        ]
+      },
+      "comparison:metargon_minus_episodic": {
+        "success_delta": 0.45,
+        "paired_bootstrap_95pct": [
+          0.26875,
+          0.64125
+        ]
+      },
+      "comparison:bayes_minus_qlearning": {
+        "success_delta": 0.6475,
+        "paired_bootstrap_95pct": [
+          0.585,
+          0.7125
+        ]
+      }
+    }
+  },
+  "raw": {
+    "stable": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.6222512000094866,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.535455400007777,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.133230100007495,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.66,
+          "first_half_success": 0.68,
+          "second_half_success": 0.64,
+          "mean_steps": 56.56,
+          "mean_steps_success_second_half": 41.0,
+          "invalid_actions": 0,
+          "cpu_s": 39.31563370001095,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.52,
+          "first_half_success": 0.7,
+          "second_half_success": 0.34,
+          "mean_steps": 56.04,
+          "mean_steps_success_second_half": 39.0,
+          "invalid_actions": 0,
+          "cpu_s": 18.219391699996777,
+          "peak_mem_bytes": null,
+          "planner_ops": 63041,
+          "plan_calls": 2031,
+          "memory_max": 128,
+          "memory_size_end": 40,
+          "evictions": 0,
+          "hypotheses_generated": 40,
+          "verified": 2,
+          "contradicted": 33
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 19.0,
+          "mean_steps_success_second_half": 19.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.35831500000495,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.13473070001055,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.0184338000108255,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.23875119999866,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.89,
+          "first_half_success": 0.92,
+          "second_half_success": 0.86,
+          "mean_steps": 29.61,
+          "mean_steps_success_second_half": 23.46511627906977,
+          "invalid_actions": 0,
+          "cpu_s": 19.358423600002425,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 14.04,
+          "mean_steps_success_second_half": 14.0,
+          "invalid_actions": 0,
+          "cpu_s": 3.11996180001006,
+          "peak_mem_bytes": null,
+          "planner_ops": 13627,
+          "plan_calls": 899,
+          "memory_max": 128,
+          "memory_size_end": 13,
+          "evictions": 0,
+          "hypotheses_generated": 13,
+          "verified": 13,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 14.0,
+          "mean_steps_success_second_half": 14.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.25629429999389686,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.1938091999909375,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.013474999999744,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.2783525999984704,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.81,
+          "first_half_success": 0.74,
+          "second_half_success": 0.88,
+          "mean_steps": 48.58,
+          "mean_steps_success_second_half": 42.68181818181818,
+          "invalid_actions": 0,
+          "cpu_s": 28.29211270000087,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.52,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 17.559411900001578,
+          "peak_mem_bytes": null,
+          "planner_ops": 65817,
+          "plan_calls": 30,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 9
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 22.0,
+          "mean_steps_success_second_half": 22.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.2902299999987008,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.1520415999984834,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.0278717999899527,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.074515500004054,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.72,
+          "first_half_success": 0.7,
+          "second_half_success": 0.74,
+          "mean_steps": 47.8,
+          "mean_steps_success_second_half": 34.54054054054054,
+          "invalid_actions": 0,
+          "cpu_s": 27.07032079999044,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.56,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 16.90782360000594,
+          "peak_mem_bytes": null,
+          "planner_ops": 60524,
+          "plan_calls": 33,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 9
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.0,
+          "mean_steps_success_second_half": 20.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.2969894999987446,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3692310999904294,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.9227679999894463,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.205969200003892,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.56,
+          "first_half_success": 0.56,
+          "second_half_success": 0.56,
+          "mean_steps": 57.05,
+          "mean_steps_success_second_half": 42.892857142857146,
+          "invalid_actions": 0,
+          "cpu_s": 36.2620855000132,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.04,
+          "first_half_success": 0.08,
+          "second_half_success": 0.0,
+          "mean_steps": 78.15,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 136.38177410000935,
+          "peak_mem_bytes": null,
+          "planner_ops": 798720,
+          "plan_calls": 22190,
+          "memory_max": 128,
+          "memory_size_end": 13,
+          "evictions": 0,
+          "hypotheses_generated": 13,
+          "verified": 10,
+          "contradicted": 3
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 16.0,
+          "mean_steps_success_second_half": 16.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.33670319999509957,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3567312999948626,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.961452300005476,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.098097800000687,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.91,
+          "first_half_success": 0.92,
+          "second_half_success": 0.9,
+          "mean_steps": 37.86,
+          "mean_steps_success_second_half": 35.15555555555556,
+          "invalid_actions": 0,
+          "cpu_s": 22.7513595999917,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.51,
+          "first_half_success": 0.56,
+          "second_half_success": 0.46,
+          "mean_steps": 61.15,
+          "mean_steps_success_second_half": 42.52173913043478,
+          "invalid_actions": 0,
+          "cpu_s": 25.82925960001012,
+          "peak_mem_bytes": null,
+          "planner_ops": 101916,
+          "plan_calls": 2493,
+          "memory_max": 128,
+          "memory_size_end": 41,
+          "evictions": 0,
+          "hypotheses_generated": 41,
+          "verified": 10,
+          "contradicted": 29
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.0,
+          "mean_steps_success_second_half": 17.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.426980200005346,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.79,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.8411332000105176,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.79,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3124433000048157,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.2658961999986786,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.98,
+          "first_half_success": 0.96,
+          "second_half_success": 1.0,
+          "mean_steps": 37.86,
+          "mean_steps_success_second_half": 36.6,
+          "invalid_actions": 0,
+          "cpu_s": 20.65497740000137,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.49,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 22.403837599995313,
+          "peak_mem_bytes": null,
+          "planner_ops": 67873,
+          "plan_calls": 70,
+          "memory_max": 128,
+          "memory_size_end": 38,
+          "evictions": 0,
+          "hypotheses_generated": 38,
+          "verified": 0,
+          "contradicted": 20
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.0,
+          "mean_steps_success_second_half": 17.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.21884480000881013,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.660495499992976,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.5621782000089297,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.7471979999972973,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.67,
+          "first_half_success": 0.6,
+          "second_half_success": 0.74,
+          "mean_steps": 49.75,
+          "mean_steps_success_second_half": 34.45945945945946,
+          "invalid_actions": 0,
+          "cpu_s": 27.95201839999936,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.71,
+          "first_half_success": 0.66,
+          "second_half_success": 0.76,
+          "mean_steps": 40.99,
+          "mean_steps_success_second_half": 25.0,
+          "invalid_actions": 0,
+          "cpu_s": 19.92034729999432,
+          "peak_mem_bytes": null,
+          "planner_ops": 87096,
+          "plan_calls": 3781,
+          "memory_max": 128,
+          "memory_size_end": 24,
+          "evictions": 0,
+          "hypotheses_generated": 24,
+          "verified": 13,
+          "contradicted": 11
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.0,
+          "mean_steps_success_second_half": 17.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.2747219999873778,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "shift": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.706671300009475,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.2089948000066215,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3045659999916097,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.8,
+          "first_half_success": 0.68,
+          "second_half_success": 0.92,
+          "mean_steps": 47.17,
+          "mean_steps_success_second_half": 32.45652173913044,
+          "invalid_actions": 0,
+          "cpu_s": 29.652077399994596,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.35,
+          "first_half_success": 0.7,
+          "second_half_success": 0.0,
+          "mean_steps": 63.01,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 18.042326499999035,
+          "peak_mem_bytes": null,
+          "planner_ops": 69198,
+          "plan_calls": 1655,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 20
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 27.0,
+          "mean_steps_success_second_half": 35.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.5842161999898963,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.2494554000004428,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.9298242999939248,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.1957571000093594,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.89,
+          "first_half_success": 0.92,
+          "second_half_success": 0.86,
+          "mean_steps": 31.81,
+          "mean_steps_success_second_half": 28.58139534883721,
+          "invalid_actions": 0,
+          "cpu_s": 18.21531959999993,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.92,
+          "first_half_success": 1.0,
+          "second_half_success": 0.84,
+          "mean_steps": 30.04,
+          "mean_steps_success_second_half": 39.523809523809526,
+          "invalid_actions": 0,
+          "cpu_s": 10.09222019999288,
+          "peak_mem_bytes": null,
+          "planner_ops": 42200,
+          "plan_calls": 1535,
+          "memory_max": 128,
+          "memory_size_end": 37,
+          "evictions": 0,
+          "hypotheses_generated": 37,
+          "verified": 10,
+          "contradicted": 27
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.5,
+          "mean_steps_success_second_half": 21.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.43073459999868646,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.6102701000054367,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.6913186999881873,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.8651144000032218,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.82,
+          "first_half_success": 0.74,
+          "second_half_success": 0.9,
+          "mean_steps": 41.92,
+          "mean_steps_success_second_half": 28.711111111111112,
+          "invalid_actions": 0,
+          "cpu_s": 23.047552299991366,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.42,
+          "first_half_success": 0.02,
+          "second_half_success": 0.82,
+          "mean_steps": 57.01,
+          "mean_steps_success_second_half": 25.097560975609756,
+          "invalid_actions": 0,
+          "cpu_s": 14.658198099990841,
+          "peak_mem_bytes": null,
+          "planner_ops": 46278,
+          "plan_calls": 1475,
+          "memory_max": 128,
+          "memory_size_end": 36,
+          "evictions": 0,
+          "hypotheses_generated": 36,
+          "verified": 9,
+          "contradicted": 27
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 22.0,
+          "mean_steps_success_second_half": 22.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.33292709999659564,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.2740238000114914,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.6267649000074016,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.080961200001184,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.68,
+          "first_half_success": 0.7,
+          "second_half_success": 0.66,
+          "mean_steps": 47.49,
+          "mean_steps_success_second_half": 28.09090909090909,
+          "invalid_actions": 0,
+          "cpu_s": 26.001286600003368,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.56,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 16.54074359999504,
+          "peak_mem_bytes": null,
+          "planner_ops": 60524,
+          "plan_calls": 33,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 9
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 23.0,
+          "mean_steps_success_second_half": 26.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.2760180999903241,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.119118000002345,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.9908145999943372,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.2325176000013016,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.68,
+          "first_half_success": 0.56,
+          "second_half_success": 0.8,
+          "mean_steps": 45.34,
+          "mean_steps_success_second_half": 24.75,
+          "invalid_actions": 0,
+          "cpu_s": 27.815521499986062,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.45,
+          "first_half_success": 0.08,
+          "second_half_success": 0.82,
+          "mean_steps": 54.33,
+          "mean_steps_success_second_half": 21.902439024390244,
+          "invalid_actions": 0,
+          "cpu_s": 85.53736099999514,
+          "peak_mem_bytes": null,
+          "planner_ops": 410547,
+          "plan_calls": 12570,
+          "memory_max": 128,
+          "memory_size_end": 30,
+          "evictions": 0,
+          "hypotheses_generated": 30,
+          "verified": 10,
+          "contradicted": 20
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 16.0,
+          "mean_steps_success_second_half": 16.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.30891890000202693,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.9690263999946183,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.249931700003799,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.2310196999897016,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.91,
+          "first_half_success": 0.92,
+          "second_half_success": 0.9,
+          "mean_steps": 32.43,
+          "mean_steps_success_second_half": 23.08888888888889,
+          "invalid_actions": 0,
+          "cpu_s": 17.144183399999747,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.28,
+          "first_half_success": 0.56,
+          "second_half_success": 0.0,
+          "mean_steps": 69.77,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 24.162136200000532,
+          "peak_mem_bytes": null,
+          "planner_ops": 84275,
+          "plan_calls": 1417,
+          "memory_max": 128,
+          "memory_size_end": 41,
+          "evictions": 0,
+          "hypotheses_generated": 41,
+          "verified": 3,
+          "contradicted": 36
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.0,
+          "mean_steps_success_second_half": 23.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.4890878000005614,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.04,
+          "first_half_success": 0.02,
+          "second_half_success": 0.06,
+          "mean_steps": 78.99,
+          "mean_steps_success_second_half": 53.333333333333336,
+          "invalid_actions": 0,
+          "cpu_s": 1.928784399991855,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.05,
+          "first_half_success": 0.02,
+          "second_half_success": 0.08,
+          "mean_steps": 78.1,
+          "mean_steps_success_second_half": 37.75,
+          "invalid_actions": 4,
+          "cpu_s": 2.839070799993351,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.7,
+          "mean_steps_success_second_half": 50.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.436116499986383,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.96,
+          "first_half_success": 0.96,
+          "second_half_success": 0.96,
+          "mean_steps": 37.7,
+          "mean_steps_success_second_half": 34.458333333333336,
+          "invalid_actions": 0,
+          "cpu_s": 18.723906299986993,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.51,
+          "first_half_success": 0.02,
+          "second_half_success": 1.0,
+          "mean_steps": 47.31,
+          "mean_steps_success_second_half": 15.64,
+          "invalid_actions": 0,
+          "cpu_s": 15.654324899995117,
+          "peak_mem_bytes": null,
+          "planner_ops": 49409,
+          "plan_calls": 1493,
+          "memory_max": 128,
+          "memory_size_end": 53,
+          "evictions": 0,
+          "hypotheses_generated": 53,
+          "verified": 7,
+          "contradicted": 30
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 22.5,
+          "mean_steps_success_second_half": 28.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.4972647999966284,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.083358699994278,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.9033323000039672,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.085198400003719,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.71,
+          "first_half_success": 0.6,
+          "second_half_success": 0.82,
+          "mean_steps": 47.43,
+          "mean_steps_success_second_half": 33.24390243902439,
+          "invalid_actions": 0,
+          "cpu_s": 23.091196699999273,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.77,
+          "first_half_success": 0.66,
+          "second_half_success": 0.88,
+          "mean_steps": 40.75,
+          "mean_steps_success_second_half": 31.954545454545453,
+          "invalid_actions": 0,
+          "cpu_s": 18.04444370001147,
+          "peak_mem_bytes": null,
+          "planner_ops": 57989,
+          "plan_calls": 2779,
+          "memory_max": 128,
+          "memory_size_end": 24,
+          "evictions": 0,
+          "hypotheses_generated": 24,
+          "verified": 11,
+          "contradicted": 13
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.0,
+          "mean_steps_success_second_half": 17.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.36897049999970477,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "rapid_shift": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.6018681999994442,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.418301199999405,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.637236299997312,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.76,
+          "first_half_success": 0.74,
+          "second_half_success": 0.78,
+          "mean_steps": 49.05,
+          "mean_steps_success_second_half": 38.15384615384615,
+          "invalid_actions": 0,
+          "cpu_s": 33.861213600001065,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.73,
+          "first_half_success": 0.72,
+          "second_half_success": 0.74,
+          "mean_steps": 41.94,
+          "mean_steps_success_second_half": 25.81081081081081,
+          "invalid_actions": 0,
+          "cpu_s": 15.1103274999914,
+          "peak_mem_bytes": null,
+          "planner_ops": 49633,
+          "plan_calls": 2835,
+          "memory_max": 128,
+          "memory_size_end": 39,
+          "evictions": 0,
+          "hypotheses_generated": 39,
+          "verified": 0,
+          "contradicted": 37
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 24.8,
+          "mean_steps_success_second_half": 30.6,
+          "invalid_actions": 0,
+          "cpu_s": 0.5202470000076573,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.58,
+          "mean_steps_success_second_half": 38.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.8484361000009812,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.58,
+          "mean_steps_success_second_half": 38.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.5679977999971015,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.329286399995908,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.85,
+          "first_half_success": 0.88,
+          "second_half_success": 0.82,
+          "mean_steps": 37.92,
+          "mean_steps_success_second_half": 36.8780487804878,
+          "invalid_actions": 0,
+          "cpu_s": 25.100758700005827,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.65,
+          "first_half_success": 0.94,
+          "second_half_success": 0.36,
+          "mean_steps": 43.45,
+          "mean_steps_success_second_half": 26.555555555555557,
+          "invalid_actions": 0,
+          "cpu_s": 20.442407199996524,
+          "peak_mem_bytes": null,
+          "planner_ops": 51866,
+          "plan_calls": 1320,
+          "memory_max": 128,
+          "memory_size_end": 42,
+          "evictions": 0,
+          "hypotheses_generated": 42,
+          "verified": 8,
+          "contradicted": 34
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.0,
+          "mean_steps_success_second_half": 23.2,
+          "invalid_actions": 0,
+          "cpu_s": 0.7249204000108875,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.0334117999882437,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.4195107000123244,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.417191800006549,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.78,
+          "first_half_success": 0.8,
+          "second_half_success": 0.76,
+          "mean_steps": 46.01,
+          "mean_steps_success_second_half": 32.55263157894737,
+          "invalid_actions": 0,
+          "cpu_s": 30.91146519999893,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.1,
+          "first_half_success": 0.02,
+          "second_half_success": 0.18,
+          "mean_steps": 75.41,
+          "mean_steps_success_second_half": 34.333333333333336,
+          "invalid_actions": 0,
+          "cpu_s": 23.976026999996975,
+          "peak_mem_bytes": null,
+          "planner_ops": 62545,
+          "plan_calls": 169,
+          "memory_max": 128,
+          "memory_size_end": 36,
+          "evictions": 0,
+          "hypotheses_generated": 36,
+          "verified": 4,
+          "contradicted": 24
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 22.5,
+          "mean_steps_success_second_half": 23.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.37095279998902697,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.329340599986608,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.1978891999897314,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.9580221999931382,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.73,
+          "first_half_success": 0.7,
+          "second_half_success": 0.76,
+          "mean_steps": 47.15,
+          "mean_steps_success_second_half": 34.026315789473685,
+          "invalid_actions": 0,
+          "cpu_s": 31.001969899996766,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.11,
+          "first_half_success": 0.02,
+          "second_half_success": 0.2,
+          "mean_steps": 75.74,
+          "mean_steps_success_second_half": 41.8,
+          "invalid_actions": 0,
+          "cpu_s": 22.81908869999461,
+          "peak_mem_bytes": null,
+          "planner_ops": 59791,
+          "plan_calls": 245,
+          "memory_max": 128,
+          "memory_size_end": 26,
+          "evictions": 0,
+          "hypotheses_generated": 26,
+          "verified": 5,
+          "contradicted": 12
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.5,
+          "mean_steps_success_second_half": 21.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.47452289999637287,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3020014999929117,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.62250949999725,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.808038999995915,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.61,
+          "first_half_success": 0.48,
+          "second_half_success": 0.74,
+          "mean_steps": 52.46,
+          "mean_steps_success_second_half": 30.10810810810811,
+          "invalid_actions": 0,
+          "cpu_s": 42.51696159999119,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.32,
+          "first_half_success": 0.44,
+          "second_half_success": 0.2,
+          "mean_steps": 63.81,
+          "mean_steps_success_second_half": 30.0,
+          "invalid_actions": 0,
+          "cpu_s": 68.46568350000598,
+          "peak_mem_bytes": null,
+          "planner_ops": 258396,
+          "plan_calls": 6999,
+          "memory_max": 128,
+          "memory_size_end": 30,
+          "evictions": 0,
+          "hypotheses_generated": 30,
+          "verified": 0,
+          "contradicted": 30
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 24.3,
+          "mean_steps_success_second_half": 30.6,
+          "invalid_actions": 0,
+          "cpu_s": 0.6541175000020303,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.02,
+          "first_half_success": 0.0,
+          "second_half_success": 0.04,
+          "mean_steps": 79.82,
+          "mean_steps_success_second_half": 71.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.976939999993192,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.85,
+          "mean_steps_success_second_half": 65.0,
+          "invalid_actions": 4,
+          "cpu_s": 3.1426766000076896,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.7199199000024237,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.87,
+          "first_half_success": 0.94,
+          "second_half_success": 0.8,
+          "mean_steps": 37.0,
+          "mean_steps_success_second_half": 33.325,
+          "invalid_actions": 0,
+          "cpu_s": 32.1238638000068,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.53,
+          "first_half_success": 0.28,
+          "second_half_success": 0.78,
+          "mean_steps": 53.35,
+          "mean_steps_success_second_half": 24.512820512820515,
+          "invalid_actions": 0,
+          "cpu_s": 21.877169400002458,
+          "peak_mem_bytes": null,
+          "planner_ops": 58696,
+          "plan_calls": 2160,
+          "memory_max": 128,
+          "memory_size_end": 53,
+          "evictions": 0,
+          "hypotheses_generated": 53,
+          "verified": 9,
+          "contradicted": 44
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 21.2,
+          "mean_steps_success_second_half": 23.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.48884049999469426,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.79,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.2394704000034835,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.79,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.4857504999963567,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.9416993000049843,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.78,
+          "first_half_success": 0.78,
+          "second_half_success": 0.78,
+          "mean_steps": 44.01,
+          "mean_steps_success_second_half": 31.666666666666668,
+          "invalid_actions": 0,
+          "cpu_s": 30.952690000005532,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.49,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 46.93610270001227,
+          "peak_mem_bytes": null,
+          "planner_ops": 136539,
+          "plan_calls": 191,
+          "memory_max": 128,
+          "memory_size_end": 41,
+          "evictions": 0,
+          "hypotheses_generated": 41,
+          "verified": 0,
+          "contradicted": 26
+        },
+        "oracle": {
+          "success_rate": 0.3,
+          "first_half_success": 0.6,
+          "second_half_success": 0.0,
+          "mean_steps": 61.1,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.5249827000079677,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.4449935000011465,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.8307569000025978,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.138755099993432,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.77,
+          "first_half_success": 0.62,
+          "second_half_success": 0.92,
+          "mean_steps": 43.65,
+          "mean_steps_success_second_half": 31.82608695652174,
+          "invalid_actions": 0,
+          "cpu_s": 35.010046299998066,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.81,
+          "first_half_success": 0.76,
+          "second_half_success": 0.86,
+          "mean_steps": 40.47,
+          "mean_steps_success_second_half": 33.41860465116279,
+          "invalid_actions": 0,
+          "cpu_s": 17.612910399999237,
+          "peak_mem_bytes": null,
+          "planner_ops": 51877,
+          "plan_calls": 2064,
+          "memory_max": 128,
+          "memory_size_end": 42,
+          "evictions": 0,
+          "hypotheses_generated": 42,
+          "verified": 0,
+          "contradicted": 40
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 18.0,
+          "mean_steps_success_second_half": 19.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.4363161999935983,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "iid": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.8015247999865096,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.2380839999968885,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3069987000053516,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.85,
+          "first_half_success": 0.8,
+          "second_half_success": 0.9,
+          "mean_steps": 41.37,
+          "mean_steps_success_second_half": 33.71111111111111,
+          "invalid_actions": 0,
+          "cpu_s": 33.94656199999736,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.65,
+          "first_half_success": 0.84,
+          "second_half_success": 0.46,
+          "mean_steps": 46.3,
+          "mean_steps_success_second_half": 29.956521739130434,
+          "invalid_actions": 0,
+          "cpu_s": 115.92070809999132,
+          "peak_mem_bytes": null,
+          "planner_ops": 433913,
+          "plan_calls": 7677,
+          "memory_max": 128,
+          "memory_size_end": 88,
+          "evictions": 0,
+          "hypotheses_generated": 88,
+          "verified": 7,
+          "contradicted": 77
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 30.61,
+          "mean_steps_success_second_half": 31.52,
+          "invalid_actions": 0,
+          "cpu_s": 1.3175010999984806,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.612152399990009,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.065540299998247,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3916945999953896,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.78,
+          "first_half_success": 0.7,
+          "second_half_success": 0.86,
+          "mean_steps": 45.76,
+          "mean_steps_success_second_half": 36.604651162790695,
+          "invalid_actions": 0,
+          "cpu_s": 36.632692799990764,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.65,
+          "first_half_success": 0.68,
+          "second_half_success": 0.62,
+          "mean_steps": 49.76,
+          "mean_steps_success_second_half": 32.25806451612903,
+          "invalid_actions": 0,
+          "cpu_s": 74.53293180000037,
+          "peak_mem_bytes": null,
+          "planner_ops": 213200,
+          "plan_calls": 3573,
+          "memory_max": 128,
+          "memory_size_end": 106,
+          "evictions": 0,
+          "hypotheses_generated": 106,
+          "verified": 0,
+          "contradicted": 101
+        },
+        "oracle": {
+          "success_rate": 0.75,
+          "first_half_success": 0.7,
+          "second_half_success": 0.8,
+          "mean_steps": 40.31,
+          "mean_steps_success_second_half": 25.675,
+          "invalid_actions": 0,
+          "cpu_s": 1.6322554999933345,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.4162382999929832,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3979713000007905,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.94242099999974,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.85,
+          "first_half_success": 0.88,
+          "second_half_success": 0.82,
+          "mean_steps": 38.47,
+          "mean_steps_success_second_half": 30.24390243902439,
+          "invalid_actions": 0,
+          "cpu_s": 35.367691499996,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.52,
+          "first_half_success": 0.54,
+          "second_half_success": 0.5,
+          "mean_steps": 55.1,
+          "mean_steps_success_second_half": 34.24,
+          "invalid_actions": 0,
+          "cpu_s": 65.73869899999409,
+          "peak_mem_bytes": null,
+          "planner_ops": 206042,
+          "plan_calls": 3242,
+          "memory_max": 128,
+          "memory_size_end": 90,
+          "evictions": 0,
+          "hypotheses_generated": 90,
+          "verified": 0,
+          "contradicted": 84
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 25.15,
+          "mean_steps_success_second_half": 26.32,
+          "invalid_actions": 0,
+          "cpu_s": 0.5214879999984987,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.92,
+          "mean_steps_success_second_half": 72.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.8779978999955347,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.92,
+          "mean_steps_success_second_half": 72.0,
+          "invalid_actions": 0,
+          "cpu_s": 3.2463080000015907,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.3172389999963343,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.79,
+          "first_half_success": 0.8,
+          "second_half_success": 0.78,
+          "mean_steps": 40.88,
+          "mean_steps_success_second_half": 33.69230769230769,
+          "invalid_actions": 0,
+          "cpu_s": 34.70010479999473,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.63,
+          "first_half_success": 0.66,
+          "second_half_success": 0.6,
+          "mean_steps": 48.01,
+          "mean_steps_success_second_half": 31.1,
+          "invalid_actions": 0,
+          "cpu_s": 37.93313779999153,
+          "peak_mem_bytes": null,
+          "planner_ops": 111271,
+          "plan_calls": 2091,
+          "memory_max": 128,
+          "memory_size_end": 91,
+          "evictions": 0,
+          "hypotheses_generated": 91,
+          "verified": 0,
+          "contradicted": 83
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 33.74,
+          "mean_steps_success_second_half": 34.02,
+          "invalid_actions": 0,
+          "cpu_s": 1.0204223000037018,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.244714999993448,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.5932718999974895,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.5975897000025725,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.75,
+          "first_half_success": 0.66,
+          "second_half_success": 0.84,
+          "mean_steps": 44.42,
+          "mean_steps_success_second_half": 32.5,
+          "invalid_actions": 0,
+          "cpu_s": 42.00523320000502,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.4,
+          "first_half_success": 0.48,
+          "second_half_success": 0.32,
+          "mean_steps": 60.02,
+          "mean_steps_success_second_half": 32.5,
+          "invalid_actions": 0,
+          "cpu_s": 39.36197240000183,
+          "peak_mem_bytes": null,
+          "planner_ops": 64122,
+          "plan_calls": 1217,
+          "memory_max": 128,
+          "memory_size_end": 96,
+          "evictions": 0,
+          "hypotheses_generated": 96,
+          "verified": 2,
+          "contradicted": 88
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 32.74,
+          "mean_steps_success_second_half": 32.66,
+          "invalid_actions": 0,
+          "cpu_s": 1.3797058999916771,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.94,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.4765026999957627,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.94,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.466586599999573,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.89,
+          "mean_steps_success_second_half": 69.0,
+          "invalid_actions": 0,
+          "cpu_s": 3.6542229000042425,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.86,
+          "first_half_success": 0.8,
+          "second_half_success": 0.92,
+          "mean_steps": 39.42,
+          "mean_steps_success_second_half": 29.847826086956523,
+          "invalid_actions": 0,
+          "cpu_s": 37.60896529999445,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.48,
+          "first_half_success": 0.52,
+          "second_half_success": 0.44,
+          "mean_steps": 56.54,
+          "mean_steps_success_second_half": 29.863636363636363,
+          "invalid_actions": 0,
+          "cpu_s": 181.99852069999906,
+          "peak_mem_bytes": null,
+          "planner_ops": 800187,
+          "plan_calls": 12914,
+          "memory_max": 128,
+          "memory_size_end": 91,
+          "evictions": 0,
+          "hypotheses_generated": 91,
+          "verified": 1,
+          "contradicted": 82
+        },
+        "oracle": {
+          "success_rate": 0.37,
+          "first_half_success": 0.4,
+          "second_half_success": 0.34,
+          "mean_steps": 61.82,
+          "mean_steps_success_second_half": 31.705882352941178,
+          "invalid_actions": 0,
+          "cpu_s": 1.716337999998359,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.96,
+          "mean_steps_success_second_half": 76.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.2319776999938767,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.96,
+          "mean_steps_success_second_half": 76.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.641676600003848,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.298320200003218,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.68,
+          "first_half_success": 0.82,
+          "second_half_success": 0.54,
+          "mean_steps": 48.75,
+          "mean_steps_success_second_half": 31.962962962962962,
+          "invalid_actions": 0,
+          "cpu_s": 45.1865994999971,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.42,
+          "first_half_success": 0.44,
+          "second_half_success": 0.4,
+          "mean_steps": 59.24,
+          "mean_steps_success_second_half": 29.7,
+          "invalid_actions": 0,
+          "cpu_s": 61.46390810000594,
+          "peak_mem_bytes": null,
+          "planner_ops": 159160,
+          "plan_calls": 2490,
+          "memory_max": 128,
+          "memory_size_end": 67,
+          "evictions": 0,
+          "hypotheses_generated": 67,
+          "verified": 4,
+          "contradicted": 60
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 24.89,
+          "mean_steps_success_second_half": 26.04,
+          "invalid_actions": 0,
+          "cpu_s": 0.5797152999875834,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3123551000026055,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.656388200004585,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.88,
+          "mean_steps_success_second_half": 68.0,
+          "invalid_actions": 0,
+          "cpu_s": 2.5810115999920527,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.76,
+          "first_half_success": 0.78,
+          "second_half_success": 0.74,
+          "mean_steps": 45.23,
+          "mean_steps_success_second_half": 34.86486486486486,
+          "invalid_actions": 0,
+          "cpu_s": 49.08614430000307,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.54,
+          "first_half_success": 0.66,
+          "second_half_success": 0.42,
+          "mean_steps": 55.46,
+          "mean_steps_success_second_half": 34.714285714285715,
+          "invalid_actions": 0,
+          "cpu_s": 80.76077979999536,
+          "peak_mem_bytes": null,
+          "planner_ops": 275788,
+          "plan_calls": 4920,
+          "memory_max": 128,
+          "memory_size_end": 94,
+          "evictions": 0,
+          "hypotheses_generated": 94,
+          "verified": 1,
+          "contradicted": 85
+        },
+        "oracle": {
+          "success_rate": 0.19,
+          "first_half_success": 0.18,
+          "second_half_success": 0.2,
+          "mean_steps": 70.56,
+          "mean_steps_success_second_half": 33.3,
+          "invalid_actions": 0,
+          "cpu_s": 1.3949514999985695,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "novel": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.662695999999414,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.714351499991608,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.6700729000003776,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.78,
+          "first_half_success": 0.68,
+          "second_half_success": 0.88,
+          "mean_steps": 44.24,
+          "mean_steps_success_second_half": 23.636363636363637,
+          "invalid_actions": 0,
+          "cpu_s": 52.00760330000776,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.35,
+          "first_half_success": 0.7,
+          "second_half_success": 0.0,
+          "mean_steps": 63.01,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 32.51465089998965,
+          "peak_mem_bytes": null,
+          "planner_ops": 69198,
+          "plan_calls": 1655,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 20
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 26.0,
+          "mean_steps_success_second_half": 33.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.5395063000032678,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.02,
+          "first_half_success": 0.0,
+          "second_half_success": 0.04,
+          "mean_steps": 79.48,
+          "mean_steps_success_second_half": 54.0,
+          "invalid_actions": 0,
+          "cpu_s": 5.413651199996821,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.02,
+          "first_half_success": 0.0,
+          "second_half_success": 0.04,
+          "mean_steps": 79.48,
+          "mean_steps_success_second_half": 54.0,
+          "invalid_actions": 0,
+          "cpu_s": 4.418576800002484,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.04,
+          "first_half_success": 0.0,
+          "second_half_success": 0.08,
+          "mean_steps": 78.71,
+          "mean_steps_success_second_half": 47.75,
+          "invalid_actions": 0,
+          "cpu_s": 3.8606386999890674,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.94,
+          "first_half_success": 0.92,
+          "second_half_success": 0.96,
+          "mean_steps": 31.26,
+          "mean_steps_success_second_half": 32.791666666666664,
+          "invalid_actions": 0,
+          "cpu_s": 31.777754100010497,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 14.49,
+          "mean_steps_success_second_half": 14.9,
+          "invalid_actions": 0,
+          "cpu_s": 9.85504179999407,
+          "peak_mem_bytes": null,
+          "planner_ops": 17718,
+          "plan_calls": 2166,
+          "memory_max": 128,
+          "memory_size_end": 31,
+          "evictions": 0,
+          "hypotheses_generated": 31,
+          "verified": 17,
+          "contradicted": 7
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.0,
+          "mean_steps_success_second_half": 20.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.4451759000075981,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.906895300009637,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.341759999995702,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.2786609000031604,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.75,
+          "first_half_success": 0.74,
+          "second_half_success": 0.76,
+          "mean_steps": 49.94,
+          "mean_steps_success_second_half": 40.36842105263158,
+          "invalid_actions": 0,
+          "cpu_s": 47.70673119999992,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.52,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 25.766396999999415,
+          "peak_mem_bytes": null,
+          "planner_ops": 65817,
+          "plan_calls": 30,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 9
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 24.5,
+          "mean_steps_success_second_half": 27.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.44947310000134166,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 6.045913900001324,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.735127099993406,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.8206674000102794,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.69,
+          "first_half_success": 0.7,
+          "second_half_success": 0.68,
+          "mean_steps": 46.29,
+          "mean_steps_success_second_half": 26.08823529411765,
+          "invalid_actions": 0,
+          "cpu_s": 31.024439400003757,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.56,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 16.466181000010693,
+          "peak_mem_bytes": null,
+          "planner_ops": 60524,
+          "plan_calls": 33,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 9
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.0,
+          "mean_steps_success_second_half": 20.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.266187400004128,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.0936470000015106,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.3927508000051603,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 3.0400057999941055,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.64,
+          "first_half_success": 0.56,
+          "second_half_success": 0.72,
+          "mean_steps": 49.2,
+          "mean_steps_success_second_half": 29.333333333333332,
+          "invalid_actions": 0,
+          "cpu_s": 33.820145499994396,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.04,
+          "first_half_success": 0.08,
+          "second_half_success": 0.0,
+          "mean_steps": 78.15,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 69.19163670000853,
+          "peak_mem_bytes": null,
+          "planner_ops": 419316,
+          "plan_calls": 10795,
+          "memory_max": 128,
+          "memory_size_end": 31,
+          "evictions": 0,
+          "hypotheses_generated": 31,
+          "verified": 3,
+          "contradicted": 17
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 24.5,
+          "mean_steps_success_second_half": 33.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.32950000000710133,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.103418700004113,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 4.414660299997195,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 2.8744949999963865,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.87,
+          "first_half_success": 0.92,
+          "second_half_success": 0.82,
+          "mean_steps": 42.56,
+          "mean_steps_success_second_half": 42.24390243902439,
+          "invalid_actions": 0,
+          "cpu_s": 25.305563900008565,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.28,
+          "first_half_success": 0.56,
+          "second_half_success": 0.0,
+          "mean_steps": 69.77,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 22.441132299994933,
+          "peak_mem_bytes": null,
+          "planner_ops": 84275,
+          "plan_calls": 1417,
+          "memory_max": 128,
+          "memory_size_end": 41,
+          "evictions": 0,
+          "hypotheses_generated": 41,
+          "verified": 3,
+          "contradicted": 36
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 21.5,
+          "mean_steps_success_second_half": 26.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.2678153999877395,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.79,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.6466704000049504,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 79.79,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.8253493999945931,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.8298281000024872,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.9,
+          "first_half_success": 0.96,
+          "second_half_success": 0.84,
+          "mean_steps": 41.83,
+          "mean_steps_success_second_half": 37.785714285714285,
+          "invalid_actions": 0,
+          "cpu_s": 21.415077800003928,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.04,
+          "first_half_success": 0.02,
+          "second_half_success": 0.06,
+          "mean_steps": 78.83,
+          "mean_steps_success_second_half": 58.0,
+          "invalid_actions": 0,
+          "cpu_s": 26.40028399998846,
+          "peak_mem_bytes": null,
+          "planner_ops": 88530,
+          "plan_calls": 1101,
+          "memory_max": 128,
+          "memory_size_end": 47,
+          "evictions": 0,
+          "hypotheses_generated": 47,
+          "verified": 5,
+          "contradicted": 40
+        },
+        "oracle": {
+          "success_rate": 0.5,
+          "first_half_success": 1.0,
+          "second_half_success": 0.0,
+          "mean_steps": 48.5,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.840222900005756,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 79.98,
+          "mean_steps_success_second_half": 78.0,
+          "invalid_actions": 0,
+          "cpu_s": 1.4938342000095872,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.02,
+          "first_half_success": 0.0,
+          "second_half_success": 0.04,
+          "mean_steps": 79.83,
+          "mean_steps_success_second_half": 71.5,
+          "invalid_actions": 1,
+          "cpu_s": 1.504366499997559,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 1.8555032000003848,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.71,
+          "first_half_success": 0.6,
+          "second_half_success": 0.82,
+          "mean_steps": 44.21,
+          "mean_steps_success_second_half": 25.390243902439025,
+          "invalid_actions": 0,
+          "cpu_s": 25.88988079999399,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.77,
+          "first_half_success": 0.66,
+          "second_half_success": 0.88,
+          "mean_steps": 36.44,
+          "mean_steps_success_second_half": 22.15909090909091,
+          "invalid_actions": 0,
+          "cpu_s": 16.0586084999959,
+          "peak_mem_bytes": null,
+          "planner_ops": 66128,
+          "plan_calls": 3554,
+          "memory_max": 128,
+          "memory_size_end": 41,
+          "evictions": 0,
+          "hypotheses_generated": 41,
+          "verified": 14,
+          "contradicted": 27
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.0,
+          "mean_steps_success_second_half": 23.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.26908309999271296,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "noisy_obs": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 11,
+          "cpu_s": 2.0808490000054007,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 11,
+          "cpu_s": 2.4126627999939956,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 18,
+          "cpu_s": 3.8157212999940384,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.66,
+          "first_half_success": 0.7,
+          "second_half_success": 0.62,
+          "mean_steps": 55.48,
+          "mean_steps_success_second_half": 46.70967741935484,
+          "invalid_actions": 74,
+          "cpu_s": 37.42225979999057,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.17,
+          "first_half_success": 0.18,
+          "second_half_success": 0.16,
+          "mean_steps": 74.78,
+          "mean_steps_success_second_half": 56.0,
+          "invalid_actions": 47,
+          "cpu_s": 157.1750761000003,
+          "peak_mem_bytes": null,
+          "planner_ops": 379168,
+          "plan_calls": 21026,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 7620,
+          "hypotheses_generated": 7748,
+          "verified": 110,
+          "contradicted": 1
+        },
+        "oracle": {
+          "success_rate": 0.95,
+          "first_half_success": 0.98,
+          "second_half_success": 0.92,
+          "mean_steps": 25.13,
+          "mean_steps_success_second_half": 20.695652173913043,
+          "invalid_actions": 5,
+          "cpu_s": 1.2362658999918494,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 12,
+          "cpu_s": 2.202932200001669,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 12,
+          "cpu_s": 2.368401100000483,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 20,
+          "cpu_s": 2.6438364000059664,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.86,
+          "first_half_success": 0.86,
+          "second_half_success": 0.86,
+          "mean_steps": 32.25,
+          "mean_steps_success_second_half": 25.046511627906977,
+          "invalid_actions": 29,
+          "cpu_s": 20.93112480000127,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.57,
+          "first_half_success": 0.58,
+          "second_half_success": 0.56,
+          "mean_steps": 50.33,
+          "mean_steps_success_second_half": 26.892857142857142,
+          "invalid_actions": 13,
+          "cpu_s": 63.20286119999946,
+          "peak_mem_bytes": null,
+          "planner_ops": 111546,
+          "plan_calls": 9063,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 4267,
+          "hypotheses_generated": 4395,
+          "verified": 113,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 15.47,
+          "mean_steps_success_second_half": 15.16,
+          "invalid_actions": 1,
+          "cpu_s": 0.7092311000014888,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 14,
+          "cpu_s": 1.9812399000074947,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 14,
+          "cpu_s": 2.126691600002232,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 21,
+          "cpu_s": 2.470478000002913,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.71,
+          "first_half_success": 0.74,
+          "second_half_success": 0.68,
+          "mean_steps": 55.62,
+          "mean_steps_success_second_half": 46.529411764705884,
+          "invalid_actions": 51,
+          "cpu_s": 31.971376799992868,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.14,
+          "first_half_success": 0.1,
+          "second_half_success": 0.18,
+          "mean_steps": 77.02,
+          "mean_steps_success_second_half": 60.666666666666664,
+          "invalid_actions": 39,
+          "cpu_s": 164.1841693999886,
+          "peak_mem_bytes": null,
+          "planner_ops": 404223,
+          "plan_calls": 20489,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 7923,
+          "hypotheses_generated": 8051,
+          "verified": 100,
+          "contradicted": 7
+        },
+        "oracle": {
+          "success_rate": 0.93,
+          "first_half_success": 0.94,
+          "second_half_success": 0.92,
+          "mean_steps": 29.82,
+          "mean_steps_success_second_half": 25.891304347826086,
+          "invalid_actions": 18,
+          "cpu_s": 1.5507313999987673,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 14,
+          "cpu_s": 3.5059622999979183,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 14,
+          "cpu_s": 2.866940300009446,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 25,
+          "cpu_s": 2.633755900009419,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.72,
+          "first_half_success": 0.76,
+          "second_half_success": 0.68,
+          "mean_steps": 48.96,
+          "mean_steps_success_second_half": 36.05882352941177,
+          "invalid_actions": 66,
+          "cpu_s": 23.6286994000111,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.38,
+          "first_half_success": 0.42,
+          "second_half_success": 0.34,
+          "mean_steps": 71.79,
+          "mean_steps_success_second_half": 63.529411764705884,
+          "invalid_actions": 32,
+          "cpu_s": 137.2444336000044,
+          "peak_mem_bytes": null,
+          "planner_ops": 317222,
+          "plan_calls": 17343,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 8103,
+          "hypotheses_generated": 8231,
+          "verified": 112,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 21.91,
+          "mean_steps_success_second_half": 21.8,
+          "invalid_actions": 3,
+          "cpu_s": 0.984244299994316,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 9,
+          "cpu_s": 2.275663099993835,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 9,
+          "cpu_s": 2.0773447999963537,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 2,
+          "cpu_s": 2.833160599999246,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.55,
+          "first_half_success": 0.56,
+          "second_half_success": 0.54,
+          "mean_steps": 55.77,
+          "mean_steps_success_second_half": 37.48148148148148,
+          "invalid_actions": 67,
+          "cpu_s": 30.805708700005198,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.25,
+          "first_half_success": 0.22,
+          "second_half_success": 0.28,
+          "mean_steps": 70.22,
+          "mean_steps_success_second_half": 39.642857142857146,
+          "invalid_actions": 51,
+          "cpu_s": 106.33103279999341,
+          "peak_mem_bytes": null,
+          "planner_ops": 236389,
+          "plan_calls": 17872,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 9084,
+          "hypotheses_generated": 9212,
+          "verified": 116,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 0.99,
+          "first_half_success": 0.98,
+          "second_half_success": 1.0,
+          "mean_steps": 20.34,
+          "mean_steps_success_second_half": 19.6,
+          "invalid_actions": 1,
+          "cpu_s": 2.4336155999917537,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 7,
+          "cpu_s": 1.8646215999906417,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 7,
+          "cpu_s": 2.0602834000019357,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 18,
+          "cpu_s": 2.4746911999973236,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.85,
+          "first_half_success": 0.86,
+          "second_half_success": 0.84,
+          "mean_steps": 44.08,
+          "mean_steps_success_second_half": 36.0,
+          "invalid_actions": 46,
+          "cpu_s": 26.239782799995737,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.11,
+          "first_half_success": 0.12,
+          "second_half_success": 0.1,
+          "mean_steps": 77.01,
+          "mean_steps_success_second_half": 46.8,
+          "invalid_actions": 40,
+          "cpu_s": 148.07375490000413,
+          "peak_mem_bytes": null,
+          "planner_ops": 341890,
+          "plan_calls": 21856,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 7681,
+          "hypotheses_generated": 7809,
+          "verified": 116,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 18.12,
+          "mean_steps_success_second_half": 18.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.7016803000005893,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.02,
+          "first_half_success": 0.02,
+          "second_half_success": 0.02,
+          "mean_steps": 79.88,
+          "mean_steps_success_second_half": 77.0,
+          "invalid_actions": 13,
+          "cpu_s": 1.7736274999915622,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.02,
+          "first_half_success": 0.02,
+          "second_half_success": 0.02,
+          "mean_steps": 79.88,
+          "mean_steps_success_second_half": 77.0,
+          "invalid_actions": 13,
+          "cpu_s": 1.9184826000127941,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 17,
+          "cpu_s": 2.2911580999934813,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.94,
+          "first_half_success": 0.96,
+          "second_half_success": 0.92,
+          "mean_steps": 40.99,
+          "mean_steps_success_second_half": 37.869565217391305,
+          "invalid_actions": 47,
+          "cpu_s": 21.732553599998937,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.79,
+          "first_half_success": 0.82,
+          "second_half_success": 0.76,
+          "mean_steps": 57.02,
+          "mean_steps_success_second_half": 51.71052631578947,
+          "invalid_actions": 5,
+          "cpu_s": 96.96440070000244,
+          "peak_mem_bytes": null,
+          "planner_ops": 245503,
+          "plan_calls": 15318,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 6390,
+          "hypotheses_generated": 6518,
+          "verified": 120,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 19.64,
+          "mean_steps_success_second_half": 20.46,
+          "invalid_actions": 2,
+          "cpu_s": 1.0156871000071988,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 14,
+          "cpu_s": 1.8999668000033125,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 14,
+          "cpu_s": 1.987386199994944,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 80.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 21,
+          "cpu_s": 2.1243333000020357,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.56,
+          "first_half_success": 0.48,
+          "second_half_success": 0.64,
+          "mean_steps": 51.65,
+          "mean_steps_success_second_half": 30.5625,
+          "invalid_actions": 58,
+          "cpu_s": 24.656996899997466,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.29,
+          "first_half_success": 0.26,
+          "second_half_success": 0.32,
+          "mean_steps": 70.9,
+          "mean_steps_success_second_half": 49.0,
+          "invalid_actions": 28,
+          "cpu_s": 75.7360822000046,
+          "peak_mem_bytes": null,
+          "planner_ops": 236047,
+          "plan_calls": 15627,
+          "memory_max": 128,
+          "memory_size_end": 128,
+          "evictions": 6080,
+          "hypotheses_generated": 6208,
+          "verified": 107,
+          "contradicted": 0
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.61,
+          "mean_steps_success_second_half": 20.96,
+          "invalid_actions": 1,
+          "cpu_s": 0.3795910000044387,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "tight_budget": [
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7128731999982847,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.78842870000517,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8717338999995263,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.63,
+          "first_half_success": 0.56,
+          "second_half_success": 0.7,
+          "mean_steps": 33.71,
+          "mean_steps_success_second_half": 26.142857142857142,
+          "invalid_actions": 0,
+          "cpu_s": 16.23716269999568,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.31,
+          "first_half_success": 0.6,
+          "second_half_success": 0.02,
+          "mean_steps": 39.78,
+          "mean_steps_success_second_half": 32.0,
+          "invalid_actions": 0,
+          "cpu_s": 9.842046099991421,
+          "peak_mem_bytes": null,
+          "planner_ops": 50493,
+          "plan_calls": 1294,
+          "memory_max": 128,
+          "memory_size_end": 24,
+          "evictions": 0,
+          "hypotheses_generated": 24,
+          "verified": 0,
+          "contradicted": 20
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 27.0,
+          "mean_steps_success_second_half": 35.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.405765400006203,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.6807639000035124,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7500088999950094,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8704671000014059,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.82,
+          "first_half_success": 0.92,
+          "second_half_success": 0.72,
+          "mean_steps": 27.6,
+          "mean_steps_success_second_half": 27.416666666666668,
+          "invalid_actions": 0,
+          "cpu_s": 13.778472900012275,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.81,
+          "first_half_success": 1.0,
+          "second_half_success": 0.62,
+          "mean_steps": 26.67,
+          "mean_steps_success_second_half": 36.354838709677416,
+          "invalid_actions": 0,
+          "cpu_s": 5.818281499989098,
+          "peak_mem_bytes": null,
+          "planner_ops": 25204,
+          "plan_calls": 1268,
+          "memory_max": 128,
+          "memory_size_end": 42,
+          "evictions": 0,
+          "hypotheses_generated": 42,
+          "verified": 10,
+          "contradicted": 32
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.5,
+          "mean_steps_success_second_half": 21.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.20575340000505093,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7964431000000332,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8223840999999084,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8398830000078306,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.62,
+          "first_half_success": 0.5,
+          "second_half_success": 0.74,
+          "mean_steps": 33.83,
+          "mean_steps_success_second_half": 23.486486486486488,
+          "invalid_actions": 0,
+          "cpu_s": 15.159530000004452,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.44,
+          "first_half_success": 0.02,
+          "second_half_success": 0.86,
+          "mean_steps": 35.45,
+          "mean_steps_success_second_half": 24.3953488372093,
+          "invalid_actions": 0,
+          "cpu_s": 8.295938100010972,
+          "peak_mem_bytes": null,
+          "planner_ops": 36660,
+          "plan_calls": 1583,
+          "memory_max": 128,
+          "memory_size_end": 36,
+          "evictions": 0,
+          "hypotheses_generated": 36,
+          "verified": 9,
+          "contradicted": 27
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 22.0,
+          "mean_steps_success_second_half": 22.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.318048799992539,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7914626999991015,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8316169000027003,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8817285999975866,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.63,
+          "first_half_success": 0.6,
+          "second_half_success": 0.66,
+          "mean_steps": 33.67,
+          "mean_steps_success_second_half": 25.12121212121212,
+          "invalid_actions": 0,
+          "cpu_s": 14.457077099999879,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.01,
+          "first_half_success": 0.02,
+          "second_half_success": 0.0,
+          "mean_steps": 43.92,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 8.462598000012804,
+          "peak_mem_bytes": null,
+          "planner_ops": 43879,
+          "plan_calls": 33,
+          "memory_max": 128,
+          "memory_size_end": 20,
+          "evictions": 0,
+          "hypotheses_generated": 20,
+          "verified": 0,
+          "contradicted": 9
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 23.0,
+          "mean_steps_success_second_half": 26.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.31022220000158995,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7417476999980863,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7476698999962537,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8931960000045365,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.59,
+          "first_half_success": 0.4,
+          "second_half_success": 0.78,
+          "mean_steps": 31.95,
+          "mean_steps_success_second_half": 22.205128205128204,
+          "invalid_actions": 0,
+          "cpu_s": 16.045009800000116,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.46,
+          "first_half_success": 0.08,
+          "second_half_success": 0.84,
+          "mean_steps": 34.37,
+          "mean_steps_success_second_half": 22.047619047619047,
+          "invalid_actions": 0,
+          "cpu_s": 22.713135799989686,
+          "peak_mem_bytes": null,
+          "planner_ops": 220585,
+          "plan_calls": 7293,
+          "memory_max": 128,
+          "memory_size_end": 30,
+          "evictions": 0,
+          "hypotheses_generated": 30,
+          "verified": 10,
+          "contradicted": 20
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 16.0,
+          "mean_steps_success_second_half": 16.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.13767729999381118,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.8070772999926703,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7239685999957146,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.97768619999988,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.75,
+          "first_half_success": 0.74,
+          "second_half_success": 0.76,
+          "mean_steps": 28.74,
+          "mean_steps_success_second_half": 21.526315789473685,
+          "invalid_actions": 0,
+          "cpu_s": 13.945708100000047,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.19,
+          "first_half_success": 0.38,
+          "second_half_success": 0.0,
+          "mean_steps": 42.98,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 10.946351799997501,
+          "peak_mem_bytes": null,
+          "planner_ops": 54556,
+          "plan_calls": 971,
+          "memory_max": 128,
+          "memory_size_end": 41,
+          "evictions": 0,
+          "hypotheses_generated": 41,
+          "verified": 3,
+          "contradicted": 36
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 20.0,
+          "mean_steps_success_second_half": 23.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.20897360000526533,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7670931000029668,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7872150999901351,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.01,
+          "first_half_success": 0.0,
+          "second_half_success": 0.02,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": 44.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.9495306000026176,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.66,
+          "first_half_success": 0.68,
+          "second_half_success": 0.64,
+          "mean_steps": 32.44,
+          "mean_steps_success_second_half": 24.6875,
+          "invalid_actions": 0,
+          "cpu_s": 13.273855000006733,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.51,
+          "first_half_success": 0.02,
+          "second_half_success": 1.0,
+          "mean_steps": 29.35,
+          "mean_steps_success_second_half": 14.88,
+          "invalid_actions": 0,
+          "cpu_s": 17.920681800009334,
+          "peak_mem_bytes": null,
+          "planner_ops": 209523,
+          "plan_calls": 3720,
+          "memory_max": 128,
+          "memory_size_end": 30,
+          "evictions": 0,
+          "hypotheses_generated": 30,
+          "verified": 10,
+          "contradicted": 15
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 22.5,
+          "mean_steps_success_second_half": 28.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.2107793000031961,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "random": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7276096999994479,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7391550000029383,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "first_half_success": 0.0,
+          "second_half_success": 0.0,
+          "mean_steps": 44.0,
+          "mean_steps_success_second_half": null,
+          "invalid_actions": 0,
+          "cpu_s": 0.7197727000020677,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.49,
+          "first_half_success": 0.46,
+          "second_half_success": 0.52,
+          "mean_steps": 34.46,
+          "mean_steps_success_second_half": 24.03846153846154,
+          "invalid_actions": 0,
+          "cpu_s": 10.824470999999903,
+          "peak_mem_bytes": null
+        },
+        "metargon": {
+          "success_rate": 0.87,
+          "first_half_success": 0.74,
+          "second_half_success": 1.0,
+          "mean_steps": 30.39,
+          "mean_steps_success_second_half": 30.8,
+          "invalid_actions": 0,
+          "cpu_s": 4.429503499995917,
+          "peak_mem_bytes": null,
+          "planner_ops": 34726,
+          "plan_calls": 2466,
+          "memory_max": 128,
+          "memory_size_end": 24,
+          "evictions": 0,
+          "hypotheses_generated": 24,
+          "verified": 13,
+          "contradicted": 11
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "first_half_success": 1.0,
+          "second_half_success": 1.0,
+          "mean_steps": 17.0,
+          "mean_steps_success_second_half": 17.0,
+          "invalid_actions": 0,
+          "cpu_s": 0.13098170000012033,
+          "peak_mem_bytes": null
+        }
+      }
+    ]
+  }
+}

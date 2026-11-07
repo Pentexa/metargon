@@ -1,10 +1,62 @@
-# METARGON v0.8 — Learning a Changing World
+# METARGON v0.9 — Compositional World Models & Out-of-Distribution Transfer
 
-> *Intelligence is not just predicting a result. It is adapting when the world changes.*
+> *Intelligence is not just predicting a result. It is adapting when the world changes — and reusing what it learned in worlds it has never seen.*
 
 **METARGON** is a crow-inspired, resource-conscious intelligence architecture **research project**. It was developed as **CORVID** from experimental versions v0.1–v0.7 and renamed at v0.8. The earlier source files, experiment reports and raw benchmark records are preserved under their original identifiers to retain scientific provenance.
 
-**Status:** Exploratory *synthetic* research. No crow-brain replication, new neural architecture, physical-energy reduction, artificial general intelligence, or state-of-the-art claim has been demonstrated. The v0.8 learned controller does **not** outperform a strong Bayesian baseline.
+**Status:** Exploratory *synthetic* research. No crow-brain replication, new neural architecture, physical-energy reduction, artificial general intelligence, or state-of-the-art claim has been demonstrated. v0.9 tests whether a bounded agent can learn reusable object–action–outcome relationships and apply them in unseen configurations. Full comparison, including any negative results, is in `docs/RESEARCH_V09.md` and `results/v09/`.
+
+## What v0.9 adds
+
+- **Independently written "Mechanism Lab" environment** (`python/lab_env.py`): 7×5 grid, two movable objects, two pressure plates, two switches, two door barriers, optional delayed effects and a noisy observation channel. Hidden wiring is sampled from a declared generative family (all configs verified solvable); training/validation/held-out test pools are disjoint.
+- **Compositional causal memory** (`python/compositional_memory.py`, `rust/src/v09.rs`): bounded hypothesis store with explicit hypothesis → predicted → verified → contradicted lifecycle and deterministic eviction.
+- **Adaptive bounded planner** (`python/metargon_v09.py`): retrieves hypotheses, probes interventions, protects load-bearing atoms, and follows plans until invalidated by a door event.
+- **Strong comparisons** (`python/baselines_v09.py`): random, episodic memory, tabular Q-learning, a model-based Bayesian particle-filter planner, and a labeled privileged oracle (excluded from deployable rankings).
+- **Measured resource usage**: CPU time, peak memory, planner operations per decision, memory budget. Energy is unmeasured.
+
+## Core benchmark (v0.9, 8 paired seeds × 100 episodes × 7 conditions)
+
+| Condition | METARGON | Bayes | Random | Oracle |
+|---|---:|---:|---:|---:|
+| stable | 35.1% | 77.5% | 0.3% | 100.0% |
+| shift | 46.4% | 80.6% | 0.6% | 100.0% |
+| rapid_shift | 40.8% | 76.9% | 0.5% | 91.3% |
+| iid | 53.6% | 79.0% | 0.4% | 78.9% |
+| novel (held-out) | 31.3% | 78.5% | 0.6% | 93.8% |
+| noisy_obs | 33.8% | 73.1% | 0.3% | 98.4% |
+| tight_budget | 45.0% | 64.9% | 0.0% | 100.0% |
+
+METARGON clearly beats model-free baselines (random/episodic/Q-learning ~0–1%)
+and transfers mechanism knowledge to unseen configurations, **but does not
+outperform the strong model-based Bayesian planner** (given the declarative
+family). This is a negative result for closing the gap to a family-knowing
+model via hypothesis composition alone. Full table, bootstrap intervals and
+resource measurements: `results/v09/benchmark_table.md`, `docs/RESEARCH_V09.md`.
+
+## Run now — no model download or GPU
+
+Requires **Python 3.10+** and the Python standard library only. Run commands from the project root:
+
+```bash
+python3 -m unittest discover -s python -v
+python3 python/benchmark_v09.py --seeds 30 --episodes 160 --parallel --workers 6 --json results/v09/summary.json
+python3 python/v09_postprocess.py results/v09/summary.json
+```
+
+Rust research kernel (crate `metargon-core` v0.9.0, `#![forbid(unsafe_code)]`):
+
+```bash
+cd rust
+cargo +1.88.0 test
+```
+
+---
+
+# METARGON v0.8 — Learning a Changing World (historical)
+
+> *Intelligence is not just predicting a result. It is adapting when the world changes.*
+
+The v0.8 release and its benchmark are preserved below and in `docs/RESEARCH_V08.md`. Its headline negative result — the surprise-adaptive controller trailing the Bayesian baseline under tight budgets — motivated the v0.9 compositional approach.
 
 ## What v0.8 adds
 

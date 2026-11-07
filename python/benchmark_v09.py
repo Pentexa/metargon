@@ -75,7 +75,8 @@ def play_episode(spec, policy) -> dict:
     }
 
 
-def score_policy(condition: str, seed: int, name: str, episodes: int) -> dict:
+def score_policy(condition: str, seed: int, name: str, episodes: int,
+                 measure_mem: bool = True) -> dict:
     worlds = generate_worlds(condition, seed, episodes)
     policy = make_policy(name, seed + 1000003)
     successes = 0
@@ -84,7 +85,8 @@ def score_policy(condition: str, seed: int, name: str, episodes: int) -> dict:
     total_steps = 0
     total_invalid = 0
     post_mid_success_steps = []
-    tracemalloc.start()
+    if measure_mem:
+        tracemalloc.start()
     t0 = time.perf_counter()
     for i, spec in enumerate(worlds):
         r = play_episode(spec, policy)
@@ -98,8 +100,10 @@ def score_policy(condition: str, seed: int, name: str, episodes: int) -> dict:
             if r["success"]:
                 post_mid_success_steps.append(r["steps"])
     cpu_s = time.perf_counter() - t0
-    _, peak = tracemalloc.get_traced_memory()
-    tracemalloc.stop()
+    peak = None
+    if measure_mem:
+        _, peak = tracemalloc.get_traced_memory()
+        tracemalloc.stop()
 
     diag = {}
     if name == "metargon":
@@ -137,7 +141,8 @@ def paired_bootstrap(diffs: list[float], seed: int = 4301, rounds: int = 1500) -
     return values[int(0.025 * rounds)], values[int(0.975 * rounds)]
 
 
-def benchmark(seeds: int = 30, episodes: int = 240) -> dict:
+def benchmark(seeds: int = 30, episodes: int = 240,
+              measure_mem: bool = True) -> dict:
     if seeds < 1 or episodes < 4:
         raise ValueError("seeds >= 1, episodes >= 4")
     scores = {}
@@ -145,7 +150,8 @@ def benchmark(seeds: int = 30, episodes: int = 240) -> dict:
     for condition in CONDITIONS:
         per_seed = []
         for i in range(seeds):
-            results = {p: score_policy(condition, i + 11800, p, episodes)
+            results = {p: score_policy(condition, i + 11800, p, episodes,
+                                       measure_mem=measure_mem)
                        for p in POLICIES}
             per_seed.append(results)
         scores[condition] = per_seed
@@ -156,8 +162,11 @@ def benchmark(seeds: int = 30, episodes: int = 240) -> dict:
                 for k in ("success_rate", "first_half_success", "second_half_success",
                           "mean_steps", "cpu_s")
             }
-            summary[condition][p]["peak_mem_mb"] = (
-                statistics.fmean(row[p]["peak_mem_bytes"] for row in per_seed) / 1e6)
+            if measure_mem:
+                summary[condition][p]["peak_mem_mb"] = (
+                    statistics.fmean(row[p]["peak_mem_bytes"] for row in per_seed) / 1e6)
+            else:
+                summary[condition][p]["peak_mem_mb"] = None
         for a, b in (("metargon", "bayes"), ("metargon", "qlearning"),
                      ("metargon", "episodic"), ("bayes", "qlearning")):
             succ_delta = [row[a]["success_rate"] - row[b]["success_rate"]
@@ -182,30 +191,121 @@ def benchmark(seeds: int = 30, episodes: int = 240) -> dict:
     }
 
 
+def _score_one(args):
+    """Top-level worker for ProcessPoolExecutor (picklable)."""
+    condition, seed, episodes, measure_mem = args
+    row = {p: score_policy(condition, seed, p, episodes,
+                            measure_mem=measure_mem) for p in POLICIES}
+    return condition, seed, row
+
+
+def benchmark_parallel(seeds: int = 30, episodes: int = 240,
+                       workers: int | None = None,
+                       measure_mem: bool = True) -> dict:
+    """Like benchmark(), but parallelized across (condition, seed) pairs.
+    Produces the identical result structure. Windows spawn requires the
+    worker to be a top-level function."""
+    import concurrent.futures
+    tasks = [(cond, i + 11800, episodes, measure_mem) for cond in CONDITIONS
+             for i in range(seeds)]
+    scores = {cond: [None] * seeds for cond in CONDITIONS}
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as ex:
+        for cond, seed, row in ex.map(_score_one, tasks):
+            scores[cond][seed - 11800] = row
+    summary = {}
+    for condition in CONDITIONS:
+        per_seed = scores[condition]
+        summary[condition] = {}
+        for p in POLICIES:
+            summary[condition][p] = {
+                k: statistics.fmean(row[p][k] for row in per_seed)
+                for k in ("success_rate", "first_half_success", "second_half_success",
+                          "mean_steps", "cpu_s")
+            }
+            if measure_mem:
+                summary[condition][p]["peak_mem_mb"] = (
+                    statistics.fmean(row[p]["peak_mem_bytes"] for row in per_seed) / 1e6)
+            else:
+                summary[condition][p]["peak_mem_mb"] = None
+        for a, b in (("metargon", "bayes"), ("metargon", "qlearning"),
+                     ("metargon", "episodic"), ("bayes", "qlearning")):
+            succ_delta = [row[a]["success_rate"] - row[b]["success_rate"]
+                          for row in per_seed]
+            summary[condition][f"comparison:{a}_minus_{b}"] = {
+                "success_delta": statistics.fmean(succ_delta),
+                "paired_bootstrap_95pct": paired_bootstrap(succ_delta),
+            }
+    return {
+        "metadata": {
+            "name": "METARGON", "version": "0.9",
+            "seeds": seeds, "episodes_per_seed": episodes,
+            "conditions": list(CONDITIONS),
+            "policies": list(POLICIES),
+            "deployable_ranking": list(DEPLOYABLE),
+            "same_pre_generated_worlds": True,
+            "oracle_has_hidden_config": True,
+            "env": "Mechanism Lab (lab_env.py)",
+            "parallel": True, "workers": workers,
+        },
+        "summary": summary,
+        "raw": scores,
+    }
+
+
+def _print_result(result, wall_s):
+    print(f"METARGON v0.9 — mechanism lab evaluation (wall {wall_s:.1f}s)")
+    for scenario, row in result["summary"].items():
+        print(f"\n{scenario}:")
+        for name in DEPLOYABLE + ("oracle",):
+            x = row[name]
+            mem = "—" if x.get("peak_mem_mb") is None else f"{x['peak_mem_mb']:.2f}MB"
+            print(f"  {name:>10}: success {x['success_rate']*100:6.2f}% "
+                  f"(1st {x['first_half_success']*100:5.2f}% / "
+                  f"2nd {x['second_half_success']*100:5.2f}%) steps {x['mean_steps']:5.2f} "
+                  f"cpu {x['cpu_s']:6.2f}s mem {mem}")
+        for key, c in row.items():
+            if key.startswith("comparison:"):
+                print(f"  {key}: delta {c['success_delta']*100:+.2f}pp "
+                      f"CI {tuple(round(x*100, 2) for x in c['paired_bootstrap_95pct'])}")
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--seeds", type=int, default=30)
     parser.add_argument("--episodes", type=int, default=240)
     parser.add_argument("--json", type=Path, default=None)
+    parser.add_argument("--parallel", action="store_true")
+    parser.add_argument("--workers", type=int, default=None)
+    parser.add_argument("--no-mem", action="store_true",
+                        help="disable tracemalloc memory tracing (much faster)")
     args = parser.parse_args()
     t0 = time.perf_counter()
-    result = benchmark(args.seeds, args.episodes)
-    print(f"METARGON v0.9 — mechanism lab evaluation (wall {time.perf_counter() - t0:.1f}s)")
-    for scenario, row in result["summary"].items():
-        print(f"\n{scenario}:")
-        for name in DEPLOYABLE + ("oracle",):
-            x = row[name]
-            print(f"  {name:>10}: success {x['success_rate']*100:6.2f}% "
-                  f"(1st {x['first_half_success']*100:5.2f}% / "
-                  f"2nd {x['second_half_success']*100:5.2f}%) steps {x['mean_steps']:5.2f} "
-                  f"cpu {x['cpu_s']:6.2f}s mem {x['peak_mem_mb']:6.2f}MB")
-        for key, c in row.items():
-            if key.startswith("comparison:"):
-                print(f"  {key}: delta {c['success_delta']*100:+.2f}pp "
-                      f"CI {tuple(round(x*100, 2) for x in c['paired_bootstrap_95pct'])}")
+    mem = not args.no_mem
+    if args.parallel:
+        result = benchmark_parallel(args.seeds, args.episodes, args.workers,
+                                    measure_mem=mem)
+    else:
+        result = benchmark(args.seeds, args.episodes, measure_mem=mem)
     if args.json:
+        # write results FIRST so a later formatting failure cannot lose them
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")
+        # also emit the per-seed flattened records next to the summary
+        rows = []
+        for cond in result["summary"]:
+            for i, per_seed in enumerate(result["raw"][cond]):
+                seed = i + 11800
+                row = {"condition": cond, "seed": seed}
+                for p, res in per_seed.items():
+                    for k, v in res.items():
+                        if isinstance(v, (int, float)):
+                            row[f"{p}.{k}"] = v
+                rows.append(row)
+        per_seed_path = args.json.with_name("per_seed_results.json")
+        per_seed_path.write_text(
+            json.dumps({"metadata": result["metadata"], "rows": rows}, indent=2)
+            + "\n", encoding="utf-8")
+    _print_result(result, time.perf_counter() - t0)
 
 
 if __name__ == "__main__":
