@@ -1,0 +1,742 @@
+{
+ "run_id": "diagnosis",
+ "seed": 0,
+ "n_configs": 10,
+ "episodes_per_config": 10,
+ "max_steps": 80,
+ "states_measured": [
+  "baseline",
+  "teacher"
+ ],
+ "fresh_agent": [
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('loadany', 'P1')}), frozenset({('sw', 'S1', False)}), False, True)",
+   "episodes": 10,
+   "success_rate": 1.0,
+   "first_half": 1.0,
+   "second_half": 1.0,
+   "memory": {
+    "size": 30,
+    "max": 128,
+    "evictions": 0,
+    "generated": 30,
+    "step": 100,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 30,
+     "contradicted": 0
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 10.0
+  },
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)",
+   "episodes": 10,
+   "success_rate": 0.0,
+   "first_half": 0.0,
+   "second_half": 0.0,
+   "memory": {
+    "size": 10,
+    "max": 128,
+    "evictions": 0,
+    "generated": 10,
+    "step": 800,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 10,
+     "contradicted": 0
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 80.0
+  },
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)",
+   "episodes": 10,
+   "success_rate": 1.0,
+   "first_half": 1.0,
+   "second_half": 1.0,
+   "memory": {
+    "size": 27,
+    "max": 128,
+    "evictions": 0,
+    "generated": 27,
+    "step": 174,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 17,
+     "contradicted": 10
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 17.4
+  },
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, False)",
+   "episodes": 10,
+   "success_rate": 1.0,
+   "first_half": 1.0,
+   "second_half": 1.0,
+   "memory": {
+    "size": 28,
+    "max": 128,
+    "evictions": 0,
+    "generated": 28,
+    "step": 202,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 12,
+     "contradicted": 16
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 20.2
+  },
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, False)",
+   "episodes": 10,
+   "success_rate": 0.3,
+   "first_half": 0.4,
+   "second_half": 0.2,
+   "memory": {
+    "size": 24,
+    "max": 128,
+    "evictions": 0,
+    "generated": 24,
+    "step": 631,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 11,
+     "contradicted": 13
+    }
+   },
+   "tried_entries": 25,
+   "mean_steps": 63.1
+  },
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), False, False)",
+   "episodes": 10,
+   "success_rate": 1.0,
+   "first_half": 1.0,
+   "second_half": 1.0,
+   "memory": {
+    "size": 24,
+    "max": 128,
+    "evictions": 0,
+    "generated": 24,
+    "step": 170,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 14,
+     "contradicted": 10
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 17.0
+  },
+  {
+   "label": "fresh",
+   "config": "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), True, False)",
+   "episodes": 10,
+   "success_rate": 1.0,
+   "first_half": 1.0,
+   "second_half": 1.0,
+   "memory": {
+    "size": 24,
+    "max": 128,
+    "evictions": 0,
+    "generated": 24,
+    "step": 150,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 14,
+     "contradicted": 10
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 15.0
+  },
+  {
+   "label": "fresh",
+   "config": "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)",
+   "episodes": 10,
+   "success_rate": 0.0,
+   "first_half": 0.0,
+   "second_half": 0.0,
+   "memory": {
+    "size": 10,
+    "max": 128,
+    "evictions": 0,
+    "generated": 10,
+    "step": 800,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 10,
+     "contradicted": 0
+    }
+   },
+   "tried_entries": 75,
+   "mean_steps": 80.0
+  },
+  {
+   "label": "fresh",
+   "config": "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+   "episodes": 10,
+   "success_rate": 0.0,
+   "first_half": 0.0,
+   "second_half": 0.0,
+   "memory": {
+    "size": 0,
+    "max": 128,
+    "evictions": 0,
+    "generated": 0,
+    "step": 800,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 0,
+     "contradicted": 0
+    }
+   },
+   "tried_entries": 101,
+   "mean_steps": 80.0
+  },
+  {
+   "label": "fresh",
+   "config": "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)",
+   "episodes": 10,
+   "success_rate": 0.0,
+   "first_half": 0.0,
+   "second_half": 0.0,
+   "memory": {
+    "size": 14,
+    "max": 128,
+    "evictions": 0,
+    "generated": 14,
+    "step": 800,
+    "status_counts": {
+     "hypothesis": 0,
+     "predicted": 0,
+     "verified": 8,
+     "contradicted": 6
+    }
+   },
+   "tried_entries": 0,
+   "mean_steps": 80.0
+  }
+ ],
+ "trained_agents": {
+  "baseline": [
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('loadany', 'P1')}), frozenset({('sw', 'S1', False)}), False, True)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4267,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 10.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4967,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4337,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 17.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4367,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 20.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4297,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 13.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 71,
+     "max": 128,
+     "evictions": 0,
+     "generated": 71,
+     "step": 4337,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 1,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 17.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), True, False)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4967,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 143,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4967,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 75,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4967,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 101,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "baseline",
+    "config": "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4967,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 70
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 80.0
+   }
+  ],
+  "teacher": [
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('loadany', 'P1')}), frozenset({('sw', 'S1', False)}), False, True)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 4739,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 10.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 5439,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 68,
+     "max": 128,
+     "evictions": 0,
+     "generated": 68,
+     "step": 4809,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 2,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 17.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4839,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 4,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 20.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 4769,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 13.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), False, False)",
+    "episodes": 10,
+    "success_rate": 1.0,
+    "first_half": 1.0,
+    "second_half": 1.0,
+    "memory": {
+     "size": 70,
+     "max": 128,
+     "evictions": 0,
+     "generated": 70,
+     "step": 4809,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 4,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 17.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), True, False)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 5439,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 143,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 5439,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 75,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 5439,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 101,
+    "mean_steps": 80.0
+   },
+   {
+    "label": "teacher",
+    "config": "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)",
+    "episodes": 10,
+    "success_rate": 0.0,
+    "first_half": 0.0,
+    "second_half": 0.0,
+    "memory": {
+     "size": 66,
+     "max": 128,
+     "evictions": 0,
+     "generated": 66,
+     "step": 5439,
+     "status_counts": {
+      "hypothesis": 0,
+      "predicted": 0,
+      "verified": 0,
+      "contradicted": 66
+     }
+    },
+    "tried_entries": 0,
+    "mean_steps": 80.0
+   }
+  ]
+ },
+ "api_calls": 0,
+ "offline": true,
+ "hash_randomization": false,
+ "started_at": 1794078115.9423237,
+ "aggregate": {
+  "fresh": {
+   "success_rate": 0.53,
+   "mean_memory_hypotheses": 19.1,
+   "mean_contradicted": 6.5,
+   "mean_verified": 12.6,
+   "mean_tried_entries": 20.1,
+   "second_half_gain": -0.02
+  },
+  "baseline": {
+   "success_rate": 0.5,
+   "mean_memory_hypotheses": 70.1,
+   "mean_contradicted": 70.0,
+   "mean_verified": 0.1,
+   "mean_tried_entries": 31.9,
+   "second_half_gain": 0.0,
+   "delta_vs_fresh": -0.030000000000000006
+  },
+  "teacher": {
+   "success_rate": 0.5,
+   "mean_memory_hypotheses": 67.0,
+   "mean_contradicted": 66.0,
+   "mean_verified": 1.0,
+   "mean_tried_entries": 31.9,
+   "second_half_gain": 0.0,
+   "delta_vs_fresh": -0.030000000000000006
+  }
+ },
+ "finished_at": 1794078178.142352
+}

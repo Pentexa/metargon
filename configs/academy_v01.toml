@@ -70,9 +70,9 @@ dir = "checkpoints/academy_v01"
 every_episodes = 20        # crash-safe snapshot cadence (training)
 keep_last = 5
 
-# =============================================================================
+# ==============================================================================
 # EVREN LLM integration (curriculum teacher only — never the decision brain)
-# =============================================================================
+# ==============================================================================
 [evren]
 enabled = true
 base_url = "https://evren-llmapi.ssyz.org.tr/v1"
@@ -92,3 +92,27 @@ temperature = 0.7
 seed = 20261107
 pilot_n = 10                       # reproducible pilot size
 registry_dir = "results/academy_v01/evren"
+
+# v0.2 adaptive curriculum experiment (zero network calls by design).
+# Changing these values changes the experiment fingerprint recorded in
+# results/academy_v01/evren/curriculum_v02_summary.json.
+[evren.curriculum]
+seed = 20261107
+episodes = 160           # training episodes per condition
+block_size = 40          # retention probe cadence (episodes)
+substrate_share = 0.30   # shared frozen-substrate slot share (matched)
+substrate_classic_n = 8  # classic configs in the shared substrate
+n_procedural = 24        # fresh procedural candidates for proc_lp
+retention_eps_per_cfg = 2
+test_grid_n = 12         # independently sampled test configs (final eval)
+eval_eps_per_cfg = 4
+holdout_eps_per_seed = 4
+ood_probe_n = 8
+ood_eps_per_seed = 3
+lp_window = 10
+lp_min_visits = 3
+lp_weight = 1.0
+weakness_weight = 1.2
+novelty_weight = 0.8
+explore_eps = 0.15
+weakness_target = 0.75

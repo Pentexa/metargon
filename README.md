@@ -9,7 +9,7 @@
 **A crow-inspired research project exploring how compact agents learn hidden rules, remember evidence, plan actions, and adapt when the environment changes.**
 
 [![Status](https://img.shields.io/badge/status-experimental-7c3aed?style=flat-square)](#research-status)
-[![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
+[![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
 [![Rust](https://img.shields.io/badge/Rust-research%20kernel-CE422B?style=flat-square&logo=rust&logoColor=white)](#architecture)
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](#license)
 [![Research](https://img.shields.io/badge/research-reproducibility%20first-111827?style=flat-square)](#research-principles)
@@ -158,7 +158,7 @@ rust_academy/            Bounded Rust kernel for Academy
 
 ## Quick start
 
-Requires **Python 3.10+** and the Python standard library only. Run commands from the project root.
+Requires **Python 3.11+** and the Python standard library only. The historical and v0.9 suites under `python/` still run on Python 3.10+; the Academy layer requires 3.11+ for its standard-library TOML configuration loader. Run commands from the project root.
 
 ### v0.9 — mechanism lab benchmark and tests
 
@@ -206,13 +206,29 @@ python -m academy.cli.main evren-pilot
 python -m academy.cli.main evren-status
 ```
 
+EVREN curriculum research v0.2 (offline by construction — zero API calls):
+
+```bash
+# diagnosis of the v0.1 null result (uses saved policies when present)
+python -m academy.cli.main evren-diagnose
+
+# matched-budget adaptive-curriculum comparison (5 conditions)
+python -m academy.cli.main evren-curriculum
+
+# quick sanity run (2 conditions, 16 episodes)
+python -m academy.cli.main evren-curriculum --quick
+```
+
+See `docs/EVREN_CURRICULUM_V02.md` for the scientific protocol and
+measured results.
+
 ---
 
 ## Research principles
 
 - **No privileged-information leakage.** Student-visible observations are separated from simulator internals.
 - **Baseline first.** Compare against random, simple heuristics, Bayesian models, and appropriate ablations.
-- **Reproducible by design.** Preserve seeds, configurations, checkpoints, and experimental artifacts.
+- **Reproducible by design.** Preserve seeds, configurations, checkpoints, and experimental artifacts. Academy runs are deterministic under a fixed `PYTHONHASHSEED`; summary metrics reproduce across hash seeds, while internal hypothesis bookkeeping details may vary.
 - **Negative results are results.** A neutral or failed mechanism is documented rather than hidden.
 - **Honest efficiency claims.** CPU-only experiments do not prove physical energy efficiency.
 - **Modest biological analogy.** Crow behavior motivates research questions; biological equivalence is not claimed.
