@@ -80,7 +80,13 @@ class MetargonAcademyAgent:
                  pair_base: int = 5,
                  planner_max_expand: int = MAX_EXPANSIONS,
                  probe_max_plans: int = PROBE_MAX_PLANS,
-                 probe_timeout: int = 10):
+                 probe_timeout: int = 10,
+                 memory_recycle_contradicted: bool = False,
+                 memory_contradiction_ratio: float = 0.0,
+                 memory_evidence_window: int = 0,
+                 probe_adaptive: bool = False,
+                 protect_episode_local: bool = False,
+                 probe_episode_local: bool = False):
         self.seed = seed
         self.rng = random.Random(seed)
         self.replay_enabled = replay_enabled
@@ -92,7 +98,14 @@ class MetargonAcademyAgent:
             contradictict_window=contradictict_window,
             candidates_per_event=candidates_per_event,
             pair_base=pair_base,
+            recycle_contradicted=memory_recycle_contradicted,
+            contradiction_ratio=memory_contradiction_ratio,
+            evidence_window=memory_evidence_window,
         )
+        self.probe_adaptive = bool(probe_adaptive)
+        self.protect_episode_local = bool(protect_episode_local)
+        self.probe_episode_local = bool(probe_episode_local)
+        self._episode_mem_step = 0
         self.planner_max_expand = planner_max_expand
         self.probe_max_plans = probe_max_plans
         self.probe_timeout = probe_timeout
@@ -123,6 +136,7 @@ class MetargonAcademyAgent:
         self._comp_cache = (None, None)
         self._goal_infeasible = {}
         self._steps_since_goal_check = 0
+        self._episode_mem_step = self.memory.step
         # derive door anchors once per topology
         if not self.far_anchor:
             self._derive_anchors(geom)
@@ -257,6 +271,9 @@ class MetargonAcademyAgent:
             for h in self.memory.query(door):
                 if h.status != VERIFIED:
                     continue
+                if self.protect_episode_local and (
+                        h.last_update < self._episode_mem_step):
+                    continue
                 for a in h.antecedent:
                     if a[0] == "sw":
                         ref_switches.add(a[1])
@@ -282,6 +299,45 @@ class MetargonAcademyAgent:
                 return True
             st = nxt
         return not (protected <= atoms_of_state(st))
+
+    def _adaptive_probe_candidates(self, door, current) -> list:
+        """Adaptive probe candidate construction:
+        * hypothesis-backed antecedents (unchanged priority; optionally
+          restricted to hypotheses evidenced in the current episode);
+        * conjunctions of the most-supported atoms (composite targets —
+          the diagnosis shows singles rarely hit true conjunctive rules);
+        * remaining singles ordered by support-weighted popularity.
+        Deterministic: all ordering is by (count, str). Bounded."""
+        hyps = self.memory.query(door, opens=True)
+        if self.probe_episode_local:
+            hyps = [h for h in hyps
+                    if h.last_update >= self._episode_mem_step]
+        out = []
+        for h in hyps[:3]:
+            out.append((door, h.antecedent, 0))
+        tried = self.tried[door]
+        atom_count = {}
+        for h in hyps[:8]:
+            for a in h.antecedent:
+                atom_count[a] = atom_count.get(a, 0) + 1
+        popular = sorted(atom_count, key=lambda a: (-atom_count[a], str(a)))
+        comps = []
+        for i in range(len(popular)):
+            for j in range(i + 1, len(popular)):
+                p = frozenset({popular[i], popular[j]})
+                if p not in tried:
+                    comps.append(p)
+                if len(comps) >= 8:
+                    break
+            if len(comps) >= 8:
+                break
+        for p in comps[:4]:
+            out.append((door, p, 1))
+        singles = [frozenset({a}) for a in popular]
+        singles = [s for s in singles if s not in tried]
+        for s in singles[:self.probe_max_plans]:
+            out.append((door, s, 1))
+        return out
 
     def _choose_probe(self):
         def on_expand():
@@ -317,7 +373,13 @@ class MetargonAcademyAgent:
         for door in self.geom.door_cell:
             if self.belief.door_open[door]:
                 continue
+            if self.probe_adaptive:
+                candidates.extend(self._adaptive_probe_candidates(door, current))
+                continue
             hyps = self.memory.query(door, opens=True)
+            if self.probe_episode_local:
+                hyps = [h for h in hyps
+                        if h.last_update >= self._episode_mem_step]
             for h in hyps[:3]:
                 candidates.append((door, h.antecedent, 0))
             probes = self._novel_singles(door) + self._conjunctive_probes(door)

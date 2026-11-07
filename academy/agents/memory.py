@@ -16,6 +16,7 @@ of bounded compositional hypothesis memory with the v0.9 research line.
 
 from __future__ import annotations
 
+from collections import deque
 from dataclasses import dataclass
 from typing import Optional
 
@@ -123,7 +124,25 @@ class Hypothesis:
 
 
 class CompositionalMemory:
-    """Bounded, evidence-driven hypothesis memory with checkpointing."""
+    """Bounded, evidence-driven hypothesis memory with checkpointing.
+
+    v0.3 improvements (each independent and off by default):
+      * ``recycle_contradicted`` — remove a hypothesis as soon as it is
+        contradicted (instead of retaining it until score-eviction), and
+        record its antecedent in a bounded per-door "dead" set so it is
+        not regenerated immediately (contradiction-aware recycling).
+      * ``contradiction_ratio`` — gate contradiction transitions by the
+        support evidence: a hypothesis may only be *status*-contradicted
+        once its contradiction count (within the evidence window, when
+        enabled) reaches ``max_contradict`` AND either ``ratio <= 0`` or
+        ``con >= ratio * sup``. This stops rare coincidental
+        non-openings in other configs from flipping heavily-supported
+        (true) hypotheses.
+      * ``evidence_window`` — when >0, support/contradict counts used
+        for status are recomputed over the last ``evidence_window``
+        evidence events (sliding recency), instead of being cumulative
+        for the lifetime of the hypothesis.
+    """
 
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES,
                  verify_support: int = VERIFY_SUPPORT,
@@ -131,7 +150,11 @@ class CompositionalMemory:
                  predict_threshold: int = PREDICT_THRESHOLD,
                  contradictict_window: int = CONTRADICT_WINDOW,
                  candidates_per_event: int = CANDIDATES_PER_EVENT,
-                 pair_base: int = PAIR_BASE):
+                 pair_base: int = PAIR_BASE,
+                 recycle_contradicted: bool = False,
+                 contradiction_ratio: float = 0.0,
+                 evidence_window: int = 0,
+                 dead_set_cap: int = 96):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -139,12 +162,21 @@ class CompositionalMemory:
         self.contradict_window = contradictict_window
         self.candidates_per_event = candidates_per_event
         self.pair_base = pair_base
+        self.recycle_contradicted = bool(recycle_contradicted)
+        self.contradiction_ratio = float(contradiction_ratio)
+        self.evidence_window = int(evidence_window)
+        self.dead_set_cap = int(dead_set_cap)
         self.hypotheses: list[Hypothesis] = []
         self.next_id = 1
         self.step = 0
         self.evictions = 0
         self.generated = 0
         self._continuous_true: dict[int, int] = {}
+        # bounded per-door dead-antecedent set (contradiction recycling)
+        self._dead: dict[str, deque] = {}
+        # evidence timelines for windowed counts: h_id -> deque of 0/1
+        self._sup_timeline: dict[int, deque] = {}
+        self._con_timeline: dict[int, deque] = {}
 
     # -- introspection ----------------------------------------------------
     def __len__(self) -> int:
@@ -185,6 +217,55 @@ class CompositionalMemory:
         self.generated += 1
         return h
 
+    # -- contradiction-aware dead set --------------------------------------
+    def _dead_set(self, door: str) -> deque:
+        dq = self._dead.get(door)
+        if dq is None:
+            dq = deque(maxlen=self.dead_set_cap)
+            self._dead[door] = dq
+        return dq
+
+    def _is_dead(self, antecedent, door: str) -> bool:
+        return antecedent in self._dead_set(door)
+
+    def _mark_dead(self, h: Hypothesis) -> None:
+        """Recycle a contradicted hypothesis: remove it and record its
+        antecedent in the per-door dead set (bounded, FIFO)."""
+        dq = self._dead_set(h.door)
+        if h.antecedent not in dq:
+            dq.append(h.antecedent)
+        self._continuous_true.pop(h.h_id, None)
+        self._sup_timeline.pop(h.h_id, None)
+        self._con_timeline.pop(h.h_id, None)
+        if h in self.hypotheses:
+            self.hypotheses.remove(h)
+
+    # -- evidence timeline (windowed counts) -------------------------------
+    def _record_evidence(self, h: Hypothesis, kind: str) -> None:
+        if self.evidence_window <= 0:
+            return
+        tl = (self._sup_timeline if kind == "s" else self._con_timeline)
+        dq = tl.get(h.h_id)
+        if dq is None:
+            dq = deque(maxlen=self.evidence_window)
+            tl[h.h_id] = dq
+        dq.append(1 if kind == "s" else 0)
+
+    def _windowed_counts(self, h: Hypothesis) -> tuple:
+        if self.evidence_window <= 0 or (h.h_id not in self._sup_timeline
+                                         and h.h_id not in self._con_timeline):
+            return h.sup, h.con
+        return (sum(self._sup_timeline.get(h.h_id, ())),
+                sum(self._con_timeline.get(h.h_id, ())))
+
+    def _contradiction_gated(self, h: Hypothesis) -> bool:
+        """Whether a transition to contradicted is *allowed* by the ratio
+        gate (contradiction_ratio). Uses windowed counts when enabled."""
+        sup, con = self._windowed_counts(h)
+        if self.contradiction_ratio <= 0.0:
+            return True
+        return con > 0 and con >= self.contradiction_ratio * max(sup, 0)
+
     def _evict_one(self):
         if not self.hypotheses:
             return
@@ -192,14 +273,27 @@ class CompositionalMemory:
                      key=lambda h: (h.score(), -h.last_update, -h.h_id))
         self.hypotheses.remove(victim)
         self._continuous_true.pop(victim.h_id, None)
+        self._sup_timeline.pop(victim.h_id, None)
+        self._con_timeline.pop(victim.h_id, None)
         self.evictions += 1
 
+    def _gated_con(self, h: Hypothesis) -> int:
+        """Contradiction count used for status (ratio-gated)."""
+        sup, con = self._windowed_counts(h)
+        if self.contradiction_ratio <= 0.0:
+            return con
+        if con > 0 and con >= self.contradiction_ratio * max(sup, 0):
+            return con
+        return 0
+
     def _recompute_status(self, h: Hypothesis):
-        if h.con > self.max_contradict:
+        con = self._gated_con(h)
+        sup, _ = self._windowed_counts(h)
+        if con > self.max_contradict:
             h.status = CONTRADICTED
-        elif h.sup >= self.verify_support and h.con <= self.max_contradict:
+        elif sup >= self.verify_support and con <= self.max_contradict:
             h.status = VERIFIED
-        elif h.sup >= self.predict_threshold:
+        elif sup >= self.predict_threshold:
             h.status = PREDICTED
         else:
             h.status = HYPOTHESIS
@@ -208,13 +302,17 @@ class CompositionalMemory:
         h.sup += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
+        self._record_evidence(h, "s")
         self._recompute_status(h)
 
     def _contradict(self, h: Hypothesis):
         h.con += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
+        self._record_evidence(h, "c")
         self._recompute_status(h)
+        if self.recycle_contradicted and h.status == CONTRADICTED:
+            self._mark_dead(h)
 
     def _candidate_antecedents(self, atoms: frozenset) -> list:
         base = sorted(atoms, key=str)[:self.pair_base]
@@ -244,6 +342,8 @@ class CompositionalMemory:
                 if ante in seen:
                     continue
                 seen.add(ante)
+                if self._is_dead(ante, door):
+                    continue
                 h = self._add(ante, consequence)
                 if h is not None and ante <= atoms:
                     self._support(h)
@@ -266,7 +366,7 @@ class CompositionalMemory:
 
     def observe_nonevent(self, atoms: frozenset, door: str, wants_open: bool):
         consequence = consequence_key(door, wants_open)
-        for h in self.hypotheses:
+        for h in list(self.hypotheses):
             if h.door != door or h.consequence != consequence or not h.usable:
                 continue
             if h.antecedent <= atoms:
@@ -290,12 +390,20 @@ class CompositionalMemory:
             "contradict_window": self.contradict_window,
             "candidates_per_event": self.candidates_per_event,
             "pair_base": self.pair_base,
+            "recycle_contradicted": self.recycle_contradicted,
+            "contradiction_ratio": self.contradiction_ratio,
+            "evidence_window": self.evidence_window,
+            "dead_set_cap": self.dead_set_cap,
             "hypotheses": [h.as_dict() for h in self.hypotheses],
             "next_id": self.next_id,
             "step": self.step,
             "evictions": self.evictions,
             "generated": self.generated,
             "continuous_true": {str(k): v for k, v in self._continuous_true.items()},
+            "dead": {door: [sorted(list(a)) for a in dq]
+                     for door, dq in self._dead.items()},
+            "sup_timeline": {str(k): list(v) for k, v in self._sup_timeline.items()},
+            "con_timeline": {str(k): list(v) for k, v in self._con_timeline.items()},
         }
 
     def load_state(self, state: dict) -> None:
@@ -306,12 +414,27 @@ class CompositionalMemory:
         self.contradict_window = state["contradict_window"]
         self.candidates_per_event = state["candidates_per_event"]
         self.pair_base = state["pair_base"]
+        self.recycle_contradicted = bool(state.get("recycle_contradicted", False))
+        self.contradiction_ratio = float(state.get("contradiction_ratio", 0.0))
+        self.evidence_window = int(state.get("evidence_window", 0))
+        self.dead_set_cap = int(state.get("dead_set_cap", 96))
         self.hypotheses = [Hypothesis.from_dict(d) for d in state["hypotheses"]]
         self.next_id = state["next_id"]
         self.step = state["step"]
         self.evictions = state["evictions"]
         self.generated = state["generated"]
         self._continuous_true = {int(k): v for k, v in state["continuous_true"].items()}
+        self._dead = {}
+        for door, rows in state.get("dead", {}).items():
+            self._dead[door] = deque(
+                (frozenset(map(tuple, a)) for a in rows),
+                maxlen=self.dead_set_cap)
+        self._sup_timeline = {
+            int(k): deque(v, maxlen=self.evidence_window)
+            for k, v in state.get("sup_timeline", {}).items()}
+        self._con_timeline = {
+            int(k): deque(v, maxlen=self.evidence_window)
+            for k, v in state.get("con_timeline", {}).items()}
 
     def diagnostics(self) -> dict:
         return {
