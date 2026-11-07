@@ -44,6 +44,8 @@ from academy.evren.provider import (  # noqa: E402
     PRIMARY_TEACHER, SECONDARY_TEACHER, api_key_from_env,
 )
 from academy.evren.task_registry import TaskRegistry  # noqa: E402
+from academy.evren.curriculum_experiment import run_curriculum_experiment  # noqa: E402
+from academy.evren.diagnosis import run_diagnosis  # noqa: E402
 
 
 def policy_factories(cfg):
@@ -496,6 +498,82 @@ def cmd_evren_train(args, cfg):
     return 0
 
 
+def cmd_evren_curriculum(args, cfg):
+    """v0.2 matched-budget curriculum experiment (offline; zero API calls).
+
+    For cross-process reproducibility this should run with
+    ``PYTHONHASHSEED=0`` (the student's state-dependent planning iterates
+    frozensets whose order is randomized otherwise). The summary records
+    the actual flag; a warning is printed when unpinned."""
+    import sys as _sys
+    if _sys.flags.hash_randomization:
+        print("WARNING: PYTHONHASHSEED is randomized; rerun with "
+              "PYTHONHASHSEED=0 for cross-process reproducibility.")
+    splits = load_splits(cfg)
+    results_dir = registry_paths(cfg)
+    registry = TaskRegistry(results_dir, run_id="evren-exp")
+    e = evren_cfg(cfg).get("curriculum", {}) or {}
+    episodes = args.episodes or int(e.get("episodes", 160))
+    conditions = (args.conditions.split(",") if args.conditions
+                  else ["uniform", "ascending", "calibrated", "proc_lp",
+                        "teacher_lp"])
+    if args.quick:
+        episodes = min(episodes, 16)
+        conditions = list(conditions)[:2]
+    summary = run_curriculum_experiment(
+        cfg, splits, registry, results_dir=results_dir,
+        run_id="curriculum-v02",
+        conditions=tuple(conditions),
+        episodes=episodes,
+        block_size=args.block or max(8, episodes // 4),
+        verbose=True)
+    print("== EVREN curriculum v0.2 experiment (offline) ==")
+    for cond, d in summary["conditions_detail"].items():
+        cls_ = d["classic_test"]["config_mean_success"]
+        ood = d["ood_probe"]["config_mean_success"]
+        ret = d["retention_classic"]["retention_delta"]
+        hold = d["teacher_holdout"]
+        hold_s = (f"{hold['config_mean_success']:.3f}"
+                  if hold else "n/a")
+        print(f"  {cond:11s} classic={cls_:.3f} ood={ood:.3f} "
+              f"teacher_hold={hold_s} retention={ret:+.3f}")
+    for name, cmp_ in summary.get("comparisons", {}).items():
+        if cmp_:
+            lo, hi = cmp_["ci"]
+            print(f"  {name}: mean={cmp_['mean']:+.4f} "
+                  f"CI95=[{lo:+.4f},{hi:+.4f}]")
+    return 0
+
+
+def cmd_evren_diagnose(args, cfg):
+    """Root-cause diagnosis of the v0.1 null result (offline)."""
+    import sys as _sys
+    if _sys.flags.hash_randomization:
+        print("WARNING: PYTHONHASHSEED is randomized; rerun with "
+              "PYTHONHASHSEED=0 for cross-process reproducibility.")
+    splits = load_splits(cfg)
+    results_dir = registry_paths(cfg)
+    summary = run_diagnosis(
+        results_dir=results_dir, splits=splits,
+        n_configs=args.configs, episodes=args.episodes,
+        train_fallback=args.fallback_train)
+    a = summary["aggregate"]
+    print("== EVREN v0.1 null-result diagnosis ==")
+    fresh = a["fresh"]
+    print(f"fresh agents:   success={fresh['success_rate']:.3f} "
+          f"contradicted_hyps={fresh['mean_contradicted']:.1f} "
+          f"verified_hyps={fresh['mean_verified']:.1f}")
+    for name in summary["trained_agents"]:
+        tr = a[name]
+        print(f"{name:14s} success={tr['success_rate']:.3f} "
+              f"delta_vs_fresh={tr['delta_vs_fresh']:+.3f} "
+              f"contradicted={tr['mean_contradicted']:.1f} "
+              f"verified={tr['mean_verified']:.1f} "
+              f"tried_entries={tr['mean_tried_entries']:.1f}")
+    print(f"  written to {os.path.join(results_dir, 'diagnosis_summary.json')}")
+    return 0
+
+
 def cmd_evren_status(args, cfg):
     results_dir = registry_paths(cfg)
     if not os.path.isdir(results_dir):
@@ -557,6 +635,17 @@ def main(argv=None):
     p_et.add_argument("--eval-seeds", type=int, default=None)
     p_et.add_argument("--eval-episodes", type=int, default=None)
     sub.add_parser("evren-status")
+    p_ec = sub.add_parser("evren-curriculum")
+    p_ec.add_argument("--episodes", type=int, default=None)
+    p_ec.add_argument("--block", type=int, default=None)
+    p_ec.add_argument("--conditions", default=None)
+    p_ec.add_argument("--quick", action="store_true")
+    p_ed = sub.add_parser("evren-diagnose")
+    p_ed.add_argument("--configs", type=int, default=10)
+    p_ed.add_argument("--episodes", type=int, default=10)
+    p_ed.add_argument("--fallback-train", type=int, default=None,
+                      help="train a quick reference agent if no saved "
+                           "policy states are found")
     parser.add_argument("--override", action="append", default=None,
                         help="flat override key=value, e.g. evaluation.seeds=8")
 
@@ -600,6 +689,10 @@ def main(argv=None):
         return cmd_evren_offline(args, cfg)
     if args.command == "evren-train":
         return cmd_evren_train(args, cfg)
+    if args.command == "evren-curriculum":
+        return cmd_evren_curriculum(args, cfg)
+    if args.command == "evren-diagnose":
+        return cmd_evren_diagnose(args, cfg)
     if args.command == "evren-status":
         return cmd_evren_status(args, cfg)
     parser.print_help()

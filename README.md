@@ -206,6 +206,22 @@ python -m academy.cli.main evren-pilot
 python -m academy.cli.main evren-status
 ```
 
+EVREN curriculum research v0.2 (offline by construction — zero API calls):
+
+```bash
+# diagnosis of the v0.1 null result (uses saved policies when present)
+python -m academy.cli.main evren-diagnose
+
+# matched-budget adaptive-curriculum comparison (5 conditions)
+python -m academy.cli.main evren-curriculum
+
+# quick sanity run (2 conditions, 16 episodes)
+python -m academy.cli.main evren-curriculum --quick
+```
+
+See `docs/EVREN_CURRICULUM_V02.md` for the scientific protocol and
+measured results.
+
 ---
 
 ## Research principles
