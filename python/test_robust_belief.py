@@ -56,6 +56,85 @@ class RobustBeliefTests(unittest.TestCase):
         self.assertFalse(res.valid)
         self.assertFalse(rb.belief.door_open["D1"])
 
+    def test_confirm_needs_persistence(self):
+        rb = RobustBelief(1)
+        w = self._world()
+        obs = w.observe()
+        rb.observe(obs)
+        # simulate a single flip then revert (like one corrupted reading)
+        class FakeObs:
+            def __init__(self, d1):
+                self.d1 = d1
+                self.d2 = False
+                self.s1 = False
+                self.s2 = False
+                self.p1 = "none"
+                self.p2 = "none"
+                self.x = 0
+                self.y = 4
+                self.ax = 2
+                self.ay = 3
+                self.bx = 4
+                self.by = 3
+        rb.observe(FakeObs(True))     # flip
+        rb.observe(FakeObs(False))    # revert before confirmation
+        self.assertEqual(rb.poll_confirmed_events(), [])
+        self.assertGreaterEqual(rb.dropped_candidates, 1)
+
+    def test_confirm_on_persistence(self):
+        rb = RobustBelief(1)
+        class FakeObs:
+            def __init__(self, d1):
+                self.d1 = d1
+                self.d2 = False
+                self.s1 = False
+                self.s2 = False
+                self.p1 = "none"
+                self.p2 = "none"
+                self.x = 0
+                self.y = 4
+                self.ax = 2
+                self.ay = 3
+                self.bx = 4
+                self.by = 3
+        rb.observe(FakeObs(False))
+        rb.observe(FakeObs(True))     # flip  -> candidate
+        rb.observe(FakeObs(True))     # persist 1
+        rb.observe(FakeObs(True))     # persist 2 -> confirm
+        ev = rb.poll_confirmed_events()
+        self.assertIn(("D1", True), ev)
+        self.assertEqual(len(ev), 1)
+
+    def test_movement_proof_confirms_and_dedupes(self):
+        rb = RobustBelief(1)
+        # synthetic: stand on (2,1), move E into door cell (3,1), valid
+        # (door truly open)
+        class FakeObs:
+            def __init__(self, x, y, d1=True):
+                self.x = x
+                self.y = y
+                self.d1 = d1
+                self.d2 = False
+                self.s1 = True
+                self.s2 = False
+                self.p1 = "A"
+                self.p2 = "none"
+                self.ax = 2
+                self.ay = 2
+                self.bx = 4
+                self.by = 3
+        rb.observe(FakeObs(2, 1, d1=False))
+        rb.apply_transition("E", True, FakeObs(3, 1, d1=True))
+        self.assertTrue(rb.belief.door_open["D1"])
+        ev = rb.poll_confirmed_events()
+        self.assertIn(("D1", True), ev)
+        # repeated transit through the same open door: no new event
+        rb.observe(FakeObs(3, 1, d1=True))
+        rb.apply_transition("E", True, FakeObs(4, 1, d1=True))
+        rb.observe(FakeObs(4, 1, d1=True))
+        rb.apply_transition("W", True, FakeObs(3, 1, d1=True))
+        self.assertEqual(rb.poll_confirmed_events(), [])
+
     def test_debounce_filters_single_flip(self):
         rb = RobustBelief(1, debounce=2)
         vb = rb.belief

@@ -40,6 +40,7 @@ CANDIDATES_PER_EVENT = 32
 EVENT_DECAY = 0.70            # per-episode evidence decay
 REPLAY_MAX = 64               # replay buffer cap
 REPLAY_PER_EVENT = 8          # replay applications per event
+REPLAY_CERT_MIN = 0.5         # min certainty for "filtered" replay
 
 HYPOTHESIS = "hypothesis"
 PREDICTED = "predicted"
@@ -131,16 +132,18 @@ class Hypothesis:
 
 class CompositionalMemoryV10:
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES, seed: int = 0,
-                 decay: float = EVENT_DECAY, enable_replay: bool = True):
+                 decay: float = EVENT_DECAY, enable_replay: bool = True,
+                 replay_mode: str = "on"):
         self.max_hypotheses = max_hypotheses
         self.decay = decay
         self.enable_replay = enable_replay
+        self.replay_mode = replay_mode
         self.hypotheses: list[Hypothesis] = []
         self.next_id = 1
         self.step = 0
         self.evictions = 0
         self.generated = 0
-        self.replay: list[tuple[float, frozenset, str]] = []  # (priority, ante, cons)
+        self.replay: list[tuple] = []  # (priority, ante, cons, certainty)
         self.replay_applied = 0
         self._continuous_true: dict[int, int] = {}
 
@@ -201,8 +204,9 @@ class CompositionalMemoryV10:
         else:
             h.status = HYPOTHESIS
 
-    def _support(self, h: Hypothesis, from_replay: bool = False):
-        h.sup += 1.0
+    def _support(self, h: Hypothesis, from_replay: bool = False,
+                 weight: float = 1.0):
+        h.sup += max(0.0, weight)
         h.n_sup += 1
         if from_replay:
             h.n_replay += 1
@@ -246,9 +250,9 @@ class CompositionalMemoryV10:
             return 1.0
         return 1.0 / (1.0 + max(h.sup, 0.0))
 
-    def _store_replay(self, antecedent, consequence):
+    def _store_replay(self, antecedent, consequence, certainty=1.0):
         prio = self._replay_priority(antecedent, consequence)
-        self.replay.append((prio, antecedent, consequence))
+        self.replay.append((prio, antecedent, consequence, certainty))
         if len(self.replay) > REPLAY_MAX:
             # drop the lowest-priority item
             self.replay.sort(key=lambda t: -t[0])
@@ -259,37 +263,69 @@ class CompositionalMemoryV10:
             items = self.replay
         if not items:
             return
-        items = sorted(items, key=lambda t: -t[0])
+        mode = getattr(self, "replay_mode", "on")
+        if mode == "off":
+            return
+        if mode == "filtered":
+            items = [it for it in items if it[3] >= REPLAY_CERT_MIN]
+        items = sorted(items, key=lambda t: -t[0] * (t[3] if mode == "weighted" else 1.0))
         taken = 0
-        for prio, ante, cons in items:
+        for prio, ante, cons, certainty in items:
             if taken >= REPLAY_PER_EVENT:
                 break
             h = self._find(ante, cons)
             if h is None:
                 h = self._add(ante, cons)
             if h is not None:
-                self._support(h, from_replay=True)
+                weight = certainty if mode == "weighted" else 1.0
+                self._support(h, from_replay=True, weight=weight)
                 self.replay_applied += 1
             taken += 1
 
     def _clear_replay_for(self, consequence: str):
-        self.replay = [(p, a, c) for (p, a, c) in self.replay if c != consequence]
+        self.replay = [t for t in self.replay if t[2] != consequence]
 
     # -- event handling ---------------------------------------------------
     def observe_event(self, before_atoms: frozenset, door: str, opened: bool):
+        self.observe_event_ex(before_atoms, before_atoms, door, opened,
+                               certainty=1.0)
+
+    def observe_event_ex(self, pre_atoms: frozenset, post_atoms: frozenset,
+                         door: str, opened: bool, certainty: float = 1.0):
+        """Combined context event with an evidence-quality weight. Contexts
+        are unioned and cleaned of contradictory polarities; support is
+        added with weight `certainty` (a family-agnostic observation-
+        likelihood proxy)."""
         consequence = opens_key(door, opened)
+        ctx = self._clean_ctx(pre_atoms, post_atoms)
         # replay reinforces *older* evidence; the just-processed event is
         # already counted directly, so exclude it from this replay pass.
         old_replay = self.replay[:] if self.enable_replay else []
-        cands = self._candidate_antecedents(before_atoms, consequence)
+        cands = self._candidate_antecedents(ctx, consequence)
         for ante in cands:
             h = self._add(ante, consequence)
-            if h is not None and ante <= before_atoms:
-                self._support(h)
+            if h is not None and ante <= ctx:
+                self._support(h, weight=certainty)
             if self.enable_replay:
-                self._store_replay(ante, consequence)
+                self._store_replay(ante, consequence, certainty)
         if self.enable_replay:
             self._apply_replay(old_replay)
+
+    @staticmethod
+    def _clean_ctx(pre, post) -> frozenset:
+        out = set(pre)
+        for a in post:
+            k = a[0]
+            conflict = False
+            if k == "sw":
+                conflict = any(x[0] == "sw" and x[1] == a[1] and x[2] != a[2]
+                               for x in pre)
+            elif k == "load":
+                conflict = any(x[0] == "load" and x[1] == a[1] and x[2] != a[2]
+                               for x in pre)
+            if not conflict:
+                out.add(a)
+        return frozenset(out)
 
     def observe_nonevent(self, atoms: frozenset, door: str, wants_open: bool):
         consequence = opens_key(door, wants_open)
