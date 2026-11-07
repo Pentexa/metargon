@@ -1,0 +1,3087 @@
+{
+ "episodes": 8,
+ "far_anchor": {
+  "D1": [
+   3,
+   1
+  ],
+  "D2": [
+   6,
+   1
+  ]
+ },
+ "goal_infeasible": {
+  "(False, False)": true,
+  "(True, False)": true
+ },
+ "memory": {
+  "candidates_per_event": 10,
+  "continuous_true": {},
+  "contradict_window": 3,
+  "evictions": 0,
+  "generated": 52,
+  "hypotheses": [
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 1,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 18
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 2,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 18
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 3,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 18
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 4,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 17
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 5,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 18
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 6,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 18
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 7,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 17
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 8,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 18
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 9,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 17
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 0,
+    "h_id": 10,
+    "last_update": 310,
+    "status": "contradicted",
+    "sup": 17
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 11,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 96
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 12,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 97
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 13,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 95
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 14,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 97
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 15,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 96
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 16,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 95
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 17,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 96
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 18,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 95
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 19,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 97
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 0,
+    "h_id": 20,
+    "last_update": 229,
+    "status": "contradicted",
+    "sup": 95
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 21,
+    "last_update": 194,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 22,
+    "last_update": 194,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 23,
+    "last_update": 203,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 24,
+    "last_update": 194,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "empty",
+      "P2"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 25,
+    "last_update": 194,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 26,
+    "last_update": 203,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 27,
+    "last_update": 194,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 28,
+    "last_update": 203,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 29,
+    "last_update": 194,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 30,
+    "last_update": 203,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 31,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 32,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 33,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:closes",
+    "created_step": 175,
+    "h_id": 34,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 2
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 176,
+    "h_id": 35,
+    "last_update": 221,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 176,
+    "h_id": 36,
+    "last_update": 221,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 176,
+    "h_id": 37,
+    "last_update": 221,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      false
+     ],
+     [
+      "sw",
+      "S2",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D1:opens",
+    "created_step": 176,
+    "h_id": 38,
+    "last_update": 221,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 193,
+    "h_id": 39,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 27
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P1"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 193,
+    "h_id": 40,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 17
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "sw",
+      "S1",
+      true
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 193,
+    "h_id": 41,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 27
+   },
+   {
+    "antecedent": [
+     [
+      "sw",
+      "S1",
+      true
+     ],
+     [
+      "sw",
+      "S2",
+      false
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 193,
+    "h_id": 42,
+    "last_update": 328,
+    "status": "contradicted",
+    "sup": 26
+   },
+   {
+    "antecedent": [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 217,
+    "h_id": 43,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "loadany",
+      "P1"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 217,
+    "h_id": 44,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 217,
+    "h_id": 45,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "loadany",
+      "P1"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 217,
+    "h_id": 46,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "loadany",
+      "P1"
+     ]
+    ],
+    "con": 3,
+    "consequence": "door:D2:opens",
+    "created_step": 217,
+    "h_id": 47,
+    "last_update": 319,
+    "status": "contradicted",
+    "sup": 3
+   },
+   {
+    "antecedent": [
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ],
+    "con": 0,
+    "consequence": "door:D1:opens",
+    "created_step": 310,
+    "h_id": 48,
+    "last_update": 328,
+    "status": "verified",
+    "sup": 20
+   },
+   {
+    "antecedent": [
+     [
+      "loadany",
+      "P1"
+     ]
+    ],
+    "con": 0,
+    "consequence": "door:D1:opens",
+    "created_step": 310,
+    "h_id": 49,
+    "last_update": 328,
+    "status": "verified",
+    "sup": 20
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "load",
+      "P1",
+      "A"
+     ]
+    ],
+    "con": 0,
+    "consequence": "door:D1:opens",
+    "created_step": 310,
+    "h_id": 50,
+    "last_update": 328,
+    "status": "verified",
+    "sup": 20
+   },
+   {
+    "antecedent": [
+     [
+      "empty",
+      "P2"
+     ],
+     [
+      "loadany",
+      "P1"
+     ]
+    ],
+    "con": 0,
+    "consequence": "door:D1:opens",
+    "created_step": 310,
+    "h_id": 51,
+    "last_update": 328,
+    "status": "verified",
+    "sup": 20
+   },
+   {
+    "antecedent": [
+     [
+      "load",
+      "P1",
+      "A"
+     ],
+     [
+      "loadany",
+      "P1"
+     ]
+    ],
+    "con": 0,
+    "consequence": "door:D1:opens",
+    "created_step": 310,
+    "h_id": 52,
+    "last_update": 328,
+    "status": "verified",
+    "sup": 20
+   }
+  ],
+  "max_contradict": 2,
+  "max_hypotheses": 128,
+  "next_id": 53,
+  "pair_base": 5,
+  "predict_threshold": 1,
+  "step": 328,
+  "verify_support": 3
+ },
+ "passed": {
+  "D1": true,
+  "D2": true
+ },
+ "pending_probe": {},
+ "plan_cache": {
+  "(((0, 0), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E"
+  ],
+  "(((0, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "Toggle",
+   "E",
+   "E",
+   "E",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((0, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P2'), ('sw', 'S1', True)))": [
+   "Toggle"
+  ],
+  "(((0, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "Toggle"
+  ],
+  "(((0, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "E",
+   "E",
+   "E",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((0, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, False)), None, (('empty', 'P2'), ('sw', 'S1', True)))": [],
+  "(((0, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, False)), None, (('sw', 'S1', False),))": [
+   "Toggle"
+  ],
+  "(((0, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, False)), None, (('sw', 'S1', True),))": [],
+  "(((0, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((0, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((0, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((0, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((0, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "E",
+   "E",
+   "S",
+   "Toggle"
+  ],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (6, 0), ())": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "PushE",
+   "PushE",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'),))": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "PushE",
+   "S",
+   "PushE",
+   "PushN",
+   "PushN"
+  ],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "PushE",
+   "S",
+   "PushE",
+   "PushN",
+   "PushN"
+  ],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "PushE",
+   "PushE",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((0, 3), (1, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((0, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((0, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((0, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "S",
+   "PushE"
+  ],
+  "(((0, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((0, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [
+   "E",
+   "S",
+   "PushE"
+  ],
+  "(((0, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "E",
+   "S",
+   "E",
+   "Toggle"
+  ],
+  "(((0, 4), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, False)), (6, 0), ())": [],
+  "(((0, 4), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((0, 4), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', False),))": [],
+  "(((0, 4), (1, 3), (2, 4), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', True),))": [
+   "N",
+   "PushE",
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), (6, 0), ())": [],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "PushE"
+  ],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('loadany', 'P1'),))": [
+   "E",
+   "PushE"
+  ],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', True),))": [
+   "E",
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "PushE"
+  ],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [
+   "E",
+   "PushE"
+  ],
+  "(((0, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (6, 0), ())": [],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "Toggle"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "Toggle"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [
+   "Toggle"
+  ],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [],
+  "(((1, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 0), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E"
+  ],
+  "(((1, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((1, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((1, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "E",
+   "S",
+   "S",
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "Toggle"
+  ],
+  "(((1, 0), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "E",
+   "S",
+   "E"
+  ],
+  "(((1, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "W",
+   "Toggle",
+   "E",
+   "E",
+   "E",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((1, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P2'), ('sw', 'S1', True)))": [
+   "W",
+   "Toggle"
+  ],
+  "(((1, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "Toggle"
+  ],
+  "(((1, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((1, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((1, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((1, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((1, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "E",
+   "S",
+   "Toggle"
+  ],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "PushE",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'),))": [],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "PushE",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "PushE",
+   "PushN",
+   "PushN"
+  ],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "PushE",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((1, 3), (2, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('empty', 'P1'),))": [],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "PushE"
+  ],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [
+   "S",
+   "PushE"
+  ],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "S",
+   "E",
+   "Toggle"
+  ],
+  "(((1, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "E",
+   "E",
+   "N",
+   "N"
+  ],
+  "(((1, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((1, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((1, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((1, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((1, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((1, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "E",
+   "Toggle"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('load', 'P1', 'A'),))": [
+   "PushE"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('loadany', 'P1'),))": [
+   "PushE"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, False)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "PushE"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [
+   "PushE"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((1, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "N",
+   "E",
+   "E",
+   "N",
+   "N"
+  ],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "W",
+   "Toggle"
+  ],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'),))": [],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "Toggle"
+  ],
+  "(((2, 0), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "S",
+   "S",
+   "S",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((2, 0), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "S",
+   "E"
+  ],
+  "(((2, 0), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "S",
+   "E",
+   "E"
+  ],
+  "(((2, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "S",
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "S",
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 0), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "Toggle"
+  ],
+  "(((2, 0), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "S",
+   "E"
+  ],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (6, 0), ())": [],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'),))": [],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 1), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "S",
+   "S",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((2, 1), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "E"
+  ],
+  "(((2, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "W",
+   "W",
+   "Toggle",
+   "E",
+   "E",
+   "E",
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((2, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P2'), ('sw', 'S1', True)))": [
+   "W",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 1), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 1), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 1), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 1), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 1), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 1), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "E"
+  ],
+  "(((2, 2), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 2), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 2), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'),))": [],
+  "(((2, 2), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [],
+  "(((2, 2), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 2), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "S",
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((2, 2), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 2), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 2), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 2), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 2), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((2, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((2, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((2, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "S",
+   "Toggle"
+  ],
+  "(((2, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((2, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((2, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((2, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "S",
+   "E",
+   "Toggle"
+  ],
+  "(((2, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((2, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((2, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "S",
+   "Toggle"
+  ],
+  "(((2, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('empty', 'P1'),))": [],
+  "(((2, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((2, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "S",
+   "E",
+   "Toggle"
+  ],
+  "(((2, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "E",
+   "N",
+   "N"
+  ],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('empty', 'P1'),))": [],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "W",
+   "S",
+   "PushE",
+   "PushE",
+   "PushE",
+   "N",
+   "PushW",
+   "S",
+   "W",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', False),))": [],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 3), (3, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((2, 3), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), (3, 1), ())": [
+   "E",
+   "N",
+   "N"
+  ],
+  "(((2, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((2, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "E",
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((2, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((2, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((2, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((2, 4), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "Toggle"
+  ],
+  "(((2, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((2, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((2, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "Toggle"
+  ],
+  "(((2, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((2, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((2, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "E",
+   "Toggle"
+  ],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (False, True)), (6, 0), ())": [],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (False, True)), (6, 1), ())": [],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (False, True)), None, (('empty', 'P1'),))": [
+   "PushE"
+  ],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "PushE",
+   "Toggle"
+  ],
+  "(((2, 4), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), (3, 1), ())": [
+   "N",
+   "E",
+   "N",
+   "N"
+  ],
+  "(((3, 0), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "S",
+   "E",
+   "E"
+  ],
+  "(((3, 1), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "E"
+  ],
+  "(((3, 1), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "E"
+  ],
+  "(((3, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), (6, 0), ())": [],
+  "(((3, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P1'), ('sw', 'S1', True)))": [
+   "S",
+   "S",
+   "W",
+   "S",
+   "PushE",
+   "N",
+   "N",
+   "N",
+   "W",
+   "W",
+   "W",
+   "Toggle"
+  ],
+  "(((3, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('empty', 'P2'), ('sw', 'S1', True)))": [
+   "W",
+   "W",
+   "W",
+   "Toggle"
+  ],
+  "(((3, 1), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "W",
+   "W",
+   "Toggle"
+  ],
+  "(((3, 1), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "E"
+  ],
+  "(((3, 1), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E",
+   "E"
+  ],
+  "(((3, 2), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "N"
+  ],
+  "(((3, 2), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), (3, 1), ())": [
+   "N"
+  ],
+  "(((3, 2), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "N"
+  ],
+  "(((3, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((3, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((3, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "S",
+   "Toggle"
+  ],
+  "(((3, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((3, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((3, 3), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "S",
+   "E",
+   "Toggle"
+  ],
+  "(((3, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('empty', 'P1'),))": [],
+  "(((3, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((3, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "S",
+   "E",
+   "Toggle"
+  ],
+  "(((3, 3), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "N",
+   "N"
+  ],
+  "(((3, 3), (3, 4), (4, 3), (False, False), ('A', 'none'), (True, False)), (3, 1), ())": [
+   "N",
+   "N"
+  ],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "Toggle"
+  ],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((3, 3), (4, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "Toggle"
+  ],
+  "(((3, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((3, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((3, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "E",
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((3, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((3, 3), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "N",
+   "N"
+  ],
+  "(((3, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((3, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "W",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((3, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((3, 4), (1, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "Toggle"
+  ],
+  "(((3, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "W",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((3, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((3, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "Toggle"
+  ],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('empty', 'P1'),))": [],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "W",
+   "W",
+   "S",
+   "PushE"
+  ],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((3, 4), (2, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "E",
+   "Toggle"
+  ],
+  "(((3, 4), (4, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((3, 4), (4, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "PushE",
+   "PushE",
+   "S",
+   "PushW"
+  ],
+  "(((3, 4), (4, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((3, 4), (4, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [
+   "N",
+   "PushE",
+   "PushE",
+   "S",
+   "PushW"
+  ],
+  "(((3, 4), (4, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "PushE",
+   "Toggle"
+  ],
+  "(((3, 4), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (3, 1), ())": [
+   "N",
+   "N",
+   "N"
+  ],
+  "(((4, 0), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "S",
+   "E",
+   "E"
+  ],
+  "(((4, 1), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E"
+  ],
+  "(((4, 1), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E"
+  ],
+  "(((4, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E"
+  ],
+  "(((4, 1), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E"
+  ],
+  "(((4, 1), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E",
+   "E"
+  ],
+  "(((4, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((4, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 3), (0, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "S",
+   "Toggle"
+  ],
+  "(((4, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((4, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "S",
+   "Toggle"
+  ],
+  "(((4, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "W",
+   "W",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((4, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 3), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "S",
+   "Toggle"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 0), ())": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "Toggle"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (3, 1), ())": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), (6, 0), ())": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'A'),))": [
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('loadany', 'P1'),))": [
+   "S",
+   "E",
+   "E",
+   "N",
+   "PushW",
+   "PushW",
+   "PushW",
+   "S",
+   "PushW",
+   "PushN",
+   "PushN"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S1', True),))": [
+   "W",
+   "W",
+   "N",
+   "N",
+   "N",
+   "W",
+   "Toggle"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, False), ('none', 'none'), (True, False)), None, (('sw', 'S2', True),))": [
+   "Toggle"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, True), ('none', 'none'), (False, False)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 3), (5, 3), (2, 4), (False, True), ('none', 'none'), (False, False)), None, (('sw', 'S2', False),))": [
+   "Toggle"
+  ],
+  "(((4, 3), (5, 3), (2, 4), (False, True), ('none', 'none'), (False, False)), None, (('sw', 'S2', True),))": [],
+  "(((4, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [
+   "N",
+   "W",
+   "W",
+   "W",
+   "W",
+   "S",
+   "PushE",
+   "PushE"
+  ],
+  "(((4, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 4), (1, 4), (5, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "Toggle"
+  ],
+  "(((4, 4), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 4), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((4, 4), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False),))": [],
+  "(((4, 4), (5, 3), (2, 4), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "N",
+   "Toggle"
+  ],
+  "(((4, 4), (5, 3), (2, 4), (False, True), ('none', 'none'), (False, False)), (6, 0), ())": [],
+  "(((4, 4), (5, 3), (2, 4), (False, True), ('none', 'none'), (False, False)), None, (('sw', 'S2', False),))": [
+   "N",
+   "Toggle"
+  ],
+  "(((4, 4), (5, 3), (2, 4), (False, True), ('none', 'none'), (False, False)), None, (('sw', 'S2', True),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 4), (5, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "Toggle"
+  ],
+  "(((4, 4), (5, 4), (4, 3), (False, True), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((4, 4), (5, 4), (4, 3), (False, True), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, True), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, True), ('none', 'none'), (False, True)), None, (('loadany', 'P1'),))": [],
+  "(((4, 4), (5, 4), (4, 3), (False, True), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [],
+  "(((5, 1), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E"
+  ],
+  "(((5, 1), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E"
+  ],
+  "(((5, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 1), ())": [
+   "E"
+  ],
+  "(((5, 1), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E"
+  ],
+  "(((5, 1), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (6, 1), ())": [
+   "E"
+  ],
+  "(((5, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), (6, 1), ())": [],
+  "(((5, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'A'),))": [],
+  "(((5, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('load', 'P1', 'B'),))": [],
+  "(((5, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', False), ('sw', 'S2', True)))": [],
+  "(((5, 3), (0, 4), (6, 3), (False, False), ('none', 'none'), (False, True)), None, (('sw', 'S2', True),))": [
+   "S",
+   "W",
+   "Toggle"
+  ],
+  "(((6, 1), (2, 4), (4, 3), (False, False), ('none', 'none'), (True, True)), (6, 0), ())": [
+   "N"
+  ],
+  "(((6, 1), (3, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 0), ())": [
+   "N"
+  ],
+  "(((6, 1), (3, 4), (4, 3), (True, False), ('A', 'none'), (True, True)), (6, 0), ())": [
+   "N"
+  ],
+  "(((6, 1), (5, 3), (2, 4), (True, False), ('none', 'none'), (True, True)), (6, 0), ())": [
+   "N"
+  ],
+  "(((6, 1), (5, 4), (4, 3), (False, True), ('none', 'none'), (True, True)), (6, 0), ())": [
+   "N"
+  ]
+ },
+ "plan_cache_hits": 1048,
+ "plan_calls": 1061,
+ "planner_max_expand": 1500,
+ "planner_ops": 147426,
+ "probe_max_plans": 4,
+ "probe_timeout": 10,
+ "replay_enabled": true,
+ "rng": {
+  "gauss": null,
+  "internal": [
+   2026548621,
+   1736977032,
+   1609997789,
+   4061495007,
+   2604439088,
+   1369820219,
+   3314032840,
+   2267657479,
+   539834418,
+   1092316921,
+   4258876558,
+   3321601939,
+   2221116375,
+   228965696,
+   1722032575,
+   1235429009,
+   2300212473,
+   4067120794,
+   3667188969,
+   3444905782,
+   2695190602,
+   1627718060,
+   1486869627,
+   3165920515,
+   423727831,
+   2079009092,
+   477231933,
+   2425991543,
+   1138740550,
+   3216032506,
+   1751235161,
+   2840258730,
+   3352098778,
+   1154035703,
+   1623270305,
+   4042370100,
+   3792390449,
+   2039310015,
+   2894301521,
+   143944941,
+   3184143984,
+   1876401307,
+   151762455,
+   4208590513,
+   909711459,
+   1871210454,
+   3594616353,
+   3489306854,
+   1550326147,
+   2117614127,
+   867575640,
+   3395138156,
+   1015805692,
+   3062341727,
+   814069866,
+   3608525718,
+   291575658,
+   3946495522,
+   1741009164,
+   2072839446,
+   4264918817,
+   2836479183,
+   4111517320,
+   2412426436,
+   2789852929,
+   3557562046,
+   41917147,
+   3405755130,
+   3981654831,
+   3441121592,
+   235446230,
+   970592648,
+   2974536138,
+   2647068255,
+   2794771342,
+   1547430230,
+   533955944,
+   3656127859,
+   662052682,
+   2273177771,
+   3779448478,
+   3179542606,
+   1544855316,
+   2028475723,
+   2974394333,
+   1909660994,
+   2862951676,
+   2984301969,
+   4156954144,
+   1004932864,
+   3730074611,
+   3966708488,
+   1734859239,
+   1511254400,
+   1951811792,
+   2653219780,
+   79831612,
+   2957376153,
+   2189156665,
+   3646456831,
+   245967570,
+   2563598472,
+   1020980797,
+   952477616,
+   1745102743,
+   3055082340,
+   4231554671,
+   2252558604,
+   2757839720,
+   2203752129,
+   313930089,
+   1507422217,
+   47080639,
+   2065599088,
+   3571389044,
+   4174766690,
+   1678887977,
+   100005361,
+   2574921385,
+   352350724,
+   218540629,
+   2052000272,
+   2898610339,
+   3493793110,
+   1884141786,
+   2021319911,
+   4238504855,
+   733188439,
+   711649545,
+   2657502168,
+   2613653588,
+   4191372730,
+   3424487582,
+   1427279761,
+   1175207458,
+   383055500,
+   1821404602,
+   1614857226,
+   3766002116,
+   2223837147,
+   1496811896,
+   145024661,
+   2593953584,
+   2859991037,
+   2380682844,
+   1928858139,
+   3948153541,
+   2505172948,
+   1399339524,
+   2432221992,
+   1658881322,
+   1881684235,
+   2306342894,
+   3458637924,
+   1375896140,
+   3932287453,
+   258546473,
+   3741341535,
+   852176366,
+   3151712173,
+   3806895321,
+   435309051,
+   135043529,
+   1070387624,
+   482087689,
+   3535629359,
+   725172061,
+   3985812586,
+   303089534,
+   3438263605,
+   2129939918,
+   2966826790,
+   2670912459,
+   78889636,
+   1488474842,
+   3767021805,
+   2199986043,
+   2415254501,
+   799640228,
+   4153482898,
+   3372961438,
+   4050770782,
+   3397862200,
+   2131481642,
+   125339832,
+   535362103,
+   2195717575,
+   2459937565,
+   1489642502,
+   3337020475,
+   2387185983,
+   1999680234,
+   982254770,
+   1344121021,
+   1644859995,
+   1150204521,
+   537095048,
+   3848446551,
+   1330311518,
+   257390230,
+   1622144316,
+   3795253522,
+   2115166881,
+   2470920875,
+   3114570285,
+   709952091,
+   2802904275,
+   2075503806,
+   583419774,
+   765765785,
+   2585988602,
+   2427543623,
+   2943923833,
+   3192986081,
+   899706907,
+   2186685310,
+   292585872,
+   3392730208,
+   1204157805,
+   1387993909,
+   2736639201,
+   1176981699,
+   877683696,
+   448236870,
+   418382014,
+   38835380,
+   2769896666,
+   2335906882,
+   3417931953,
+   921721805,
+   2940680057,
+   2498667876,
+   1110503453,
+   4254514315,
+   468277727,
+   2256046305,
+   4002655549,
+   2720305945,
+   2748877303,
+   3413082773,
+   2415145652,
+   2046397856,
+   2688235282,
+   3098705581,
+   1248549649,
+   841962124,
+   1061584387,
+   4191778805,
+   1346722038,
+   4260855403,
+   1055873878,
+   1279406409,
+   1037889807,
+   1625962896,
+   2096150415,
+   2624374810,
+   2681267024,
+   3113620361,
+   415176631,
+   1793240174,
+   1146216723,
+   2722265446,
+   863994898,
+   1292520990,
+   3110331917,
+   2607476686,
+   213616866,
+   537332268,
+   2075399726,
+   4087956013,
+   1887893410,
+   3997232483,
+   1429329201,
+   3323716796,
+   1348727439,
+   3102913343,
+   2292347702,
+   1298988662,
+   2472602386,
+   2671058280,
+   618901884,
+   41739394,
+   2336846334,
+   2238037270,
+   3921440175,
+   661045895,
+   2707949299,
+   1870345650,
+   3304576885,
+   1739235682,
+   3366600924,
+   2608262077,
+   852151973,
+   3526318666,
+   3439190202,
+   2462751814,
+   2892508458,
+   3963320451,
+   344907698,
+   4099482521,
+   193387490,
+   1226614042,
+   3793053627,
+   1750527255,
+   4079940723,
+   3445401045,
+   2642185261,
+   675531155,
+   1238286039,
+   606004635,
+   327921558,
+   3844553501,
+   80490377,
+   1772012004,
+   231666840,
+   2884700553,
+   1874609826,
+   4097471206,
+   1315947618,
+   1781573763,
+   3216071370,
+   1517601609,
+   1247978306,
+   2353538409,
+   574785788,
+   3779204491,
+   517811544,
+   2721629597,
+   1167355787,
+   1222393780,
+   2719636508,
+   2125728083,
+   3429255256,
+   331134565,
+   220871820,
+   2993465046,
+   3079900500,
+   2346441990,
+   686186286,
+   1161855666,
+   2358296902,
+   2892795569,
+   529325848,
+   2131511366,
+   1762295210,
+   1884082001,
+   1826564914,
+   2875539403,
+   1223251200,
+   3770099416,
+   2527853645,
+   2094465361,
+   2063797591,
+   4202856821,
+   2264248190,
+   2638437390,
+   3861070268,
+   1618726507,
+   2079577352,
+   1439345019,
+   3793014066,
+   2018684849,
+   3453732571,
+   1044628621,
+   394383723,
+   2650051462,
+   833362336,
+   1196633910,
+   4063867638,
+   2150929488,
+   1291100126,
+   3658515363,
+   3189025065,
+   1674844127,
+   1460994037,
+   701420403,
+   3810193808,
+   427116873,
+   312124848,
+   3935114136,
+   470796356,
+   2819694405,
+   4293939930,
+   1009245010,
+   730963249,
+   3966439142,
+   3776941826,
+   1152569434,
+   2611565392,
+   6677412,
+   2120679138,
+   1208021712,
+   2995361220,
+   2260427021,
+   1262077880,
+   2959148092,
+   352768391,
+   1572530033,
+   1843717481,
+   3487475692,
+   1060481643,
+   85113691,
+   2027056467,
+   4092598170,
+   785958525,
+   3117148439,
+   2931267268,
+   1817726400,
+   21787947,
+   3315833823,
+   2423340646,
+   85096413,
+   208404101,
+   2680464326,
+   2430419631,
+   4229861693,
+   3799478268,
+   965877544,
+   1475116185,
+   1537831982,
+   2087217803,
+   899063,
+   3807170779,
+   3600041689,
+   234002590,
+   3053811073,
+   2965302518,
+   2112087837,
+   4026642603,
+   2964278153,
+   1329988366,
+   502725651,
+   3185097586,
+   2733423681,
+   2234277296,
+   465928032,
+   865215358,
+   1686690802,
+   2087080539,
+   3922285494,
+   1917060276,
+   2481498662,
+   1329765684,
+   3054097785,
+   1132622432,
+   2608125240,
+   3100773582,
+   445660428,
+   1772399655,
+   1543519728,
+   469067739,
+   1211035689,
+   592244609,
+   524587223,
+   2266672995,
+   3166594643,
+   3702296297,
+   202853370,
+   1564973398,
+   1597485540,
+   3319743961,
+   673553222,
+   1355236906,
+   151690254,
+   2820873206,
+   4218733043,
+   2538535633,
+   4147155977,
+   3087524157,
+   2461609800,
+   3428627340,
+   1920901006,
+   363538772,
+   3933351926,
+   3643798183,
+   829027612,
+   452374939,
+   1894198827,
+   1489544360,
+   289444069,
+   635499868,
+   1493904012,
+   3521430138,
+   1361331699,
+   3542063505,
+   2931695800,
+   1089103739,
+   3961045106,
+   16656237,
+   225715787,
+   3634553353,
+   594352727,
+   683612918,
+   3015062880,
+   1290610815,
+   3777514220,
+   3987767028,
+   1475570153,
+   643741742,
+   2677264239,
+   3783128995,
+   276482222,
+   1900798848,
+   2925761985,
+   1689276344,
+   1679374918,
+   4153414646,
+   4244132816,
+   1597721980,
+   157522954,
+   1378572163,
+   1327174030,
+   2177890466,
+   720391328,
+   3611054309,
+   1316901316,
+   403614696,
+   462591723,
+   978955175,
+   3532313812,
+   3520865599,
+   1007902091,
+   2719711733,
+   2062100730,
+   3736153814,
+   3136654080,
+   2037529174,
+   2641090241,
+   4267690940,
+   1619387331,
+   56693118,
+   237965848,
+   841828337,
+   3763078740,
+   3915824659,
+   3486240731,
+   3812708333,
+   1702613899,
+   3416599582,
+   2320311851,
+   456390760,
+   1781312997,
+   3990438050,
+   2863301056,
+   86641396,
+   3262884956,
+   3000821759,
+   84696852,
+   388970883,
+   2880361626,
+   4224978109,
+   2399200647,
+   3888313170,
+   1589646824,
+   2147681328,
+   4147071291,
+   3709268560,
+   2199638416,
+   1223359070,
+   3296337074,
+   3132936150,
+   2443965463,
+   2218365901,
+   362903292,
+   2147294168,
+   1330250491,
+   509443442,
+   3436175443,
+   2258150782,
+   817643766,
+   4196404536,
+   1595090404,
+   535079185,
+   274870082,
+   3528779232,
+   2015161404,
+   3816267092,
+   777023489,
+   291994797,
+   2593815224,
+   205646466,
+   3725728757,
+   4101111972,
+   1861031333,
+   3170264575,
+   749223929,
+   3046690484,
+   4127327266,
+   770826517,
+   1562314354,
+   2977014325,
+   1793713831,
+   2166267139,
+   3007467025,
+   2953363758,
+   4135852947,
+   4170153512,
+   4178453098,
+   1648899426,
+   3729706259,
+   1520522138,
+   486876859,
+   4168806526,
+   2114931320,
+   1905731546,
+   2018736533,
+   366336302,
+   2460189608,
+   1196147707,
+   103781750,
+   3778284231,
+   4194898269,
+   3987631535,
+   1956145371,
+   3506489518,
+   713864601,
+   2993411813,
+   2555309589,
+   812806699,
+   670565511,
+   3552089331,
+   1923778051,
+   3293577830,
+   2959816606,
+   94
+  ],
+  "version": 3
+ },
+ "seed": 20261107,
+ "steps": 328,
+ "successes": 5,
+ "tried": {
+  "D1": [],
+  "D2": []
+ }
+}

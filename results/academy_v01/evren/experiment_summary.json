@@ -1,0 +1,1052 @@
+{
+ "run_id": "evren-exp",
+ "episodes": 80,
+ "p_teacher": 0.5,
+ "seed": 20261107,
+ "teacher_train_tasks": 8,
+ "teacher_holdout_tasks": 2,
+ "baseline": {
+  "train_success": 0.425,
+  "train_mean_steps": 52.0875,
+  "classic_test": {
+   "n": 90,
+   "success_rate": 0.0,
+   "success_std": 0.0,
+   "mean_steps": 80,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "successes": 0
+  },
+  "teacher_holdout": {
+   "n": 90,
+   "success_rate": 0.6666666666666666,
+   "success_std": 0.4714045207910317,
+   "mean_steps": 33.333333333333336,
+   "ci": [
+    0.5666666666666667,
+    0.7666666666666667
+   ],
+   "successes": 60
+  }
+ },
+ "teacher": {
+  "train_success": 0.325,
+  "train_mean_steps": 57.9875,
+  "classic_test": {
+   "n": 90,
+   "success_rate": 0.0,
+   "success_std": 0.0,
+   "mean_steps": 80,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "successes": 0
+  },
+  "teacher_holdout": {
+   "n": 90,
+   "success_rate": 0.6666666666666666,
+   "success_std": 0.4714045207910317,
+   "mean_steps": 33.333333333333336,
+   "ci": [
+    0.5666666666666667,
+    0.7666666666666667
+   ],
+   "successes": 60
+  }
+ },
+ "learning_curves": {
+  "baseline": [
+   {
+    "episode": 0,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 1,
+    "success": true,
+    "steps": 35,
+    "door_events": 2
+   },
+   {
+    "episode": 2,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 3,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 4,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 5,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 6,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 7,
+    "success": true,
+    "steps": 62,
+    "door_events": 2
+   },
+   {
+    "episode": 8,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 9,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 10,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 11,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 12,
+    "success": false,
+    "steps": 80,
+    "door_events": 5
+   },
+   {
+    "episode": 13,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 14,
+    "success": true,
+    "steps": 26,
+    "door_events": 2
+   },
+   {
+    "episode": 15,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 16,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 17,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 18,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 19,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 20,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 21,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 22,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 23,
+    "success": false,
+    "steps": 80,
+    "door_events": 77
+   },
+   {
+    "episode": 24,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 25,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 26,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 27,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 28,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 29,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 30,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 31,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 32,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 33,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 34,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 35,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 36,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 37,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 38,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 39,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 40,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 41,
+    "success": true,
+    "steps": 17,
+    "door_events": 2
+   },
+   {
+    "episode": 42,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 43,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 44,
+    "success": false,
+    "steps": 80,
+    "door_events": 151
+   },
+   {
+    "episode": 45,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 46,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 47,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 48,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 49,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 50,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 51,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 52,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 53,
+    "success": true,
+    "steps": 17,
+    "door_events": 2
+   },
+   {
+    "episode": 54,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 55,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 56,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 57,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 58,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 59,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 60,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 61,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 62,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 63,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 64,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 65,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 66,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 67,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 68,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 69,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 70,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 71,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 72,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 73,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 74,
+    "success": false,
+    "steps": 80,
+    "door_events": 151
+   },
+   {
+    "episode": 75,
+    "success": false,
+    "steps": 80,
+    "door_events": 2
+   },
+   {
+    "episode": 76,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 77,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 78,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 79,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   }
+  ],
+  "teacher": [
+   {
+    "episode": 0,
+    "success": true,
+    "steps": 29,
+    "door_events": 2
+   },
+   {
+    "episode": 1,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 2,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 3,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 4,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 5,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 6,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 7,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 8,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 9,
+    "success": false,
+    "steps": 80,
+    "door_events": 9
+   },
+   {
+    "episode": 10,
+    "success": false,
+    "steps": 80,
+    "door_events": 5
+   },
+   {
+    "episode": 11,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 12,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 13,
+    "success": true,
+    "steps": 12,
+    "door_events": 2
+   },
+   {
+    "episode": 14,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 15,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 16,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 17,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 18,
+    "success": false,
+    "steps": 80,
+    "door_events": 151
+   },
+   {
+    "episode": 19,
+    "success": false,
+    "steps": 80,
+    "door_events": 2
+   },
+   {
+    "episode": 20,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 21,
+    "success": false,
+    "steps": 80,
+    "door_events": 2
+   },
+   {
+    "episode": 22,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 23,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 24,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 25,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 26,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 27,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 28,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 29,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 30,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 31,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 32,
+    "success": false,
+    "steps": 80,
+    "door_events": 151
+   },
+   {
+    "episode": 33,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 34,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 35,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 36,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 37,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 38,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 39,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 40,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 41,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 42,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 43,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 44,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 45,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 46,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 47,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 48,
+    "success": false,
+    "steps": 80,
+    "door_events": 2
+   },
+   {
+    "episode": 49,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 50,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 51,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 52,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 53,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 54,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 55,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 56,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 57,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 58,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 59,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 60,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 61,
+    "success": true,
+    "steps": 15,
+    "door_events": 2
+   },
+   {
+    "episode": 62,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 63,
+    "success": false,
+    "steps": 80,
+    "door_events": 76
+   },
+   {
+    "episode": 64,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 65,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 66,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 67,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 68,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 69,
+    "success": true,
+    "steps": 13,
+    "door_events": 2
+   },
+   {
+    "episode": 70,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 71,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 72,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 73,
+    "success": true,
+    "steps": 10,
+    "door_events": 2
+   },
+   {
+    "episode": 74,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 75,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 76,
+    "success": false,
+    "steps": 80,
+    "door_events": 0
+   },
+   {
+    "episode": 77,
+    "success": false,
+    "steps": 80,
+    "door_events": 75
+   },
+   {
+    "episode": 78,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   },
+   {
+    "episode": 79,
+    "success": false,
+    "steps": 80,
+    "door_events": 1
+   }
+  ]
+ },
+ "forgetting": {
+  "baseline_probe": {
+   "n": 40,
+   "success_rate": 0.5,
+   "success_std": 0.5,
+   "mean_steps": 45,
+   "ci": [
+    0.35,
+    0.65
+   ],
+   "successes": 20
+  },
+  "teacher_probe": {
+   "n": 40,
+   "success_rate": 0.5,
+   "success_std": 0.5,
+   "mean_steps": 45,
+   "ci": [
+    0.35,
+    0.65
+   ],
+   "successes": 20
+  },
+  "forgetting_delta_teacher_vs_baseline": 0.0
+ },
+ "finished_at": 1794006996.478908
+}

@@ -13,6 +13,7 @@ class BenchmarkTests(unittest.TestCase):
         for k in ("success_rate", "mean_steps", "planner_ops", "plan_calls"):
             self.assertEqual(a[k], b[k], k)
 
+<<<<<<< HEAD
     BEHAVIORAL = ("success_rate", "first_half_success", "second_half_success",
                   "mean_steps", "invalid_actions")
 
@@ -31,22 +32,36 @@ class BenchmarkTests(unittest.TestCase):
             for k, v in a["summary"][cond].items():
                 if k.startswith("comparison:"):
                     self.assertEqual(v, b["summary"][cond][k], (cond, k))
+=======
+    def test_benchmark_repeatable_serial(self):
+        a = benchmark(2, 12)
+        b = benchmark(2, 12)
+        self.assertEqual(a, b)
+>>>>>>> origin/main
 
     def test_benchmark_parallel_matches_serial(self):
         a = benchmark(2, 8)
         b = benchmark_parallel(2, 8, workers=2)
+<<<<<<< HEAD
         for cond in a["summary"]:
             self.assertEqual(self._behavioral(a["summary"][cond]),
                              self._behavioral(b["summary"][cond]), cond)
+=======
+        self.assertEqual(a["summary"], b["summary"])
+>>>>>>> origin/main
         # raw ordering may differ; compare per (condition, seed) rows
         for cond in a["raw"]:
             for i in range(2):
                 for p in POLICIES:
+<<<<<<< HEAD
                     for k in self.BEHAVIORAL:
                         if k in a["raw"][cond][i][p]:
                             self.assertEqual(a["raw"][cond][i][p][k],
                                              b["raw"][cond][i][p][k],
                                              (cond, i, p, k))
+=======
+                    self.assertEqual(a["raw"][cond][i][p], b["raw"][cond][i][p], (cond, i, p))
+>>>>>>> origin/main
 
     def test_metadata_and_ranking_structure(self):
         r = benchmark(1, 8)
@@ -64,6 +79,7 @@ class BenchmarkTests(unittest.TestCase):
         for cond, row in r["summary"].items():
             for p in DEPLOYABLE + ("oracle",):
                 x = row[p]
+<<<<<<< HEAD
                 for k in ("success_rate", "mean_steps", "cpu_s"):
                     self.assertTrue(0.0 <= x[k] < float("inf"), (cond, p, k))
                 # memory may be None when tracing is disabled
@@ -76,6 +92,10 @@ class BenchmarkTests(unittest.TestCase):
             for p in DEPLOYABLE:
                 self.assertIsNone(row[p]["peak_mem_mb"])
                 self.assertGreaterEqual(row[p]["success_rate"], 0.0)
+=======
+                for k in ("success_rate", "mean_steps", "cpu_s", "peak_mem_mb"):
+                    self.assertTrue(0.0 <= x[k] < float("inf"), (cond, p, k))
+>>>>>>> origin/main
 
 
 if __name__ == "__main__":
