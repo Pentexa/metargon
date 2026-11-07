@@ -317,3 +317,4 @@ pub mod v08;
 
 /// New v0.9 bounded compositional causal memory.
 pub mod v09;
+pub mod v10;

@@ -1,0 +1,170 @@
+{
+  "stable_f": {
+    "metargon09": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.6083333333333333,
+      "covered_discovered": 0.6083333333333333,
+      "verified_false_ratio": 0.034482758620689655,
+      "verified_total": 174,
+      "best_usable_exact": 0.275
+    },
+    "metargon10": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8916666666666667,
+      "covered_discovered": 0.8916666666666667,
+      "verified_false_ratio": 0.06416275430359937,
+      "verified_total": 639,
+      "best_usable_exact": 0.15833333333333333
+    },
+    "metargon10-rb": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8916666666666667,
+      "covered_discovered": 0.8916666666666667,
+      "verified_false_ratio": 0.06416275430359937,
+      "verified_total": 639,
+      "best_usable_exact": 0.15833333333333333
+    },
+    "metargon10-cd": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8916666666666667,
+      "covered_discovered": 0.8916666666666667,
+      "verified_false_ratio": 0.07087827426810478,
+      "verified_total": 649,
+      "best_usable_exact": 0.15833333333333333
+    },
+    "metargon10-x": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.925,
+      "covered_discovered": 0.925,
+      "verified_false_ratio": 0.0457516339869281,
+      "verified_total": 612,
+      "best_usable_exact": 0.20833333333333334
+    }
+  },
+  "noisy_obs_f": {
+    "metargon09": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.5,
+      "covered_discovered": 0.5,
+      "verified_false_ratio": 0.4435035723736438,
+      "verified_total": 3779,
+      "best_usable_exact": 0.0
+    },
+    "metargon10": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8416666666666667,
+      "covered_discovered": 0.8416666666666667,
+      "verified_false_ratio": 0.11348161597821153,
+      "verified_total": 2203,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-rb": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.9416666666666667,
+      "covered_discovered": 0.9416666666666667,
+      "verified_false_ratio": 0.024242424242424242,
+      "verified_total": 2145,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-cd": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.85,
+      "covered_discovered": 0.85,
+      "verified_false_ratio": 0.10879419764279238,
+      "verified_total": 2206,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-x": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.7083333333333334,
+      "covered_discovered": 0.7083333333333334,
+      "verified_false_ratio": 0.2274066797642436,
+      "verified_total": 2036,
+      "best_usable_exact": 0.075
+    }
+  },
+  "stable_h": {
+    "metargon09": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.65,
+      "covered_discovered": 0.65,
+      "verified_false_ratio": 0.0,
+      "verified_total": 476,
+      "best_usable_exact": 0.0
+    },
+    "metargon10": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.7833333333333333,
+      "covered_discovered": 0.7833333333333333,
+      "verified_false_ratio": 0.047666335650446874,
+      "verified_total": 1007,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-rb": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.7833333333333333,
+      "covered_discovered": 0.7833333333333333,
+      "verified_false_ratio": 0.047666335650446874,
+      "verified_total": 1007,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-cd": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.7916666666666666,
+      "covered_discovered": 0.7916666666666666,
+      "verified_false_ratio": 0.04757185332011893,
+      "verified_total": 1009,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-x": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.875,
+      "covered_discovered": 0.875,
+      "verified_false_ratio": 0.07590759075907591,
+      "verified_total": 1212,
+      "best_usable_exact": 0.0
+    }
+  },
+  "novel_h": {
+    "metargon09": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.7083333333333334,
+      "covered_discovered": 0.7083333333333334,
+      "verified_false_ratio": 0.0,
+      "verified_total": 528,
+      "best_usable_exact": 0.0
+    },
+    "metargon10": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8083333333333333,
+      "covered_discovered": 0.8083333333333333,
+      "verified_false_ratio": 0.05005213764337852,
+      "verified_total": 959,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-rb": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8083333333333333,
+      "covered_discovered": 0.8083333333333333,
+      "verified_false_ratio": 0.05005213764337852,
+      "verified_total": 959,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-cd": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8166666666666667,
+      "covered_discovered": 0.8166666666666667,
+      "verified_false_ratio": 0.049740932642487044,
+      "verified_total": 965,
+      "best_usable_exact": 0.0
+    },
+    "metargon10-x": {
+      "doors_evaluated": 120,
+      "exact_discovered": 0.8416666666666667,
+      "covered_discovered": 0.8416666666666667,
+      "verified_false_ratio": 0.09162995594713656,
+      "verified_total": 1135,
+      "best_usable_exact": 0.0
+    }
+  }
+}

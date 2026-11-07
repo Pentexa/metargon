@@ -1,0 +1,3642 @@
+[
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 72,
+    "verified": 9,
+    "contradicted": 6,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 22,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 0,
+    "mem_size": 104,
+    "verified": 35,
+    "contradicted": 10,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 28,
+    "mem_size": 127,
+    "verified": 39,
+    "contradicted": 20,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 50,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 22,
+    "contradicted": 21,
+    "evictions": 28
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 27,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 34,
+    "contradicted": 6,
+    "evictions": 53
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 57,
+    "invalid": 0,
+    "first_event_step": 18,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 49,
+    "contradicted": 0,
+    "evictions": 118
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 48,
+    "contradicted": 0,
+    "evictions": 144
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 19,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 46,
+    "contradicted": 0,
+    "evictions": 172
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 55,
+    "invalid": 0,
+    "first_event_step": 32,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 46,
+    "contradicted": 7,
+    "evictions": 250
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 46,
+    "contradicted": 0,
+    "evictions": 299
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 50,
+    "contradicted": 7,
+    "evictions": 337
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 14,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 4,
+    "mem_size": 128,
+    "verified": 64,
+    "contradicted": 0,
+    "evictions": 413
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 128,
+    "verified": 72,
+    "contradicted": 0,
+    "evictions": 438
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 45,
+    "invalid": 0,
+    "first_event_step": 24,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 66,
+    "contradicted": 9,
+    "evictions": 488
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 69,
+    "contradicted": 4,
+    "evictions": 511
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 36,
+    "mem_size": 128,
+    "verified": 79,
+    "contradicted": 2,
+    "evictions": 557
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 16,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 60,
+    "mem_size": 128,
+    "verified": 83,
+    "contradicted": 0,
+    "evictions": 645
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 21,
+    "mem_size": 128,
+    "verified": 89,
+    "contradicted": 0,
+    "evictions": 700
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 84,
+    "contradicted": 4,
+    "evictions": 743
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 42,
+    "mem_size": 128,
+    "verified": 84,
+    "contradicted": 3,
+    "evictions": 770
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 33,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 86,
+    "contradicted": 2,
+    "evictions": 811
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 82,
+    "contradicted": 4,
+    "evictions": 850
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 86,
+    "contradicted": 2,
+    "evictions": 891
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 90,
+    "contradicted": 0,
+    "evictions": 943
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 87,
+    "contradicted": 0,
+    "evictions": 972
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 128,
+    "verified": 88,
+    "contradicted": 1,
+    "evictions": 1012
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 65,
+    "invalid": 0,
+    "first_event_step": 28,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 90,
+    "contradicted": 0,
+    "evictions": 1155
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 18,
+    "mem_size": 128,
+    "verified": 103,
+    "contradicted": 0,
+    "evictions": 1244
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 21,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 102,
+    "contradicted": 1,
+    "evictions": 1312
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 75,
+    "invalid": 0,
+    "first_event_step": 26,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 93,
+    "contradicted": 0,
+    "evictions": 1377
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 69,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 3,
+    "evictions": 1410
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 14,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 94,
+    "contradicted": 0,
+    "evictions": 1477
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 61,
+    "invalid": 0,
+    "first_event_step": 40,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 94,
+    "contradicted": 0,
+    "evictions": 1537
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 102,
+    "contradicted": 0,
+    "evictions": 1584
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 59,
+    "invalid": 0,
+    "first_event_step": 44,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 0,
+    "evictions": 1703
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 47,
+    "invalid": 0,
+    "first_event_step": 22,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 97,
+    "contradicted": 0,
+    "evictions": 1763
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 97,
+    "contradicted": 2,
+    "evictions": 1844
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 26,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 0,
+    "evictions": 1881
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 27,
+    "mem_size": 128,
+    "verified": 103,
+    "contradicted": 1,
+    "evictions": 1967
+  },
+  {
+    "seed": 0,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 18,
+    "mem_size": 128,
+    "verified": 109,
+    "contradicted": 0,
+    "evictions": 2020
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 45,
+    "mem_size": 77,
+    "verified": 7,
+    "contradicted": 16,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 97,
+    "verified": 10,
+    "contradicted": 17,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 27,
+    "mem_size": 120,
+    "verified": 16,
+    "contradicted": 17,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 28,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 25,
+    "contradicted": 7,
+    "evictions": 25
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 21,
+    "mem_size": 128,
+    "verified": 29,
+    "contradicted": 3,
+    "evictions": 43
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 27,
+    "mem_size": 128,
+    "verified": 35,
+    "contradicted": 0,
+    "evictions": 59
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 11,
+    "mem_size": 128,
+    "verified": 46,
+    "contradicted": 0,
+    "evictions": 103
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 36,
+    "mem_size": 128,
+    "verified": 50,
+    "contradicted": 0,
+    "evictions": 191
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 53,
+    "contradicted": 0,
+    "evictions": 274
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 28,
+    "mem_size": 128,
+    "verified": 68,
+    "contradicted": 0,
+    "evictions": 343
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 2,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 68,
+    "contradicted": 0,
+    "evictions": 395
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 26,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 80,
+    "contradicted": 0,
+    "evictions": 477
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 29,
+    "mem_size": 128,
+    "verified": 84,
+    "contradicted": 0,
+    "evictions": 557
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 11,
+    "mem_size": 128,
+    "verified": 87,
+    "contradicted": 0,
+    "evictions": 611
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 23,
+    "mem_size": 128,
+    "verified": 92,
+    "contradicted": 0,
+    "evictions": 648
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 44,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 1,
+    "evictions": 721
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 44,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 1,
+    "evictions": 759
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 11,
+    "mem_size": 128,
+    "verified": 97,
+    "contradicted": 0,
+    "evictions": 812
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 104,
+    "contradicted": 0,
+    "evictions": 872
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 12,
+    "mem_size": 128,
+    "verified": 106,
+    "contradicted": 0,
+    "evictions": 909
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 41,
+    "mem_size": 128,
+    "verified": 106,
+    "contradicted": 0,
+    "evictions": 963
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 1,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 1,
+    "evictions": 1005
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 24,
+    "mem_size": 128,
+    "verified": 99,
+    "contradicted": 0,
+    "evictions": 1054
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 77,
+    "invalid": 0,
+    "first_event_step": 56,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 89,
+    "contradicted": 1,
+    "evictions": 1133
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 47,
+    "mem_size": 128,
+    "verified": 93,
+    "contradicted": 1,
+    "evictions": 1178
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 54,
+    "mem_size": 128,
+    "verified": 98,
+    "contradicted": 0,
+    "evictions": 1322
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 98,
+    "contradicted": 0,
+    "evictions": 1351
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 17,
+    "mem_size": 128,
+    "verified": 98,
+    "contradicted": 0,
+    "evictions": 1390
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 99,
+    "contradicted": 0,
+    "evictions": 1464
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 70,
+    "invalid": 0,
+    "first_event_step": 24,
+    "n_events_D1": 3,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 98,
+    "contradicted": 0,
+    "evictions": 1562
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 53,
+    "invalid": 0,
+    "first_event_step": 18,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 88,
+    "contradicted": 18,
+    "evictions": 1623
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 72,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 9,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 88,
+    "contradicted": 8,
+    "evictions": 1678
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 14,
+    "mem_size": 128,
+    "verified": 86,
+    "contradicted": 4,
+    "evictions": 1708
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 70,
+    "mem_size": 128,
+    "verified": 93,
+    "contradicted": 0,
+    "evictions": 1753
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 47,
+    "invalid": 0,
+    "first_event_step": 26,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 94,
+    "contradicted": 0,
+    "evictions": 1819
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 15,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 0,
+    "evictions": 1844
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 97,
+    "contradicted": 1,
+    "evictions": 1889
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 31,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 104,
+    "contradicted": 0,
+    "evictions": 1946
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 16,
+    "mem_size": 128,
+    "verified": 105,
+    "contradicted": 0,
+    "evictions": 2012
+  },
+  {
+    "seed": 1,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 3,
+    "first_event_step": 20,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 26,
+    "mem_size": 128,
+    "verified": 105,
+    "contradicted": 0,
+    "evictions": 2060
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 13,
+    "mem_size": 71,
+    "verified": 6,
+    "contradicted": 10,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 13,
+    "mem_size": 97,
+    "verified": 15,
+    "contradicted": 10,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 18,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 30,
+    "mem_size": 120,
+    "verified": 33,
+    "contradicted": 24,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 125,
+    "verified": 40,
+    "contradicted": 24,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 32,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 39,
+    "mem_size": 128,
+    "verified": 44,
+    "contradicted": 11,
+    "evictions": 45
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 35,
+    "mem_size": 128,
+    "verified": 65,
+    "contradicted": 0,
+    "evictions": 83
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 22,
+    "mem_size": 128,
+    "verified": 71,
+    "contradicted": 0,
+    "evictions": 119
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 76,
+    "contradicted": 0,
+    "evictions": 190
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 83,
+    "contradicted": 0,
+    "evictions": 249
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 19,
+    "mem_size": 128,
+    "verified": 84,
+    "contradicted": 0,
+    "evictions": 291
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 84,
+    "contradicted": 0,
+    "evictions": 371
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 18,
+    "mem_size": 128,
+    "verified": 85,
+    "contradicted": 1,
+    "evictions": 417
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 14,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 30,
+    "mem_size": 128,
+    "verified": 87,
+    "contradicted": 0,
+    "evictions": 458
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 92,
+    "contradicted": 0,
+    "evictions": 531
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 42,
+    "mem_size": 128,
+    "verified": 92,
+    "contradicted": 0,
+    "evictions": 581
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 24,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 0,
+    "evictions": 629
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 14,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 36,
+    "mem_size": 128,
+    "verified": 91,
+    "contradicted": 0,
+    "evictions": 707
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 40,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 45,
+    "mem_size": 128,
+    "verified": 92,
+    "contradicted": 1,
+    "evictions": 733
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 92,
+    "contradicted": 0,
+    "evictions": 797
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 22,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 91,
+    "contradicted": 0,
+    "evictions": 901
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 92,
+    "contradicted": 0,
+    "evictions": 949
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 45,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 1,
+    "evictions": 990
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 5,
+    "mem_size": 128,
+    "verified": 97,
+    "contradicted": 0,
+    "evictions": 1055
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 45,
+    "mem_size": 128,
+    "verified": 101,
+    "contradicted": 0,
+    "evictions": 1101
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 2,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 34,
+    "mem_size": 128,
+    "verified": 106,
+    "contradicted": 0,
+    "evictions": 1259
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 20,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 30,
+    "mem_size": 128,
+    "verified": 105,
+    "contradicted": 0,
+    "evictions": 1332
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 107,
+    "contradicted": 0,
+    "evictions": 1362
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 28,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 108,
+    "contradicted": 0,
+    "evictions": 1460
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 26,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 100,
+    "contradicted": 6,
+    "evictions": 1562
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 47,
+    "invalid": 0,
+    "first_event_step": 14,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 105,
+    "contradicted": 0,
+    "evictions": 1610
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 108,
+    "contradicted": 0,
+    "evictions": 1683
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 37,
+    "mem_size": 128,
+    "verified": 109,
+    "contradicted": 0,
+    "evictions": 1746
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 27,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 105,
+    "contradicted": 4,
+    "evictions": 1784
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 43,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 105,
+    "contradicted": 0,
+    "evictions": 1852
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 25,
+    "mem_size": 128,
+    "verified": 107,
+    "contradicted": 0,
+    "evictions": 1908
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 12,
+    "mem_size": 128,
+    "verified": 107,
+    "contradicted": 0,
+    "evictions": 2031
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 47,
+    "mem_size": 128,
+    "verified": 107,
+    "contradicted": 0,
+    "evictions": 2089
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 29,
+    "mem_size": 128,
+    "verified": 106,
+    "contradicted": 0,
+    "evictions": 2167
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 43,
+    "mem_size": 128,
+    "verified": 108,
+    "contradicted": 0,
+    "evictions": 2221
+  },
+  {
+    "seed": 2,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 15,
+    "mem_size": 128,
+    "verified": 107,
+    "contradicted": 0,
+    "evictions": 2265
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 53,
+    "verified": 6,
+    "contradicted": 6,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 6,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 69,
+    "verified": 3,
+    "contradicted": 19,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 14,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 28,
+    "mem_size": 84,
+    "verified": 14,
+    "contradicted": 19,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 11,
+    "mem_size": 109,
+    "verified": 25,
+    "contradicted": 19,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 65,
+    "invalid": 0,
+    "first_event_step": 28,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 26,
+    "contradicted": 42,
+    "evictions": 8
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 75,
+    "invalid": 0,
+    "first_event_step": 26,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 40,
+    "contradicted": 34,
+    "evictions": 39
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 15,
+    "mem_size": 128,
+    "verified": 51,
+    "contradicted": 29,
+    "evictions": 53
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 35,
+    "mem_size": 128,
+    "verified": 37,
+    "contradicted": 25,
+    "evictions": 114
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 6,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 10,
+    "mem_size": 128,
+    "verified": 53,
+    "contradicted": 4,
+    "evictions": 150
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 58,
+    "contradicted": 0,
+    "evictions": 185
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 22,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 17,
+    "mem_size": 128,
+    "verified": 81,
+    "contradicted": 0,
+    "evictions": 246
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 6,
+    "n_events_D1": 4,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 37,
+    "mem_size": 128,
+    "verified": 73,
+    "contradicted": 0,
+    "evictions": 340
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 6,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 4,
+    "mem_size": 128,
+    "verified": 79,
+    "contradicted": 0,
+    "evictions": 404
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 69,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 63,
+    "contradicted": 10,
+    "evictions": 469
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 2,
+    "first_event_step": 10,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 68,
+    "contradicted": 0,
+    "evictions": 516
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 24,
+    "mem_size": 128,
+    "verified": 81,
+    "contradicted": 0,
+    "evictions": 572
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 42,
+    "mem_size": 128,
+    "verified": 82,
+    "contradicted": 3,
+    "evictions": 593
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 28,
+    "mem_size": 128,
+    "verified": 87,
+    "contradicted": 0,
+    "evictions": 655
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 22,
+    "n_events_D1": 1,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 9,
+    "mem_size": 128,
+    "verified": 81,
+    "contradicted": 17,
+    "evictions": 712
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 38,
+    "invalid": 1,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 79,
+    "contradicted": 16,
+    "evictions": 753
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 70,
+    "invalid": 1,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 76,
+    "contradicted": 0,
+    "evictions": 822
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 61,
+    "invalid": 0,
+    "first_event_step": 16,
+    "n_events_D1": 3,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 79,
+    "contradicted": 5,
+    "evictions": 849
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 85,
+    "contradicted": 0,
+    "evictions": 890
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 93,
+    "contradicted": 0,
+    "evictions": 940
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 4,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 8,
+    "mem_size": 128,
+    "verified": 90,
+    "contradicted": 0,
+    "evictions": 1084
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 16,
+    "n_events_D1": 3,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 84,
+    "contradicted": 0,
+    "evictions": 1183
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 32,
+    "mem_size": 128,
+    "verified": 90,
+    "contradicted": 0,
+    "evictions": 1273
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 4,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 20,
+    "mem_size": 128,
+    "verified": 86,
+    "contradicted": 0,
+    "evictions": 1389
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 6,
+    "mem_size": 128,
+    "verified": 90,
+    "contradicted": 0,
+    "evictions": 1462
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 6,
+    "n_events_D1": 3,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 94,
+    "contradicted": 2,
+    "evictions": 1569
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": 38,
+    "n_events_D1": 1,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 5,
+    "evictions": 1644
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 79,
+    "invalid": 2,
+    "first_event_step": 16,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 94,
+    "contradicted": 0,
+    "evictions": 1733
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 98,
+    "contradicted": 0,
+    "evictions": 1800
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 5,
+    "mem_size": 128,
+    "verified": 101,
+    "contradicted": 0,
+    "evictions": 1858
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 11,
+    "mem_size": 128,
+    "verified": 102,
+    "contradicted": 0,
+    "evictions": 1895
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 34,
+    "mem_size": 128,
+    "verified": 102,
+    "contradicted": 1,
+    "evictions": 1957
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 96,
+    "contradicted": 7,
+    "evictions": 2005
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 1,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 16,
+    "mem_size": 128,
+    "verified": 100,
+    "contradicted": 0,
+    "evictions": 2042
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 3,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 128,
+    "verified": 95,
+    "contradicted": 8,
+    "evictions": 2093
+  },
+  {
+    "seed": 3,
+    "condition": "noisy_obs",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 8,
+    "mem_size": 128,
+    "verified": 99,
+    "contradicted": 0,
+    "evictions": 2155
+  }
+]

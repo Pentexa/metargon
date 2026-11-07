@@ -1,0 +1,3562 @@
+[
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 0,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 15,
+    "contradicted": 22,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 10,
+    "contradicted": 28,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 8,
+    "contradicted": 33,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 29,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 6,
+    "contradicted": 35,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 0,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 3,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": true,
+    "steps": 27,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 0,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 1,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 1,
+    "condition": "novel",
+    "d1_true": [
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('load', 'P2', 'B')"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 9,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 0,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 23,
+    "verified": 0,
+    "contradicted": 2,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 23,
+    "verified": 15,
+    "contradicted": 2,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 9,
+    "contradicted": 32,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 6,
+    "contradicted": 37,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 3,
+    "n_events_D2": 3,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 31,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 2,
+    "n_events_D2": 2,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 43,
+    "verified": 4,
+    "contradicted": 39,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 62,
+    "invalid": 0,
+    "first_event_step": 15,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 49,
+    "verified": 2,
+    "contradicted": 41,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 44,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 49,
+    "verified": 2,
+    "contradicted": 46,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 46,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 41,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 43,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 37,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 43,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 51,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 2,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 35,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 48,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 50,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 53,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 2,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 35,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 55,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 42,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 55,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 55,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 45,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 55,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 29,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 3,
+    "contradicted": 55,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 45,
+    "invalid": 0,
+    "first_event_step": 5,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 2,
+    "contradicted": 56,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 39,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 2,
+    "contradicted": 56,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 3,
+    "n_events_D1": 2,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 34,
+    "mem_size": 58,
+    "verified": 2,
+    "contradicted": 56,
+    "evictions": 0
+  },
+  {
+    "seed": 2,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')"
+    ],
+    "d2_true": [
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 44,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 58,
+    "verified": 2,
+    "contradicted": 56,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 45,
+    "invalid": 0,
+    "first_event_step": 22,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 0,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 29,
+    "invalid": 0,
+    "first_event_step": 8,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 0,
+    "contradicted": 5,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 69,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 69,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 43,
+    "invalid": 0,
+    "first_event_step": 22,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 31,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 33,
+    "invalid": 0,
+    "first_event_step": 10,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 35,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": null,
+    "n_events_D1": 0,
+    "n_events_D2": 0,
+    "probe_timeout_marks": 68,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 27,
+    "invalid": 0,
+    "first_event_step": 4,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('loadany', 'P1')",
+      "('sw', 'S1', False)"
+    ],
+    "d2_true": [
+      "('loadany', 'P2')",
+      "('sw', 'S2', True)"
+    ],
+    "success": true,
+    "steps": 33,
+    "invalid": 0,
+    "first_event_step": 12,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 20,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 19,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 23,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 17,
+    "invalid": 0,
+    "first_event_step": 9,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 7,
+    "contradicted": 13,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 15,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 4,
+    "contradicted": 19,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 13,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 8,
+    "contradicted": 23,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 9,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 9,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 25,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": true,
+    "steps": 23,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 1,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 0,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  },
+  {
+    "seed": 3,
+    "condition": "novel",
+    "d1_true": [
+      "('load', 'P1', 'A')",
+      "('sw', 'S1', True)"
+    ],
+    "d2_true": [
+      "('sw', 'S1', True)",
+      "('sw', 'S2', False)"
+    ],
+    "success": false,
+    "steps": 80,
+    "invalid": 0,
+    "first_event_step": 7,
+    "n_events_D1": 0,
+    "n_events_D2": 1,
+    "probe_timeout_marks": 27,
+    "mem_size": 31,
+    "verified": 6,
+    "contradicted": 25,
+    "evictions": 0
+  }
+]
