@@ -31,7 +31,7 @@ fn main() {
     let q = mem.query(outcome);
     println!("after 3 supporting events: {} usable hypotheses", q.len());
     let verified = q.iter().filter(|h| h.status == Status::Verified).count();
-    println!("verified hypotheses: {}", verified);
+    println!("verified hypotheses: {verified}");
     let (size, evictions, generated, _) = mem.diagnostics();
-    println!("memory size={} generated={} evictions={}", size, generated, evictions);
+    println!("memory size={size} generated={generated} evictions={evictions}");
 }

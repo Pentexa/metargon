@@ -1,0 +1,95 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  # ------------------------------------------------------------------
+  # Repository-wide hygiene: merge markers, doc links, Python compile
+  # ------------------------------------------------------------------
+  repo-checks:
+    name: Repo hygiene
+    runs-on: ubuntu-latest
+    env:
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Hygiene checks
+        run: python scripts/check_repo.py
+
+  # ------------------------------------------------------------------
+  # Historical / v0.9 Python suite (python/)
+  # ------------------------------------------------------------------
+  python-v09:
+    name: Python v0.9 + historical suite
+    runs-on: ubuntu-latest
+    env:
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run unittest suite (python/)
+        working-directory: python
+        run: python -m unittest discover -s . -v
+        timeout-minutes: 90
+
+  # ------------------------------------------------------------------
+  # Academy v0.1 suite + CLI smoke
+  # ------------------------------------------------------------------
+  academy:
+    name: Academy (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    env:
+      PYTHONHASHSEED: "0"
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.11", "3.12"]
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Run Academy unit tests
+        run: python -m unittest discover -s academy/tests -v
+        timeout-minutes: 40
+      - name: Academy CLI smoke (README quick start)
+        run: python -m academy.cli.main smoke
+        timeout-minutes: 15
+
+  # ------------------------------------------------------------------
+  # Rust research kernel + Academy kernel (pinned toolchain 1.88.0)
+  # ------------------------------------------------------------------
+  rust:
+    name: Rust crates
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: 1.88.0
+          components: clippy
+      - name: Build & test metargon-core
+        working-directory: rust
+        run: |
+          cargo test --locked
+          cargo clippy --locked --all-targets -- -D warnings
+      - name: Build & test metargon-academy-kernel
+        working-directory: rust_academy
+        run: |
+          cargo test --locked
+          cargo clippy --locked --all-targets -- -D warnings

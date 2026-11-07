@@ -110,9 +110,10 @@ impl Default for HypothesisMemory {
 impl HypothesisMemory {
     /// Create with a custom capacity.
     pub fn with_capacity(cap: usize) -> Self {
-        let mut m = Self::default();
-        m.max_hypotheses = cap;
-        m
+        Self {
+            max_hypotheses: cap,
+            ..Self::default()
+        }
     }
 
     /// Current number of stored hypotheses.
@@ -215,23 +216,23 @@ impl HypothesisMemory {
     }
 
     fn support(&mut self, idx: usize) {
-        let h = &mut self.hypotheses[idx];
-        h.sup += 1;
-        h.last_update = self.step;
-        self.continuous_true.remove(&h.id);
-        let i = idx;
-        drop(h);
-        self.recompute_status(i);
+        {
+            let h = &mut self.hypotheses[idx];
+            h.sup += 1;
+            h.last_update = self.step;
+            self.continuous_true.remove(&h.id);
+        }
+        self.recompute_status(idx);
     }
 
     fn contradict(&mut self, idx: usize) {
-        let h = &mut self.hypotheses[idx];
-        h.con += 1;
-        h.last_update = self.step;
-        self.continuous_true.remove(&h.id);
-        let i = idx;
-        drop(h);
-        self.recompute_status(i);
+        {
+            let h = &mut self.hypotheses[idx];
+            h.con += 1;
+            h.last_update = self.step;
+            self.continuous_true.remove(&h.id);
+        }
+        self.recompute_status(idx);
     }
 
     /// Simple candidate generation from an atom set (bounded, like Python).

@@ -243,7 +243,10 @@ class QLearningPolicy:
         self.epsilon = state["epsilon"]
         self.Q = {}
         for row in state["Q"]:
-            sig = tuple(tuple(x) for x in row[:-2])
+            # save_state rows are [sig, [action], value] (3 elements).
+            # The signature is the first element; reconstructing keys from
+            # the tail must not wrap the signature in an extra tuple.
+            sig = tuple(row[0])
             action = row[-2][0]
             value = row[-1]
             self.Q[(sig, action)] = value
