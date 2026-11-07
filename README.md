@@ -1,78 +1,12 @@
-<<<<<<< HEAD
-# METARGON v0.9 — Compositional World Models & Out-of-Distribution Transfer
-
-> *Intelligence is not just predicting a result. It is adapting when the world changes — and reusing what it learned in worlds it has never seen.*
-=======
 <div align="center">
 
 <img src="images/banner.png" alt="METARGON banner" width="100%" />
->>>>>>> origin/main
+
+<img src="images/logomet.png" alt="METARGON logo" width="120" />
 
 # 🐦‍⬛ METARGON
 
-<<<<<<< HEAD
-**Status:** Exploratory *synthetic* research. No crow-brain replication, new neural architecture, physical-energy reduction, artificial general intelligence, or state-of-the-art claim has been demonstrated. v0.9 tests whether a bounded agent can learn reusable object–action–outcome relationships and apply them in unseen configurations. Full comparison, including any negative results, is in `docs/RESEARCH_V09.md` and `results/v09/`.
-
-## What v0.9 adds
-
-- **Independently written "Mechanism Lab" environment** (`python/lab_env.py`): 7×5 grid, two movable objects, two pressure plates, two switches, two door barriers, optional delayed effects and a noisy observation channel. Hidden wiring is sampled from a declared generative family (all configs verified solvable); training/validation/held-out test pools are disjoint.
-- **Compositional causal memory** (`python/compositional_memory.py`, `rust/src/v09.rs`): bounded hypothesis store with explicit hypothesis → predicted → verified → contradicted lifecycle and deterministic eviction.
-- **Adaptive bounded planner** (`python/metargon_v09.py`): retrieves hypotheses, probes interventions, protects load-bearing atoms, and follows plans until invalidated by a door event.
-- **Strong comparisons** (`python/baselines_v09.py`): random, episodic memory, tabular Q-learning, a model-based Bayesian particle-filter planner, and a labeled privileged oracle (excluded from deployable rankings).
-- **Measured resource usage**: CPU time, peak memory, planner operations per decision, memory budget. Energy is unmeasured.
-
-## Core benchmark (v0.9, 8 paired seeds × 100 episodes × 7 conditions)
-
-| Condition | METARGON | Bayes | Random | Oracle |
-|---|---:|---:|---:|---:|
-| stable | 35.1% | 77.5% | 0.3% | 100.0% |
-| shift | 46.4% | 80.6% | 0.6% | 100.0% |
-| rapid_shift | 40.8% | 76.9% | 0.5% | 91.3% |
-| iid | 53.6% | 79.0% | 0.4% | 78.9% |
-| novel (held-out) | 31.3% | 78.5% | 0.6% | 93.8% |
-| noisy_obs | 33.8% | 73.1% | 0.3% | 98.4% |
-| tight_budget | 45.0% | 64.9% | 0.0% | 100.0% |
-
-METARGON clearly beats model-free baselines (random/episodic/Q-learning ~0–1%)
-and transfers mechanism knowledge to unseen configurations, **but does not
-outperform the strong model-based Bayesian planner** (given the declarative
-family). This is a negative result for closing the gap to a family-knowing
-model via hypothesis composition alone. Full table, bootstrap intervals and
-resource measurements: `results/v09/benchmark_table.md`, `docs/RESEARCH_V09.md`.
-
-## Run now — no model download or GPU
-
-Requires **Python 3.10+** and the Python standard library only. Run commands from the project root:
-
-```bash
-python3 -m unittest discover -s python -v
-python3 python/benchmark_v09.py --seeds 30 --episodes 160 --parallel --workers 6 --json results/v09/summary.json
-python3 python/v09_postprocess.py results/v09/summary.json
-```
-
-Rust research kernel (crate `metargon-core` v0.9.0, `#![forbid(unsafe_code)]`):
-
-```bash
-cd rust
-cargo +1.88.0 test
-```
-
----
-
-# METARGON v0.8 — Learning a Changing World (historical)
-
-> *Intelligence is not just predicting a result. It is adapting when the world changes.*
-
-The v0.8 release and its benchmark are preserved below and in `docs/RESEARCH_V08.md`. Its headline negative result — the surprise-adaptive controller trailing the Bayesian baseline under tight budgets — motivated the v0.9 compositional approach.
-=======
-### Learning a changing world.
->>>>>>> origin/main
-
 **A crow-inspired research project exploring how compact agents learn hidden rules, remember evidence, plan actions, and adapt when the environment changes.**
-
-<p align="center">
-  <img src="images/logomet.png" alt="METARGON logo" width="120" />
-</p>
 
 [![Status](https://img.shields.io/badge/status-experimental-7c3aed?style=flat-square)](#research-status)
 [![Python](https://img.shields.io/badge/Python-3.10%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
@@ -80,7 +14,7 @@ The v0.8 release and its benchmark are preserved below and in `docs/RESEARCH_V08
 [![License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](#license)
 [![Research](https://img.shields.io/badge/research-reproducibility%20first-111827?style=flat-square)](#research-principles)
 
-**[Overview](#why-metargon) · [Architecture](#architecture) · [Experiments](#experimental-results) · [Quick start](#quick-start) · [Roadmap](#research-roadmap)**
+**[Overview](#why-metargon) · [The story so far](#the-story-so-far) · [Architecture](#architecture) · [Experiments](#experimental-results) · [Quick start](#quick-start) · [Roadmap](#research-roadmap)**
 
 </div>
 
@@ -96,19 +30,97 @@ METARGON studies that question with **bounded memory, explicit hypotheses, actio
 
 It is **not** a crow-brain simulation, a foundation model, or a demonstrated AGI system.
 
-## What is being explored?
+---
 
-| Research area | Approach |
-|:---|:---|
-| **Hidden-rule discovery** | Infer task mechanics from observations and action outcomes without reading simulator secrets |
-| **Adaptive behavior** | Update beliefs when a rule fails or the environment changes |
-| **Compositional memory** | Store bounded, evidence-backed hypotheses that can inform later decisions |
-| **Planning** | Combine known public dynamics with inferred hidden mechanisms |
-| **Curriculum learning** | Measure progress and select tasks for further learning |
-| **Controlled evaluation** | Use fixed splits, matched seeds, baselines, ablations, and out-of-distribution tests |
-| **AI-assisted teaching (experimental)** | Generate candidate tasks using a provider adapter, then validate and isolate them before use |
+## The story so far
 
-The **Academy v0.1** system and **EVREN teacher integration** described below are development-stage work based on local agent reports. Their results are not yet independently verified or guaranteed to be present on the default branch.
+The project grew from a series of small, falsifiable experiments. Each version asks a sharper question and keeps the full history for provenance.
+
+### CORVID v0.1–v0.7 — early questions (historical)
+
+Under its original name **CORVID**, the project built a sequence of bounded-memory experiments:
+
+| Version | Research question |
+|:---|---|
+| v0.1 | Active perception: when is an extra observation worth its cost? |
+| v0.2 | Selective attention and bounded working memory |
+| v0.3 | Active causal probing under sparse, delayed feedback |
+| v0.4 | Learned sensor reliability without quality labels |
+| v0.5 | Sparse and delayed feedback with verified outcomes |
+| v0.6 | Bounded verified-feedback memory for diagnostics |
+| v0.7 | Lightweight predictive world models |
+
+These experiments are preserved under their original filenames in `python/`, `rust/` and `docs/`.
+
+### METARGON v0.8 — Learning a Changing World
+
+The project was renamed **METARGON** at v0.8, which introduced an independently specified **stateful five-position workshop**: a key, a switch, a gate whose hidden mechanism can change mid-run, and noisy outcomes.
+
+- **Headline result (negative):** the more complex surprise-adaptive controller **underperformed a strong fixed-hazard Bayesian baseline** by 3.56 percentage points under a tight action budget (85.24% vs 88.79%).
+- Full preservation: `docs/RESEARCH_V08.md`, `results/stateful_transfer_30seeds.json`.
+
+### METARGON v0.9 — Compositional World Models & Out-of-Distribution Transfer
+
+v0.9 asks whether a resource-constrained agent can **learn reusable object–action–outcome relationships** and apply them in previously unseen configurations — without being given the hidden wiring.
+
+- **Independent environment:** the "Mechanism Lab" — a 7×5 grid with two movable objects, two pressure plates, two switches, two door barriers, optional delayed effects, and a noisy observation channel. All configurations are verified solvable; training/validation/held-out test pools are disjoint.
+- **Compositional causal memory:** bounded hypotheses with an explicit hypothesis → predicted → verified → contradicted lifecycle and deterministic eviction (`python/compositional_memory.py`, `rust/src/v09.rs`).
+- **Adaptive bounded planner:** retrieves hypotheses, probes interventions, protects load-bearing atoms, and follows plans until invalidated by a door event (`python/metargon_v09.py`).
+- **Strong comparisons:** random, episodic memory, tabular Q-learning, a model-based Bayesian particle-filter planner, and a labeled privileged oracle excluded from deployable rankings.
+- **Headline result (negative):** METARGON clearly beats model-free baselines and transfers mechanism knowledge to held-out configurations, **but does not outperform the family-knowing Bayesian planner** (see the results table below).
+
+### Academy v0.1 + EVREN teacher integration (development)
+
+A separate development layer adds a **student/curriculum system** and an **optional AI-assisted task-generation teacher** (EVREN): the teacher proposes *tasks*, not privileged answers; candidates must pass validation, solvability, duplicate, and contamination checks before entering training.
+
+- Academy v0.1 and EVREN are **development-stage work based on local agent reports**; their results are not yet independently verified.
+- See `academy/`, `rust_academy/`, `configs/academy_v01.toml`, `docs/ACADEMY_*`, `docs/EVREN_*`.
+
+---
+
+## Experimental results
+
+### v0.9 — mechanism lab (8 paired seeds × 100 episodes × 7 conditions)
+
+| Condition | METARGON | Bayes | Random | Oracle |
+|---|---:|---:|---:|---:|
+| stable | 35.1% | 77.5% | 0.3% | 100.0% |
+| shift | 46.4% | 80.6% | 0.6% | 100.0% |
+| rapid_shift | 40.8% | 76.9% | 0.5% | 91.3% |
+| iid | 53.6% | 79.0% | 0.4% | 78.9% |
+| novel (held-out) | 31.3% | 78.5% | 0.6% | 93.8% |
+| noisy_obs | 33.8% | 73.1% | 0.3% | 98.4% |
+| tight_budget | 45.0% | 64.9% | 0.0% | 100.0% |
+
+METARGON clearly beats model-free baselines (random/episodic/Q-learning ~0–1%) and transfers mechanism knowledge to unseen configurations, **but does not outperform the strong model-based Bayesian planner** (given the declarative family). This is a negative result for closing the gap to a family-knowing model via hypothesis composition alone. Full table, bootstrap intervals and resource measurements: `results/v09/benchmark_table.md`, `docs/RESEARCH_V09.md`.
+
+### v0.8 — preserved historical result (30 matched seeds × 240 episodes, tight budget)
+
+| Policy | Success |
+|:---|---:|
+| Privileged mechanism-aware comparator | 92.88% |
+| Fixed-hazard Bayesian baseline | **88.79%** |
+| METARGON surprise-adaptive controller | 85.24% |
+| Win-stay / lose-switch | 85.24% |
+| Random first mechanism | 49.24% |
+
+**Negative result worth keeping:** in this condition, the more complex METARGON controller **underperformed the Bayesian baseline by 3.56 percentage points**. The v0.8 study does not establish a general advantage for METARGON. Read the full experiment: [`docs/RESEARCH_V08.md`](docs/RESEARCH_V08.md).
+
+### Academy v0.1 — preliminary local results (agent-reported, not independently rerun)
+
+**Held-out test:** 6 seeds × 40 episodes per policy.
+
+| Policy | Held-out test success | OOD success |
+|:---|---:|---:|
+| Privileged oracle | 100.0% | 100.0% |
+| **METARGON** | **50.0%** | **50.0%** |
+| Model-based Bayesian baseline | 27.5% | 20.8% |
+| Q-learning | 23.3% | 0.0% |
+| Random | 3.3% | 1.3% |
+
+> **Different experimental worlds, different protocols:** v0.8, v0.9 and Academy v0.1 percentages are **not directly comparable**. No measurements here establish real-world robotics performance, AGI, or physical energy savings.
+
+---
 
 ## Architecture
 
@@ -131,64 +143,41 @@ flowchart TD
 ### Project structure
 
 ```text
-python/                  Historical experiments and v0.8 simulator
-rust/                    Bounded Rust research components
+python/                  Historical experiments, v0.8 workshop, v0.9 lab and benchmark
+rust/                    Bounded Rust research components (v0.2–v0.9 kernels)
 docs/                    Research protocols, results, and limitations
-results/                 Recorded experimental artifacts
+results/                 Recorded experimental artifacts (v0.1–v0.9)
 
-academy/                 Academy v0.1 student, environments, evaluations*
-academy/evren/           Optional EVREN task-generation integration*
-configs/                 Experiment configuration*
+academy/                 Academy v0.1 student, environments, evaluations
+academy/evren/           Optional EVREN task-generation integration
+configs/                 Experiment configuration
+rust_academy/            Bounded Rust kernel for Academy
 ```
 
-\* Academy and EVREN paths are **under active integration** and may exist only in local development branches until published. This README intentionally does not imply that an unreleased branch has already been merged.
-
-## Experimental results
-
-### Academy v0.1 — preliminary local results
-
-The development report describes a **7 × 5 mechanism grid** with hidden gate rules, noisy or delayed feedback, distinct task splits, and comparison policies. Results below are **agent-reported preliminary numbers**, not independently rerun here.
-
-**Held-out test:** 6 seeds × 40 episodes per policy.
-
-| Policy | Held-out test success | OOD success |
-|:---|---:|---:|
-| Privileged oracle | 100.0% | 100.0% |
-| **METARGON** | **50.0%** | **50.0%** |
-| Model-based Bayesian baseline | 27.5% | 20.8% |
-| Q-learning | 23.3% | 0.0% |
-| Random | 3.3% | 1.3% |
-
-**Important context:** The oracle has access to privileged simulator information. In the reported training run, METARGON's success was 26.3%, and **replay did not improve performance** relative to the no-replay ablation. Distribution and evaluator effects require independent checking before drawing stronger conclusions about learning or generalization.
-
-The EVREN offline pilot reportedly accepted **10 of 27** generated tasks after validation. Its baseline-vs-teacher comparison **has not demonstrated a teacher advantage**: both conditions reported 66.7% on held-out teacher tasks, with 0.0% classic-pool transfer in that specific experiment. An authenticated online EVREN pilot remains to be run.
-
-### v0.8 — preserved historical result
-
-The earlier stateful workshop experiment measured **30 matched seeds × 240 episodes** under a tight action budget:
-
-| Policy | Success |
-|:---|---:|
-| Privileged mechanism-aware comparator | 92.88% |
-| Fixed-hazard Bayesian baseline | **88.79%** |
-| METARGON surprise-adaptive controller | 85.24% |
-| Win-stay / lose-switch | 85.24% |
-| Random first mechanism | 49.24% |
-
-**Negative result worth keeping:** in this condition, the more complex METARGON controller **underperformed the Bayesian baseline by 3.56 percentage points**. The v0.8 study does not establish a general advantage for METARGON. Read the full experiment: [`docs/RESEARCH_V08.md`](docs/RESEARCH_V08.md).
-
-> **Different experimental worlds, different protocols:** v0.8 and Academy v0.1 percentages are **not directly comparable**. No measurements here establish real-world robotics performance, AGI, or physical energy savings.
+---
 
 ## Quick start
 
-### Run the historical v0.8 demo
+Requires **Python 3.10+** and the Python standard library only. Run commands from the project root.
 
-The previously documented v0.8 Python path requires **Python 3.10+** and only the standard library.
+### v0.9 — mechanism lab benchmark and tests
 
 ```bash
-git clone https://github.com/Pentexa/metargon.git
-cd metargon
+python3 -m unittest discover -s python -v
+python3 python/benchmark_v09.py --seeds 8 --episodes 100 --parallel --workers 6 --no-mem --json results/v09/summary.json
+python3 python/v09_postprocess.py results/v09/summary.json
+```
 
+Rust research kernel (crate `metargon-core` v0.9.0, `#![forbid(unsafe_code)]`):
+
+```bash
+cd rust
+cargo +1.88.0 test
+```
+
+### v0.8 — historical workshop demo
+
+```bash
 python3 python/metargon_demo.py
 python3 -m unittest discover -s python -v
 ```
@@ -196,14 +185,10 @@ python3 -m unittest discover -s python -v
 For the original recorded experiment:
 
 ```bash
-python3 python/metargon_world.py \
-  --seeds 30 --episodes 240 \
-  --json results/stateful_transfer_30seeds.json
+python3 python/metargon_world.py --seeds 30 --episodes 240 --json results/stateful_transfer_30seeds.json
 ```
 
-### Academy v0.1 (development branch, when published)
-
-The agent reports these CLI entry points in its development branch:
+### Academy v0.1 (development)
 
 ```bash
 python -m unittest discover -s academy/tests
@@ -213,16 +198,15 @@ python -m academy.cli.main eval
 python -m academy.cli.main ood
 ```
 
-For the optional EVREN teacher integration:
+Optional EVREN teacher integration (requires a locally configured `EVREN_API_KEY`; never commit secrets):
 
 ```bash
-# Requires a locally configured EVREN_API_KEY; do not commit secrets.
 python -m academy.cli.main evren-smoke
 python -m academy.cli.main evren-pilot
 python -m academy.cli.main evren-status
 ```
 
-These commands are **development documentation**, not a guarantee that they work on the current remote default branch. Consult `configs/academy_v01.toml` and the branch-specific documentation once Academy is published. The reports describe a conservative API quota guard and an offline fallback.
+---
 
 ## Research principles
 
@@ -237,6 +221,7 @@ These commands are **development documentation**, not a guarantee that they work
 
 - [x] Preserve earlier CORVID experiments and research history
 - [x] Build a stateful hidden-rule workshop (v0.8)
+- [x] Build an independent compositional-mechanism environment (v0.9)
 - [x] Implement Academy v0.1 and local baseline studies *(reported; integration in progress)*
 - [x] Implement optional EVREN candidate-task pipeline *(reported; online validation pending)*
 - [ ] Independently verify the integrated Academy results
