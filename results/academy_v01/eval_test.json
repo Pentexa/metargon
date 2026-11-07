@@ -1,0 +1,10268 @@
+{
+ "kind": "test",
+ "n_seeds": 6,
+ "results": {
+  "metargon_full": {
+   "policy": "metargon_full",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 0.5,
+    "success_std": 0.5,
+    "mean_steps": 46.5,
+    "ci": [
+     0.4375,
+     0.5625
+    ],
+    "successes": 120
+   },
+   "per_seed": [
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    }
+   ]
+  },
+  "metargon_noreplay": {
+   "policy": "metargon_full",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 0.5,
+    "success_std": 0.5,
+    "mean_steps": 46.5,
+    "ci": [
+     0.4375,
+     0.5625
+    ],
+    "successes": 120
+   },
+   "per_seed": [
+    1.0,
+    1.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 19,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    }
+   ]
+  },
+  "random": {
+   "policy": "random",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 0.03333333333333333,
+    "success_std": 0.17950549357115014,
+    "mean_steps": 78.9,
+    "ci": [
+     0.0125,
+     0.05416666666666667
+    ],
+    "successes": 8
+   },
+   "per_seed": [
+    0.125,
+    0.0,
+    0.0,
+    0.075,
+    0.0,
+    0.0
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 36,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 72,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 72,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 34,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 9,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 26,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 46,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 64,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 9,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 26,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    }
+   ]
+  },
+  "episodic": {
+   "policy": "episodic",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 0.0375,
+    "success_std": 0.1899835519196333,
+    "mean_steps": 78.60416666666667,
+    "ci": [
+     0.016666666666666666,
+     0.0625
+    ],
+    "successes": 9
+   },
+   "per_seed": [
+    0.15,
+    0.0,
+    0.0,
+    0.075,
+    0.0,
+    0.0
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 36,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 72,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 21,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 29,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 32,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 9,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 56,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 46,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 64,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 9,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 29,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    }
+   ]
+  },
+  "qlearning": {
+   "policy": "qlearning",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 0.23333333333333334,
+    "success_std": 0.4229525846816507,
+    "mean_steps": 64.83333333333333,
+    "ci": [
+     0.17916666666666667,
+     0.2833333333333333
+    ],
+    "successes": 56
+   },
+   "per_seed": [
+    0.7,
+    0.0,
+    0.0,
+    0.7,
+    0.0,
+    0.0
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 38,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 50,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 26,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 38,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 50,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 26,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 12,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    }
+   ]
+  },
+  "bayes": {
+   "policy": "bayes",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 0.275,
+    "success_std": 0.4465142774872938,
+    "mean_steps": 69.35833333333333,
+    "ci": [
+     0.21666666666666667,
+     0.32916666666666666
+    ],
+    "successes": 66
+   },
+   "per_seed": [
+    0.75,
+    0.125,
+    0.025,
+    0.725,
+    0.0,
+    0.025
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 62,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 58,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 44,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 32,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 34,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 32,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 64,
+     "door_events": 6,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 28,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 32,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 28,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 54,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 68,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 44,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 60,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 44,
+     "door_events": 6,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 16,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 34,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 32,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 40,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 16,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 36,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 54,
+     "door_events": 4,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 28,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 27,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 61,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 9,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 45,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 8,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 10,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 45,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 59,
+     "door_events": 6,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 13,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 58,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108002
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 49,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 75,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 65,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 30,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 14,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 33,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 18,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 73,
+     "door_events": 8,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 64,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 77,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 8,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 41,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 42,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 21,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 77,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 37,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 26,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 68,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 16,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 34,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 32,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 43,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 16,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 79,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 16,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 54,
+     "door_events": 10,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 36,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 77,
+     "door_events": 4,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 76,
+     "door_events": 6,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108003
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 8,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 7,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 5,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108004
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 80,
+     "door_events": 6,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 9,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 10,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 3,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 1,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 0,
+     "seed": 20261108005
+    },
+    {
+     "success": false,
+     "steps": 80,
+     "door_events": 4,
+     "seed": 20261108005
+    }
+   ]
+  },
+  "oracle": {
+   "policy": "oracle",
+   "pool_tag": "test",
+   "n_seeds": 6,
+   "summary": {
+    "n": 240,
+    "success_rate": 1.0,
+    "success_std": 0.0,
+    "mean_steps": 16.5,
+    "ci": [
+     1.0,
+     1.0
+    ],
+    "successes": 240
+   },
+   "per_seed": [
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0,
+    1.0
+   ],
+   "records": [
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108000
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 17,
+     "door_events": 2,
+     "seed": 20261108001
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108002
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 10,
+     "door_events": 2,
+     "seed": 20261108003
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 20,
+     "door_events": 2,
+     "seed": 20261108004
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    },
+    {
+     "success": true,
+     "steps": 22,
+     "door_events": 2,
+     "seed": 20261108005
+    }
+   ]
+  }
+ }
+}

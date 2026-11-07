@@ -1,0 +1,56 @@
+{
+ "policy": "random",
+ "episodes": 8,
+ "success_rate": 0.0,
+ "curve": [
+  {
+   "episode": 0,
+   "success": false,
+   "steps": 80,
+   "door_events": 6
+  },
+  {
+   "episode": 1,
+   "success": false,
+   "steps": 80,
+   "door_events": 1
+  },
+  {
+   "episode": 2,
+   "success": false,
+   "steps": 80,
+   "door_events": 3
+  },
+  {
+   "episode": 3,
+   "success": false,
+   "steps": 80,
+   "door_events": 6
+  },
+  {
+   "episode": 4,
+   "success": false,
+   "steps": 80,
+   "door_events": 2
+  },
+  {
+   "episode": 5,
+   "success": false,
+   "steps": 80,
+   "door_events": 1
+  },
+  {
+   "episode": 6,
+   "success": false,
+   "steps": 80,
+   "door_events": 1
+  },
+  {
+   "episode": 7,
+   "success": false,
+   "steps": 80,
+   "door_events": 2
+  }
+ ],
+ "wall_s": 0.06555870000011055
+}

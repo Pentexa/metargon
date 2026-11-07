@@ -182,15 +182,64 @@ def benchmark(seeds: int = 30, episodes: int = 240) -> dict:
     }
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--seeds", type=int, default=30)
-    parser.add_argument("--episodes", type=int, default=240)
-    parser.add_argument("--json", type=Path, default=None)
-    args = parser.parse_args()
-    t0 = time.perf_counter()
-    result = benchmark(args.seeds, args.episodes)
-    print(f"METARGON v0.9 — mechanism lab evaluation (wall {time.perf_counter() - t0:.1f}s)")
+def _score_one(args):
+    """Top-level worker for ProcessPoolExecutor (picklable)."""
+    condition, seed, episodes = args
+    row = {p: score_policy(condition, seed, p, episodes) for p in POLICIES}
+    return condition, seed, row
+
+
+def benchmark_parallel(seeds: int = 30, episodes: int = 240,
+                       workers: int | None = None) -> dict:
+    """Like benchmark(), but parallelized across (condition, seed) pairs.
+    Produces the identical result structure. Windows spawn requires the
+    worker to be a top-level function."""
+    import concurrent.futures
+    tasks = [(cond, i + 11800, episodes) for cond in CONDITIONS
+             for i in range(seeds)]
+    scores = {cond: [None] * seeds for cond in CONDITIONS}
+    with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as ex:
+        for cond, seed, row in ex.map(_score_one, tasks):
+            scores[cond][seed - 11800] = row
+    summary = {}
+    for condition in CONDITIONS:
+        per_seed = scores[condition]
+        summary[condition] = {}
+        for p in POLICIES:
+            summary[condition][p] = {
+                k: statistics.fmean(row[p][k] for row in per_seed)
+                for k in ("success_rate", "first_half_success", "second_half_success",
+                          "mean_steps", "cpu_s")
+            }
+            summary[condition][p]["peak_mem_mb"] = (
+                statistics.fmean(row[p]["peak_mem_bytes"] for row in per_seed) / 1e6)
+        for a, b in (("metargon", "bayes"), ("metargon", "qlearning"),
+                     ("metargon", "episodic"), ("bayes", "qlearning")):
+            succ_delta = [row[a]["success_rate"] - row[b]["success_rate"]
+                          for row in per_seed]
+            summary[condition][f"comparison:{a}_minus_{b}"] = {
+                "success_delta": statistics.fmean(succ_delta),
+                "paired_bootstrap_95pct": paired_bootstrap(succ_delta),
+            }
+    return {
+        "metadata": {
+            "name": "METARGON", "version": "0.9",
+            "seeds": seeds, "episodes_per_seed": episodes,
+            "conditions": list(CONDITIONS),
+            "policies": list(POLICIES),
+            "deployable_ranking": list(DEPLOYABLE),
+            "same_pre_generated_worlds": True,
+            "oracle_has_hidden_config": True,
+            "env": "Mechanism Lab (lab_env.py)",
+            "parallel": True, "workers": workers,
+        },
+        "summary": summary,
+        "raw": scores,
+    }
+
+
+def _print_result(result, wall_s):
+    print(f"METARGON v0.9 — mechanism lab evaluation (wall {wall_s:.1f}s)")
     for scenario, row in result["summary"].items():
         print(f"\n{scenario}:")
         for name in DEPLOYABLE + ("oracle",):
@@ -203,6 +252,22 @@ def main():
             if key.startswith("comparison:"):
                 print(f"  {key}: delta {c['success_delta']*100:+.2f}pp "
                       f"CI {tuple(round(x*100, 2) for x in c['paired_bootstrap_95pct'])}")
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--seeds", type=int, default=30)
+    parser.add_argument("--episodes", type=int, default=240)
+    parser.add_argument("--json", type=Path, default=None)
+    parser.add_argument("--parallel", action="store_true")
+    parser.add_argument("--workers", type=int, default=None)
+    args = parser.parse_args()
+    t0 = time.perf_counter()
+    if args.parallel:
+        result = benchmark_parallel(args.seeds, args.episodes, args.workers)
+    else:
+        result = benchmark(args.seeds, args.episodes)
+    _print_result(result, time.perf_counter() - t0)
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(json.dumps(result, indent=2) + "\n", encoding="utf-8")

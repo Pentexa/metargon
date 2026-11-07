@@ -1,0 +1,1 @@
+"""Academy test suite."""

@@ -1,0 +1,8 @@
+policy,state_bytes
+bayes,871699
+episodic,18330
+metargon_full,145657
+metargon_noreplay,147045
+oracle,9929
+qlearning,152169
+random,9923
