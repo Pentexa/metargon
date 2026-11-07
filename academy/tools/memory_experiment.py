@@ -139,7 +139,7 @@ def _run_variant(name, splits, stream, substrate, eval_seed, max_steps,
 
 def run_memory_experiment(splits=None, episodes=160, seed=20261107,
                           max_steps=80, variants=None, results_dir=None,
-                          eval_cfg=None, verbose=True):
+                          eval_cfg=None, verbose=True, append_path=None):
     splits = splits or load_splits(DEFAULT_SPLITS_PATH)
     results_dir = results_dir or os.path.join(
         os.path.dirname(os.path.dirname(os.path.dirname(
@@ -195,8 +195,13 @@ def run_memory_experiment(splits=None, episodes=160, seed=20261107,
             traceback.print_exc()
             per = {"error": f"{type(exc).__name__}: {exc}"}
         summary["conditions_detail"][name] = per
+        if append_path is not None:
+            import io
+            with io.open(append_path, "a", encoding="utf-8") as f:
+                f.write(json.dumps({"variant": name, "per": per},
+                                   default=str) + "\n")
         if verbose:
-            print(f"  {name}: done")
+            print(f"  {name}: done", flush=True)
 
     # paired comparisons vs original
     if "original" in summary["conditions_detail"]:
