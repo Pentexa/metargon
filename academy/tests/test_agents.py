@@ -148,5 +148,59 @@ class TestBaselinesSanity(unittest.TestCase):
         self.assertGreaterEqual(len(q.Q), 0)
 
 
+class TestQlearningPersistence(unittest.TestCase):
+    """Regression tests for QLearningPolicy save/load (Q-table keys)."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.splits = get_splits()
+
+    def test_save_load_roundtrip_preserves_q_table(self):
+        import json
+        from academy.envs.gridworld import MechanismGrid
+        c = self.splits["train"][0]
+        spec = EpisodeSpec(config=c, max_steps=80, noise_q=0.0,
+                           spec_seed=3, pool_tag="train",
+                           difficulty=difficulty_of(c))
+        q = QLearningPolicy(seed=0)
+        env = MechanismGrid(spec.config, 80, 0.0)
+        for seed in (3, 7):
+            obs = env.reset(seed)
+            q.episode_start(spec, env.geom)
+            while not env.finished and env.steps < spec.max_steps:
+                act = q.act(obs)
+                res = env.step(act)
+                q.learn(obs, act, res)
+        self.assertGreater(len(q.Q), 0)
+        snapshot = json.loads(json.dumps(q.save_state()))
+        clone = QLearningPolicy(seed=0)
+        clone.load_state(snapshot)
+        self.assertEqual(clone.Q, q.Q)
+        # every learned key must be reachable under the runtime key format
+        sig, action = next(iter(q.Q))
+        self.assertEqual(clone._q(sig, action), q.Q[(sig, action)])
+
+    def test_load_committed_policy_json_reaches_learned_keys(self):
+        """Regression: load_state used to wrap signatures in an extra tuple,
+        so a reloaded Q table was unreachable at decision time."""
+        import json
+        path = os.path.join(
+            os.path.dirname(os.path.dirname(os.path.dirname(
+                os.path.abspath(__file__)))),
+            "results", "academy_v01", "policies", "qlearning.json")
+        if not os.path.exists(path):
+            self.skipTest("committed qlearning policy artifact not present")
+        with open(path, "r", encoding="utf-8") as f:
+            state = json.load(f)
+        self.assertIn("Q", state)
+        self.assertGreater(len(state["Q"]), 0)
+        q = QLearningPolicy(seed=0)
+        q.load_state(state)
+        self.assertEqual(len(q.Q), len(state["Q"]))
+        # every saved row must map to a runtime-reachable (sig, action) key
+        for row in state["Q"]:
+            self.assertIn((tuple(row[0]), row[-2][0]), q.Q)
+
+
 if __name__ == "__main__":
     unittest.main()

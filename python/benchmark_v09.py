@@ -193,33 +193,20 @@ def benchmark(seeds: int = 30, episodes: int = 240,
 
 def _score_one(args):
     """Top-level worker for ProcessPoolExecutor (picklable)."""
-<<<<<<< HEAD
     condition, seed, episodes, measure_mem = args
     row = {p: score_policy(condition, seed, p, episodes,
                             measure_mem=measure_mem) for p in POLICIES}
-=======
-    condition, seed, episodes = args
-    row = {p: score_policy(condition, seed, p, episodes) for p in POLICIES}
->>>>>>> origin/main
     return condition, seed, row
 
 
 def benchmark_parallel(seeds: int = 30, episodes: int = 240,
-<<<<<<< HEAD
                        workers: int | None = None,
                        measure_mem: bool = True) -> dict:
-=======
-                       workers: int | None = None) -> dict:
->>>>>>> origin/main
     """Like benchmark(), but parallelized across (condition, seed) pairs.
     Produces the identical result structure. Windows spawn requires the
     worker to be a top-level function."""
     import concurrent.futures
-<<<<<<< HEAD
     tasks = [(cond, i + 11800, episodes, measure_mem) for cond in CONDITIONS
-=======
-    tasks = [(cond, i + 11800, episodes) for cond in CONDITIONS
->>>>>>> origin/main
              for i in range(seeds)]
     scores = {cond: [None] * seeds for cond in CONDITIONS}
     with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as ex:
@@ -235,16 +222,11 @@ def benchmark_parallel(seeds: int = 30, episodes: int = 240,
                 for k in ("success_rate", "first_half_success", "second_half_success",
                           "mean_steps", "cpu_s")
             }
-<<<<<<< HEAD
             if measure_mem:
                 summary[condition][p]["peak_mem_mb"] = (
                     statistics.fmean(row[p]["peak_mem_bytes"] for row in per_seed) / 1e6)
             else:
                 summary[condition][p]["peak_mem_mb"] = None
-=======
-            summary[condition][p]["peak_mem_mb"] = (
-                statistics.fmean(row[p]["peak_mem_bytes"] for row in per_seed) / 1e6)
->>>>>>> origin/main
         for a, b in (("metargon", "bayes"), ("metargon", "qlearning"),
                      ("metargon", "episodic"), ("bayes", "qlearning")):
             succ_delta = [row[a]["success_rate"] - row[b]["success_rate"]
@@ -276,18 +258,11 @@ def _print_result(result, wall_s):
         print(f"\n{scenario}:")
         for name in DEPLOYABLE + ("oracle",):
             x = row[name]
-<<<<<<< HEAD
             mem = "—" if x.get("peak_mem_mb") is None else f"{x['peak_mem_mb']:.2f}MB"
             print(f"  {name:>10}: success {x['success_rate']*100:6.2f}% "
                   f"(1st {x['first_half_success']*100:5.2f}% / "
                   f"2nd {x['second_half_success']*100:5.2f}%) steps {x['mean_steps']:5.2f} "
                   f"cpu {x['cpu_s']:6.2f}s mem {mem}")
-=======
-            print(f"  {name:>10}: success {x['success_rate']*100:6.2f}% "
-                  f"(1st {x['first_half_success']*100:5.2f}% / "
-                  f"2nd {x['second_half_success']*100:5.2f}%) steps {x['mean_steps']:5.2f} "
-                  f"cpu {x['cpu_s']:6.2f}s mem {x['peak_mem_mb']:6.2f}MB")
->>>>>>> origin/main
         for key, c in row.items():
             if key.startswith("comparison:"):
                 print(f"  {key}: delta {c['success_delta']*100:+.2f}pp "
@@ -301,7 +276,6 @@ def main():
     parser.add_argument("--json", type=Path, default=None)
     parser.add_argument("--parallel", action="store_true")
     parser.add_argument("--workers", type=int, default=None)
-<<<<<<< HEAD
     parser.add_argument("--no-mem", action="store_true",
                         help="disable tracemalloc memory tracing (much faster)")
     args = parser.parse_args()
@@ -312,15 +286,6 @@ def main():
                                     measure_mem=mem)
     else:
         result = benchmark(args.seeds, args.episodes, measure_mem=mem)
-=======
-    args = parser.parse_args()
-    t0 = time.perf_counter()
-    if args.parallel:
-        result = benchmark_parallel(args.seeds, args.episodes, args.workers)
-    else:
-        result = benchmark(args.seeds, args.episodes)
-    _print_result(result, time.perf_counter() - t0)
->>>>>>> origin/main
     if args.json:
         # write results FIRST so a later formatting failure cannot lose them
         args.json.parent.mkdir(parents=True, exist_ok=True)

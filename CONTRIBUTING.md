@@ -32,7 +32,8 @@ Include:
 1. What you did (the exact command or code path).
 2. What you expected to happen.
 3. What actually happened (full traceback/error output).
-4. Environment: OS, Python version (3.10+ required), Rust toolchain
+4. Environment: OS, Python version (3.11+ required; the `python/` suites
+   still run on 3.10+), Rust toolchain
    (cargo `+1.88.0` for the `rust/` crate).
 5. Whether the bug reproduces in a fresh clone.
 
@@ -54,8 +55,10 @@ questions**. Explain:
 
 ### Prerequisites
 
-- **Python 3.10+** — the Python code uses **the standard library only**;
-  there are no pip dependencies.
+- **Python 3.11+** — the Python code uses **the standard library only**;
+  there are no pip dependencies. The historical and v0.9 suites under
+  `python/` still run on Python 3.10+; the Academy layer requires 3.11+
+  for its standard-library TOML configuration loader.
 - **Rust toolchain** for the research kernel: `cargo +1.88.0` (crate
   `metargon-core`). The crate declares `#![forbid(unsafe_code)]`.
 
@@ -111,6 +114,13 @@ code forbidden.
 
 **Before opening a PR:** run the full Python suite *and* the Rust tests, and
 make sure your branch is up to date with `main`.
+
+**CI:** GitHub Actions (`.github/workflows/ci.yml`) runs the Python suites,
+the Rust crate tests with `cargo clippy -D warnings`, and repo hygiene checks
+(`python scripts/check_repo.py`: merge markers, Markdown links, Python
+compile). Python jobs pin `PYTHONHASHSEED=0`; Academy runs are deterministic
+under a fixed hash seed, but internal hypothesis bookkeeping may differ
+across hash seeds (summary metrics reproduce).
 
 ## Code style & conventions
 
