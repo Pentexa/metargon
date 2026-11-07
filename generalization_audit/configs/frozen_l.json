@@ -1,0 +1,287 @@
+{
+ "family": "l",
+ "split_seed": 20260910,
+ "n_solvable": 9,
+ "n_train": 5,
+ "n_val": 1,
+ "n_test": 3,
+ "train": [
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d1_second": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_first": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ],
+   "d2_second": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d1_second": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_first": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ],
+   "d2_second": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d1_second": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_first": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ],
+   "d2_second": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d1_second": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_first": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ],
+   "d2_second": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  },
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d1_second": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_first": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ],
+   "d2_second": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  }
+ ],
+ "val": [
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d1_second": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_first": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ],
+   "d2_second": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  }
+ ],
+ "test": [
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d1_second": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_first": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ],
+   "d2_second": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d1_second": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_first": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ],
+   "d2_second": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  },
+  {
+   "family": "l",
+   "d1_first": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d1_second": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_first": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ],
+   "d2_second": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  }
+ ]
+}

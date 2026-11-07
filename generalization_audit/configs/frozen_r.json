@@ -1,0 +1,340 @@
+{
+ "family": "r",
+ "split_seed": 20260910,
+ "n_solvable": 19,
+ "n_train": 11,
+ "n_val": 3,
+ "n_test": 5,
+ "train": [
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ],
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ],
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_cond": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ],
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  }
+ ],
+ "val": [
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "load",
+     "P1",
+     "A"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     false
+    ]
+   ]
+  }
+ ],
+ "test": [
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "loadany",
+     "P1"
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_cond": [
+    [
+     "sw",
+     "S2",
+     true
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d2_cond": [
+    [
+     "load",
+     "P2",
+     "B"
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     false
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  },
+  {
+   "family": "r",
+   "d1_cond": [
+    [
+     "sw",
+     "S1",
+     true
+    ]
+   ],
+   "d2_cond": [
+    [
+     "loadany",
+     "P2"
+    ]
+   ]
+  }
+ ]
+}
