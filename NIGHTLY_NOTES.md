@@ -35,6 +35,9 @@ Pending/status:
 1. Check `memory_v03_chunks.log` + `memory_v03_runs.jsonl`; confirm all
    variants recorded; retry ratio (and any missing) via
    `python x/run_chunks.py` (skips already-recorded variants).
+   NOTE: as of 02:30 the driver was still on `window` (no further
+   progress logged); if it hasn't finished by morning, kill it and
+   rerun `python x/run_chunks.py` (resumes from jsonl).
 2. Merge: `python academy/tools/memory_merge.py` → writes
    memory_v03_summary.json (comparisons + paired CIs).
 3. Replace the placeholder numbers in `docs/MEMORY_V03.md` with the
@@ -42,6 +45,8 @@ Pending/status:
    degrade transfer; probe_local is the only training-positive variant).
 4. Run full suite: `python -m unittest discover -s academy/tests`
    (long; expect ~8 min).
+   DONE (02:20): full suite green — **187 tests OK** (incl. the 14
+   new test_memory_v03.py).
 5. Final commit, push, and open a PR:
    `academy/memory-v03` → `main`.
 
