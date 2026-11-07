@@ -115,18 +115,21 @@ impl CausalMemoryV10 {
         self.hypotheses.iter().filter(|h| h.is_some()).count()
     }
 
+    #[inline]
+    pub fn is_empty(&self) -> bool {
+        self.len() == 0
+    }
+
     pub fn step_advance(&mut self) {
         self.step = self.step.wrapping_add(1);
     }
 
     /// Decay all evidence by EVENT_DECAY (called once per episode boundary).
     pub fn episode_end(&mut self) {
-        for slot in self.hypotheses.iter_mut() {
-            if let Some(h) = slot {
-                h.support *= EVENT_DECAY;
-                h.contradiction *= EVENT_DECAY;
-                Self::recompute_status(h);
-            }
+        for h in self.hypotheses.iter_mut().flatten() {
+            h.support *= EVENT_DECAY;
+            h.contradiction *= EVENT_DECAY;
+            Self::recompute_status(h);
         }
         for c in self.continuous_true.iter_mut() {
             *c = c.saturating_sub(1);
@@ -210,11 +213,15 @@ impl CausalMemoryV10 {
                 let s = h.score(self.step);
                 if s < victim_score
                     || (s - victim_score).abs() < 1e-12
-                        && victim.map_or(true, |v| {
-                            let a = self.hypotheses[v].as_ref().unwrap();
-                            h.last_update < a.last_update
-                                || (h.last_update == a.last_update && h.id < a.id)
-                        })
+                        && (victim.is_none()
+                            || match victim {
+                                Some(v) => {
+                                    let a = self.hypotheses[v].as_ref().unwrap();
+                                    h.last_update < a.last_update
+                                        || (h.last_update == a.last_update && h.id < a.id)
+                                }
+                                None => false,
+                            })
                 {
                     victim = Some(i);
                     victim_score = s;

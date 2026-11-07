@@ -126,11 +126,15 @@ impl CausalMemory {
                 let s = self.score(h);
                 if s < victim_score
                     || (s - victim_score).abs() < 1e-12
-                        && victim.map_or(true, |v| {
-                            let a = self.hypotheses[v].as_ref().unwrap();
-                            h.last_update < a.last_update
-                                || (h.last_update == a.last_update && h.id < a.id)
-                        })
+                        && (victim.is_none()
+                            || match victim {
+                                Some(v) => {
+                                    let a = self.hypotheses[v].as_ref().unwrap();
+                                    h.last_update < a.last_update
+                                        || (h.last_update == a.last_update && h.id < a.id)
+                                }
+                                None => false,
+                            })
                 {
                     victim = Some(i);
                     victim_score = s;
