@@ -30,6 +30,10 @@ from lab_env import DOORS, DOOR_CELL, MOVE_ACTIONS, PLATES, SWITCHES, WS, make_s
 # pre-registered: a correction becomes believed after this many consecutive
 # agreeing corrupted readings (holds q up to ~0.2 without meaningful cost).
 DEBOUNCE = 2
+# extra agreeing raw reading (beyond the first flip) needed to *confirm* a
+# door event for the learning stream (kept separate from the belief, which
+# still adopts immediately so planning never lags).
+CONFIRM_PERSIST = 1
 
 _DIR = {"N": (0, -1), "S": (0, 1), "E": (1, 0), "W": (-1, 0)}
 
@@ -44,6 +48,20 @@ class RobustBelief:
         self.noise_anomalies = 0              # diagnostics
         self.action_corrections = 0           # diagnostics (physics-adopted)
         self.sensor_changes = 0               # debounce-adopted changes
+        # -- noise-aware confirmed-event stream --------------------------
+        # raw readings are tracked separately from the belief; a door event
+        # is *confirmed* for learning when either
+        #   (a) the flipped raw reading persists on the next observation, or
+        #   (b) movement proof confirms it (apply_transition), or
+        #   (c) it reverts immediately -> candidate is dropped silently.
+        self.raw_prev: dict[str, bool] = {d: False for d in DOORS}
+        self.candidates: dict[str, tuple] = {}   # door -> (value, persist_count)
+        self.confirmed_events: list[tuple] = []
+        self.confirmed_count = 0
+        self.dropped_candidates = 0
+        self.confirmed_by_movement = 0
+        self._last_confirmed: dict[str, tuple] = {}  # door -> (value, clock)
+        self._clock = 0
 
     # -- diagnostics -----------------------------------------------------
     def diagnostics(self) -> dict:
@@ -52,11 +70,16 @@ class RobustBelief:
             "action_corrections": self.action_corrections,
             "sensor_changes": self.sensor_changes,
             "pending": len(self.pending),
+            "confirmed_events": self.confirmed_count,
+            "confirmed_by_movement": self.confirmed_by_movement,
+            "dropped_candidates": self.dropped_candidates,
+            "open_candidates": len(self.candidates),
         }
 
     # -- core ------------------------------------------------------------
     def observe(self, obs) -> WS:
         """Fold one observation into the belief (readings + positions)."""
+        self._clock += 1
         b = self.belief
         b = b._replace(pos=(obs.x, obs.y))
         objs = dict(b.objs)
@@ -90,6 +113,22 @@ class RobustBelief:
                 self.pending.pop(name, None)
             else:
                 self.pending.pop(name, None)
+            # confirmed-event bookkeeping (learning stream)
+            if name in self.candidates:
+                cand_value, persist = self.candidates[name]
+                if raw == cand_value:
+                    if persist >= CONFIRM_PERSIST:
+                        self._emit_confirmed(name, bool(cand_value))
+                        del self.candidates[name]
+                    else:
+                        self.candidates[name] = (cand_value, persist + 1)
+                else:
+                    # revert/inconsistent before confirmation: drop
+                    del self.candidates[name]
+                    self.dropped_candidates += 1
+            elif raw != self.raw_prev[name]:
+                self.candidates[name] = (raw, 0)
+            self.raw_prev[name] = raw
         b = b._replace(door_open=doors)
 
         self.belief = b
@@ -118,14 +157,17 @@ class RobustBelief:
             target = (pre_pos[0] + dx, pre_pos[1] + dy)
             if target in DOOR_CELL.values():
                 door = next(d for d, c in DOOR_CELL.items() if c == target)
+                old = b.door_open[door]
                 if not valid:
-                    if b.door_open[door]:
+                    if old:
                         self.action_corrections += 1
                     b.door_open[door] = False
+                    self._confirm_by_movement(door, False, changed=(old is not False))
                 else:
-                    if not b.door_open[door]:
+                    if not old:
                         self.action_corrections += 1
                     b.door_open[door] = True
+                    self._confirm_by_movement(door, True, changed=(old is not True))
                 self.pending.pop(door, None)
                 self.pending.pop(door.lower(), None)
             return b
@@ -149,6 +191,85 @@ class RobustBelief:
         return b
 
     # -- helpers ---------------------------------------------------------
+    def _emit_confirmed(self, door, value):
+        """Add a confirmed event unless the same direction was just confirmed
+        (dedupe window) — a door transition is a single causal event."""
+        last = self._last_confirmed.get(door)
+        if last is not None and last[0] == value and \
+                self._clock - last[1] < 3:
+            return
+        self.confirmed_events.append((door, bool(value)))
+        self.confirmed_count += 1
+        self._last_confirmed[door] = (bool(value), self._clock)
+
+    def _confirm_by_movement(self, door, value, changed: bool = True):
+        """Movement proof confirms a door state. An event is emitted only
+        when the belief actually changed (`changed`) or a raw candidate was
+        pending — repeated transits through an already-known state must not
+        spam the learning stream with duplicate causal events."""
+        had_candidate = door in self.candidates
+        if not changed and not had_candidate:
+            return
+        self._emit_confirmed(door, value)
+        self.confirmed_by_movement += 1
+        self.candidates.pop(door, None)
+
+    def poll_confirmed_events(self):
+        """Drain confirmed door events since the last poll (learning stream)."""
+        ev = list(self.confirmed_events)
+        self.confirmed_events.clear()
+        return ev
+
+    def has_door_candidate(self, door) -> bool:
+        return door in self.candidates
+
+    def door_is_stable(self, door) -> bool:
+        """A door is stable when there is no pending candidate and the raw
+        reading agrees with the belief."""
+        return door not in self.candidates and \
+            self.raw_prev.get(door) == self.belief.door_open.get(door)
+
+    def sensor_is_stable(self, sensor) -> bool:
+        """Switch/plate sensor is stable when it has no pending (debounce)
+        entry."""
+        return sensor not in self.pending
+
+    def stable_atoms(self) -> frozenset:
+        """Atoms from sensors that are currently stable (not pending, not
+        mid-event). Used for certainty-aware learning contexts."""
+        out = set()
+        for plate in PLATES:
+            load = self.belief.plate_load[plate]
+            if load in ("A", "B") and self.sensor_is_stable(plate):
+                out.add(("load", plate, load))
+                out.add(("loadany", plate))
+        for sw in SWITCHES:
+            if self.sensor_is_stable(sw):
+                out.add(("sw", sw, bool(self.belief.switch_state[sw])))
+        for door in DOORS:
+            if self.door_is_stable(door):
+                out.add(("door_open", door, bool(self.belief.door_open[door])))
+        return frozenset(out)
+
+    def context_certainty(self, atoms) -> float:
+        """Fraction of the context atoms whose sensors were stable (floor
+        0.25 so a partially noisy context never fully loses its learning
+        signal)."""
+        if not atoms:
+            return 1.0
+        stable = 0
+        for a in atoms:
+            k = a[0]
+            if k in ("load", "loadany"):
+                stable += int(self.sensor_is_stable(a[1]))
+            elif k == "sw":
+                stable += int(self.sensor_is_stable(a[1]))
+            elif k == "door_open":
+                stable += int(self.door_is_stable(a[1]))
+            else:
+                stable += 1
+        return max(0.25, stable / len(atoms))
+
     def _debounce(self, key, raw, container, is_switch):
         cur = container[key]
         if raw == cur:
