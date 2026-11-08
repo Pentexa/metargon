@@ -86,7 +86,10 @@ class MetargonAcademyAgent:
                  memory_evidence_window: int = 0,
                  probe_adaptive: bool = False,
                  protect_episode_local: bool = False,
-                 probe_episode_local: bool = False):
+                 probe_episode_local: bool = False,
+                 memory_context_scoped: bool = False,
+                 memory_task_change_reset: bool = False,
+                 memory_context_gate_transfer: bool = False):
         self.seed = seed
         self.rng = random.Random(seed)
         self.replay_enabled = replay_enabled
@@ -101,11 +104,15 @@ class MetargonAcademyAgent:
             recycle_contradicted=memory_recycle_contradicted,
             contradiction_ratio=memory_contradiction_ratio,
             evidence_window=memory_evidence_window,
+            context_scoped=memory_context_scoped,
+            task_change_reset=memory_task_change_reset,
+            context_gate_transfer=memory_context_gate_transfer,
         )
         self.probe_adaptive = bool(probe_adaptive)
         self.protect_episode_local = bool(protect_episode_local)
         self.probe_episode_local = bool(probe_episode_local)
         self._episode_mem_step = 0
+        self._ctx_signature = None
         self.planner_max_expand = planner_max_expand
         self.probe_max_plans = probe_max_plans
         self.probe_timeout = probe_timeout
@@ -137,6 +144,7 @@ class MetargonAcademyAgent:
         self._goal_infeasible = {}
         self._steps_since_goal_check = 0
         self._episode_mem_step = self.memory.step
+        self._ctx_signature = None
         # derive door anchors once per topology
         if not self.far_anchor:
             self._derive_anchors(geom)
@@ -176,6 +184,16 @@ class MetargonAcademyAgent:
     def _sync(self, obs):
         from .common import belief_from_obs
         self.belief = belief_from_obs(obs, self.geom)
+        if self._ctx_signature is None:
+            b = self.belief
+            self._ctx_signature = (
+                b.pos,
+                tuple(b.switch_state[s] for s in ("S1", "S2")),
+                tuple(b.plate_load[p] for p in ("P1", "P2")),
+                b.objs["A"], b.objs["B"],
+                tuple(b.door_open[d] for d in ("D1", "D2")),
+            )
+            self.memory.set_context(self._ctx_signature)
         # `passed` is updated in _choose_probe by physically standing on the
         # far cell of an open door (component-based labels are unreliable
         # once doors merge regions).
@@ -493,27 +511,27 @@ class MetargonAcademyAgent:
             if wants_open is True:
                 if door in evts:
                     if evts[door] and h.antecedent <= before_atoms:
-                        self.memory._support(h)
+                        self.memory._support(h, record_ctx=False)
                     elif not evts[door] and h.antecedent <= before_atoms:
-                        self.memory._contradict(h)
+                        self.memory._contradict(h, record_ctx=False)
                 elif exp.obs_after.door_open[door]:
                     if h.antecedent <= after_atoms:
-                        self.memory._support(h)
+                        self.memory._support(h, record_ctx=False)
                 else:
                     if h.antecedent <= after_atoms:
-                        self.memory._contradict(h)
+                        self.memory._contradict(h, record_ctx=False)
             elif wants_open is False:
                 if door in evts:
                     if not evts[door] and h.antecedent <= before_atoms:
-                        self.memory._support(h)
+                        self.memory._support(h, record_ctx=False)
                     elif evts[door] and h.antecedent <= before_atoms:
-                        self.memory._contradict(h)
+                        self.memory._contradict(h, record_ctx=False)
                 elif not exp.obs_after.door_open[door]:
                     if h.antecedent <= after_atoms:
-                        self.memory._support(h)
+                        self.memory._support(h, record_ctx=False)
                 else:
                     if h.antecedent <= after_atoms:
-                        self.memory._contradict(h)
+                        self.memory._contradict(h, record_ctx=False)
 
     def finish_episode(self, success: bool):
         self.episodes += 1
@@ -541,6 +559,7 @@ class MetargonAcademyAgent:
             },
             "passed": dict(self.passed),
             "far_anchor": dict(self.far_anchor),
+            "_ctx_signature": self._ctx_signature,
             "pending_probe": {
                 d: [sorted(list(ante)), deadline]
                 for d, (ante, deadline) in self.pending_probe.items()
@@ -573,6 +592,7 @@ class MetargonAcademyAgent:
             for d, t in state["tried"].items()
         }
         self.passed = dict(state["passed"])
+        self._ctx_signature = state.get("_ctx_signature")
         self.far_anchor = {d: tuple(a) for d, a in state["far_anchor"].items()}
         self.pending_probe = {
             d: (frozenset(map(tuple, atoms)), deadline)
