@@ -164,21 +164,21 @@ Discovery (D1, offline): metargon10 exact-rule 50% (stable), 77%
 high (2.1–4.6 per episode). Full v0.10 loses 50pp on stable when compute
 is capped at 120 expansions/decision.
 
-### 4.2 Family L (ordered-sequence) — success rates
+### 4.2 Family L (ordered-sequence) — success rates (3 seeds × 20 episodes)
 
 | Condition | metargon10 | random / episodic | qlearning | bayes | metargon10-cap | bayes-cap | oracle |
 |---|---:|---:|---:|---:|---:|---:|---:|
-| stable | 33.3% | 0.0% | 0.0% | **43.3%** | 0.0% | 3.3% | 100% |
-| shift | 26.7% | 0.0% | 0.0% | **50.0%** | 0.0% | 0.0% | 100% |
-| novel | 23.3% | 0.0% | 0.0% | **36.7%** | 0.0% | 6.7% | 100% |
-| cross_family | 43.3% | 0.0% | 0.0% | **60.0%** | 23.3% | 10.0% | —¹ |
+| stable | 25.0% | 0.0% | 0.0% | **53.3%** | 0.0% | 10.0% | 100% |
+| shift | 23.3% | 0.0% | 0.0% | **56.7%** | 0.0% | 1.7% | 100% |
+| novel | 23.3% | 0.0% | 0.0% | **46.7%** | 0.0% | 15.0% | 100% |
+| cross_family | 58.3% | 0.0% | 0.0% | **60.0%** | 16.7% | 5.0% | —¹ |
 
 ¹ See note above.
 
-Discovery (D1): metargon10 exact-rule **0.0%** on stable/shift/novel
-(the ordered rule is never identified as an exact antecedent); doors
-open only behaviorally (events > 0). On `cross_family` exact jumps to
-35.7% (family-F half supplies familiar conjunctive context).
+Discovery (D1): metargon10 exact-rule **0.0% on every condition**
+including cross_family — the ordered rule is never identified as an
+exact antecedent; doors open only behaviorally. This is consistent with
+the 2×15 exploratory run and strengthens the negative result.
 
 ---
 
@@ -206,10 +206,10 @@ open only behaviorally (events > 0). On `cross_family` exact jumps to
   incidentally satisfy the hold condition while acting).
 - On family L (ordered-sequence), v0.10's hypothesis language
   (unordered conjunctive sets) **cannot express the rule**: exact D1
-  discovery is 0.0% on stable/shift/novel. Success (~23–33%) comes from
-  behavior only (opening doors by incidentally satisfying both atoms),
-  not from causal understanding. The family-F Bayes planner also
-  struggles (36–50%), but remains above the student. This is a clean
+  discovery is 0.0% on every condition (3×20 run). Success (~23–58%)
+  comes from behavior only (opening doors by incidentally satisfying both
+  atoms), not from causal understanding. The family-F Bayes planner also
+  struggles (47–60%), but remains above the student. This is a clean
   negative result: order-dependent rules are outside the agent's
   representational capacity.
 - Cap-120 compute budget cripples the student on R (50pp loss on stable);
@@ -222,8 +222,10 @@ open only behaviorally (events > 0). On `cross_family` exact jumps to
 
 ## 6. Limitations
 
-- **Sample size:** 2 paired seeds × 15 episodes per condition; bootstrap
-  CIs are wide. Numbers are directional, not definitive.
+- **Sample size:** family R 2 paired seeds × 15 episodes; family L 3
+  paired seeds × 20 episodes (an earlier 3×20 run for L completed after
+  the 2×15 run and superseded it; results are consistent). Bootstrap CIs
+  are wide; numbers are directional, not definitive.
 - `cross_family` has no oracle row (by design).
 - Compute arm uses an expansion budget of 120 per decision (arbitrary
   but identical across policies); results are sensitive to this value.
