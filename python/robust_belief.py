@@ -62,6 +62,16 @@ class RobustBelief:
         self.confirmed_by_movement = 0
         self._last_confirmed: dict[str, tuple] = {}  # door -> (value, clock)
         self._clock = 0
+        # -- adaptive confirmation (v0.12) -------------------------------
+        # Track the perceived corruption rate (raw readings disagreeing with
+        # the reconciled belief) and raise the confirmation threshold when
+        # the channel looks unreliable.
+        self._conflict_count = 0
+        self._reading_count = 0
+        self.adaptive_confirm_persist = CONFIRM_PERSIST
+        self._last_anomaly_rate = 0.0
+        # door transition timestamps (for nonevent gating / recent credit)
+        self._door_transition_step: dict[str, int] = {d: -10**6 for d in DOORS}
 
     # -- diagnostics -----------------------------------------------------
     def diagnostics(self) -> dict:
@@ -74,6 +84,8 @@ class RobustBelief:
             "confirmed_by_movement": self.confirmed_by_movement,
             "dropped_candidates": self.dropped_candidates,
             "open_candidates": len(self.candidates),
+            "adaptive_confirm_persist": self.adaptive_confirm_persist,
+            "anomaly_rate": round(self._last_anomaly_rate, 4),
         }
 
     # -- core ------------------------------------------------------------
@@ -117,7 +129,7 @@ class RobustBelief:
             if name in self.candidates:
                 cand_value, persist = self.candidates[name]
                 if raw == cand_value:
-                    if persist >= CONFIRM_PERSIST:
+                    if persist >= self.adaptive_confirm_persist:
                         self._emit_confirmed(name, bool(cand_value))
                         del self.candidates[name]
                     else:
@@ -129,6 +141,15 @@ class RobustBelief:
             elif raw != self.raw_prev[name]:
                 self.candidates[name] = (raw, 0)
             self.raw_prev[name] = raw
+            # adaptive anomaly tracking (raw vs reconciled belief)
+            self._reading_count += 1
+            if raw != self.belief.door_open.get(name):
+                self._conflict_count += 1
+                if self._reading_count % 40 == 0:
+                    self._last_anomaly_rate = (
+                        self._conflict_count / self._reading_count)
+                    self.adaptive_confirm_persist = (
+                        2 if self._last_anomaly_rate > 0.06 else 1)
         b = b._replace(door_open=doors)
 
         self.belief = b
@@ -201,6 +222,7 @@ class RobustBelief:
         self.confirmed_events.append((door, bool(value)))
         self.confirmed_count += 1
         self._last_confirmed[door] = (bool(value), self._clock)
+        self._door_transition_step[door] = self._clock
 
     def _confirm_by_movement(self, door, value, changed: bool = True):
         """Movement proof confirms a door state. An event is emitted only

@@ -295,19 +295,37 @@ class CompositionalMemoryV10:
         """Combined context event with an evidence-quality weight. Contexts
         are unioned and cleaned of contradictory polarities; support is
         added with weight `certainty` (a family-agnostic observation-
-        likelihood proxy)."""
+        likelihood proxy).
+
+        `event_context_mode` selects the candidate-generation context (v0.12
+        addition; default "clean" preserves v0.11 behavior):
+          * "clean" — one cleaned union context (v0.11 semantics);
+          * "dual"  — generate candidates from pre AND post contexts
+                       separately (a post context is never dropped because
+                       the event-flipped atom is the likely cause; this
+                       recovers v0.10's ability to learn toggle-induced
+                       rules while keeping confirmed-event gating);
+          * "union" — raw pre|post (v0.10 semantics, no cleaning).
+        """
         consequence = opens_key(door, opened)
-        ctx = self._clean_ctx(pre_atoms, post_atoms)
+        mode = getattr(self, "event_context_mode", "clean")
+        if mode == "dual":
+            contexts = (pre_atoms, post_atoms)
+        elif mode == "union":
+            contexts = (pre_atoms | post_atoms,)
+        else:
+            contexts = (self._clean_ctx(pre_atoms, post_atoms),)
         # replay reinforces *older* evidence; the just-processed event is
         # already counted directly, so exclude it from this replay pass.
         old_replay = self.replay[:] if self.enable_replay else []
-        cands = self._candidate_antecedents(ctx, consequence)
-        for ante in cands:
-            h = self._add(ante, consequence)
-            if h is not None and ante <= ctx:
-                self._support(h, weight=certainty)
-            if self.enable_replay:
-                self._store_replay(ante, consequence, certainty)
+        for ctx in contexts:
+            cands = self._candidate_antecedents(ctx, consequence)
+            for ante in cands:
+                h = self._add(ante, consequence)
+                if h is not None and ante <= ctx:
+                    self._support(h, weight=certainty)
+                if self.enable_replay:
+                    self._store_replay(ante, consequence, certainty)
         if self.enable_replay:
             self._apply_replay(old_replay)
 
