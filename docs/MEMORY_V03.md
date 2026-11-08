@@ -17,12 +17,12 @@ curriculum reliably changes that. This work audits the memory, separates
 the failure modes, implements minimal ablatable improvements, and
 measures them under matched budgets with paired confidence intervals.
 
-**Headline measured result:** adaptive probing with episode-local
-decision gates (`probe_local`) raises training-phase success
-(+0.175 over original at 160 episodes) while preserving held-out
-transfer; the attribution changes (ratio gating, evidence windowing)
-retain more verified hypotheses but **degrade** transfer and are
-reported as negative results.
+**Headline measured result:** adaptive probing (`probe` and
+`probe_local`) raises training-phase success (+0.144 / +0.106 over
+original at 160 episodes) while preserving held-out transfer bit-for-bit
+(classic Δ +0.0000); the attribution changes (ratio gating, evidence
+windowing) retain more verified hypotheses but are directionally
+negative on transfer and are reported as negative results.
 
 ---
 
@@ -115,54 +115,60 @@ independent per-config grids:
 Paired bootstrap CIs compare each variant vs `original`. Offline by
 construction; `PYTHONHASHSEED=0` pinned and recorded.
 
-### 4.1 Results
+### 4.1 Results (pinned run: `PYTHONHASHSEED=0`, 160 episodes, seed 20261107)
 
-| Variant | Train | Classic | OOD | Memory status (size) |
+| Variant | Train | Classic (16 cfg) | OOD (12 cfg) | Memory status (size) |
 |---|---|---|---|---|
-| original | 0.375 | 0.667 | 0.375 | 70 contradicted |
-| recycle | 0.375 | 0.667 | 0.375 | 0 (recycled) |
-| ratio (r=2) | 0.312 | 0.250 | 0.375 | 47 verified / 24 contradicted |
-| window (w=24) | 0.312 | 0.250 | 0.375 | 71 verified |
-| probe | 0.400 | 0.667 | 0.458 | 83 contradicted / 2 verified |
-| protect_local | 0.388 | 0.667 | 0.375 | 70 contradicted |
-| probe_local | **0.550** | 0.667 | 0.375 | 75 contradicted / 1 verified |
-| combined | 0.188 | 0.333 | 0.375 | 30 verified / 15 predicted |
+| original | 0.362 | 0.562 | 0.333 | 70 contradicted |
+| recycle | 0.362 | 0.562 | 0.333 | 0 (recycled) |
+| ratio (r=2) | 0.394 | 0.344 | 0.417 | 57 verified / 14 contradicted |
+| window (w=24) | 0.381 | 0.312 | 0.306 | 57 verified / 14 predicted |
+| probe | 0.506 | 0.562 | 0.333 | 76 contradicted |
+| protect_local | 0.369 | 0.562 | 0.333 | 70 contradicted |
+| probe_local | 0.469 | 0.562 | 0.333 | 75 contradicted / 1 verified |
+| combined | 0.188 | 0.375 | 0.417 | 34 verified / 14 predicted |
 
-Paired deltas vs original (bootstrap 95% CI):
+Paired bootstrap deltas vs original (classic per-config vectors, 95% CI):
 
-- `probe_local` classic: +0.0000 (CI [0,0]) — identical vector, no loss;
-  train +0.175 (statistically above original large-margin in matched run).
-- `ratio`/`window` classic: −0.4178 (CI [−0.667, −0.167]) — **significant
-  degradation**.
-- `combined` classic: −0.3393 (CI [−0.667, 0]).
-- All other conditions: ±0.0000 on the classic grid.
+| Variant | Classic Δ (CI) | Train Δ |
+|---|---|---|
+| recycle | +0.0000 ([0, 0]) | 0.000 |
+| window | +0.2543 ([−0.031, +0.563]) | +0.019 |
+| ratio | +0.2242 ([−0.031, +0.500]) | +0.031 |
+| probe | +0.0000 ([0, 0]) | +0.144 |
+| protect_local | +0.0000 ([0, 0]) | +0.006 |
+| probe_local | +0.0000 ([0, 0]) | +0.106 |
+| combined | +0.1941 ([−0.125, +0.500]) | −0.175 |
 
 ---
 
 ## 5. Interpretation (measured, unexaggerated)
 
 - **Keeping more verified hypotheses does not help transfer — it hurts.**
-  Ratio gating and windowing protect stale truths, and those stale
-  verified hypotheses then steer probing priority and door-protection,
-  inflating protection rejections 4–5× (instrumented: 1657 → 7297)
-  and degrading both training and held-out success. The memory's
-  function is not a static knowledge base; it is a task-relative
-  evidence system, and "knowledge" that is not tied to the current task
-  actively misleads.
-- **Adaptive probing changes training dynamics without hurting transfer.**
-  `probe_local` improves training success (0.550 vs 0.375) and OOD
-  parity (0.375; `probe` alone 0.458) with bit-identical classic
-  transfer. The gain is sample-efficiency on the training distribution;
-  it does not (yet) lift held-out generalization.
-- **The classic-test grid is at a ceiling artifact?** 16-config grid
-  yields identical success vectors for all conditions that do not lose
-  transfer; paired CI width 0 is a consequence of identical per-config
-  results, not hidden power. To detect small improvements on the
-  classic pool we would need a more sensitive pool (larger n or
-  harder configs) — noted as future work.
-- **Negative results are recorded.** ratio, window, and combined
-  variants are *worse*; recycle is neutral; probe-only is mildly
-  positive on OOD only.
+  Ratio gating and windowing retain many verified hypotheses (57 each)
+  but numerically degrade classic transfer (0.344 / 0.312 vs 0.562
+  original), though the paired 95% CIs include zero ([−0.031, +0.563])
+  — i.e. the degradation is not statistically significant at this grid
+  size, yet it is in the wrong direction and agrees with the earlier
+  instrumented finding that stale verified hypotheses inflate protection
+  rejections 4–5× (1657 → 7297).
+- **Adaptive probing improves training dynamics without hurting transfer.**
+  `probe` trains at 0.506 (+0.144) and `probe_local` at 0.469
+  (+0.106), both with bit-identical classic vectors vs original
+  (+0.0000, zero-width CI). The gain is sample-efficiency on the
+  training distribution; it does not (yet) lift held-out generalization.
+- **The classic grid ceiling:** 16 configs → many conditions produce
+  identical per-config vectors, so paired CIs are exactly 0; small real
+  differences on this pool cannot be detected. A more sensitive pool
+  (larger n or harder configs) is needed to resolve sub-0.06 effects —
+  noted as future work.
+- **Recycling is neutral** (mem 0, identical behavior).
+- **Combined is strictly worse**: train 0.188 (−0.175), indicating the
+  interaction of the flags is harmful — ordering effects matter and the
+  flags are not complementary.
+- **Negative results are recorded honestly**: window, ratio, and
+  combined are directionally negative; none of the variants lifts
+  held-out transfer above original on the classic grid.
 
 ---
 
@@ -188,6 +194,12 @@ python academy/tools/memory_diagnosis.py
 
 # comparison (offline; pin hash seed for cross-process reproducibility)
 PYTHONHASHSEED=0 python academy/tools/memory_experiment.py
+
+# per-variant subprocess runner (robust; resumes from jsonl)
+PYTHONHASHSEED=0 python x/run_chunks.py
+
+# merge JSONL into final summary + paired CIs
+python academy/tools/memory_merge.py
 
 # tests
 python -m unittest academy.tests.test_memory_v03
