@@ -84,7 +84,12 @@ def forgetting_metrics(early_records, late_records) -> dict:
 
 
 def paired_difference(a_succ, b_succ, seed: int = 0, n_boot: int = 2000) -> dict:
-    """Paired bootstrap over per-seed success rates (a - b)."""
+    """Paired bootstrap over per-seed success rates, ordered (a − b).
+
+    Convention: call with ``(candidate, baseline)`` so a positive mean
+    means the candidate improved on the baseline. Reversing the
+    arguments flips the sign of the result.
+    """
     assert len(a_succ) == len(b_succ)
     n = len(a_succ)
     rng = random.Random(seed)

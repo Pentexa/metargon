@@ -18,6 +18,7 @@ from typing import Callable, List, Optional
 from ..core.interfaces import Experience
 from ..envs.gridworld import MechanismGrid
 from ..envs.tasks import EpisodeSpec, make_episodes
+from ..eval.protocol import spec_for
 from .curriculum import BINS, CurriculumManager
 from .experience_memory import BoundedExperienceMemory
 
@@ -139,7 +140,7 @@ def run_one_episode(agent, spec: EpisodeSpec, max_steps: Optional[int] = None,
                         max_steps=max_steps or spec.max_steps,
                         noise_q=spec.noise_q)
     obs = env.reset(spec.spec_seed)
-    agent.episode_start(spec, env.geom)
+    agent.episode_start(spec_for(agent, spec), env.geom)
     steps = 0
     door_events = 0
     trace = [] if collect_trace else None

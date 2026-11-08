@@ -129,17 +129,19 @@ construction; `PYTHONHASHSEED=0` pinned and recorded.
 | probe_local | 0.469 | 0.562 | 0.333 | 75 contradicted / 1 verified |
 | combined | 0.188 | 0.375 | 0.417 | 34 verified / 14 predicted |
 
-Paired bootstrap deltas vs original (classic per-config vectors, 95% CI):
+Paired bootstrap deltas vs original (classic per-config vectors, 95% CI;
+reported as **candidate − baseline**: positive = variant improves, negative
+= variant worse):
 
 | Variant | Classic Δ (CI) | Train Δ |
 |---|---|---|
 | recycle | +0.0000 ([0, 0]) | 0.000 |
-| window | +0.2543 ([−0.031, +0.563]) | +0.019 |
-| ratio | +0.2242 ([−0.031, +0.500]) | +0.031 |
+| window | **−0.2543** ([−0.563, +0.031]) | +0.019 |
+| ratio | **−0.2242** ([−0.500, +0.031]) | +0.031 |
 | probe | +0.0000 ([0, 0]) | +0.144 |
 | protect_local | +0.0000 ([0, 0]) | +0.006 |
 | probe_local | +0.0000 ([0, 0]) | +0.106 |
-| combined | +0.1941 ([−0.125, +0.500]) | −0.175 |
+| combined | **−0.1941** ([−0.500, +0.125]) | −0.175 |
 
 ---
 
@@ -148,7 +150,8 @@ Paired bootstrap deltas vs original (classic per-config vectors, 95% CI):
 - **Keeping more verified hypotheses does not help transfer — it hurts.**
   Ratio gating and windowing retain many verified hypotheses (57 each)
   but numerically degrade classic transfer (0.344 / 0.312 vs 0.562
-  original), though the paired 95% CIs include zero ([−0.031, +0.563])
+  original), though the paired 95% CIs include zero ([−0.500, +0.031]
+  and [−0.563, +0.031])
   — i.e. the degradation is not statistically significant at this grid
   size, yet it is in the wrong direction and agrees with the earlier
   instrumented finding that stale verified hypotheses inflate protection

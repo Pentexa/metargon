@@ -33,8 +33,9 @@ if "original" in records:
         if name == "original":
             continue
         cmp_ = {}
-        a, b = orig["classic_test_per_config"], per["classic_test_per_config"]
+        a, b = per["classic_test_per_config"], orig["classic_test_per_config"]
         if a and b and len(a) == len(b):
+            # candidate − baseline (positive = variant improves)
             cmp_["classic_test"] = paired_difference(a, b, seed=20261108)
         cmp_["train_delta"] = per["train_success"] - orig["train_success"]
         summary["comparisons"][f"{name}_vs_original"] = cmp_
