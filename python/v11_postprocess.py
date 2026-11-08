@@ -8,6 +8,7 @@ Usage: python v11_postprocess.py [summary.json] [out.md]
 from __future__ import annotations
 
 import json
+import statistics
 import sys
 from pathlib import Path
 
@@ -29,12 +30,19 @@ COMPARISONS = (
 def main(path: Path, out: Path):
     data = json.loads(path.read_text(encoding="utf-8"))
     summary = data["summary"]
+    raw = data.get("raw", {})
     lines = ["# METARGON v0.11 — benchmark table\n"]
     lines.append(f"Run: {data['metadata']['seeds']} seeds × "
                  f"{data['metadata']['episodes_per_seed']} episodes × "
                  f"{len(data['metadata']['conditions'])} conditions "
                  f"(family {data['metadata'].get('family', 'f')}).\n")
     lines.append("Uncertainty: paired bootstrap 95% intervals (1500 resamples).\n")
+
+    def diag_mean(cond, policy, key):
+        vals = [row[policy].get(key) for row in raw.get(cond, [])]
+        vals = [v for v in vals if isinstance(v, (int, float))]
+        return statistics.fmean(vals) if vals else None
+
     for cond in summary:
         lines.append(f"\n## {cond}\n")
         lines.append("| policy | success | steps | invalid | events | firstEv | cpu s | peak MB |")
@@ -52,6 +60,24 @@ def main(path: Path, out: Path):
                 f"| {x['mean_steps']:.2f} | {x['invalid_actions']:.2f} "
                 f"| {x['door_events_total']:.1f} "
                 f"| {first_s} | {x['cpu_s']:.2f} | {mem_s} |")
+        # learning diagnostics for METARGON policies
+        if any(p.startswith("metargon") for p in POLICIES if p in summary[cond]):
+            lines.append("\nLearning diagnostics (mean per seed-run; offline oracle "
+                         "false-verification not available in summary):\n")
+            lines.append("| policy | verified | contradicted | replay applied | "
+                         "confirmed events | dropped candidates |")
+            lines.append("|---|---:|---:|---:|---:|---:|")
+            for p in POLICIES:
+                if p not in summary[cond]:
+                    continue
+                if not p.startswith("metargon"):
+                    continue
+                lines.append(
+                    f"| {p} | {diag_mean(cond, p, 'verified')} "
+                    f"| {diag_mean(cond, p, 'contradicted')} "
+                    f"| {diag_mean(cond, p, 'replay_applied')} "
+                    f"| {diag_mean(cond, p, 'confirmed_events')} "
+                    f"| {diag_mean(cond, p, 'dropped_candidates')} |")
         lines.append("\n### Paired comparisons (success-rate deltas, pp)\n")
         lines.append("| condition | comparison | Δ pp | 95% CI pp |")
         lines.append("|---|---:|---:|---:|")

@@ -1,46 +1,40 @@
-# METARGON v0.11 — çalışma günlüğü / açık işler
+# METARGON v0.11 — çalışma günlüğü / durum
 
-**Tarih:** 8 Kasım 2026, gece (WIP checkpoint — 02:00)
 **Dal:** `research/v11-noise` (main'e merge edilmedi)
 
-## Bugün yapılanlar
-1. Gürültü teşhisi (v0.10): v10 4.3× sahte olay inanıyor; doğrulanmış
-   hipotezlerin ~%96'sı sahte; replay ~7k uygulama/bölüm ile amplifikasyon.
-   → `results/v11/diagnostics_noise_v10.json`
-2. v0.11 mekanizması (yalnızca kamu bilgisi, aile-agnostik):
-   - Doğrulanmış olay akışı (`robust_belief.py`): 2 ardışık tutarlı okuma
-     veya hareket kanıtı; aynı yönlü dedupe penceresi; tek bitlik
-     hatalar düşürülüyor.
-   - Kesinlik-ağırlıklı kanıt (`compositional_memory_v10.py`): bağlam
-     üyeliği filtrelenmez, ağırlık = stable sensör oranı (min 0.25).
-   - Replay modları: `on` (v10 mirası), `off`, `filtered` (önerilen),
-     `weighted`.
-   - Nonevent kapısı (kararsız kapıda çelişki sayımı yok), koruma
-     iyileştirmesi (son olay kredisi kaldırıldı).
-3. Yeni ajan: `metargon_v11.py` (MetargonV10 alt sınıfı; ablasyon
-   bayrakları `-cf`, `-ct`, `-rp`, `-rw`).
-4. Testler: robust belief 8/8, v11 ajanı 6/6, seçili v10 regresyonları
-   geçti.
-5. Ön ölçümler (aynı tohumlar, gürültü): v11 ~%90 başarı (v10 %76.7);
-   sahte doğrulama 44.9 → 7.3/bölüm; replay 7171 → 482/bölüm.
+## Sonuçlar (resmi, 8 tohum × 100 bölüm)
 
-## Yarın kalan işler
-- [ ] **Resmi eşleştirilmiş koşular (YENİ KODLA):** önceki arka plan
-      koşusu eski kodla başlamıştı → geçersiz. Şunları sıralı koş:
-      1. `F: 7 koşul × 8 tohum × 100 bölüm` (`benchmark_v11.py --parallel`)
-      2. `H: stable,novel × 8×100`
-      3. `bellek örneklemi: stable,noisy × 2×20` (--json ayrı)
-- [ ] `v11_postprocess.py` ile `benchmark_table_v11.md` ve `_h.md`
-      tablolarını üret; `docs/RESEARCH_V11.md`'deki yer tutucuları
-      doldur.
-- [ ] Ablasyon tablosu (clean/noisy için -cf/-ct/-rp/-rw) + paired CI.
-- [ ] Tam Python test paketi (`unittest discover -s python`).
-- [ ] Raporu finalize et; commit + push; bağımsız PR aç (main'e
-      merge yok).
+### F ailesi (7 koşul)
+| koşul | v0.10 | v0.11 | Bayes | v11−v10 | v11−Bayes |
+|---|---:|---:|---:|---:|---:|
+| stable | 80.62 | 74.62 | 77.50 | −6.00 | −2.88 |
+| shift | 86.88 | 86.25 | 80.62 | −0.63 | +5.62 |
+| rapid_shift | 83.62 | 86.50 | 76.88 | +2.88 | +9.62 |
+| iid | 67.75 | 68.25 | 79.00 | +0.50 | −10.75 |
+| novel | 89.75 | 86.75 | 78.50 | −3.00 | +8.25 |
+| **noisy_obs** | 45.12 | **84.88** | 73.12 | **+39.75** | **+11.75** |
+| tight_budget | 82.62 | 85.88 | 64.88 | +3.25 | +21.00 |
 
-## Notlar
-- Geçici hata ayıklama script'leri (`dbg_*.py`, `smoke_v11.py`) bu
-  commit'e dahil edilmedi.
-- Bayes'e dokunulmadı (zayıflatma yasağı korundu).
-- `results/v11/` yalnızca teşhis JSON'ları içeriyor; resmi summary'lar
-  henüz yok.
+### H ailesi (yapısal yenilik)
+| koşul | v0.10 | v0.11 | Bayes | v11−v10 | v11−Bayes |
+|---|---:|---:|---:|---:|---:|
+| stable | 79.88 | 68.00 | 66.88 | −11.88 | +1.13 |
+| novel | 79.88 | 74.25 | 68.12 | −5.62 | +6.13 |
+
+### Gürültü ablasyonları (F, noisy_obs)
+| varyant | başarı | vs v11 |
+|---|---:|---:|
+| v11 (filtered replay) | 84.88 | — |
+| -cf (onay yok) | 73.12 | +11.75 |
+| -ct (kesinlik yok) | 86.62 | −1.75 |
+| -rp (replay yok) | 80.50 | +4.37 |
+| -rw (replay ağırlıklı) | 79.62 | +5.25 |
+
+Teşhis: sahte doğrulama 44.9 → 7.3/ep; replay 7171 → 482/ep; verified
+47.5 → 9.0/seed-run; CPU noisy 151 s → 57 s; peak bellek 0.23 → 0.13 MB.
+
+## Durum
+- [x] Teşhis + mekanizma + testler (22/22 hızlı; tam paket arka planda)
+- [x] Resmi F/H/bellek koşuları (exit 0) + tablolar + `RESEARCH_V11.md`
+- [ ] Tam test paketi sonucu → commit + push → PR (token yok, kullanıcı açacak)
+- [ ] İsteğe bağlı: -cf/-ct'nin F-stable'daki nötrlüğü not edildi (rapor §7)

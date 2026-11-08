@@ -1,0 +1,811 @@
+{
+  "metadata": {
+    "name": "METARGON",
+    "version": "0.11",
+    "seeds": 2,
+    "episodes_per_seed": 20,
+    "conditions": [
+      "stable",
+      "noisy_obs"
+    ],
+    "family": "f",
+    "policies": [
+      "metargon10",
+      "metargon11",
+      "metargon11-cf",
+      "metargon11-ct",
+      "metargon11-rp",
+      "metargon11-rw",
+      "bayes",
+      "oracle"
+    ],
+    "deployable_ranking": [
+      "metargon10",
+      "metargon11",
+      "metargon11-cf",
+      "metargon11-ct",
+      "metargon11-rp",
+      "metargon11-rw",
+      "bayes",
+      "oracle"
+    ],
+    "same_pre_generated_worlds": true,
+    "oracle_has_hidden_config": true
+  },
+  "summary": {
+    "stable": {
+      "metargon10": {
+        "success_rate": 0.725,
+        "mean_steps": 34.525,
+        "invalid_actions": 0.0,
+        "door_events_total": 31.5,
+        "mean_first_event_step": 4.9,
+        "cpu_s": 44.82666625000002,
+        "peak_mem_mb": 0.230955
+      },
+      "metargon11": {
+        "success_rate": 0.725,
+        "mean_steps": 34.325,
+        "invalid_actions": 0.0,
+        "door_events_total": 29.0,
+        "mean_first_event_step": 5.111111111111111,
+        "cpu_s": 33.271958350000205,
+        "peak_mem_mb": 0.1326675
+      },
+      "metargon11-cf": {
+        "success_rate": 0.725,
+        "mean_steps": 34.275,
+        "invalid_actions": 0.0,
+        "door_events_total": 29.0,
+        "mean_first_event_step": 5.111111111111111,
+        "cpu_s": 34.67882239999972,
+        "peak_mem_mb": 0.282678
+      },
+      "metargon11-ct": {
+        "success_rate": 0.725,
+        "mean_steps": 34.325,
+        "invalid_actions": 0.0,
+        "door_events_total": 29.0,
+        "mean_first_event_step": 5.111111111111111,
+        "cpu_s": 34.16052585000034,
+        "peak_mem_mb": 0.1307145
+      },
+      "metargon11-rp": {
+        "success_rate": 0.725,
+        "mean_steps": 34.325,
+        "invalid_actions": 0.0,
+        "door_events_total": 29.0,
+        "mean_first_event_step": 5.111111111111111,
+        "cpu_s": 30.238422499999615,
+        "peak_mem_mb": 0.1293245
+      },
+      "metargon11-rw": {
+        "success_rate": 0.725,
+        "mean_steps": 34.325,
+        "invalid_actions": 0.0,
+        "door_events_total": 29.0,
+        "mean_first_event_step": 5.111111111111111,
+        "cpu_s": 27.702241250000498,
+        "peak_mem_mb": 0.1300005
+      },
+      "bayes": {
+        "success_rate": 0.825,
+        "mean_steps": 42.775000000000006,
+        "invalid_actions": 0.0,
+        "door_events_total": 57.5,
+        "mean_first_event_step": 4.117647058823529,
+        "cpu_s": 10.479582949999894,
+        "peak_mem_mb": 0.481316
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "mean_steps": 16.5,
+        "invalid_actions": 0.0,
+        "door_events_total": 40.0,
+        "mean_first_event_step": 3.0,
+        "cpu_s": 0.15476895000074364,
+        "peak_mem_mb": 0.092844
+      },
+      "comparison:metargon11_minus_metargon10": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparison:metargon11_minus_bayes": {
+        "success_delta": -0.09999999999999995,
+        "paired_bootstrap_95pct": [
+          -0.24999999999999994,
+          0.050000000000000044
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-cf": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-ct": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-rp": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-rw": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "noisy_obs": {
+      "metargon10": {
+        "success_rate": 0.475,
+        "mean_steps": 55.7,
+        "invalid_actions": 3.5,
+        "door_events_total": 44.0,
+        "mean_first_event_step": 8.625,
+        "cpu_s": 59.46330154999987,
+        "peak_mem_mb": 1.567999
+      },
+      "metargon11": {
+        "success_rate": 0.6,
+        "mean_steps": 47.8,
+        "invalid_actions": 11.5,
+        "door_events_total": 47.0,
+        "mean_first_event_step": 8.90909090909091,
+        "cpu_s": 25.2899931500001,
+        "peak_mem_mb": 0.9833405
+      },
+      "metargon11-cf": {
+        "success_rate": 0.675,
+        "mean_steps": 42.925,
+        "invalid_actions": 1.5,
+        "door_events_total": 44.5,
+        "mean_first_event_step": 6.454545454545454,
+        "cpu_s": 38.56685150000021,
+        "peak_mem_mb": 0.9187615
+      },
+      "metargon11-ct": {
+        "success_rate": 0.875,
+        "mean_steps": 31.0,
+        "invalid_actions": 5.5,
+        "door_events_total": 42.0,
+        "mean_first_event_step": 6.764705882352941,
+        "cpu_s": 11.74784900000077,
+        "peak_mem_mb": 0.6542615
+      },
+      "metargon11-rp": {
+        "success_rate": 0.675,
+        "mean_steps": 38.55,
+        "invalid_actions": 10.0,
+        "door_events_total": 32.5,
+        "mean_first_event_step": 6.2,
+        "cpu_s": 27.60658204999936,
+        "peak_mem_mb": 0.7141805
+      },
+      "metargon11-rw": {
+        "success_rate": 0.85,
+        "mean_steps": 31.2,
+        "invalid_actions": 7.0,
+        "door_events_total": 39.0,
+        "mean_first_event_step": 8.75,
+        "cpu_s": 12.455512500000168,
+        "peak_mem_mb": 0.504274
+      },
+      "bayes": {
+        "success_rate": 0.725,
+        "mean_steps": 44.099999999999994,
+        "invalid_actions": 9.5,
+        "door_events_total": 49.5,
+        "mean_first_event_step": 3.0625,
+        "cpu_s": 12.047970050000458,
+        "peak_mem_mb": 0.63538
+      },
+      "oracle": {
+        "success_rate": 0.975,
+        "mean_steps": 19.95,
+        "invalid_actions": 1.0,
+        "door_events_total": 43.0,
+        "mean_first_event_step": 3.0,
+        "cpu_s": 0.655778299999838,
+        "peak_mem_mb": 0.123492
+      },
+      "comparison:metargon11_minus_metargon10": {
+        "success_delta": 0.12499999999999999,
+        "paired_bootstrap_95pct": [
+          0.09999999999999998,
+          0.15
+        ]
+      },
+      "comparison:metargon11_minus_bayes": {
+        "success_delta": -0.125,
+        "paired_bootstrap_95pct": [
+          -0.35,
+          0.09999999999999998
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-cf": {
+        "success_delta": -0.07500000000000001,
+        "paired_bootstrap_95pct": [
+          -0.09999999999999998,
+          -0.050000000000000044
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-ct": {
+        "success_delta": -0.275,
+        "paired_bootstrap_95pct": [
+          -0.55,
+          0.0
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-rp": {
+        "success_delta": -0.07500000000000001,
+        "paired_bootstrap_95pct": [
+          -0.15000000000000002,
+          0.0
+        ]
+      },
+      "comparison:metargon11_minus_metargon11-rw": {
+        "success_delta": -0.25,
+        "paired_bootstrap_95pct": [
+          -0.5,
+          0.0
+        ]
+      }
+    }
+  },
+  "raw": {
+    "stable": [
+      {
+        "metargon10": {
+          "success_rate": 0.45,
+          "mean_steps": 54.95,
+          "invalid_actions": 0,
+          "door_events_total": 23,
+          "mean_first_event_step": 7.8,
+          "cpu_s": 87.10134440000002,
+          "peak_mem_bytes": 292403,
+          "planner_ops": 184331,
+          "plan_calls": 3367,
+          "hypotheses_generated": 69,
+          "verified": 22,
+          "contradicted": 28,
+          "evictions": 0,
+          "replay_applied": 360,
+          "confirmed_events": null,
+          "dropped_candidates": null,
+          "belief_corrections": 3
+        },
+        "metargon11": {
+          "success_rate": 0.45,
+          "mean_steps": 54.45,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 8.222222222222221,
+          "cpu_s": 64.89442220000092,
+          "peak_mem_bytes": 176517,
+          "planner_ops": 214788,
+          "plan_calls": 3863,
+          "hypotheses_generated": 31,
+          "verified": 6,
+          "contradicted": 4,
+          "evictions": 0,
+          "replay_applied": 136,
+          "confirmed_events": 18,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-cf": {
+          "success_rate": 0.45,
+          "mean_steps": 54.45,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 8.222222222222221,
+          "cpu_s": 66.77402649999931,
+          "peak_mem_bytes": 476896,
+          "planner_ops": 214766,
+          "plan_calls": 3863,
+          "hypotheses_generated": 31,
+          "verified": 6,
+          "contradicted": 4,
+          "evictions": 0,
+          "replay_applied": 136,
+          "confirmed_events": 0,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-ct": {
+          "success_rate": 0.45,
+          "mean_steps": 54.45,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 8.222222222222221,
+          "cpu_s": 66.770144600001,
+          "peak_mem_bytes": 176753,
+          "planner_ops": 214788,
+          "plan_calls": 3863,
+          "hypotheses_generated": 31,
+          "verified": 6,
+          "contradicted": 4,
+          "evictions": 0,
+          "replay_applied": 136,
+          "confirmed_events": 18,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-rp": {
+          "success_rate": 0.45,
+          "mean_steps": 54.45,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 8.222222222222221,
+          "cpu_s": 58.98607929999889,
+          "peak_mem_bytes": 171576,
+          "planner_ops": 214788,
+          "plan_calls": 3863,
+          "hypotheses_generated": 31,
+          "verified": 0,
+          "contradicted": 4,
+          "evictions": 0,
+          "replay_applied": 0,
+          "confirmed_events": 18,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-rw": {
+          "success_rate": 0.45,
+          "mean_steps": 54.45,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 8.222222222222221,
+          "cpu_s": 53.96907910000118,
+          "peak_mem_bytes": 173013,
+          "planner_ops": 214788,
+          "plan_calls": 3863,
+          "hypotheses_generated": 31,
+          "verified": 6,
+          "contradicted": 4,
+          "evictions": 0,
+          "replay_applied": 136,
+          "confirmed_events": 18,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "bayes": {
+          "success_rate": 0.7,
+          "mean_steps": 59.2,
+          "invalid_actions": 0,
+          "door_events_total": 58,
+          "mean_first_event_step": 6.235294117647059,
+          "cpu_s": 11.712138200000481,
+          "peak_mem_bytes": 717376
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 19.0,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 4.0,
+          "cpu_s": 0.09689290000096662,
+          "peak_mem_bytes": 106528
+        }
+      },
+      {
+        "metargon10": {
+          "success_rate": 1.0,
+          "mean_steps": 14.1,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 2.551988100000017,
+          "peak_mem_bytes": 169507,
+          "planner_ops": 3915,
+          "plan_calls": 137,
+          "hypotheses_generated": 13,
+          "verified": 13,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 625,
+          "confirmed_events": null,
+          "dropped_candidates": null,
+          "belief_corrections": 0
+        },
+        "metargon11": {
+          "success_rate": 1.0,
+          "mean_steps": 14.2,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 1.6494944999994914,
+          "peak_mem_bytes": 88818,
+          "planner_ops": 1559,
+          "plan_calls": 99,
+          "hypotheses_generated": 20,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 307,
+          "confirmed_events": 40,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-cf": {
+          "success_rate": 1.0,
+          "mean_steps": 14.1,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 2.5836183000001256,
+          "peak_mem_bytes": 88460,
+          "planner_ops": 3921,
+          "plan_calls": 156,
+          "hypotheses_generated": 13,
+          "verified": 13,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 307,
+          "confirmed_events": 0,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-ct": {
+          "success_rate": 1.0,
+          "mean_steps": 14.2,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 1.5509070999996766,
+          "peak_mem_bytes": 84676,
+          "planner_ops": 1559,
+          "plan_calls": 99,
+          "hypotheses_generated": 20,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 307,
+          "confirmed_events": 40,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-rp": {
+          "success_rate": 1.0,
+          "mean_steps": 14.2,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 1.4907657000003383,
+          "peak_mem_bytes": 87073,
+          "planner_ops": 1559,
+          "plan_calls": 99,
+          "hypotheses_generated": 20,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 0,
+          "confirmed_events": 40,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "metargon11-rw": {
+          "success_rate": 1.0,
+          "mean_steps": 14.2,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 1.4354033999998137,
+          "peak_mem_bytes": 86988,
+          "planner_ops": 1559,
+          "plan_calls": 99,
+          "hypotheses_generated": 20,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 307,
+          "confirmed_events": 40,
+          "dropped_candidates": 0,
+          "belief_corrections": 0
+        },
+        "bayes": {
+          "success_rate": 0.95,
+          "mean_steps": 26.35,
+          "invalid_actions": 0,
+          "door_events_total": 57,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 9.247027699999308,
+          "peak_mem_bytes": 245256
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 14.0,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 0.21264500000052067,
+          "peak_mem_bytes": 79160
+        }
+      }
+    ],
+    "noisy_obs": [
+      {
+        "metargon10": {
+          "success_rate": 0.1,
+          "mean_steps": 77.7,
+          "invalid_actions": 4,
+          "door_events_total": 35,
+          "mean_first_event_step": 15.25,
+          "cpu_s": 93.38517789999969,
+          "peak_mem_bytes": 2140719,
+          "planner_ops": 95064,
+          "plan_calls": 4625,
+          "hypotheses_generated": 608,
+          "verified": 38,
+          "contradicted": 6,
+          "evictions": 480,
+          "replay_applied": 7201,
+          "confirmed_events": null,
+          "dropped_candidates": null,
+          "belief_corrections": 17
+        },
+        "metargon11": {
+          "success_rate": 0.25,
+          "mean_steps": 75.2,
+          "invalid_actions": 22,
+          "door_events_total": 53,
+          "mean_first_event_step": 15.818181818181818,
+          "cpu_s": 43.798213699999906,
+          "peak_mem_bytes": 1277506,
+          "planner_ops": 83984,
+          "plan_calls": 1713,
+          "hypotheses_generated": 121,
+          "verified": 7,
+          "contradicted": 55,
+          "evictions": 0,
+          "replay_applied": 745,
+          "confirmed_events": 95,
+          "dropped_candidates": 8,
+          "belief_corrections": 7
+        },
+        "metargon11-cf": {
+          "success_rate": 0.35,
+          "mean_steps": 68.55,
+          "invalid_actions": 3,
+          "door_events_total": 49,
+          "mean_first_event_step": 10.909090909090908,
+          "cpu_s": 71.2956737000004,
+          "peak_mem_bytes": 1400448,
+          "planner_ops": 140678,
+          "plan_calls": 2572,
+          "hypotheses_generated": 526,
+          "verified": 36,
+          "contradicted": 28,
+          "evictions": 398,
+          "replay_applied": 3225,
+          "confirmed_events": 0,
+          "dropped_candidates": 6,
+          "belief_corrections": 7
+        },
+        "metargon11-ct": {
+          "success_rate": 0.8,
+          "mean_steps": 43.9,
+          "invalid_actions": 10,
+          "door_events_total": 43,
+          "mean_first_event_step": 11.529411764705882,
+          "cpu_s": 17.206299700001182,
+          "peak_mem_bytes": 1080216,
+          "planner_ops": 39170,
+          "plan_calls": 919,
+          "hypotheses_generated": 169,
+          "verified": 18,
+          "contradicted": 24,
+          "evictions": 41,
+          "replay_applied": 569,
+          "confirmed_events": 73,
+          "dropped_candidates": 4,
+          "belief_corrections": 3
+        },
+        "metargon11-rp": {
+          "success_rate": 0.4,
+          "mean_steps": 59.0,
+          "invalid_actions": 19,
+          "door_events_total": 24,
+          "mean_first_event_step": 10.4,
+          "cpu_s": 48.95292589999917,
+          "peak_mem_bytes": 1201425,
+          "planner_ops": 88552,
+          "plan_calls": 2709,
+          "hypotheses_generated": 124,
+          "verified": 7,
+          "contradicted": 6,
+          "evictions": 0,
+          "replay_applied": 0,
+          "confirmed_events": 55,
+          "dropped_candidates": 10,
+          "belief_corrections": 3
+        },
+        "metargon11-rw": {
+          "success_rate": 0.75,
+          "mean_steps": 44.3,
+          "invalid_actions": 13,
+          "door_events_total": 37,
+          "mean_first_event_step": 15.5,
+          "cpu_s": 18.758872399999746,
+          "peak_mem_bytes": 780305,
+          "planner_ops": 41317,
+          "plan_calls": 1112,
+          "hypotheses_generated": 123,
+          "verified": 16,
+          "contradicted": 38,
+          "evictions": 0,
+          "replay_applied": 457,
+          "confirmed_events": 59,
+          "dropped_candidates": 3,
+          "belief_corrections": 1
+        },
+        "bayes": {
+          "success_rate": 0.6,
+          "mean_steps": 57.3,
+          "invalid_actions": 13,
+          "door_events_total": 50,
+          "mean_first_event_step": 4.125,
+          "cpu_s": 14.327691000000414,
+          "peak_mem_bytes": 734976
+        },
+        "oracle": {
+          "success_rate": 0.95,
+          "mean_steps": 25.25,
+          "invalid_actions": 1,
+          "door_events_total": 44,
+          "mean_first_event_step": 4.0,
+          "cpu_s": 0.8547058999993169,
+          "peak_mem_bytes": 157088
+        }
+      },
+      {
+        "metargon10": {
+          "success_rate": 0.85,
+          "mean_steps": 33.7,
+          "invalid_actions": 3,
+          "door_events_total": 53,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 25.54142520000005,
+          "peak_mem_bytes": 995279,
+          "planner_ops": 28467,
+          "plan_calls": 1256,
+          "hypotheses_generated": 193,
+          "verified": 22,
+          "contradicted": 15,
+          "evictions": 65,
+          "replay_applied": 3681,
+          "confirmed_events": null,
+          "dropped_candidates": null,
+          "belief_corrections": 0
+        },
+        "metargon11": {
+          "success_rate": 0.95,
+          "mean_steps": 20.4,
+          "invalid_actions": 1,
+          "door_events_total": 41,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 6.781772600000295,
+          "peak_mem_bytes": 689175,
+          "planner_ops": 11433,
+          "plan_calls": 221,
+          "hypotheses_generated": 51,
+          "verified": 8,
+          "contradicted": 3,
+          "evictions": 0,
+          "replay_applied": 328,
+          "confirmed_events": 42,
+          "dropped_candidates": 4,
+          "belief_corrections": 0
+        },
+        "metargon11-cf": {
+          "success_rate": 1.0,
+          "mean_steps": 17.3,
+          "invalid_actions": 0,
+          "door_events_total": 40,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 5.8380293000000165,
+          "peak_mem_bytes": 437075,
+          "planner_ops": 8847,
+          "plan_calls": 193,
+          "hypotheses_generated": 96,
+          "verified": 25,
+          "contradicted": 23,
+          "evictions": 0,
+          "replay_applied": 929,
+          "confirmed_events": 0,
+          "dropped_candidates": 3,
+          "belief_corrections": 0
+        },
+        "metargon11-ct": {
+          "success_rate": 0.95,
+          "mean_steps": 18.1,
+          "invalid_actions": 1,
+          "door_events_total": 41,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 6.289398300000357,
+          "peak_mem_bytes": 228307,
+          "planner_ops": 10605,
+          "plan_calls": 426,
+          "hypotheses_generated": 60,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 360,
+          "confirmed_events": 46,
+          "dropped_candidates": 3,
+          "belief_corrections": 1
+        },
+        "metargon11-rp": {
+          "success_rate": 0.95,
+          "mean_steps": 18.1,
+          "invalid_actions": 1,
+          "door_events_total": 41,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 6.260238199999549,
+          "peak_mem_bytes": 226936,
+          "planner_ops": 10602,
+          "plan_calls": 424,
+          "hypotheses_generated": 60,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 0,
+          "confirmed_events": 46,
+          "dropped_candidates": 3,
+          "belief_corrections": 1
+        },
+        "metargon11-rw": {
+          "success_rate": 0.95,
+          "mean_steps": 18.1,
+          "invalid_actions": 1,
+          "door_events_total": 41,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 6.152152600000591,
+          "peak_mem_bytes": 228243,
+          "planner_ops": 10602,
+          "plan_calls": 424,
+          "hypotheses_generated": 60,
+          "verified": 20,
+          "contradicted": 0,
+          "evictions": 0,
+          "replay_applied": 360,
+          "confirmed_events": 46,
+          "dropped_candidates": 3,
+          "belief_corrections": 1
+        },
+        "bayes": {
+          "success_rate": 0.85,
+          "mean_steps": 30.9,
+          "invalid_actions": 6,
+          "door_events_total": 49,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 9.768249100000503,
+          "peak_mem_bytes": 535784
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 14.65,
+          "invalid_actions": 1,
+          "door_events_total": 42,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 0.4568507000003592,
+          "peak_mem_bytes": 89896
+        }
+      }
+    ]
+  }
+}
