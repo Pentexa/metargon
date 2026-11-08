@@ -6,3 +6,7 @@ checkpoints/
 results/my_run.json
 results/my_v03.json
 .env
+
+# memory v03 scratch logs
+memory_v03_*.log
+
