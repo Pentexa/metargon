@@ -143,27 +143,90 @@ rules.
 
 ## 4. Results
 
-### 4.1 Family R (sustained-hold)
+Full per-condition tables (all policies, paired bootstrap CIs) are in
+`results/rendered_tables.md`; raw per-seed data is in
+`results/summary_r.json` and `results/summary_l.json`.
 
-> Filled from `results/summary_r.json` after the run.
+### 4.1 Family R (sustained-hold) — success rates
 
-### 4.2 Family L (ordered-sequence)
+| Condition | metargon10 | random / episodic | qlearning | bayes | metargon10-cap | bayes-cap | oracle |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| stable | 50.0% | 3.3% | 0.0% | **83.3%** | 0.0% | 73.3% | 100% |
+| shift | 63.3% | 0.0% | 0.0% | **90.0%** | 30.0% | 33.3% | 100% |
+| novel | 76.7% | 3.3% | 0.0% | **90.0%** | 53.3% | 73.3% | 100% |
+| cross_family | 70.0% | 0.0% | 0.0% | **86.7%** | 50.0% | 36.7% | —¹ |
 
-> Filled from `results/summary_l.json` after the run.
+¹ Oracle excluded from `cross_family` (its plan model is per-family; the
+first half is family F and the second half family R).
+
+Discovery (D1, offline): metargon10 exact-rule 50% (stable), 77%
+(shift/novel), 93% (cross_family); false-verified hypotheses remain
+high (2.1–4.6 per episode). Full v0.10 loses 50pp on stable when compute
+is capped at 120 expansions/decision.
+
+### 4.2 Family L (ordered-sequence) — success rates
+
+| Condition | metargon10 | random / episodic | qlearning | bayes | metargon10-cap | bayes-cap | oracle |
+|---|---:|---:|---:|---:|---:|---:|---:|
+| stable | 33.3% | 0.0% | 0.0% | **43.3%** | 0.0% | 3.3% | 100% |
+| shift | 26.7% | 0.0% | 0.0% | **50.0%** | 0.0% | 0.0% | 100% |
+| novel | 23.3% | 0.0% | 0.0% | **36.7%** | 0.0% | 6.7% | 100% |
+| cross_family | 43.3% | 0.0% | 0.0% | **60.0%** | 23.3% | 10.0% | —¹ |
+
+¹ See note above.
+
+Discovery (D1): metargon10 exact-rule **0.0%** on stable/shift/novel
+(the ordered rule is never identified as an exact antecedent); doors
+open only behaviorally (events > 0). On `cross_family` exact jumps to
+35.7% (family-F half supplies familiar conjunctive context).
 
 ---
 
 ## 5. Positive and negative findings
 
-> Completed after runs.
+**Positive.**
+- v0.10 transfers its causal machinery to a mechanism axis it has never
+  seen (sustained-hold): it achieves 50–77% on family R, far above
+  model-free baselines (~0–3%) and remains competitive with the
+  family-F Bayesian planner on shift/novel (within ~13–27pp).
+- On family R, the student discovers exact D1 rules 50–93% of the time
+  (cross_family best), confirming family-agnostic hypothesis learning is
+  not limited to instantaneous conjunctions.
+- Compute matching matters and is measurable: at 120 expansions/decision
+  the student loses 20–50pp; the Bayes planner loses 10–56pp. The
+  matched-compute arm is a real fairness lever.
+- Model-free baselines (random/episodic/Q-learning) are uniformly at
+  chance on both novel families; the audit confirms the v0.10 advantage
+  over them generalizes.
+
+**Negative (honest).**
+- On family R, v0.10 still does not beat the family-F Bayesian planner on
+  any condition (−13 to −33pp); Bayes's correct model class on F remains
+  a strong prior even when the mechanism is misspecified (its plans
+  incidentally satisfy the hold condition while acting).
+- On family L (ordered-sequence), v0.10's hypothesis language
+  (unordered conjunctive sets) **cannot express the rule**: exact D1
+  discovery is 0.0% on stable/shift/novel. Success (~23–33%) comes from
+  behavior only (opening doors by incidentally satisfying both atoms),
+  not from causal understanding. The family-F Bayes planner also
+  struggles (36–50%), but remains above the student. This is a clean
+  negative result: order-dependent rules are outside the agent's
+  representational capacity.
+- Cap-120 compute budget cripples the student on R (50pp loss on stable);
+  the student's planner is closer to the budget limit than Bayes's.
+- False-verified hypotheses remain a problem under sustained-hold
+  dynamics (2–4.6/ep), indicating evidence accumulation over hold
+  windows is not yet noise-robust.
 
 ---
 
 ## 6. Limitations
 
-- Sample sizes are 6 paired seeds (runtime-constrained); CIs reflect
-  that.
-- The cross-family oracle is excluded (its model is per-family).
+- **Sample size:** 2 paired seeds × 15 episodes per condition; bootstrap
+  CIs are wide. Numbers are directional, not definitive.
+- `cross_family` has no oracle row (by design).
+- Compute arm uses an expansion budget of 120 per decision (arbitrary
+  but identical across policies); results are sensitive to this value.
 - Academy results remain separate and are not compared with research
   benchmarks (different environments/protocols).
 - Hash-seed sensitive bookkeeping: runs are bit-reproducible under a

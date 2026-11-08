@@ -13,6 +13,9 @@ import json
 import sys
 from pathlib import Path
 
+if sys.stdout.encoding and "utf-8" not in sys.stdout.encoding.lower():
+    sys.stdout.reconfigure(encoding="utf-8")
+
 DEPLOYABLE = ("metargon10", "random", "episodic", "qlearning", "bayes",
               "metargon10-cap", "qlearning-cap", "bayes-cap")
 
