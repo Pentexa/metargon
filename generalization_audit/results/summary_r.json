@@ -1,0 +1,1654 @@
+{
+  "metadata": {
+    "name": "METARGON generalization audit",
+    "version": "2.0",
+    "family": "r",
+    "frozen_file": "generalization_audit\\configs\\frozen_r.json",
+    "frozen_sha": "239f16dba15b9730",
+    "seeds": 2,
+    "episodes_per_seed": 15,
+    "conditions": [
+      "stable",
+      "shift",
+      "novel",
+      "cross_family"
+    ],
+    "policies": [
+      "metargon10",
+      "random",
+      "episodic",
+      "qlearning",
+      "bayes",
+      "metargon10-cap",
+      "qlearning-cap",
+      "bayes-cap",
+      "oracle"
+    ],
+    "deployable_ranking": [
+      "metargon10",
+      "random",
+      "episodic",
+      "qlearning",
+      "bayes",
+      "metargon10-cap",
+      "qlearning-cap",
+      "bayes-cap"
+    ],
+    "same_pre_generated_worlds": true,
+    "oracle_has_hidden_config": true,
+    "compute": "matched action budgets; matched-compute arm with per-decision expansion cap 120"
+  },
+  "summary": {
+    "stable": {
+      "metargon10": {
+        "success_rate": 0.5,
+        "mean_steps": 54.4,
+        "invalid_actions": 0.0,
+        "door_events_total": 22.5,
+        "mean_first_event_step": 5.5,
+        "cpu_s": 9.228558799999973,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.5,
+            "covered_rate": 0.5,
+            "false_verified_per_episode": 0.0
+          },
+          "D2": {
+            "exact_rate": 1.0,
+            "covered_rate": 1.0,
+            "false_verified_per_episode": 2.8333333333333335
+          }
+        }
+      },
+      "random": {
+        "success_rate": 0.03333333333333333,
+        "mean_steps": 79.63333333333333,
+        "invalid_actions": 0.0,
+        "door_events_total": 19.0,
+        "mean_first_event_step": 26.833333333333332,
+        "cpu_s": 0.2552937500004191,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.03333333333333333,
+        "mean_steps": 79.63333333333333,
+        "invalid_actions": 0.0,
+        "door_events_total": 19.0,
+        "mean_first_event_step": 26.833333333333332,
+        "cpu_s": 0.3093932499996299,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 24.0,
+        "mean_first_event_step": 17.357142857142858,
+        "cpu_s": 0.3204352499997185,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.8333333333333333,
+        "mean_steps": 43.099999999999994,
+        "invalid_actions": 0.0,
+        "door_events_total": 32.5,
+        "mean_first_event_step": 8.833333333333332,
+        "cpu_s": 3.986596549999831,
+        "peak_mem_mb": null
+      },
+      "metargon10-cap": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 7.5,
+        "mean_first_event_step": 3.0,
+        "cpu_s": 18.280487349999476,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.0,
+            "covered_rate": 0.0,
+            "false_verified_per_episode": 0.0
+          },
+          "D2": {
+            "exact_rate": 0.5,
+            "covered_rate": 0.5,
+            "false_verified_per_episode": 2.8333333333333335
+          }
+        }
+      },
+      "qlearning-cap": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 24.0,
+        "mean_first_event_step": 17.357142857142858,
+        "cpu_s": 0.3345269000001281,
+        "peak_mem_mb": null
+      },
+      "bayes-cap": {
+        "success_rate": 0.7333333333333333,
+        "mean_steps": 58.03333333333333,
+        "invalid_actions": 0.0,
+        "door_events_total": 31.5,
+        "mean_first_event_step": 21.928571428571427,
+        "cpu_s": 11.84834624999985,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "mean_steps": 16.5,
+        "invalid_actions": 0.0,
+        "door_events_total": 30.0,
+        "mean_first_event_step": 5.5,
+        "cpu_s": 0.06005200000026889,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon10_minus_random": {
+        "success_delta": 0.4666666666666667,
+        "paired_bootstrap_95pct": [
+          -0.06666666666666667,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_episodic": {
+        "success_delta": 0.4666666666666667,
+        "paired_bootstrap_95pct": [
+          -0.06666666666666667,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_qlearning": {
+        "success_delta": 0.5,
+        "paired_bootstrap_95pct": [
+          0.0,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_bayes": {
+        "success_delta": -0.3333333333333333,
+        "paired_bootstrap_95pct": [
+          -0.7333333333333333,
+          0.06666666666666665
+        ]
+      },
+      "comparison:metargon10_minus_metargon10-cap": {
+        "success_delta": 0.5,
+        "paired_bootstrap_95pct": [
+          0.0,
+          1.0
+        ]
+      },
+      "comparison:bayes_minus_bayes-cap": {
+        "success_delta": 0.10000000000000003,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.20000000000000007
+        ]
+      },
+      "comparison:qlearning_minus_qlearning-cap": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "shift": {
+      "metargon10": {
+        "success_rate": 0.6333333333333333,
+        "mean_steps": 44.266666666666666,
+        "invalid_actions": 0.0,
+        "door_events_total": 22.5,
+        "mean_first_event_step": 4.53030303030303,
+        "cpu_s": 10.496716700000434,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.7666666666666666,
+            "covered_rate": 0.7666666666666666,
+            "false_verified_per_episode": 2.1333333333333333
+          },
+          "D2": {
+            "exact_rate": 0.7666666666666666,
+            "covered_rate": 0.9666666666666667,
+            "false_verified_per_episode": 6.733333333333333
+          }
+        },
+        "forgetting": {
+          "D1": null,
+          "D2": null
+        },
+        "adaptation": {
+          "post_success_rate": 0.75,
+          "delta": 0.25,
+          "first_recovery_episode": 7.0
+        }
+      },
+      "random": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 17.0,
+        "mean_first_event_step": 13.40909090909091,
+        "cpu_s": 0.33952819999967687,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 17.0,
+        "mean_first_event_step": 13.40909090909091,
+        "cpu_s": 0.2939978500003235,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 17.5,
+        "mean_first_event_step": 8.166666666666668,
+        "cpu_s": 0.3148489000000154,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.9,
+        "mean_steps": 34.766666666666666,
+        "invalid_actions": 0.0,
+        "door_events_total": 32.0,
+        "mean_first_event_step": 6.771428571428572,
+        "cpu_s": 3.4101637000003393,
+        "peak_mem_mb": null
+      },
+      "metargon10-cap": {
+        "success_rate": 0.3,
+        "mean_steps": 60.93333333333334,
+        "invalid_actions": 0.0,
+        "door_events_total": 12.5,
+        "mean_first_event_step": 3.125,
+        "cpu_s": 16.868654450000122,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.26666666666666666,
+            "covered_rate": 0.26666666666666666,
+            "false_verified_per_episode": 0.8
+          },
+          "D2": {
+            "exact_rate": 0.26666666666666666,
+            "covered_rate": 0.26666666666666666,
+            "false_verified_per_episode": 1.6
+          }
+        },
+        "forgetting": {
+          "D1": null,
+          "D2": null
+        },
+        "adaptation": {
+          "post_success_rate": 0.5625,
+          "delta": 0.5625,
+          "first_recovery_episode": 7.0
+        }
+      },
+      "qlearning-cap": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 17.5,
+        "mean_first_event_step": 8.166666666666668,
+        "cpu_s": 0.3205734999996821,
+        "peak_mem_mb": null
+      },
+      "bayes-cap": {
+        "success_rate": 0.33333333333333337,
+        "mean_steps": 69.9,
+        "invalid_actions": 0.0,
+        "door_events_total": 26.0,
+        "mean_first_event_step": 12.814285714285713,
+        "cpu_s": 13.635169150000365,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "mean_steps": 16.233333333333334,
+        "invalid_actions": 0.0,
+        "door_events_total": 30.0,
+        "mean_first_event_step": 4.699999999999999,
+        "cpu_s": 0.09383035000018936,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon10_minus_random": {
+        "success_delta": 0.6333333333333333,
+        "paired_bootstrap_95pct": [
+          0.26666666666666666,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_episodic": {
+        "success_delta": 0.6333333333333333,
+        "paired_bootstrap_95pct": [
+          0.26666666666666666,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_qlearning": {
+        "success_delta": 0.6333333333333333,
+        "paired_bootstrap_95pct": [
+          0.26666666666666666,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_bayes": {
+        "success_delta": -0.2666666666666667,
+        "paired_bootstrap_95pct": [
+          -0.6000000000000001,
+          0.06666666666666665
+        ]
+      },
+      "comparison:metargon10_minus_metargon10-cap": {
+        "success_delta": 0.33333333333333337,
+        "paired_bootstrap_95pct": [
+          0.2,
+          0.4666666666666667
+        ]
+      },
+      "comparison:bayes_minus_bayes-cap": {
+        "success_delta": 0.5666666666666667,
+        "paired_bootstrap_95pct": [
+          0.4666666666666667,
+          0.6666666666666667
+        ]
+      },
+      "comparison:qlearning_minus_qlearning-cap": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "novel": {
+      "metargon10": {
+        "success_rate": 0.7666666666666666,
+        "mean_steps": 38.13333333333333,
+        "invalid_actions": 0.0,
+        "door_events_total": 27.5,
+        "mean_first_event_step": 4.166666666666666,
+        "cpu_s": 5.792234600000029,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.7666666666666666,
+            "covered_rate": 0.7666666666666666,
+            "false_verified_per_episode": 2.6333333333333337
+          },
+          "D2": {
+            "exact_rate": 0.7666666666666666,
+            "covered_rate": 0.7666666666666666,
+            "false_verified_per_episode": 2.2666666666666666
+          }
+        }
+      },
+      "random": {
+        "success_rate": 0.03333333333333333,
+        "mean_steps": 79.96666666666667,
+        "invalid_actions": 0.0,
+        "door_events_total": 27.5,
+        "mean_first_event_step": 9.318181818181818,
+        "cpu_s": 0.3519445500000984,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.03333333333333333,
+        "mean_steps": 79.96666666666667,
+        "invalid_actions": 0.0,
+        "door_events_total": 27.5,
+        "mean_first_event_step": 9.318181818181818,
+        "cpu_s": 0.3566065499994693,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 31.0,
+        "mean_first_event_step": 8.166666666666668,
+        "cpu_s": 0.5037409999999909,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.9,
+        "mean_steps": 39.03333333333333,
+        "invalid_actions": 0.0,
+        "door_events_total": 37.0,
+        "mean_first_event_step": 5.7,
+        "cpu_s": 4.87045124999986,
+        "peak_mem_mb": null
+      },
+      "metargon10-cap": {
+        "success_rate": 0.5333333333333333,
+        "mean_steps": 49.8,
+        "invalid_actions": 0.0,
+        "door_events_total": 19.5,
+        "mean_first_event_step": 3.0,
+        "cpu_s": 9.435527299999649,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.5333333333333333,
+            "covered_rate": 0.5333333333333333,
+            "false_verified_per_episode": 3.2
+          },
+          "D2": {
+            "exact_rate": 0.5333333333333333,
+            "covered_rate": 0.5333333333333333,
+            "false_verified_per_episode": 1.3333333333333333
+          }
+        }
+      },
+      "qlearning-cap": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 31.0,
+        "mean_first_event_step": 8.166666666666668,
+        "cpu_s": 0.3754487999999583,
+        "peak_mem_mb": null
+      },
+      "bayes-cap": {
+        "success_rate": 0.7333333333333334,
+        "mean_steps": 55.266666666666666,
+        "invalid_actions": 0.0,
+        "door_events_total": 34.0,
+        "mean_first_event_step": 11.214285714285714,
+        "cpu_s": 13.958168450000358,
+        "peak_mem_mb": null
+      },
+      "oracle": {
+        "success_rate": 1.0,
+        "mean_steps": 15.966666666666667,
+        "invalid_actions": 0.0,
+        "door_events_total": 30.0,
+        "mean_first_event_step": 4.166666666666666,
+        "cpu_s": 0.236253250000118,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon10_minus_random": {
+        "success_delta": 0.7333333333333334,
+        "paired_bootstrap_95pct": [
+          0.4666666666666667,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_episodic": {
+        "success_delta": 0.7333333333333334,
+        "paired_bootstrap_95pct": [
+          0.4666666666666667,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_qlearning": {
+        "success_delta": 0.7666666666666666,
+        "paired_bootstrap_95pct": [
+          0.5333333333333333,
+          1.0
+        ]
+      },
+      "comparison:metargon10_minus_bayes": {
+        "success_delta": -0.13333333333333336,
+        "paired_bootstrap_95pct": [
+          -0.4,
+          0.1333333333333333
+        ]
+      },
+      "comparison:metargon10_minus_metargon10-cap": {
+        "success_delta": 0.23333333333333334,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.4666666666666667
+        ]
+      },
+      "comparison:bayes_minus_bayes-cap": {
+        "success_delta": 0.16666666666666669,
+        "paired_bootstrap_95pct": [
+          0.1333333333333333,
+          0.20000000000000007
+        ]
+      },
+      "comparison:qlearning_minus_qlearning-cap": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "cross_family": {
+      "metargon10": {
+        "success_rate": 0.7,
+        "mean_steps": 36.400000000000006,
+        "invalid_actions": 0.0,
+        "door_events_total": 23.5,
+        "mean_first_event_step": 4.909090909090909,
+        "cpu_s": 15.359886799999913,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.9333333333333333,
+            "covered_rate": 0.9333333333333333,
+            "false_verified_per_episode": 4.6
+          },
+          "D2": {
+            "exact_rate": 0.5,
+            "covered_rate": 0.5,
+            "false_verified_per_episode": 3.4000000000000004
+          }
+        },
+        "forgetting": {
+          "D1": null,
+          "D2": null
+        },
+        "adaptation": {
+          "post_success_rate": 0.75,
+          "delta": 0.10714285714285715,
+          "first_recovery_episode": 7.5
+        }
+      },
+      "random": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 23.5,
+        "mean_first_event_step": 7.2333333333333325,
+        "cpu_s": 0.2819169499994132,
+        "peak_mem_mb": null
+      },
+      "episodic": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 23.5,
+        "mean_first_event_step": 7.2333333333333325,
+        "cpu_s": 0.23774109999976645,
+        "peak_mem_mb": null
+      },
+      "qlearning": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 9.5,
+        "mean_first_event_step": 2.5,
+        "cpu_s": 0.3460893500000566,
+        "peak_mem_mb": null
+      },
+      "bayes": {
+        "success_rate": 0.8666666666666667,
+        "mean_steps": 38.03333333333333,
+        "invalid_actions": 0.0,
+        "door_events_total": 38.0,
+        "mean_first_event_step": 5.353846153846154,
+        "cpu_s": 3.884171350000088,
+        "peak_mem_mb": null
+      },
+      "metargon10-cap": {
+        "success_rate": 0.5,
+        "mean_steps": 48.8,
+        "invalid_actions": 0.0,
+        "door_events_total": 15.0,
+        "mean_first_event_step": 2.5,
+        "cpu_s": 12.254722299999685,
+        "peak_mem_mb": null,
+        "discovery": {
+          "D1": {
+            "exact_rate": 0.26666666666666666,
+            "covered_rate": 0.26666666666666666,
+            "false_verified_per_episode": 1.6
+          },
+          "D2": {
+            "exact_rate": 0.26666666666666666,
+            "covered_rate": 0.26666666666666666,
+            "false_verified_per_episode": 1.3333333333333333
+          }
+        },
+        "forgetting": {
+          "D1": null,
+          "D2": null
+        },
+        "adaptation": {
+          "post_success_rate": 0.5,
+          "delta": 0.0,
+          "first_recovery_episode": 7.0
+        }
+      },
+      "qlearning-cap": {
+        "success_rate": 0.0,
+        "mean_steps": 80.0,
+        "invalid_actions": 0.0,
+        "door_events_total": 9.5,
+        "mean_first_event_step": 2.5,
+        "cpu_s": 0.3126560499995321,
+        "peak_mem_mb": null
+      },
+      "bayes-cap": {
+        "success_rate": 0.3666666666666667,
+        "mean_steps": 64.93333333333334,
+        "invalid_actions": 0.0,
+        "door_events_total": 24.0,
+        "mean_first_event_step": 4.454545454545455,
+        "cpu_s": 16.02250920000006,
+        "peak_mem_mb": null
+      },
+      "comparison:metargon10_minus_random": {
+        "success_delta": 0.7,
+        "paired_bootstrap_95pct": [
+          0.6666666666666666,
+          0.7333333333333333
+        ]
+      },
+      "comparison:metargon10_minus_episodic": {
+        "success_delta": 0.7,
+        "paired_bootstrap_95pct": [
+          0.6666666666666666,
+          0.7333333333333333
+        ]
+      },
+      "comparison:metargon10_minus_qlearning": {
+        "success_delta": 0.7,
+        "paired_bootstrap_95pct": [
+          0.6666666666666666,
+          0.7333333333333333
+        ]
+      },
+      "comparison:metargon10_minus_bayes": {
+        "success_delta": -0.16666666666666674,
+        "paired_bootstrap_95pct": [
+          -0.20000000000000007,
+          -0.13333333333333341
+        ]
+      },
+      "comparison:metargon10_minus_metargon10-cap": {
+        "success_delta": 0.19999999999999996,
+        "paired_bootstrap_95pct": [
+          0.1333333333333333,
+          0.2666666666666666
+        ]
+      },
+      "comparison:bayes_minus_bayes-cap": {
+        "success_delta": 0.5,
+        "paired_bootstrap_95pct": [
+          0.2666666666666667,
+          0.7333333333333334
+        ]
+      },
+      "comparison:qlearning_minus_qlearning-cap": {
+        "success_delta": 0.0,
+        "paired_bootstrap_95pct": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  },
+  "raw": {
+    "stable": [
+      {
+        "metargon10": {
+          "success_rate": 1.0,
+          "mean_steps": 28.8,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 8.0,
+          "cpu_s": 2.0405313999999635,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 0.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 0.0
+            }
+          }
+        },
+        "random": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 9,
+          "mean_first_event_step": 50.666666666666664,
+          "cpu_s": 0.2616572000006272,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 9,
+          "mean_first_event_step": 50.666666666666664,
+          "cpu_s": 0.2643826999992598,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 25,
+          "mean_first_event_step": 31.714285714285715,
+          "cpu_s": 0.31034120000003895,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.9333333333333333,
+          "mean_steps": 38.666666666666664,
+          "invalid_actions": 0,
+          "door_events_total": 29,
+          "mean_first_event_step": 14.666666666666666,
+          "cpu_s": 3.3815145999997185,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 0,
+          "mean_first_event_step": null,
+          "cpu_s": 24.765081699999428,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            }
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 25,
+          "mean_first_event_step": 31.714285714285715,
+          "cpu_s": 0.3947668999999223,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.7333333333333333,
+          "mean_steps": 61.733333333333334,
+          "invalid_actions": 0,
+          "door_events_total": 33,
+          "mean_first_event_step": 40.857142857142854,
+          "cpu_s": 13.819386699999995,
+          "peak_mem_bytes": null
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 18.0,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 8.0,
+          "cpu_s": 0.08806370000002062,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "metargon10": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 15,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 16.416586199999983,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 5.666666666666667
+            }
+          }
+        },
+        "random": {
+          "success_rate": 0.06666666666666667,
+          "mean_steps": 79.26666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 29,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.248930300000211,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.06666666666666667,
+          "mean_steps": 79.26666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 29,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.35440380000000005,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 23,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.33052929999939806,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.7333333333333333,
+          "mean_steps": 47.53333333333333,
+          "invalid_actions": 0,
+          "door_events_total": 36,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 4.591678499999944,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 15,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 11.795892999999523,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 5.666666666666667
+            }
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 23,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.27428690000033384,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.7333333333333333,
+          "mean_steps": 54.333333333333336,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 9.877305799999704,
+          "peak_mem_bytes": null
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 15.0,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.03204030000051716,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "shift": [
+      {
+        "metargon10": {
+          "success_rate": 1.0,
+          "mean_steps": 24.533333333333335,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 5.333333333333333,
+          "cpu_s": 1.7088165000004665,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 2.6666666666666665
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 5.066666666666666
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 1.0,
+            "post_success_rate": 1.0,
+            "delta": 0.0,
+            "first_recovery_episode": 7
+          }
+        },
+        "random": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 16,
+          "mean_first_event_step": 15.636363636363637,
+          "cpu_s": 0.3175100999997085,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 16,
+          "mean_first_event_step": 15.636363636363637,
+          "cpu_s": 0.3041561999998521,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 24,
+          "mean_first_event_step": 13.333333333333334,
+          "cpu_s": 0.29487109999990935,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.9333333333333333,
+          "mean_steps": 29.733333333333334,
+          "invalid_actions": 0,
+          "door_events_total": 33,
+          "mean_first_event_step": 8.4,
+          "cpu_s": 2.478841900000589,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.5333333333333333,
+          "mean_steps": 45.86666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 16,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 9.307223400000112,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 1.6
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 3.2
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 0.0,
+            "post_success_rate": 1.0,
+            "delta": 1.0,
+            "first_recovery_episode": 7
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 24,
+          "mean_first_event_step": 13.333333333333334,
+          "cpu_s": 0.2700362999994468,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.26666666666666666,
+          "mean_steps": 76.0,
+          "invalid_actions": 0,
+          "door_events_total": 31,
+          "mean_first_event_step": 19.428571428571427,
+          "cpu_s": 15.328404500000033,
+          "peak_mem_bytes": null
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 15.866666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 5.333333333333333,
+          "cpu_s": 0.08977760000016133,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "metargon10": {
+          "success_rate": 0.26666666666666666,
+          "mean_steps": 64.0,
+          "invalid_actions": 0,
+          "door_events_total": 15,
+          "mean_first_event_step": 3.727272727272727,
+          "cpu_s": 19.2846169000004,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 1.6
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.9333333333333333,
+              "false_verified_per_episode": 8.4
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 0.0,
+            "post_success_rate": 0.5,
+            "delta": 0.5,
+            "first_recovery_episode": 7
+          }
+        },
+        "random": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 11.181818181818182,
+          "cpu_s": 0.36154629999964527,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 18,
+          "mean_first_event_step": 11.181818181818182,
+          "cpu_s": 0.28383950000079494,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 11,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.3348267000001215,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.8666666666666667,
+          "mean_steps": 39.8,
+          "invalid_actions": 0,
+          "door_events_total": 31,
+          "mean_first_event_step": 5.142857142857143,
+          "cpu_s": 4.34148550000009,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.06666666666666667,
+          "mean_steps": 76.0,
+          "invalid_actions": 0,
+          "door_events_total": 9,
+          "mean_first_event_step": 3.25,
+          "cpu_s": 24.430085500000132,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 0.0,
+            "post_success_rate": 0.125,
+            "delta": 0.125,
+            "first_recovery_episode": 7
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 11,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.3711106999999174,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.4,
+          "mean_steps": 63.8,
+          "invalid_actions": 0,
+          "door_events_total": 21,
+          "mean_first_event_step": 6.2,
+          "cpu_s": 11.941933800000697,
+          "peak_mem_bytes": null
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 16.6,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 4.066666666666666,
+          "cpu_s": 0.09788310000021738,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "novel": [
+      {
+        "metargon10": {
+          "success_rate": 1.0,
+          "mean_steps": 24.8,
+          "invalid_actions": 0,
+          "door_events_total": 32,
+          "mean_first_event_step": 5.333333333333333,
+          "cpu_s": 2.23169340000004,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 2.066666666666667
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 4.533333333333333
+            }
+          }
+        },
+        "random": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 28,
+          "mean_first_event_step": 15.636363636363637,
+          "cpu_s": 0.35691959999985556,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 28,
+          "mean_first_event_step": 15.636363636363637,
+          "cpu_s": 0.2537003999996159,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 27,
+          "mean_first_event_step": 13.333333333333334,
+          "cpu_s": 0.35851309999998193,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.8666666666666667,
+          "mean_steps": 43.13333333333333,
+          "invalid_actions": 0,
+          "door_events_total": 41,
+          "mean_first_event_step": 8.4,
+          "cpu_s": 4.757744399999865,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.5333333333333333,
+          "mean_steps": 47.6,
+          "invalid_actions": 0,
+          "door_events_total": 16,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 11.511382099999537,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 3.2
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 2.6666666666666665
+            }
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 27,
+          "mean_first_event_step": 13.333333333333334,
+          "cpu_s": 0.3315853000003699,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.6666666666666666,
+          "mean_steps": 59.86666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 35,
+          "mean_first_event_step": 19.428571428571427,
+          "cpu_s": 17.176028800000495,
+          "peak_mem_bytes": null
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 16.933333333333334,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 5.333333333333333,
+          "cpu_s": 0.23738930000035907,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "metargon10": {
+          "success_rate": 0.5333333333333333,
+          "mean_steps": 51.46666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 23,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 9.352775800000018,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 3.2
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 0.0
+            }
+          }
+        },
+        "random": {
+          "success_rate": 0.06666666666666667,
+          "mean_steps": 79.93333333333334,
+          "invalid_actions": 0,
+          "door_events_total": 27,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.3469695000003412,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.06666666666666667,
+          "mean_steps": 79.93333333333334,
+          "invalid_actions": 0,
+          "door_events_total": 27,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.45951269999932265,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 35,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.6489688999999998,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.9333333333333333,
+          "mean_steps": 34.93333333333333,
+          "invalid_actions": 0,
+          "door_events_total": 33,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 4.983158099999855,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.5333333333333333,
+          "mean_steps": 52.0,
+          "invalid_actions": 0,
+          "door_events_total": 23,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 7.3596724999997605,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 3.2
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 0.0
+            }
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 35,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.41931229999954667,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.8,
+          "mean_steps": 50.666666666666664,
+          "invalid_actions": 0,
+          "door_events_total": 33,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 10.74030810000022,
+          "peak_mem_bytes": null
+        },
+        "oracle": {
+          "success_rate": 1.0,
+          "mean_steps": 15.0,
+          "invalid_actions": 0,
+          "door_events_total": 30,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.2351171999998769,
+          "peak_mem_bytes": null
+        }
+      }
+    ],
+    "cross_family": [
+      {
+        "metargon10": {
+          "success_rate": 0.6666666666666666,
+          "mean_steps": 39.46666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 25,
+          "mean_first_event_step": 6.7272727272727275,
+          "cpu_s": 16.028403100000105,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.8666666666666667,
+              "covered_rate": 0.8666666666666667,
+              "false_verified_per_episode": 6.2
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 4.466666666666667
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 0.2857142857142857,
+            "post_success_rate": 1.0,
+            "delta": 0.7142857142857143,
+            "first_recovery_episode": 7
+          }
+        },
+        "random": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 27,
+          "mean_first_event_step": 3.8,
+          "cpu_s": 0.2661296999995102,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 27,
+          "mean_first_event_step": 3.8,
+          "cpu_s": 0.2652066000000559,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 12,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.39918070000021544,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.8,
+          "mean_steps": 48.46666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 41,
+          "mean_first_event_step": 6.3076923076923075,
+          "cpu_s": 5.212146200000461,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.5333333333333333,
+          "mean_steps": 47.6,
+          "invalid_actions": 0,
+          "door_events_total": 16,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 10.754875899999206,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 3.2
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.5333333333333333,
+              "covered_rate": 0.5333333333333333,
+              "false_verified_per_episode": 2.6666666666666665
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 0.0,
+            "post_success_rate": 1.0,
+            "delta": 1.0,
+            "first_recovery_episode": 7
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 12,
+          "mean_first_event_step": 3.0,
+          "cpu_s": 0.3255145999992237,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.5333333333333333,
+          "mean_steps": 57.6,
+          "invalid_actions": 0,
+          "door_events_total": 28,
+          "mean_first_event_step": 4.181818181818182,
+          "cpu_s": 16.250251200000093,
+          "peak_mem_bytes": null
+        }
+      },
+      {
+        "metargon10": {
+          "success_rate": 0.7333333333333333,
+          "mean_steps": 33.333333333333336,
+          "invalid_actions": 0,
+          "door_events_total": 22,
+          "mean_first_event_step": 3.090909090909091,
+          "cpu_s": 14.69137049999972,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 1.0,
+              "covered_rate": 1.0,
+              "false_verified_per_episode": 3.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.4666666666666667,
+              "covered_rate": 0.4666666666666667,
+              "false_verified_per_episode": 2.3333333333333335
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 1.0,
+            "post_success_rate": 0.5,
+            "delta": -0.5,
+            "first_recovery_episode": 8
+          }
+        },
+        "random": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 20,
+          "mean_first_event_step": 10.666666666666666,
+          "cpu_s": 0.2977041999993162,
+          "peak_mem_bytes": null
+        },
+        "episodic": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 20,
+          "mean_first_event_step": 10.666666666666666,
+          "cpu_s": 0.21027559999947698,
+          "peak_mem_bytes": null
+        },
+        "qlearning": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 7,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 0.29299799999989773,
+          "peak_mem_bytes": null
+        },
+        "bayes": {
+          "success_rate": 0.9333333333333333,
+          "mean_steps": 27.6,
+          "invalid_actions": 0,
+          "door_events_total": 35,
+          "mean_first_event_step": 4.4,
+          "cpu_s": 2.5561964999997144,
+          "peak_mem_bytes": null
+        },
+        "metargon10-cap": {
+          "success_rate": 0.4666666666666667,
+          "mean_steps": 50.0,
+          "invalid_actions": 0,
+          "door_events_total": 14,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 13.754568700000164,
+          "peak_mem_bytes": null,
+          "discovery": {
+            "D1": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            },
+            "D2": {
+              "n": 15,
+              "exact_rate": 0.0,
+              "covered_rate": 0.0,
+              "false_verified_per_episode": 0.0
+            }
+          },
+          "forgetting": {
+            "D1": null,
+            "D2": null
+          },
+          "adaptation": {
+            "pre_success_rate": 1.0,
+            "post_success_rate": 0.0,
+            "delta": -1.0,
+            "first_recovery_episode": null
+          }
+        },
+        "qlearning-cap": {
+          "success_rate": 0.0,
+          "mean_steps": 80.0,
+          "invalid_actions": 0,
+          "door_events_total": 7,
+          "mean_first_event_step": 2.0,
+          "cpu_s": 0.2997974999998405,
+          "peak_mem_bytes": null
+        },
+        "bayes-cap": {
+          "success_rate": 0.2,
+          "mean_steps": 72.26666666666667,
+          "invalid_actions": 0,
+          "door_events_total": 20,
+          "mean_first_event_step": 4.7272727272727275,
+          "cpu_s": 15.794767200000024,
+          "peak_mem_bytes": null
+        }
+      }
+    ]
+  }
+}
