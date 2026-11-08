@@ -4,256 +4,226 @@
 
 <img src="images/logomet.png" alt="METARGON logo" width="120" />
 
-# 🐦‍⬛ METARGON
+# METARGON
 
-**A crow-inspired research project exploring how compact agents learn hidden rules, remember evidence, plan actions, and adapt when the environment changes.**
+**A crow-inspired research project investigating how compact agents learn hidden rules, remember evidence, form hypotheses, plan actions, and adapt when the world changes.**
 
-[![Status](https://img.shields.io/badge/status-experimental-7c3aed?style=flat-square)](#research-status)
 [![Python](https://img.shields.io/badge/Python-3.11%2B-3776AB?style=flat-square&logo=python&logoColor=white)](#quick-start)
 [![Rust](https://img.shields.io/badge/Rust-research%20kernel-CE422B?style=flat-square&logo=rust&logoColor=white)](#architecture)
-[![License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](#license)
-[![Research](https://img.shields.io/badge/research-reproducibility%20first-111827?style=flat-square)](#research-principles)
+[![License](https://img.shields.io/badge/license-MIT-22c55e?style=flat-square)](#contributing-and-license)
 
-**[Overview](#why-metargon) · [The story so far](#the-story-so-far) · [Architecture](#architecture) · [Experiments](#experimental-results) · [Quick start](#quick-start) · [Roadmap](#research-roadmap)**
+**[What it is](#what-metargon-is) · [How the agent works](#how-the-agent-works) · [Research status](#research-status) · [Results](#experimental-results) · [Architecture](#architecture) · [Quick start](#quick-start) · [Roadmap](#roadmap-and-limitations)**
 
 </div>
 
 ---
 
-## Why METARGON?
+## What METARGON is
 
-> **Intelligence is not just predicting a result. It is adapting when the world changes.**
+METARGON is an **exploratory synthetic-research project**. It studies a single question, inspired by the famously adaptive crow:
 
-Crows inspired the question, not the implementation: **Can a small artificial agent discover what matters, test hypotheses through action, and revise its behavior when previously useful rules stop working?**
+> Can a small artificial agent discover what matters in an environment, test its beliefs through action, and revise its behavior when previously useful rules stop working?
 
-METARGON studies that question with **bounded memory, explicit hypotheses, action planning, structured feedback, and falsifiable evaluations**. The project prioritizes transparent mechanisms and reproducible experiments over impressive-sounding claims.
+The project answers with **bounded memory, explicit hypotheses, action planning, structured feedback, and falsifiable evaluations**. Everything is implemented from scratch — Python 3.11 (standard library only) and a Rust research kernel — with CPU-only, reproducible experiments.
 
-It is **not** a crow-brain simulation, a foundation model, or a demonstrated AGI system.
+METARGON is **not** a crow-brain simulation, a foundation model, or a demonstrated AGI system. It is a transparent laboratory for studying how resource-constrained agents learn and adapt.
 
----
+## How the agent works
 
-## The story so far
+The agent is an **observe → learn → hypothesize → plan → act** loop:
 
-The project grew from a series of small, falsifiable experiments. Each version asks a sharper question and keeps the full history for provenance.
+1. **Observe** — a fixed public observation vector (agent position, objects, switches, plates, door readings). Hidden rule wiring is never exposed.
+2. **Learn** — door events and nonevents update a **compositional hypothesis memory**: candidate conjunctive rules over public atoms are generated, verified, contradicted, and evicted under a hard cap (128 slots). Evidence decays over time so stale rules do not dominate after a mechanism change.
+3. **Hypothesize** — hypotheses are the agent's causal model of "what opens each door". Verified hypotheses drive probing and protection; contradicted ones are recycled or replaced.
+4. **Plan** — a bounded BFS planner converts beliefs and hypotheses into actions under strict expansion and evaluation budgets. When no plan exists, an information-gathering fallback keeps exploring.
+5. **Act and adapt** — outcomes feed back into the belief state and hypothesis memory, closing the loop.
 
-### CORVID v0.1–v0.7 — early questions (historical)
+Two layers exist on top of the core agent:
 
-Under its original name **CORVID**, the project built a sequence of bounded-memory experiments:
+- **Academy** — a reproducible continual-learning laboratory (student agents, procedural environments, frozen evaluation splits, checkpointing).
+- **EVREN** — an optional LLM-backed *curriculum teacher* that proposes **tasks, never answers**. Proposals must pass leakage, schema, solvability, contamination, and duplicate checks before entering a training pool.
 
-| Version | Research question |
-|:---|---|
-| v0.1 | Active perception: when is an extra observation worth its cost? |
-| v0.2 | Selective attention and bounded working memory |
-| v0.3 | Active causal probing under sparse, delayed feedback |
-| v0.4 | Learned sensor reliability without quality labels |
-| v0.5 | Sparse and delayed feedback with verified outcomes |
-| v0.6 | Bounded verified-feedback memory for diagnostics |
-| v0.7 | Lightweight predictive world models |
+See [docs/ARCHITECTURE_OVERVIEW.md](docs/ARCHITECTURE_OVERVIEW.md) for the full implementation-level description.
 
-These experiments are preserved under their original filenames in `python/`, `rust/` and `docs/`.
+## Research status
 
-### METARGON v0.8 — Learning a Changing World
+**Latest merged research version: METARGON v0.11 (noise-aware learning).**
 
-The project was renamed **METARGON** at v0.8, which introduced an independently specified **stateful five-position workshop**: a key, a switch, a gate whose hidden mechanism can change mid-run, and noisy outcomes.
+The project has run controlled paired studies across seven conditions (stable, shift, rapid_shift, iid, novel, noisy_obs, tight_budget) plus a structurally novel family `H`, an independent generalization audit, and an Academy curriculum program. Results are conditional on these environments and protocols; **no real-world robotics, AGI, or energy claims are made**.
 
-- **Headline result (negative):** the more complex surprise-adaptive controller **underperformed a strong fixed-hazard Bayesian baseline** by 3.56 percentage points under a tight action budget (85.24% vs 88.79%).
-- Full preservation: `docs/RESEARCH_V08.md`, `results/stateful_transfer_30seeds.json`.
+The headline story so far:
 
-### METARGON v0.9 — Compositional World Models & Out-of-Distribution Transfer
+- **v0.9** showed the family-agnostic student clearly beats model-free baselines (random/episodic/Q-learning) and transfers mechanism knowledge to held-out configurations, but could not close the gap to a family-knowing Bayesian planner.
+- **v0.10** fixed measured pathologies (discovery freeze, contradictory protected atoms, raw-noise belief corruption, candidate truncation, stale evidence) and closed the gap — meeting or exceeding the Bayesian planner on most conditions while staying family-agnostic.
+- **v0.11** made learning noise-aware (confirmed events, certainty-weighted evidence, filtered replay). It more than doubled noisy-observation success and now exceeds the Bayesian planner there, at the cost of small clean-condition regressions, reported honestly below.
+- **Academy + EVREN curriculum research** found that curriculum ordering and teacher-augmented task pools do not (yet) measurably improve held-out transfer — the student's hypothesis-memory saturation is the binding constraint. Academy Memory v0.3 quantified **negative transfer**: training itself costs ~0.13 success on unseen configs.
 
-v0.9 asks whether a resource-constrained agent can **learn reusable object–action–outcome relationships** and apply them in previously unseen configurations — without being given the hidden wiring.
+## Research milestones
 
-- **Independent environment:** the "Mechanism Lab" — a 7×5 grid with two movable objects, two pressure plates, two switches, two door barriers, optional delayed effects, and a noisy observation channel. All configurations are verified solvable; training/validation/held-out test pools are disjoint.
-- **Compositional causal memory:** bounded hypotheses with an explicit hypothesis → predicted → verified → contradicted lifecycle and deterministic eviction (`python/compositional_memory.py`, `rust/src/v09.rs`).
-- **Adaptive bounded planner:** retrieves hypotheses, probes interventions, protects load-bearing atoms, and follows plans until invalidated by a door event (`python/metargon_v09.py`).
-- **Strong comparisons:** random, episodic memory, tabular Q-learning, a model-based Bayesian particle-filter planner, and a labeled privileged oracle excluded from deployable rankings.
-- **Headline result (negative):** METARGON clearly beats model-free baselines and transfers mechanism knowledge to held-out configurations, **but does not outperform the family-knowing Bayesian planner** (see the results table below).
+| Version | Scope | Status |
+|---|---|---|
+| CORVID v0.1–v0.7 | Early bounded-memory experiments (active perception → predictive world models) | Historical, preserved |
+| METARGON v0.8 | Stateful five-position workshop; surprise-adaptive control | Completed, negative headline |
+| METARGON v0.9 | Mechanism Lab: compositional causal memory + adaptive planner vs baselines | Completed, negative headline |
+| Academy v0.1 + EVREN | Student/curriculum system + validated task-generation teacher | Completed, agent-reported |
+| METARGON v0.10 | Robust perception, probe cooldowns, evidence decay, prioritized replay, structured-OOD transfer | Completed |
+| EVREN curriculum v0.2 | Adaptive task selection, retention protocol, matched-budget curriculum experiment | Completed, null transfer |
+| Academy Memory v0.3 | Hypothesis-memory audit; ablatable improvements; fresh-agent negative-transfer control | Completed |
+| Independent generalization audit | Protocol audit + new families R (sustained-hold) and L (ordered-sequence) | Completed |
+| METARGON v0.11 | Noise-aware learning: confirmed events, certainty-weighted evidence, replay filtering | **Latest merged** |
 
-### Academy v0.1 + EVREN teacher integration (development)
-
-A separate development layer adds a **student/curriculum system** and an **optional AI-assisted task-generation teacher** (EVREN): the teacher proposes *tasks*, not privileged answers; candidates must pass validation, solvability, duplicate, and contamination checks before entering training.
-
-- Academy v0.1 and EVREN are **development-stage work based on local agent reports**; their results are not yet independently verified.
-- See `academy/`, `rust_academy/`, `configs/academy_v01.toml`, `docs/ACADEMY_*`, `docs/EVREN_*`.
-
----
+Full provenance and links: [docs/RESEARCH_INDEX.md](docs/RESEARCH_INDEX.md).
 
 ## Experimental results
 
-### v0.9 — mechanism lab (8 paired seeds × 100 episodes × 7 conditions)
+All studies are paired (identical worlds per seed across policies), with bootstrap 95% CIs on per-seed deltas. **Percentages across versions are not directly comparable** — environments and protocols differ.
 
-| Condition | METARGON | Bayes | Random | Oracle |
-|---|---:|---:|---:|---:|
-| stable | 35.1% | 77.5% | 0.3% | 100.0% |
-| shift | 46.4% | 80.6% | 0.6% | 100.0% |
-| rapid_shift | 40.8% | 76.9% | 0.5% | 91.3% |
-| iid | 53.6% | 79.0% | 0.4% | 78.9% |
-| novel (held-out) | 31.3% | 78.5% | 0.6% | 93.8% |
-| noisy_obs | 33.8% | 73.1% | 0.3% | 98.4% |
-| tight_budget | 45.0% | 64.9% | 0.0% | 100.0% |
+### v0.11 headline (8 seeds × 100 episodes, family F)
 
-METARGON clearly beats model-free baselines (random/episodic/Q-learning ~0–1%) and transfers mechanism knowledge to unseen configurations, **but does not outperform the strong model-based Bayesian planner** (given the declarative family). This is a negative result for closing the gap to a family-knowing model via hypothesis composition alone. Full table, bootstrap intervals and resource measurements: `results/v09/benchmark_table.md`, `docs/RESEARCH_V09.md`.
+| Condition | v0.10 | v0.11 | Bayes | v11 − v10 (pp) | v11 − Bayes (pp) |
+|---|---:|---:|---:|---:|---:|
+| stable | 80.62 | 74.62 | 77.50 | −6.00 | −2.88 |
+| shift | 86.88 | 86.25 | 80.62 | −0.63 | +5.62 |
+| rapid_shift | 83.62 | 86.50 | 76.88 | +2.88 | +9.62 |
+| iid | 67.75 | 68.25 | 79.00 | +0.50 | −10.75 |
+| novel (held-out) | 89.75 | 86.75 | 78.50 | −3.00 | +8.25 |
+| noisy_obs | 45.12 | **84.88** | 73.12 | **+39.75** | **+11.75** |
+| tight_budget | 82.62 | 85.88 | 64.88 | +3.25 | +21.00 |
 
-### v0.8 — preserved historical result (30 matched seeds × 240 episodes, tight budget)
+- **Positive:** noisy-observation success more than doubled (45.1% → 84.9%, +39.75pp, CI [25.1, 56.4]); v0.11 exceeds the privileged-family Bayesian planner under noise (+11.75pp) and beats it on 9 of 11 condition×family cells.
+- **Negative (measured regressions):** clean-condition `stable` −6.0pp and structurally novel family H `stable` −11.9pp vs v0.10. The confirmed-event gating itself costs −6.75pp on H-stable. Certainty weighting is net-neutral-to-negative under noise (−1.75pp, CI includes 0). `iid` remains below Bayes (−10.75pp, CI [−19.8, −0.8]) because per-episode fresh configs favor the family-privileged prior. The invalid-action rate did not improve.
+- **Ablations (noisy_obs):** confirmed events are the main driver (−cf costs 11.75pp); filtered replay helps (+4.37pp) over legacy replay; weighted replay < filtered.
 
-| Policy | Success |
-|:---|---:|
-| Privileged mechanism-aware comparator | 92.88% |
-| Fixed-hazard Bayesian baseline | **88.79%** |
-| METARGON surprise-adaptive controller | 85.24% |
-| Win-stay / lose-switch | 85.24% |
-| Random first mechanism | 49.24% |
+Report: [docs/RESEARCH_V11.md](docs/RESEARCH_V11.md) · tables: `results/v11/benchmark_table_v11.md`.
 
-**Negative result worth keeping:** in this condition, the more complex METARGON controller **underperformed the Bayesian baseline by 3.56 percentage points**. The v0.8 study does not establish a general advantage for METARGON. Read the full experiment: [`docs/RESEARCH_V08.md`](docs/RESEARCH_V08.md).
+### v0.10 (8 seeds × 100 episodes, family F)
 
-### Academy v0.1 — preliminary local results (agent-reported, not independently rerun)
+v0.10 closed the gap to the Bayesian baseline that v0.9 could not: it met or exceeded Bayes on `stable` (80.75 vs 77.50), `shift` (89.25 vs 80.62), `rapid_shift`, `novel`, and `tight_budget`. Two documented negative results remain: `noisy_obs` still trails Bayes (−23.75pp, CI excludes 0 — the motivation for v0.11), and `iid` trails slightly (−4.5pp, CI includes 0). On the structurally novel family H — where the Bayesian model class is misspecified — v0.10 sustained ~80% success on both conditions while Bayes dropped to ~67%; CIs are wide at 8 seeds, so this is reported as a **directional transfer result**, not a definitive win. Prioritized replay was functionally validated but empirically neutral-to-negative (−4.7pp under noise). Report: [docs/RESEARCH_V10.md](docs/RESEARCH_V10.md).
 
-**Held-out test:** 6 seeds × 40 episodes per policy.
+### v0.9 (8 paired seeds, 7 conditions)
 
-| Policy | Held-out test success | OOD success |
-|:---|---:|---:|
-| Privileged oracle | 100.0% | 100.0% |
-| **METARGON** | **50.0%** | **50.0%** |
-| Model-based Bayesian baseline | 27.5% | 20.8% |
-| Q-learning | 23.3% | 0.0% |
-| Random | 3.3% | 1.3% |
+METARGON clearly beats model-free baselines (random/episodic/Q-learning ~0–1%) and transfers mechanism knowledge to held-out configurations, **but does not outperform the family-knowing Bayesian planner** (e.g. stable 35.1% vs Bayes 77.5%). A negative result for closing the gap via hypothesis composition alone. Report: [docs/RESEARCH_V09.md](docs/RESEARCH_V09.md).
 
-> **Different experimental worlds, different protocols:** v0.8, v0.9 and Academy v0.1 percentages are **not directly comparable**. No measurements here establish real-world robotics performance, AGI, or physical energy savings.
+### Independent generalization audit (families R and L)
 
----
+An independent audit tested the unmodified v0.10 student on two **structurally novel** rule families:
+
+- **Family R (sustained-hold):** a door opens only after its condition holds for 3 consecutive states. The student transfers its causal machinery to this never-seen axis (50–77% success vs ~0–3% for model-free baselines), but still does not beat the family-F Bayesian planner on any condition (−13 to −33pp). Exact-rule discovery 50–93%; false-verified hypotheses remain high (up to ~4.6/episode).
+- **Family L (ordered-sequence):** a door opens only when two atoms become true in a specific order. The student's unordered conjunctive hypothesis language **cannot express the rule**: exact D1 discovery is 0.0% on every condition, and success (~23–58%) is purely behavioral. This is a clean negative result on representational capacity.
+- Compute matching matters: at a per-decision expansion cap of 120, the student loses 20–50pp on R.
+
+Samples are small (R: 2×15; L: 3×20); findings are directional. Audit: [generalization_audit/docs/AUDIT_REPORT.md](generalization_audit/docs/AUDIT_REPORT.md).
+
+### Academy research (development layer, separate protocols)
+
+- **Academy v0.1:** student vs baselines on frozen val/test/OOD pools. METARGON held-out test 50.0% vs Bayes 27.5% (but val 66.7% vs 50.4% — pool-dependent); OOD 50.0% vs 20.8% (Bayes is structurally mismatched on OOD). Replay is neutral (identical with/without). Report: [docs/ACADEMY_RESEARCH_V01.md](docs/ACADEMY_RESEARCH_V01.md).
+- **EVREN curriculum v0.2:** adaptive learning-progress selection demonstrably ran and improved training-phase success (0.444 vs 0.419), but produced **no measurable transfer benefit** — LP and teacher-source effects are exactly +0.0000 (zero-width CI). Retention is flat. The student's saturated hypothesis memory is the binding constraint, not the curriculum source. Report: [docs/EVREN_CURRICULUM_V02.md](docs/EVREN_CURRICULUM_V02.md).
+- **Academy Memory v0.3:** an untrained fresh student scores **0.695** on the classic grid vs 0.562 for every trained variant — training itself causes negative transfer. Adaptive probing improves training-phase success (+0.144) without hurting transfer (bit-identical classic vectors); ratio-gated contradictions, evidence windowing, and the combined variant are directionally negative. Report: [docs/MEMORY_V03.md](docs/MEMORY_V03.md).
+
+### Student agents vs comparators vs oracles
+
+- **Student agents** (METARGON v0.9–v0.11, Academy student) learn from **public observations only**; the hidden wiring is never exposed.
+- **Bayesian comparators** are deliberately privileged: they receive the *declared generative family* (a correct model class on F) and run a particle-filter planner. On family H (and R/L) that declared class is misspecified, so Bayes is a strong, not a fair, baseline.
+- **Oracles** have perfect knowledge of hidden rules and are **diagnostic only — excluded from all rankings**.
+- **Model-free baselines** (random, episodic, Q-learning) anchor the lower bound and are consistently at or near chance on compositional tasks.
 
 ## Architecture
 
 ```mermaid
 flowchart TD
-    A[Observation] --> B[Belief and hypothesis memory]
-    B --> C[Planning and action selection]
-    C --> D[Environment]
-    D --> E[Outcome and feedback]
-    E --> F[Evidence-based update]
-    F --> B
-    G[Curriculum and task registry] --> D
-    H[Optional EVREN teacher] --> I[Candidate-task validation]
-    I --> G
-    D --> J[Frozen evaluation suites]
+    subgraph Student["Student layer (the agent)"]
+        O[Observation] --> B[Belief state]
+        B --> M[Hypothesis memory]
+        M --> P[Bounded planner]
+        P --> A[Action]
+        A --> E[Environment]
+        E --> F[Outcome / feedback]
+        F --> U[Evidence update]
+        U --> M
+        F --> B
+    end
+    subgraph Teacher["Optional teacher layer"]
+        T[EVREN teacher / procedural generator] --> V[Candidate-task validation]
+        V --> R[Task registry and curriculum]
+        R --> E
+    end
+    E --> EV[Frozen evaluation pools]
 ```
 
 **Two distinct layers:** the student acts and learns from environment feedback; the optional teacher proposes *tasks*, not privileged answers. Generated tasks must pass validation, solvability, duplicate checks, and evaluation-contamination safeguards before they can enter training.
 
-### Project structure
-
-```text
-python/                  Historical experiments, v0.8 workshop, v0.9 lab and benchmark
-rust/                    Bounded Rust research components (v0.2–v0.9 kernels)
-docs/                    Research protocols, results, and limitations
-results/                 Recorded experimental artifacts (v0.1–v0.9)
-
-academy/                 Academy v0.1 student, environments, evaluations
-academy/evren/           Optional EVREN task-generation integration
-configs/                 Experiment configuration
-rust_academy/            Bounded Rust kernel for Academy
-```
-
----
-
 ## Quick start
 
-Requires **Python 3.11+** and the Python standard library only. The historical and v0.9 suites under `python/` still run on Python 3.10+; the Academy layer requires 3.11+ for its standard-library TOML configuration loader. Run commands from the project root.
-
-### v0.9 — mechanism lab benchmark and tests
+Requires **Python 3.11+** (standard library only — no pip dependencies) and, for the Rust kernels, `cargo +1.88.0`. Run commands from the repository root.
 
 ```bash
-python3 -m unittest discover -s python -v
-python3 python/benchmark_v09.py --seeds 8 --episodes 100 --parallel --workers 6 --no-mem --json results/v09/summary.json
-python3 python/v09_postprocess.py results/v09/summary.json
-```
+# full Python test suite (historical + v0.9–v0.11)
+python -m unittest discover -s python -v
 
-Rust research kernel (crate `metargon-core` v0.9.0, `#![forbid(unsafe_code)]`):
+# repository hygiene (merge markers, Markdown links, Python compile)
+python scripts/check_repo.py
 
-```bash
-cd rust
-cargo +1.88.0 test
-```
+# v0.11 benchmark (8 seeds × 100 episodes), results to results/v11/
+python python/benchmark_v11.py --seeds 8 --episodes 100 --parallel \
+    --workers 6 --no-mem --json results/v11/summary.json
+python python/v11_postprocess.py
 
-### v0.8 — historical workshop demo
-
-```bash
-python3 python/metargon_demo.py
-python3 -m unittest discover -s python -v
-```
-
-For the original recorded experiment:
-
-```bash
-python3 python/metargon_world.py --seeds 30 --episodes 240 --json results/stateful_transfer_30seeds.json
-```
-
-### Academy v0.1 (development)
-
-```bash
-python -m unittest discover -s academy/tests
+# Academy CLI (smoke test)
 python -m academy.cli.main smoke
-python -m academy.cli.main train
-python -m academy.cli.main eval
-python -m academy.cli.main ood
+
+# Academy tests
+python -m unittest discover -s academy/tests
+
+# Rust research kernel
+cd rust && cargo +1.88.0 test && cd ..
+
+# Independent generalization audit tests
+python -m unittest discover -s generalization_audit/tests -t . -v
 ```
 
-Optional EVREN teacher integration (requires a locally configured `EVREN_API_KEY`; never commit secrets):
+For the full set of verified, version-specific commands (benchmarks, ablation runs, attributes, EVREN experiments, audit reproduction), see [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) and [docs/BENCHMARK_GUIDE.md](docs/BENCHMARK_GUIDE.md).
 
-```bash
-python -m academy.cli.main evren-smoke
-python -m academy.cli.main evren-pilot
-python -m academy.cli.main evren-status
-```
+## Documentation index
 
-EVREN curriculum research v0.2 (offline by construction — zero API calls):
+| Guide | Purpose |
+|---|---|
+| [docs/GETTING_STARTED.md](docs/GETTING_STARTED.md) | Installation, prerequisites, first commands, CLI reference |
+| [docs/ARCHITECTURE_OVERVIEW.md](docs/ARCHITECTURE_OVERVIEW.md) | How the agent, memory, planner, Academy, and EVREN work |
+| [docs/RESEARCH_INDEX.md](docs/RESEARCH_INDEX.md) | All research reports, milestones, versions, and findings |
+| [docs/BENCHMARK_GUIDE.md](docs/BENCHMARK_GUIDE.md) | Reproducing every benchmark, ablation, and test suite |
+| [docs/RESEARCH_PROTOCOL.md](docs/RESEARCH_PROTOCOL.md) | Research principles: pairing, baselines, pre-registration, honesty |
 
-```bash
-# diagnosis of the v0.1 null result (uses saved policies when present)
-python -m academy.cli.main evren-diagnose
+## Roadmap and limitations
 
-# matched-budget adaptive-curriculum comparison (5 conditions)
-python -m academy.cli.main evren-curriculum
+**Roadmap (merged work and next gates):**
 
-# quick sanity run (2 conditions, 16 episodes)
-python -m academy.cli.main evren-curriculum --quick
-```
-
-See `docs/EVREN_CURRICULUM_V02.md` for the scientific protocol and
-measured results.
-
----
-
-## Research principles
-
-- **No privileged-information leakage.** Student-visible observations are separated from simulator internals.
-- **Baseline first.** Compare against random, simple heuristics, Bayesian models, and appropriate ablations.
-- **Reproducible by design.** Preserve seeds, configurations, checkpoints, and experimental artifacts. Academy runs are deterministic under a fixed `PYTHONHASHSEED`; summary metrics reproduce across hash seeds, while internal hypothesis bookkeeping details may vary.
-- **Negative results are results.** A neutral or failed mechanism is documented rather than hidden.
-- **Honest efficiency claims.** CPU-only experiments do not prove physical energy efficiency.
-- **Modest biological analogy.** Crow behavior motivates research questions; biological equivalence is not claimed.
-
-## Research roadmap
-
-- [x] Preserve earlier CORVID experiments and research history
-- [x] Build a stateful hidden-rule workshop (v0.8)
-- [x] Build an independent compositional-mechanism environment (v0.9)
-- [x] Implement Academy v0.1 and local baseline studies *(reported; integration in progress)*
-- [x] Implement optional EVREN candidate-task pipeline *(reported; online validation pending)*
-- [ ] Independently verify the integrated Academy results
-- [ ] Demonstrate measurable gains from replay and teacher-driven curricula
-- [ ] Test transfer to independently designed environments
+- [x] Preserve CORVID history and rename to METARGON (v0.8)
+- [x] v0.9 Mechanism Lab + negative Bayesian-gap result
+- [x] v0.10 robust perception/evidence decay/structured-OOD transfer
+- [x] v0.11 noise-aware learning (latest merged version)
+- [x] Academy v0.1, EVREN integration, curriculum v0.2, memory v0.3
+- [x] Independent generalization audit (families R/L)
+- [ ] Reduce or eliminate the clean-condition regression in v0.11
+- [ ] Extend the hypothesis language beyond unordered conjunctive sets (family L)
+- [ ] Improve noisy-condition robustness without sacrificing clean-condition performance
 - [ ] Measure real hardware latency, memory, and energy before making efficiency claims
+- [ ] Independently verify Academy results at larger scale
 
-## Research status
+Active development branches (not merged, **not part of this documentation**): `research/v12-general-causality` (v0.12), `academy/memory-v04` (Academy Memory v0.4), and follow-up audit work. Do not cite unmerged features as completed.
 
-**Exploratory synthetic research.** Results are conditional on specific environments, task distributions, and evaluation protocols. The system does not currently demonstrate human-like intelligence, autonomous general-purpose discovery, biological fidelity, or state-of-the-art performance.
+**Known limitations:**
 
-Historical experiment names **CORVID** (v0.1–v0.7) are retained for provenance; the project was renamed **METARGON** at v0.8.
+- All results are on synthetic 7×5 grid environments with hidden conjunctive-style rules; generalization to real-world settings is unmeasured.
+- Family-agnostic learning is intentionally sample-inefficient relative to family-knowing Bayesian priors on `iid` conditions.
+- The hypothesis language cannot express order-dependent rules (family L).
+- Noise robustness trades off against clean-condition performance in v0.11.
+- Academy results are agent-reported/audited but not yet independently re-run at full scale in this repository.
 
-## License
+## Contributing and license
 
-MIT. See the repository's license file for the governing terms.
+Contributions — code, experiments, documentation, or careful peer review — are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md): it covers the standard-library-only rule, the `#![forbid(unsafe_code)]` Rust kernel, matched-seed experiment discipline, pre-registration, and the project's scientific-integrity requirements (including the mandate to preserve raw results and publish negative findings).
+
+**License:** MIT — see [LICENSE](LICENSE).
 
 ---
 
