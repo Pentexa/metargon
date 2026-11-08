@@ -94,38 +94,78 @@ arrives.
 
 ## 5. Results
 
-<!-- filled by memory_merge_v04.py at commit time -->
+*Pinned run: `PYTHONHASHSEED=0`, 2 train seeds × 160 episodes, frozen
+16-config classic grid, 12-config OOD, 8-config substrate retention.*
 
 ### 5.1 Final held-out numbers (mean over 2 train seeds)
 
 | Variant | Train | Classic | OOD | Memory status (mean) |
 |---|---|---|---|---|
-| fresh | — | 0.695 | 0.417 | — |
-| original | | | | |
-| probe_local | | | | |
-| ctx | | | | |
-| ctx_reset | | | | |
-| ctx_gate | | | | |
-| ctx_full | | | | |
-| memory_wiped | | | | |
+| fresh | — | **0.695** | 0.417 | — |
+| original | 0.341 | 0.594 | 0.333 | 2.5 verified / 75 contradicted |
+| probe_local | 0.422 | **0.625** | 0.375 | 0.5 v / 77.5 c |
+| ctx | 0.369 | **0.625** | 0.417 | 2.5 v / 76.5 c |
+| ctx_reset | 0.369 | **0.625** | 0.417 | 2.5 v / 76.5 c |
+| ctx_gate | 0.366 | **0.625** | 0.417 | 2.5 v / 76.5 c |
+| ctx_full | 0.497 | 0.562 | 0.417 | 75.5 contradicted |
+| memory_wiped | 0.341 | 0.594 | 0.333 | (memory discarded) |
 
-### 5.2 Paired deltas vs original (95% CI)
+### 5.2 Paired deltas vs original (95% CI, per-config vectors)
 
 | Variant | Classic Δ | Train Δ |
 |---|---|---|
-| ... | | |
+| fresh | −0.100 ([−0.211, 0.000]) | −0.341 |
+| probe_local | −0.032 ([−0.094, 0.000]) | +0.081 |
+| ctx | −0.030 ([−0.094, 0.000]) | +0.028 |
+| ctx_reset | −0.030 ([−0.094, 0.000]) | +0.028 |
+| ctx_gate | −0.030 ([−0.094, 0.000]) | +0.025 |
+| ctx_full | +0.030 ([0.000, +0.094]) | +0.156 |
+| memory_wiped | 0.000 ([0.000, 0.000]) | 0.000 |
 
-### 5.3 Train-vs-transfer curves
+### 5.3 Train-vs-transfer curves (mid-grid success by episode block)
 
-(mid-curve success by episode block — see summary JSON)
+| Variant | ep40 | ep80 | ep120 | ep160 |
+|---|---|---|---|---|
+| original | 0.438 | 0.438 | 0.500 | 0.500 |
+| probe_local | 0.500 | 0.438 | 0.500 | 0.500 |
+| ctx | 0.500 | 0.500 | 0.500 | 0.500 |
+| ctx_full | 0.500 | 0.500 | 0.500 | 0.438 |
+| memory_wiped | 0.438 | 0.438 | 0.500 | 0.500 |
 
 ---
 
 ## 6. Interpretation
 
-<!-- filled after final run -->
-
----
+- **Negative transfer decreased but did not close.** Fresh 0.695 vs
+  best trained 0.625 (−7 pp) vs original 0.594 (−10 pp). `probe_local`
+  and the `ctx` family each recover ~3 pp of the transfer gap; CI
+  upper bounds touch 0 (directionally positive, not significant at this
+  grid size).
+- **No variant beats the untrained control.** The gap is reduced but
+  the fresh baseline remains above every trained variant.
+- **Attribution changes alone did not rescue transfer.** `ctx`,
+  `ctx_reset`, `ctx_gate` all behave identically on the classic grid
+  (0.625) — the per-context evidence bookkeeping changes memory state
+  (fewer contradicted spills) but not enough to move generalization.
+  `ctx_reset`/`ctx_gate` add nothing over `ctx` on this benchmark.
+- **More verified hypotheses ≠ success.** `ctx_full` reaches the best
+  training success (0.497) but the *worst* trained classic score
+  (0.562) — combining adaptive probing with full context gating is
+  harmful for transfer (CI [0, +0.094] is directionally negative for
+  original, i.e. ctx_full < original).
+- **Retaining vs discarding memory does not change final performance.**
+  `memory_wiped` (train, then wipe) is bit-identical to `original`
+  (0.594). Because evaluation episodes themselves let the agent learn
+  (within-eval learning), the persistent memory does not determine
+  held-out success; the task is largely solved from scratch inside each
+  evaluation.
+- **Retention is flat for every variant** (0.000 delta on the shared
+  substrate) — no measured forgetting in either direction.
+- **Conclusion (honest):** v0.4 context-aware evidence marginally
+  reduces negative transfer (≈ −7 pp vs −10 pp) but does not beat the
+  untrained control; the dominant mechanism appears to be within-eval
+  learning, and none of the interventions yet convert accumulated
+  experience into held-out gains.
 
 ## 7. Files
 

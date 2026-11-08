@@ -169,7 +169,7 @@ def run_v04_experiment(splits=None, episodes=160, block_size=40,
             wall = time.perf_counter() - t0
             if getattr(agent, "_wipe", False):
                 agent.maybe_wipe()
-            state = agent.save_state()
+            state = None if name == "fresh" else agent.save_state()
 
             classic = eval_config_grid(
                 state, splits["test"], "test", max_steps,
@@ -183,11 +183,11 @@ def run_v04_experiment(splits=None, episodes=160, block_size=40,
                 substrate=substrate, max_steps=max_steps,
                 episodes_per_config=base["retention_eps_per_cfg"],
                 seeds=(0,), label=name)
-            retention.run_probe(agent.save_state(),
+            retention.run_probe(state,
                                 lambda s, _k=kwargs:
                                 MetargonAcademyAgent(seed=s, **_k),
                                 episode_i=0)
-            retention.run_probe(agent.save_state(),
+            retention.run_probe(state,
                                 lambda s, _k=kwargs:
                                 MetargonAcademyAgent(seed=s, **_k),
                                 episode_i=1)

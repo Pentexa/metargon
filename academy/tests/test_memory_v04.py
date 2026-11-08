@@ -132,5 +132,24 @@ class TestCheckpointCompatibility(unittest.TestCase):
         self.assertEqual(m2.current_ctx, m.current_ctx)
 
 
+class TestWipeHook(unittest.TestCase):
+    def test_wipe_clears_memory(self):
+        from academy.tools.memory_experiment_v04 import WipeHookAgent
+        a = WipeHookAgent(seed=0, _wipe_memory=True)
+        a.memory.observe_event(frozenset({("sw", "S2", True)}),
+                               "D1", True, None)
+        self.assertGreater(len(a.memory.hypotheses), 0)
+        a.maybe_wipe()
+        self.assertEqual(len(a.memory.hypotheses), 0)
+
+    def test_no_wipe_by_default(self):
+        from academy.tools.memory_experiment_v04 import WipeHookAgent
+        a = WipeHookAgent(seed=0)
+        a.memory.observe_event(frozenset({("sw", "S2", True)}),
+                               "D1", True, None)
+        a.maybe_wipe()
+        self.assertGreater(len(a.memory.hypotheses), 0)
+
+
 if __name__ == "__main__":
     unittest.main()
