@@ -119,6 +119,7 @@ construction; `PYTHONHASHSEED=0` pinned and recorded.
 
 | Variant | Train | Classic (16 cfg) | OOD (12 cfg) | Memory status (size) |
 |---|---|---|---|---|
+| **fresh (control)** | — | **0.695** | **0.417** | — |
 | original | 0.362 | 0.562 | 0.333 | 70 contradicted |
 | recycle | 0.362 | 0.562 | 0.333 | 0 (recycled) |
 | ratio (r=2) | 0.394 | 0.344 | 0.417 | 57 verified / 14 contradicted |
@@ -152,6 +153,13 @@ Paired bootstrap deltas vs original (classic per-config vectors, 95% CI):
   size, yet it is in the wrong direction and agrees with the earlier
   instrumented finding that stale verified hypotheses inflate protection
   rejections 4–5× (1657 → 7297).
+- **Fresh-agent control quantifies negative transfer.** An *untrained*
+  student scores 0.695 on the same classic grid vs 0.562 for every
+  trained variant — training itself costs ~0.13 on unseen configs. The
+  memory's saturated contradicted state is not inert; it actively
+  reduces generalization. This makes the ceiling for curriculum/memory
+  improvements on this pool a *recovery* of the fresh-agent baseline,
+  not a new high.
 - **Adaptive probing improves training dynamics without hurting transfer.**
   `probe` trains at 0.506 (+0.144) and `probe_local` at 0.469
   (+0.106), both with bit-identical classic vectors vs original

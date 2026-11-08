@@ -1303,5 +1303,74 @@
    },
    "train_delta": -0.175
   }
+ },
+ "fresh_control": {
+  "classic_test": {
+   "n_configs": 16,
+   "episodes_per_config": 4,
+   "seeds": [
+    0,
+    1
+   ],
+   "config_mean_success": 0.6953125,
+   "per_config": {
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)": 1.0,
+    "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 1.0,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)": 1.0,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+    "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('empty', 'P2')}), False, False)": 0.5,
+    "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2')}), True, True)": 0.625,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+    "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, True)": 1.0,
+    "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, False)": 1.0,
+    "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)": 1.0
+   }
+  },
+  "classic_test_per_config": [
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   1.0,
+   0.0,
+   0.5,
+   0.625,
+   1.0,
+   1.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   1.0
+  ],
+  "ood": {
+   "n_configs": 12,
+   "episodes_per_config": 3,
+   "seeds": [
+    0
+   ],
+   "config_mean_success": 0.4166666666666667,
+   "per_config": {
+    "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('empty', 'P1')}), False, False)": 1.0,
+    "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True), ('empty', 'P1')}), True, False)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, False)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, True)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, True)": 1.0,
+    "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, False)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, False)": 1.0,
+    "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, False)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True), ('empty', 'P1')}), True, True)": 0.0,
+    "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('empty', 'P1')}), True, False)": 1.0,
+    "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), True, False)": 1.0
+   }
+  }
  }
 }
