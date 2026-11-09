@@ -309,7 +309,7 @@ any v0.13 / v0.6 result exists) requires:
 |---|---|---|
 | Audit (incl. 47 new) | `python -m unittest discover -s generalization_audit/tests -t .` | **104 tests OK** |
 | Python | `python -m unittest discover -s python` | see dev log (run summary below) |
-| Academy | `python -m unittest discover -s academy/tests` | see dev log (run summary below) |
+| Academy | `python -m unittest discover -s academy/tests` | **209 tests OK** (~19 min, loaded machine) |
 | Rust (rust/, rust_academy/) | `cargo test --locked` | **OK** — metargon_core 32/32, metargon_academy_kernel 9/9 (stable 1.99.1; CI pins 1.88.0) |
 | Repo hygiene | `python scripts/check_repo.py` | OK |
 
