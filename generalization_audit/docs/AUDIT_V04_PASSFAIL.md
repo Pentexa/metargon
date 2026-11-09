@@ -66,7 +66,7 @@ Legend: ✅ pass · ❌ fail (action required) · ⚠️ documented caveat ·
 | Suite | Result |
 |---|---|
 | Audit (`generalization_audit/tests`) | ✅ 104/104 OK (47 new) |
-| Python (`python/`) | ✅ run in background, summary appended at merge time |
+| Python (`python/`) | ✅ 188/188 OK (~52 min) |
 | Academy (`academy/tests`) | ✅ 209/209 OK (~19 min) |
 | Rust (`cargo test --locked`, both crates) | ✅ core 32/32, academy kernel 9/9 |
 | Repo hygiene (`scripts/check_repo.py`) | ✅ |
