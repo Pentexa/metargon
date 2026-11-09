@@ -1,0 +1,81 @@
+{
+  "schema_version": "experiment-manifest-v01",
+  "protocol_version": "eval-protocol-v01",
+  "experiment": {
+    "name": "v121-final-l",
+    "description": "METARGON v0.12.1 final paired runs, family L (ordered sequence), 4 seeds x 40 episodes, temporal-memory preservation check. Committed artifact: results/v121/final_l.json.",
+    "format": "benchmark_v12",
+    "agent_version": "metargon_v12 (v0.12.1 defaults: recent-credit off, temporal on for L)",
+    "harness": "python/benchmark_v12.py",
+    "commit_sha": "fefaaf1",
+    "python_version": "3.11.0",
+    "platform": "windows",
+    "hash_seed": 0,
+    "family": "l",
+    "conditions": [
+      "stable",
+      "novel"
+    ],
+    "seeds": [
+      11800,
+      11801,
+      11802,
+      11803
+    ],
+    "episodes_per_seed": 40,
+    "action_budget_max_steps": 80,
+    "policies": [
+      "metargon10",
+      "metargon11",
+      "metargon12",
+      "metargon12-legacy",
+      "metargon12-notp",
+      "bayes",
+      "oracle",
+      "random",
+      "qlearning",
+      "episodic"
+    ],
+    "ablation_flags": {
+      "use_recent_credit": false,
+      "use_temporal": true,
+      "family_l_frozen_pool": "generalization_audit/configs/frozen_l.json"
+    },
+    "parameters": {
+      "policy_seed_offset": 1000003,
+      "world_seed_base": 11800
+    },
+    "resources": {
+      "planner_max_expand": 700,
+      "probe_max_plans": 3,
+      "memory_limit_bytes": null,
+      "per_policy_cpu_s": true
+    },
+    "evaluation": {
+      "comparison_convention": "candidate_minus_baseline",
+      "bootstrap": {
+        "method": "paired",
+        "seed": 4301,
+        "rounds": 1500,
+        "alpha": 0.05
+      },
+      "metrics": {
+        "success_rate": "fraction of episodes completed (40 per seed)",
+        "exact_discovery_D1": "fraction of episodes where a verified temporal hypothesis exactly matches the true ordered rule (first, second) for D1; predicted hypotheses not counted",
+        "exact_discovery_D2": "fraction of episodes where a verified temporal hypothesis exactly matches the true ordered rule for D2",
+        "covered_discovery_D1": "fraction of episodes where a verified hypothesis's antecedent is a subset of the true D1 rule",
+        "temporal_probes": "temporal probe count per seed-run"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "../../results/v121/final_l.json",
+      "role": "raw",
+      "generated_by": "benchmark_v12.py --family l --seeds 4 --episodes 40",
+      "contains_per_seed": true,
+      "sha256": "3738f81842c75e4cf4a29989dd5d261cd44154178daaeb7ee18023abd905b6c5",
+      "size_bytes": 58464
+    }
+  ]
+}
