@@ -25,10 +25,16 @@ from .checks import (
     run_checks,
 )
 from .report import VerificationReport
+from .artifact_gate import (
+    FROZEN_TARGETS,
+    GateReport,
+    check_frozen_target_artifacts,
+)
 
 __all__ = [
     "ManifestError", "load_manifest", "validate_manifest", "sha256_file",
     "canonical_sha256",
     "CheckResult", "PASS", "FAIL", "INCONCLUSIVE",
     "VerifierContext", "run_checks", "VerificationReport",
+    "FROZEN_TARGETS", "GateReport", "check_frozen_target_artifacts",
 ]

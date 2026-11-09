@@ -2,9 +2,12 @@
 
 Validates `generalization_audit/configs/frozen_eval_criteria_v02.json`
 (the criteria defined by audit v0.4 for v0.13 / Memory v0.6 before any
-such results exist). Also asserts the criteria do not accidentally
-reference artifacts that do not exist yet, keeping the protocol
-independent of the implementation.
+such results exist). The criteria themselves remain immutable.
+
+The former *permanent artifact prohibition* (asserting `results/v13` /
+`results/academy_v01/memory_v06` never exist) was replaced by the
+provenance-aware publication gate: see `test_artifact_gate_provenance.py`
+and `generalization_audit/verification/artifact_gate.py`.
 """
 from __future__ import annotations
 
@@ -63,19 +66,23 @@ class TestFrozenCriteriaV02(unittest.TestCase):
                       "reproducible", "regression"):
             self.assertIn(token, text, f"improvement rule must mention {token}")
 
-    def test_future_targets_have_no_committed_artifacts_yet(self):
-        # Criteria must be defined before results exist: no results/v13 or
-        # memory_v06 directory should be present in the workspace yet.
-        self.assertFalse((_ROOT / "results" / "v13").exists(),
-                         "v0.13 artifacts must not exist while criteria are frozen")
-        self.assertFalse((_ROOT / "results" / "academy_v01" / "memory_v06").exists(),
-                         "Memory v0.6 artifacts must not exist while criteria are frozen")
-
     def test_criteria_do_not_require_specific_implementation(self):
         text = json.dumps(self.criteria)
         for banned in ("metargon_v12.py", "benchmark_v12.py"):
             self.assertNotIn(banned, text,
                              "frozen criteria must not reference implementation files")
+
+    def test_criteria_still_frozen_and_auditable(self):
+        # The publication gate must not have weakened the frozen criteria:
+        # the requirements sections remain present, non-empty, and the
+        # protocol/audit metadata is unchanged.
+        self.assertEqual(self.criteria["protocol"], "frozen-eval-criteria-v02")
+        self.assertEqual(self.criteria["audit"], "evaluation-v04")
+        for sec in _REQUIRED_SECTIONS:
+            self.assertIn(sec, self.criteria)
+            body = self.criteria[sec]
+            if isinstance(body, dict) and "requirement" in body:
+                self.assertTrue(body["requirement"])
 
 
 if __name__ == "__main__":
