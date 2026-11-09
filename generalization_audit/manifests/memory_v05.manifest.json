@@ -1,0 +1,86 @@
+{
+  "schema_version": "experiment-manifest-v01",
+  "protocol_version": "eval-protocol-v01",
+  "experiment": {
+    "name": "academy-memory-v05",
+    "description": "Academy Memory v0.5 three-regime experiment (frozen/adapt/continual) with evidence bank. Committed artifact: results/academy_v01/memory_v05/.",
+    "format": "academy_memory",
+    "agent_version": "academy-v0.5",
+    "harness": "academy/tools/memory_experiment_v05.py + memory_merge_v05.py",
+    "commit_sha": "947b69f",
+    "python_version": "3.11.0",
+    "platform": "windows",
+    "hash_seed": 0,
+    "family": "academy-classic",
+    "conditions": [
+      "classic"
+    ],
+    "seeds": [
+      20261107,
+      20261108
+    ],
+    "episodes_per_seed": 64,
+    "action_budget_max_steps": null,
+    "policies": [
+      "fresh",
+      "original",
+      "memory_wiped",
+      "ctx",
+      "ctx_full",
+      "bank",
+      "bank_ctx",
+      "bank_ctx_full"
+    ],
+    "ablation_flags": {
+      "frozen_policy": true,
+      "evidence_bank_cap": 16
+    },
+    "parameters": {
+      "classic_grid_configs": 16,
+      "ood_probe_configs": 12,
+      "continual_probe_configs": 6,
+      "train_episodes_per_seed": 160
+    },
+    "resources": {
+      "planner_max_expand": 1500,
+      "probe_max_plans": 4,
+      "memory_limit_bytes": null,
+      "per_policy_cpu_s": false
+    },
+    "evaluation": {
+      "comparison_convention": "baseline_minus_candidate",
+      "bootstrap": {
+        "method": "paired",
+        "seed": 20261108,
+        "rounds": 2000,
+        "alpha": 0.05
+      },
+      "metrics": {
+        "train_success_mean": "mean training-phase success over 160 episodes per seed",
+        "classic_frozen": "zero-shot transfer: config_mean_success over 16-config classic grid, learning disabled",
+        "classic_adapt": "within-episode learning: config_mean_success over 16-config classic grid, learning enabled",
+        "ood_frozen": "frozen OOD probe over 12-config pool",
+        "continual_ood": "continual OOD probe over 6-config pool",
+        "retention_delta_mean": "first-vs-last substrate retention delta"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "../../results/academy_v01/memory_v05/memory_v05_summary.json",
+      "role": "summary",
+      "generated_by": "memory_merge_v05.py",
+      "contains_per_seed": true,
+      "sha256": "844df0f699f4d0cc7b9f42974349c94f260bb26e8dddc80ec03856f5324c63ee",
+      "size_bytes": 169815
+    },
+    {
+      "path": "../../results/academy_v01/memory_v05/memory_v05_runs.jsonl",
+      "role": "log",
+      "generated_by": "memory_experiment_v05.py",
+      "contains_per_seed": false,
+      "sha256": "fbf03e4b60cc461d0f0b4ec9d0dfedaac201894e7e91d7a85307b458cc75808c",
+      "size_bytes": 144351
+    }
+  ]
+}

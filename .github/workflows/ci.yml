@@ -88,6 +88,15 @@ jobs:
       - name: Audit unit tests
         run: python -m unittest discover -s generalization_audit/tests -t . -v
         timeout-minutes: 30
+      - name: Verify committed example manifests
+        run: |
+          python -m generalization_audit.tools.verify_experiment \
+            --manifest generalization_audit/manifests/memory_v05.manifest.json \
+            --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['overall'] != 'FAIL', d"
+          python -m generalization_audit.tools.verify_experiment \
+            --manifest generalization_audit/manifests/v121_final_l.manifest.json \
+            --json | python -c "import json,sys; d=json.load(sys.stdin); assert d['overall'] != 'FAIL', d"
+        timeout-minutes: 10
 
   # ------------------------------------------------------------------
   # Rust research kernel + Academy kernel (pinned toolchain 1.88.0)

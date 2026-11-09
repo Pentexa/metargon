@@ -1,0 +1,116 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "METARGON experiment manifest",
+  "description": "Machine-readable provenance record for a METARGON experiment. Captures code state, protocol, seeds, budgets, metrics, and artifact hashes so that results can be independently verified without trusting narrative reports.",
+  "type": "object",
+  "required": ["schema_version", "protocol_version", "experiment", "artifacts"],
+  "properties": {
+    "schema_version": {
+      "const": "experiment-manifest-v01"
+    },
+    "protocol_version": {
+      "type": "string",
+      "description": "Evaluation protocol version under which this experiment was run (see generalization_audit/configs/frozen_eval_criteria_*.json)."
+    },
+    "experiment": {
+      "type": "object",
+      "required": [
+        "name", "family", "conditions", "seeds", "episodes_per_seed",
+        "agent_version", "harness", "commit_sha", "evaluation"
+      ],
+      "properties": {
+        "name": {"type": "string"},
+        "description": {"type": "string"},
+        "format": {
+          "description": "Artifact format hint for the verifier: benchmark_v12 (raw+summary+comparisons), academy_memory (conditions_detail+comparisons), or generic.",
+          "enum": ["benchmark_v12", "academy_memory", "generic"]
+        },
+        "agent_version": {"type": "string"},
+        "harness": {"type": "string"},
+        "commit_sha": {
+          "type": "string",
+          "pattern": "^[0-9a-f]{7,40}$"
+        },
+        "working_tree_status": {"enum": ["clean", "dirty"]},
+        "dirty_files": {"type": "array", "items": {"type": "string"}},
+        "python_version": {"type": "string"},
+        "platform": {"type": "string"},
+        "hash_seed": {
+          "description": "PYTHONHASHSEED pinned for determinism-sensitive runs.",
+          "type": ["integer", "string"]
+        },
+        "family": {"type": "string"},
+        "conditions": {
+          "type": "array",
+          "items": {"type": "string"},
+          "minItems": 1
+        },
+        "seeds": {
+          "type": "array",
+          "items": {"type": "integer"},
+          "minItems": 1
+        },
+        "episodes_per_seed": {"type": "integer", "minimum": 1},
+        "action_budget_max_steps": {"type": ["integer", "null"]},
+        "policies": {
+          "type": "array",
+          "items": {"type": "string"}
+        },
+        "ablation_flags": {"type": "object"},
+        "parameters": {"type": "object"},
+        "resources": {
+          "type": "object",
+          "properties": {
+            "planner_max_expand": {"type": ["integer", "null"]},
+            "probe_max_plans": {"type": ["integer", "null"]},
+            "memory_limit_bytes": {"type": ["integer", "null"]},
+            "per_policy_cpu_s": {"type": "boolean"}
+          }
+        },
+        "evaluation": {
+          "type": "object",
+          "required": ["comparison_convention", "bootstrap"],
+          "properties": {
+            "comparison_convention": {
+              "description": "Direction recorded in summary delta fields. 'candidate_minus_baseline' is the project-wide convention (audit v0.2+); 'baseline_minus_candidate' marks historical experiments known to use the reversed convention.",
+              "enum": ["candidate_minus_baseline", "baseline_minus_candidate"]
+            },
+            "bootstrap": {
+              "type": "object",
+              "properties": {
+                "method": {"const": "paired"},
+                "seed": {"type": "integer"},
+                "rounds": {"type": "integer", "minimum": 1},
+                "alpha": {"type": "number", "minimum": 0, "maximum": 0.5}
+              },
+              "required": ["method", "seed", "rounds", "alpha"]
+            },
+            "metrics": {
+              "type": "object",
+              "description": "Metric definitions: metric name -> definition string. Discovery metrics must also provide per-seed arrays."
+            }
+          }
+        }
+      }
+    },
+    "artifacts": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "required": ["path", "role", "sha256"],
+        "properties": {
+          "path": {"type": "string"},
+          "role": {"enum": ["raw", "summary", "log", "table", "manifest"]},
+          "sha256": {
+            "type": "string",
+            "pattern": "^[0-9a-f]{64}$"
+          },
+          "size_bytes": {"type": "integer", "minimum": 0},
+          "generated_by": {"type": "string"},
+          "contains_per_seed": {"type": "boolean"}
+        }
+      }
+    }
+  }
+}
