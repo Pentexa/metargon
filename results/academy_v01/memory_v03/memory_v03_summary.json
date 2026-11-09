@@ -1241,27 +1241,27 @@
      0.0
     ]
    },
-   "train_delta": 0.0
+   "retention_delta": 0.0
   },
   "window_vs_original": {
    "classic_test": {
-    "mean": 0.254328125,
+    "mean": -0.254328125,
     "ci": [
-     -0.03125,
-     0.5625
+     -0.5625,
+     0.03125
     ]
    },
-   "train_delta": 0.01874999999999999
+   "retention_delta": 0.0
   },
   "ratio_vs_original": {
    "classic_test": {
-    "mean": 0.22415625,
+    "mean": -0.22415625,
     "ci": [
-     -0.03125,
-     0.5
+     -0.5,
+     0.03125
     ]
    },
-   "train_delta": 0.03125
+   "retention_delta": 0.0
   },
   "probe_vs_original": {
    "classic_test": {
@@ -1271,7 +1271,7 @@
      0.0
     ]
    },
-   "train_delta": 0.14375
+   "retention_delta": 0.0
   },
   "protect_local_vs_original": {
    "classic_test": {
@@ -1281,7 +1281,7 @@
      0.0
     ]
    },
-   "train_delta": 0.006250000000000033
+   "retention_delta": 0.0
   },
   "probe_local_vs_original": {
    "classic_test": {
@@ -1291,17 +1291,17 @@
      0.0
     ]
    },
-   "train_delta": 0.10625000000000001
+   "retention_delta": 0.0
   },
   "combined_vs_original": {
    "classic_test": {
-    "mean": 0.19409375,
+    "mean": -0.19409375,
     "ci": [
-     -0.125,
-     0.5
+     -0.5,
+     0.125
     ]
    },
-   "train_delta": -0.175
+   "retention_delta": 0.0
   }
  },
  "fresh_control": {

@@ -1,0 +1,57 @@
+{
+ "protocol": "academy-eval-grid-v01",
+ "note": "Frozen evaluation grid for Academy experiments. Config keys are the canonical EnvConfig.key() values. Deterministic only under a fixed PYTHONHASHSEED (sample_substrate sorts by str(frozenset)).",
+ "splits_source": "C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon-eval02\\academy\\envs\\..\\..\\results\\academy_v01\\splits.json",
+ "hash_seed": "pinned (0)",
+ "classic": {
+  "pool": "test",
+  "n_configs": 16,
+  "seeds": [
+   0,
+   1
+  ],
+  "episodes_per_config": 4,
+  "sample_seed": 20261108,
+  "keys": [
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)",
+   "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)",
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)",
+   "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)",
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)",
+   "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)",
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)",
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('empty', 'P2')}), False, False)",
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2')}), True, True)",
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)",
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, True)",
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, False)",
+   "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)",
+   "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)",
+   "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)"
+  ]
+ },
+ "ood": {
+  "pool": "ood",
+  "n_configs": 12,
+  "seeds": [
+   0
+  ],
+  "episodes_per_config": 3,
+  "sample_seed": 20261110,
+  "keys": [
+   "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)",
+   "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('empty', 'P1')}), False, False)",
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True), ('empty', 'P1')}), True, False)",
+   "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, False)",
+   "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, True)",
+   "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, True)",
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, False)",
+   "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, False)",
+   "('TP2', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, False)",
+   "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True), ('empty', 'P1')}), True, True)",
+   "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('empty', 'P1')}), True, False)",
+   "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), True, False)"
+  ]
+ }
+}

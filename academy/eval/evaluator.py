@@ -14,6 +14,7 @@ import random
 from ..envs.gridworld import MechanismGrid
 from ..envs.tasks import EpisodeSpec, make_episodes
 from .metrics import summarize_episodes, paired_difference
+from .protocol import spec_for
 
 
 class Evaluator:
@@ -67,7 +68,7 @@ class Evaluator:
             for spec in stream:
                 env = MechanismGrid(spec.config, spec.max_steps, spec.noise_q)
                 obs = env.reset(spec.spec_seed)
-                agent.episode_start(spec, env.geom)
+                agent.episode_start(spec_for(agent, spec), env.geom)
                 success = False
                 steps = 0
                 door_events = 0

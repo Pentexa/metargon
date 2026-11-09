@@ -211,8 +211,9 @@ def run_memory_experiment(splits=None, episodes=160, seed=20261107,
                 continue
             v = summary["conditions_detail"][name]
             cmp_ = {}
-            a, b = orig["classic_test_per_config"], v["classic_test_per_config"]
+            a, b = v["classic_test_per_config"], orig["classic_test_per_config"]
             if len(a) == len(b):
+                # candidate − baseline (positive = variant improves)
                 cmp_["classic_test"] = paired_difference(a, b, seed=eval_seed)
             if v["retention"]["snapshots"] and orig["retention"]["snapshots"]:
                 cmp_["retention_delta"] = (

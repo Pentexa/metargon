@@ -110,6 +110,18 @@ def load_policy_state(factory, results_dir, policy):
     return agent
 
 
+def load_policy_state_or_warn(factory, results_dir, policy, warn=True):
+    """Like load_policy_state, but surfaces a warning when the trained
+    policy state is missing (silent evaluation of an untrained agent is
+    a measurement-integrity hazard)."""
+    agent = load_policy_state(factory, results_dir, policy)
+    if agent is None and warn:
+        print(f"[eval] WARNING: no trained policy state for '{policy}'; "
+              f"evaluating an UNTRAINED agent — this result is NOT a "
+              f"fair post-training measurement", file=sys.stderr)
+    return agent
+
+
 def cmd_splits(args, cfg):
     splits = get_splits(cfg["seeds"]["pool_split"], force_compute=True)
     counts = splits["counts"]
@@ -254,7 +266,7 @@ def cmd_eval(args, cfg, kind="test"):
     results = {}
     for name in names:
         factory = factories[name]
-        agent = load_policy_state(factory, DEFAULT_RESULTS_DIR, name)
+        agent = load_policy_state_or_warn(factory, DEFAULT_RESULTS_DIR, name)
         if agent is not None:
             # wrap into a factory that recreates the loaded agent per seed
             def make_loaded(seed, _agent=agent, _factory=factory):
@@ -264,6 +276,7 @@ def cmd_eval(args, cfg, kind="test"):
             res = evaluator.run_policy(make_loaded, pool, n_seeds=n_seeds)
         else:
             res = evaluator.run_policy(factory, pool, n_seeds=n_seeds)
+            res["untrained_fallback"] = True
         results[name] = res
         s = res["summary"]
         print(f"  {name}: success={s['success_rate']:.3f} "

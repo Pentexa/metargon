@@ -64,6 +64,7 @@ from ..envs.tasks import (
 )
 from ..eval.metrics import paired_difference
 from ..eval.evaluator import Evaluator
+from ..eval.protocol import spec_for
 from ..learning.loop import run_one_episode
 from .diversity import diversity_metrics
 from .offline_generator import OfflineTaskGenerator
@@ -296,7 +297,7 @@ def eval_config_grid(agent_state, configs, labels: str, max_steps: int,
             for ep, spec in enumerate(stream):
                 env = MechanismGrid(spec.config, spec.max_steps, spec.noise_q)
                 obs = env.reset(spec.spec_seed)
-                agent.episode_start(spec, env.geom)
+                agent.episode_start(spec_for(agent, spec), env.geom)
                 success = False
                 steps = 0
                 while steps < env.max_steps:
