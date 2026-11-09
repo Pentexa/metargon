@@ -1,0 +1,76 @@
+{
+  "protocol": "frozen-eval-criteria-v02",
+  "created": "2026-11-09",
+  "audit": "evaluation-v04",
+  "note": "Frozen evaluation criteria for future METARGON research (v0.13) and Academy Memory (v0.6) PRs. Defined by the independent audit BEFORE inspecting any v0.13 / v0.6 result, and before those experiments exist. Any deviation must be documented with justification in the PR. Criteria v01 (audit v0.3) remains in force for v0.12.1 / Academy v0.5 retrospective checks; this v02 file replaces it for all new research claims.",
+  "pilot_requirements": {
+    "mechanism_lab_v013": {
+      "minimum": ">=4 seeds x 40 episodes per family-condition cell (preliminary/pilot only)",
+      "confirmatory": ">=8 seeds x 100 episodes per family-condition cell for any population-level claim",
+      "registration": "Pilot thresholds, conditions, families, and policy roster must be recorded BEFORE running; post-hoc expansion must be declared.",
+      "families": ["F (all 5 conditions)", "H", "R", "L"],
+      "note": "The committed v0.12 / v0.12.1 studies are 4x40 and are therefore pilot-grade; any headline claim carried into docs must either upgrade to 8x100 or be explicitly labeled preliminary."
+    },
+    "academy_memory_v06": {
+      "minimum": "2 train seeds x full frozen grid (16 classic / 12 OOD / 6 continual)",
+      "confirmatory": ">=5 train seeds x full frozen grid for any transfer/retention claim",
+      "frozen_grids": ["generalization_audit/configs/academy_eval_grid_v01.json", "16-config classic grid", "12-config OOD probe", "6-config continual probe"],
+      "controls": ["fresh (untrained, within-eval)", "original (candidate baseline)", "memory_wiped (ablation of persistent memory)"]
+    }
+  },
+  "statistical_uncertainty": {
+    "requirement": [
+      "Every headline metric must be reported as a per-seed vector in the artifact (not only the mean).",
+      "Report population stddev, min/max, and the count of seeds with nonzero/positive evidence for every discovery metric (exact D1/D2).",
+      "All paired deltas use candidate - baseline (audit v0.2 convention).",
+      "Paired bootstrap 95% CIs must be reported for every delta claimed as an effect; attach the raw vectors.",
+      "If the CI includes 0, the claim must be worded as 'no measured effect', not as improvement.",
+      "Any claim must state how many seeds drive it; a mean driven by <=2 seeds of 8 is not a robust population effect."
+    ]
+  },
+  "zero_shot_vs_within_episode": {
+    "requirement": [
+      "Report separately: (1) zero-shot/frozen score (learning disabled during evaluation), (2) within-episode-learning score.",
+      "Transfer/retention claims must use the zero-shot score.",
+      "Within-episode learning must be reported as a separate quantity: adapt - frozen.",
+      "Fresh controls must be run under the same within-episode protocol.",
+      "A memory claim that appears only in the within-episode regime is a within-episode-learning claim, not a transfer claim."
+    ]
+  },
+  "resource_fairness": {
+    "requirement": [
+      "Identical per-decision budgets (plan expansion cap, memory bounds, action horizon) across compared policies.",
+      "If a baseline uses a larger budget, compare only with a compute-capped variant or report CPU seconds alongside; never compare raw success without both.",
+      "Report invalid-action counts per policy (they are a policy cost).",
+      "All policies in a comparison must receive the same episode streams (matched seeds) and the same max_steps per condition."
+    ]
+  },
+  "regression_preservation": {
+    "requirement": [
+      "For every proposed change, rerun the matched-seed regression suite before merge: families F (5 conditions), H (stable/novel), R (stable/novel), L (stable/novel), plus the Academy frozen grid.",
+      "A family-agnostic change may not reduce any prior headline metric (success or exact D1/D2) beyond the paired-bootstrap noise bound (delta CI must include 0 or decline < 2 SE).",
+      "Any regression beyond noise must be acknowledged in the report with the changed cells, and the change must not be merged silently.",
+      "Exact-discovery metrics (D1/D2) must be tracked per family; losing a discovery capability is a regression even if success is unchanged.",
+      "Record the exact committed baseline artifacts compared against and the git state of the harness."
+    ]
+  },
+  "evidence_for_improvement_claim": {
+    "requirement": [
+      "A claim of improvement requires ALL of:",
+      "  (a) confirmatory sample size (8x100 mechanism lab / >=5 train seeds Academy);",
+      "  (b) candidate - baseline paired bootstrap 95% CI excluding 0, or effect size declared a priori;",
+      "  (c) per-seed breakdown showing the effect is not carried by one seed;",
+      "  (d) a mechanism check: ablation or controlled control showing the named mechanism is the cause;",
+      "  (e) reproducible commands recorded in the report (exact CLI, PYTHONHASHSEED, code state);",
+      "  (f) no unpreserved regression in the preservation suite.",
+      "Pilot results (4x40 / 2 train seeds) may be reported but must be labeled preliminary and must not be used as the basis of a population claim."
+    ]
+  },
+  "independence": {
+    "requirement": [
+      "Evaluation protocol is defined by the independent audit and is implementation-agnostic.",
+      "The researchers' own evaluation runs are not admissible as the sole evidence for a claim; at least one independent recomputation (audit rerun) is required for any headline figure.",
+      "Artifacts must be committed raw (per-seed) alongside summaries; summaries computable from raw must match."
+    ]
+  }
+}
