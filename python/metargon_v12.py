@@ -20,6 +20,8 @@ Mission B (temporal ordered-sequence hypotheses, prototype):
 """
 from __future__ import annotations
 
+from collections import deque
+
 from lab_env import DOORS
 
 from metargon_v11 import MetargonV11
@@ -49,7 +51,8 @@ class MetargonV12(MetargonV11):
                  use_temporal: bool = False,
                  temporal_max: int = 64,
                  adaptive_confirmed_events: bool = False,
-                 anomaly_threshold: float = 0.03):
+                 anomaly_threshold: float = 0.03,
+                 dual_persist_gate: int = 0):
         super().__init__(
             seed=seed, max_hypotheses=max_hypotheses,
             use_robust_belief=use_robust_belief,
@@ -61,6 +64,10 @@ class MetargonV12(MetargonV11):
             use_certainty=use_certainty,
         )
         self.use_dual_context = use_dual_context
+        self.dual_persist_gate = dual_persist_gate
+        self._atoms_tail: deque = deque(maxlen=4)
+        self._clean_gated_events = 0
+        self._dual_gated_events = 0
         if not use_dual_context:
             self.dual_context_mode = "off"
             self.memory.event_context_mode = "clean"
@@ -183,6 +190,21 @@ class MetargonV12(MetargonV11):
             else:
                 certainty = 1.0
             self._certainty_sum += certainty
+            if self.dual_persist_gate > 0 and self.use_dual_context:
+                # Persistence-gated dual context (v0.13): if the belief
+                # state has been unchanged for `dual_persist_gate`
+                # consecutive completed steps before this event, the cause
+                # is very likely already present in the pre-context (hold/
+                # delayed mechanisms); using the post-context then only
+                # adds decoy atoms. Otherwise (transient transition, e.g.
+                # toggle-induced rules) keep the dual context.
+                persist = sum(1 for s in self._atoms_tail if s == post)
+                if persist >= self.dual_persist_gate:
+                    self.memory.event_context_mode = "clean"
+                    self._clean_gated_events += 1
+                else:
+                    self.memory.event_context_mode = "dual"
+                    self._dual_gated_events += 1
             stable_post = self.belief.stable_atoms() \
                 if self.memory.event_context_mode == "dual_stable" \
                 else frozenset()
@@ -221,6 +243,8 @@ class MetargonV12(MetargonV11):
                     self.temporal.observe_nonevent(door, self.memory.step)
             else:
                 self.memory.observe_nonevent(post_atoms, door, False)
+        if self.dual_persist_gate > 0:
+            self._atoms_tail.append(post_atoms)
         self.memory.step_advance()
         if self.temporal is not None:
             self.temporal.step_advance()
@@ -234,6 +258,9 @@ class MetargonV12(MetargonV11):
         plan, door = super()._choose_probe()
         if plan is not None:
             return plan, door
+        return self._choose_temporal_probe()
+
+    def _choose_temporal_probe(self):
         if self.temporal is None:
             return None, None
         b = self.belief.belief
@@ -278,6 +305,8 @@ class MetargonV12(MetargonV11):
         if self.temporal is not None:
             self.temporal.episode_end()
         self._prev_atoms = frozenset()
+        if self.dual_persist_gate > 0:
+            self._atoms_tail.clear()
 
     def diagnostics(self) -> dict:
         d = super().diagnostics()
@@ -287,6 +316,8 @@ class MetargonV12(MetargonV11):
         d["adaptive_confirmed_events"] = self.adaptive_confirmed_events
         d["confirmed_gating_active"] = getattr(self, "_confirmed_gating_active", None)
         d["temporal_probes"] = self._temporal_probes
+        d["clean_gated_events"] = self._clean_gated_events
+        d["dual_gated_events"] = self._dual_gated_events
         if self.temporal is not None:
             d["temporal"] = self.temporal.diagnostics()
         return d
