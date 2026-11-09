@@ -176,6 +176,14 @@ class CompositionalMemory:
         *active* context may be considered usable/queryable. This is a
         conservative transfer gate: new contexts start with no borrowed
         knowledge until evidence arrives.
+
+    v0.5 evidence bank (off by default):
+      * ``evidence_bank_cap`` (default 0 = disabled) — maintain a
+        compact bank of *verified* hypotheses (antecedent +
+        consequence). Bank entries are used as high-priority probe
+        candidates in new tasks (useful evidence reuse). The bank
+        stores only antecedent/consequence pairs, is bounded, and is
+        fully checkpointed. It never accesses hidden configuration.
     """
 
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES,
@@ -191,7 +199,8 @@ class CompositionalMemory:
                  dead_set_cap: int = 96,
                  context_scoped: bool = False,
                  task_change_reset: bool = False,
-                 context_gate_transfer: bool = False):
+                 context_gate_transfer: bool = False,
+                 evidence_bank_cap: int = 0):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -206,6 +215,7 @@ class CompositionalMemory:
         self.context_scoped = bool(context_scoped)
         self.task_change_reset = bool(task_change_reset)
         self.context_gate_transfer = bool(context_gate_transfer)
+        self.evidence_bank_cap = int(evidence_bank_cap)
         self.current_ctx = None
         self.hypotheses: list[Hypothesis] = []
         self.next_id = 1
@@ -218,6 +228,9 @@ class CompositionalMemory:
         # evidence timelines for windowed counts: h_id -> deque of 0/1
         self._sup_timeline: dict[int, deque] = {}
         self._con_timeline: dict[int, deque] = {}
+        # v0.5 evidence bank: list of (antecedent, consequence_key)
+        self.evidence_bank: list = []
+        self.bank_retrievals = 0
 
     # -- context (v0.4) -----------------------------------------------------
     def set_context(self, ctx: Optional[tuple]) -> None:
@@ -371,6 +384,25 @@ class CompositionalMemory:
             h.status = PREDICTED
         else:
             h.status = HYPOTHESIS
+        if self.evidence_bank_cap > 0 and h.status == VERIFIED:
+            self._bank_verified(h)
+
+    def _bank_verified(self, h: Hypothesis) -> None:
+        """Add a verified hypothesis to the compact evidence bank
+        (bounded, deduplicated by (antecedent, consequence))."""
+        entry = (h.antecedent, h.consequence)
+        for i, (ante, cons) in enumerate(self.evidence_bank):
+            if ante == entry[0] and cons == entry[1]:
+                return
+        self.evidence_bank.append(entry)
+        if len(self.evidence_bank) > self.evidence_bank_cap:
+            self.evidence_bank.pop(0)   # FIFO eviction
+
+    def bank_entries(self) -> list:
+        return list(self.evidence_bank)
+
+    def mark_retrieval(self) -> None:
+        self.bank_retrievals += 1
 
     def _support(self, h: Hypothesis, record_ctx: bool = True):
         h.sup += 1
@@ -473,7 +505,12 @@ class CompositionalMemory:
             "context_scoped": self.context_scoped,
             "task_change_reset": self.task_change_reset,
             "context_gate_transfer": self.context_gate_transfer,
+            "evidence_bank_cap": self.evidence_bank_cap,
             "current_ctx": self.current_ctx,
+            "evidence_bank": [
+                [sorted(list(ante)), cons] for ante, cons in self.evidence_bank
+            ],
+            "bank_retrievals": self.bank_retrievals,
             "hypotheses": [h.as_dict() for h in self.hypotheses],
             "next_id": self.next_id,
             "step": self.step,
@@ -502,6 +539,12 @@ class CompositionalMemory:
         self.task_change_reset = bool(state.get("task_change_reset", False))
         self.context_gate_transfer = bool(state.get("context_gate_transfer", False))
         self.current_ctx = state.get("current_ctx")
+        self.evidence_bank_cap = int(state.get("evidence_bank_cap", 0))
+        self.evidence_bank = [
+            (frozenset(map(tuple, ante)), cons)
+            for ante, cons in state.get("evidence_bank", [])
+        ]
+        self.bank_retrievals = int(state.get("bank_retrievals", 0))
         self.hypotheses = [Hypothesis.from_dict(d) for d in state["hypotheses"]]
         self.next_id = state["next_id"]
         self.step = state["step"]

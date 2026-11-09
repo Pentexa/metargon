@@ -89,7 +89,8 @@ class MetargonAcademyAgent:
                  probe_episode_local: bool = False,
                  memory_context_scoped: bool = False,
                  memory_task_change_reset: bool = False,
-                 memory_context_gate_transfer: bool = False):
+                 memory_context_gate_transfer: bool = False,
+                 memory_evidence_bank_cap: int = 0):
         self.seed = seed
         self.rng = random.Random(seed)
         self.replay_enabled = replay_enabled
@@ -107,12 +108,14 @@ class MetargonAcademyAgent:
             context_scoped=memory_context_scoped,
             task_change_reset=memory_task_change_reset,
             context_gate_transfer=memory_context_gate_transfer,
+            evidence_bank_cap=memory_evidence_bank_cap,
         )
         self.probe_adaptive = bool(probe_adaptive)
         self.protect_episode_local = bool(protect_episode_local)
         self.probe_episode_local = bool(probe_episode_local)
         self._episode_mem_step = 0
         self._ctx_signature = None
+        self.frozen_policy = False
         self.planner_max_expand = planner_max_expand
         self.probe_max_plans = probe_max_plans
         self.probe_timeout = probe_timeout
@@ -333,6 +336,14 @@ class MetargonAcademyAgent:
         out = []
         for h in hyps[:3]:
             out.append((door, h.antecedent, 0))
+        # v0.5: evidence-bank retrieval (high-priority reuse)
+        if self.memory.evidence_bank_cap > 0:
+            for ante, cons in self.memory.bank_entries():
+                if cons.split(":")[1] != door:
+                    continue
+                if ante not in self.tried[door]:
+                    out.append((door, ante, 0))
+                    self.memory.mark_retrieval()
         tried = self.tried[door]
         atom_count = {}
         for h in hyps[:8]:
@@ -454,6 +465,8 @@ class MetargonAcademyAgent:
         return self.rng.choice(valid if valid else ("N",))
 
     def learn(self, obs_before, action, result):
+        if self.frozen_policy:
+            return
         self.steps += 1
         before_atoms = atoms_from_observation(obs_before)
         after_obs = result.observation
@@ -496,7 +509,7 @@ class MetargonAcademyAgent:
         recorded — are adjudicated against the stored transition. This
         gives replay genuine retroactive value (old data validates new
         hypotheses)."""
-        if not self.replay_enabled:
+        if not self.replay_enabled or self.frozen_policy:
             return
         before_atoms = atoms_from_observation(exp.obs_before)
         after_atoms = atoms_from_observation(exp.obs_after)
@@ -560,6 +573,7 @@ class MetargonAcademyAgent:
             "passed": dict(self.passed),
             "far_anchor": dict(self.far_anchor),
             "_ctx_signature": self._ctx_signature,
+            "frozen_policy": self.frozen_policy,
             "pending_probe": {
                 d: [sorted(list(ante)), deadline]
                 for d, (ante, deadline) in self.pending_probe.items()
@@ -593,6 +607,7 @@ class MetargonAcademyAgent:
         }
         self.passed = dict(state["passed"])
         self._ctx_signature = state.get("_ctx_signature")
+        self.frozen_policy = state.get("frozen_policy", False)
         self.far_anchor = {d: tuple(a) for d, a in state["far_anchor"].items()}
         self.pending_probe = {
             d: (frozenset(map(tuple, atoms)), deadline)
