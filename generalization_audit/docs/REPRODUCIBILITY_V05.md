@@ -180,6 +180,5 @@ requirement (frozen criteria v01/v02) remains the rule for new experiments.
 - Example-manifest verification: memory v0.5 → 56 PASS / 0 FAIL / 1
   INCONCLUSIVE; v121 final_l → 374 PASS / 0 FAIL / 1 INCONCLUSIVE.
 - Academy suite: **209/209 OK**.
-- Python suite: recorded on this branch when run completes (long wall under
-  loaded machine).
+- Python suite: **188/188 OK** (~26 min under loaded machine).
 - Repo hygiene and Rust suites: unchanged and green.
