@@ -136,6 +136,14 @@ checks honor the declared convention, so historical evidence verifies as
 self-consistent while the project-wide `candidate_minus_baseline`
 requirement (frozen criteria v01/v02) remains the rule for new experiments.
 
+### Post-freeze publication (artifact gate)
+
+Research v0.13 / Academy Memory v0.6 may commit raw evidence after the
+freeze **if** it is covered by a validating manifest. The provenance-aware
+gate (`verification/artifact_gate.py`, `tests/test_artifact_gate_provenance.py`)
+replaces the former permanent absence assertion; see
+`docs/ARTIFACT_GATE_V05.md` for the full workflow.
+
 ---
 
 ## 6. Integration
