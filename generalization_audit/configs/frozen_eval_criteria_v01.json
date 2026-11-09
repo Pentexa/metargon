@@ -27,7 +27,10 @@
       "All paired deltas use candidate − baseline (audit v0.2 convention); positive = improvement.",
       "Per-seed paired bootstrap 95% CIs; report the delta and both bounds.",
       "Attach the raw per-config / per-seed vectors so the summary can be recomputed.",
-      "Record PYTHONHASHSEED used; any sampler whose sort key uses str(frozenset) is hash-sensitive."
+      "Record PYTHONHASHSEED used; any sampler whose sort key uses str(frozenset) is hash-sensitive.",
+      "REQUIRED (added audit v0.3 follow-up): report every metric ALSO per seed (not only the mean). A mean over 4 seeds can be driven by a single seed; without per-seed values, seed sensitivity is invisible.",
+      "REQUIRED: for any temporal-learning claim (exact-D1 discovery etc.), report the per-seed vector, the population stddev, and the number of seeds with nonzero discovery. Do not claim robust generalization from small n.",
+      "RECOMMENDED: use larger independent seed sets (>=8) before making population-level claims; 4-seed runs are pilot/preliminary only."
     ]
   },
   "seed_config_alignment": {
@@ -40,7 +43,8 @@
   "v0121_target": {
     "focus": [
       "Mechanism-lab families F (all 5 conditions), H, R, L at 8 seeds x 100 episodes (the committed v0.12 run is 4x40; treat it as preliminary).",
-      "Exact D1/D2 discovery under the temporal and compositional languages, with per-condition breakdown.",
+      "Exact D1/D2 discovery under the temporal and compositional languages, with per-condition breakdown AND per-seed breakdown (the temporal exact-D1 metric on L is seed-sensitive: stable 4-seed vector [0,0,0.675,0], novel [0,0.25,0.675,0]).",
+      "Record the exact-D1 metric definition in the artifact (fraction of episodes with a verified temporal hypothesis exactly matching the true ordered rule; predicted hypotheses not counted).",
       "Zero-shot vs within-eval learning separation (mechanism-lab epochs are within-eval by construction; state it explicitly)."
     ]
   },
