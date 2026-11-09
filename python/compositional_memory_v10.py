@@ -291,7 +291,8 @@ class CompositionalMemoryV10:
                                certainty=1.0)
 
     def observe_event_ex(self, pre_atoms: frozenset, post_atoms: frozenset,
-                         door: str, opened: bool, certainty: float = 1.0):
+                         door: str, opened: bool, certainty: float = 1.0,
+                         stable_post_atoms: frozenset = frozenset()):
         """Combined context event with an evidence-quality weight. Contexts
         are unioned and cleaned of contradictory polarities; support is
         added with weight `certainty` (a family-agnostic observation-
@@ -305,12 +306,24 @@ class CompositionalMemoryV10:
                        the event-flipped atom is the likely cause; this
                        recovers v0.10's ability to learn toggle-induced
                        rules while keeping confirmed-event gating);
+          * "dual_stable" — dual, but the post context is limited to atoms
+                       whose sensors are stable (v0.12.1: keeps the D2
+                       recovery while limiting noise-polluted post
+                       candidates);
           * "union" — raw pre|post (v0.10 semantics, no cleaning).
         """
         consequence = opens_key(door, opened)
         mode = getattr(self, "event_context_mode", "clean")
         if mode == "dual":
             contexts = (pre_atoms, post_atoms)
+        elif mode == "dual_if_changed":
+            if pre_atoms != post_atoms:
+                contexts = (pre_atoms, post_atoms)
+            else:
+                contexts = (self._clean_ctx(pre_atoms, post_atoms),)
+        elif mode == "dual_stable":
+            pst = stable_post_atoms if stable_post_atoms else post_atoms
+            contexts = (pre_atoms, pst)
         elif mode == "union":
             contexts = (pre_atoms | post_atoms,)
         else:

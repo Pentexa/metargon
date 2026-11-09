@@ -61,10 +61,15 @@ FROZEN = {"r": ROOT / "generalization_audit" / "configs" / "frozen_r.json",
 # variant factories
 ABLATIONS = {
     "metargon12": {},
+    "metargon12-legacy": {"dual_context_mode": "dual",
+                          "use_recent_credit": True},
+    "metargon12-dic": {"dual_context_mode": "dual_if_changed"},
     "metargon12-nodc": {"use_dual_context": False},
+    "metargon12-dst": {"dual_context_mode": "dual_stable"},
     "metargon12-norc": {"use_recent_credit": False},
     "metargon12-noad": {"use_adaptive_confirm": False},
     "metargon12-notp": {"use_temporal": False},
+    "metargon12-conf": {"adaptive_confirmed_events": False},
 }
 TEMPORAL_OFF = ("metargon12-nodc", "metargon12-norc", "metargon12-noad",
                 "metargon12-notp")
@@ -79,6 +84,12 @@ def make_policy(name, seed, family):
         return MetargonV12(seed, **ABLATIONS[name])
     if name == "metargon11":
         return MetargonV11(seed)
+    if name == "metargon11-cf":
+        return MetargonV11(seed, use_confirmed_events=False)
+    if name == "metargon11-ct":
+        return MetargonV11(seed, use_certainty=False)
+    if name == "metargon11-rp":
+        return MetargonV11(seed, replay_mode="off")
     if name == "metargon10":
         return MetargonV10(seed)
     if name == "bayes":
@@ -306,8 +317,10 @@ def benchmark(seeds=8, episodes=60, family="f", conditions=None,
         "metargon12-norc", "metargon12-noad", "bayes", "oracle",
     ]
     if family in ("r", "l"):
-        roster = [p for p in roster if p != "metargon12-nodc"] + ["random"]
-        if family == "l":
+        if family == "r":
+            roster = roster + ["random"]
+        else:
+            roster = roster + ["random"]
             roster += ["metargon12-notp", "qlearning", "episodic"]
     scores = {}
     summary = {}
@@ -394,8 +407,10 @@ def benchmark_parallel(seeds=8, episodes=60, family="f", conditions=None,
         "metargon12-norc", "metargon12-noad", "bayes", "oracle",
     ]
     if family in ("r", "l"):
-        roster = [p for p in roster if p != "metargon12-nodc"] + ["random"]
-        if family == "l":
+        if family == "r":
+            roster = roster + ["random"]
+        else:
+            roster = roster + ["random"]
             roster += ["metargon12-notp", "qlearning", "episodic"]
     tasks = [(cond, i + 11800, episodes, family, measure_mem, tuple(roster))
              for cond in conds for i in range(seeds)]
@@ -473,14 +488,17 @@ def main():
     parser.add_argument("--parallel", action="store_true")
     parser.add_argument("--workers", type=int, default=None)
     parser.add_argument("--no-mem", action="store_true")
+    parser.add_argument("--policies", type=str, default=None)
     args = parser.parse_args()
     conditions = None if not args.conditions else args.conditions.split(",")
+    policies = None if not args.policies else args.policies.split(",")
     mem = not args.no_mem
     if args.parallel:
         result = benchmark_parallel(args.seeds, args.episodes, args.family,
-                                    conditions, args.workers, mem)
+                                    conditions, args.workers, mem, policies)
     else:
-        result = benchmark(args.seeds, args.episodes, args.family, conditions, mem)
+        result = benchmark(args.seeds, args.episodes, args.family, conditions,
+                           mem, policies)
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(json.dumps(result, indent=2) + "\n",
