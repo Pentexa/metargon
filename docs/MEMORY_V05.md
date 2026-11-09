@@ -65,40 +65,70 @@ CIs vs `original` on per-config vectors (frozen and adapt separately).
 
 ## 4. Results
 
-<!-- filled from memory_merge_v05.py at commit time -->
+*Pinned run: `PYTHONHASHSEED=0`, 2 train seeds × 160 episodes, frozen
+16-config classic grid, 12-config OOD, shared substrate retention.*
 
 ### 4.1 Held-out numbers (mean over 2 seeds)
 
 | Variant | Train | Frozen classic | Adapt classic | OOD frozen | Continual OOD |
 |---|---|---|---|---|---|
-| fresh | — | | | | |
-| original | | | | | |
-| memory_wiped | | | | | |
-| ctx | | | | | |
-| ctx_full | | | | | |
-| bank | | | | | |
-| bank_ctx | | | | | |
-| bank_ctx_full | | | | | |
+| fresh | — | **0.312** | **0.695** | 0.333 | 0.333 |
+| original | 0.341 | 0.281 | 0.594 | 0.333 | 0.500 |
+| memory_wiped | 0.341 | 0.281 | 0.594 | 0.333 | 0.500 |
+| ctx | 0.369 | 0.281 | 0.625 | 0.333 | 0.500 |
+| ctx_full | 0.497 | 0.250 | 0.562 | 0.333 | 0.500 |
+| bank | 0.341 | 0.281 | 0.594 | 0.333 | 0.500 |
+| bank_ctx | 0.369 | 0.281 | 0.625 | 0.333 | 0.500 |
+| bank_ctx_full | 0.231 | 0.273 | 0.633 | 0.333 | 0.472 |
 
 ### 4.2 Paired deltas vs original (95% CI)
 
 | Variant | Frozen Δ | Adapt Δ | Train Δ |
 |---|---|---|---|
-| ... | | | |
+| fresh | −0.030 ([−0.094, 0.000]) | −0.100 ([−0.211, 0.000]) | −0.341 |
+| memory_wiped | +0.000 ([0, 0]) | +0.000 ([0, 0]) | 0.000 |
+| ctx | +0.000 ([0, 0]) | −0.030 ([−0.094, 0.000]) | +0.028 |
+| ctx_full | +0.030 ([0, +0.094]) | +0.030 ([0, +0.094]) | +0.156 |
+| bank | +0.000 ([0, 0]) | +0.000 ([0, 0]) | 0.000 |
+| bank_ctx | +0.000 ([0, 0]) | −0.030 ([−0.094, 0.000]) | +0.028 |
+| bank_ctx_full | +0.007 ([−0.070, +0.094]) | −0.037 ([−0.133, +0.039]) | −0.109 |
 
 ### 4.3 Memory tracking (mean)
 
 | Variant | verified | contradicted | ctx-specific | bank size | retrievals |
 |---|---|---|---|---|---|
-| ... | | | | | |
+| original | 2.5 | 75.0 | 0 | 0 | 0 |
+| ctx | 2.5 | 76.5 | 79 | 0 | 0 |
+| bank | 2.5 | 75.0 | 0 | 16 | 0 |
+| bank_ctx_full | 6.0 | 51.0 | 57 | 16 | 79,345 |
 
 ---
 
 ## 5. Interpretation
 
-<!-- filled after final run -->
-
----
+- **Zero-shot (frozen) transfer is absent.** Every trained variant
+  scores *below* the fresh control on the frozen grid (0.250–0.281 vs
+  0.312). Retained memory alone transfers nothing — and remains mildly
+  negative.
+- **memory_wiped ≡ original, bit-identical in both regimes.** Deleting
+  all learned memory does not change frozen or adaptive scores. The
+  persistent memory does not determine held-out performance.
+- **All apparent transfer is within-episode adaptation.** adapt −
+  frozen ≈ 0.31–0.38 for every variant. The agent solves each unseen
+  configuration from scratch inside the evaluation episode.
+- **The evidence bank does not help.** `bank` / `bank_ctx` are
+  bit-identical to `original` / `ctx`. `bank_ctx_full` performed 79k
+  retrievals (the mechanism demonstrably runs) yet adaptation is
+  directionally negative (−0.037) vs original.
+- **No variant beats the untrained control** in either regime.
+- **Retention is flat** (+0.000 for all variants); continual-OOD probe
+  is ~0.5 for all trained variants.
+- **Conclusion (honest):** v0.5's evaluation-safe protocol confirms
+  that the Academy student's persistent memory currently produces no
+  measurable zero-shot transfer; all measured generalization is
+  within-evaluation learning. The evidence bank, context-scoped
+  evidence, and their combinations do not convert retained experience
+  into held-out gains. Positive transfer was not achieved.
 
 ## 6. Files
 

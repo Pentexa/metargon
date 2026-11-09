@@ -136,6 +136,7 @@ def eval_grid(agent_state, configs, max_steps, n_configs, episodes_per_config,
             rows.append({
                 "config": str(cfgc.key), "config_i": i, "seed_i": seed_i,
                 "success_rate": succ / max(1, len(stream)),
+                "n": len(stream),
             })
     per_config = {}
     for r in rows:
