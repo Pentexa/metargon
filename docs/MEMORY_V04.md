@@ -112,14 +112,17 @@ arrives.
 
 ### 5.2 Paired deltas vs original (95% CI, per-config vectors)
 
+All classic deltas are **candidate − baseline** (audit v0.2
+convention): positive = the candidate improved on `original`.
+
 | Variant | Classic Δ | Train Δ |
 |---|---|---|
-| fresh | −0.100 ([−0.211, 0.000]) | −0.341 |
-| probe_local | −0.032 ([−0.094, 0.000]) | +0.081 |
-| ctx | −0.030 ([−0.094, 0.000]) | +0.028 |
-| ctx_reset | −0.030 ([−0.094, 0.000]) | +0.028 |
-| ctx_gate | −0.030 ([−0.094, 0.000]) | +0.025 |
-| ctx_full | +0.030 ([0.000, +0.094]) | +0.156 |
+| fresh | +0.100 ([0.000, +0.211]) | −0.341 |
+| probe_local | +0.032 ([0.000, +0.094]) | +0.081 |
+| ctx | +0.030 ([0.000, +0.094]) | +0.028 |
+| ctx_reset | +0.030 ([0.000, +0.094]) | +0.028 |
+| ctx_gate | +0.030 ([0.000, +0.094]) | +0.025 |
+| ctx_full | −0.030 ([−0.094, 0.000]) | +0.156 |
 | memory_wiped | 0.000 ([0.000, 0.000]) | 0.000 |
 
 ### 5.3 Train-vs-transfer curves (mid-grid success by episode block)

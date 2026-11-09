@@ -1,0 +1,56 @@
+{
+  "protocol": "frozen-eval-criteria-v01",
+  "created": "2026-11-09",
+  "audit": "evaluation-v03",
+  "note": "Frozen evaluation criteria for future METARGON research (v0.12.1) and Academy (v0.5) PRs. Defined BEFORE inspecting their results. Any deviation must be documented with justification.",
+  "zero_shot_vs_within_eval_learning": {
+    "definition": "A policy's held-out score conflates two quantities: (a) knowledge retained from training (zero-shot / frozen), and (b) learning that happens during evaluation episodes. Memory v0.4 established that within-eval learning is the dominant mechanism on the Academy classic grid (memory_wiped == original).",
+    "requirement": [
+      "For every policy comparison, report BOTH:",
+      "  1. zero-shot / frozen score: the trained policy state is loaded once per seed and its ACTIONS are executed with learning disabled, no memory updates, no replay, no within-eval acquisition;",
+      "  2. within-evaluation-learning score: the normal protocol (learning enabled during evaluation).",
+      "The difference between the two must be reported as 'within-eval learning gain'.",
+      "Fresh (untrained) control must be run under the same within-eval protocol.",
+      "Claims about 'transfer' or 'retention' must use the zero-shot score, not the within-eval score."
+    ]
+  },
+  "resource_budget_fairness": {
+    "requirement": [
+      "Identical per-decision compute budgets across compared policies: same BFS expansion cap, same plan-evaluation budget, same memory bounds.",
+      "If a baseline (e.g. Bayesian planner) uses a larger planning budget, either (a) cap it to the student's budget, or (b) report a compute-capped variant alongside, and never compare raw success without reporting CPU seconds.",
+      "Invalid actions consume steps and must be reported per policy (they are a policy cost).",
+      "Wall-clock/CPU must be reported per seed-run for every policy."
+    ]
+  },
+  "statistics": {
+    "requirement": [
+      "All paired deltas use candidate − baseline (audit v0.2 convention); positive = improvement.",
+      "Per-seed paired bootstrap 95% CIs; report the delta and both bounds.",
+      "Attach the raw per-config / per-seed vectors so the summary can be recomputed.",
+      "Record PYTHONHASHSEED used; any sampler whose sort key uses str(frozenset) is hash-sensitive."
+    ]
+  },
+  "seed_config_alignment": {
+    "requirement": [
+      "Record the exact split source (path), split seed, eval seeds, episode counts, noise, max steps in the artifact metadata.",
+      "Frozen config pools (families R/L, Academy eval grid) must be loaded read-only from the committed files.",
+      "Confidence intervals and paired alignment must use the identical episode streams per seed."
+    ]
+  },
+  "v0121_target": {
+    "focus": [
+      "Mechanism-lab families F (all 5 conditions), H, R, L at 8 seeds x 100 episodes (the committed v0.12 run is 4x40; treat it as preliminary).",
+      "Exact D1/D2 discovery under the temporal and compositional languages, with per-condition breakdown.",
+      "Zero-shot vs within-eval learning separation (mechanism-lab epochs are within-eval by construction; state it explicitly)."
+    ]
+  },
+  "academy_v05_target": {
+    "focus": [
+      "Frozen classic grid: 16 configs x 2 seeds x 4 episodes (academy_eval_grid_v01.json).",
+      "Frozen OOD probe: 12 configs x 1 seed x 3 episodes.",
+      "Report zero-shot (memory frozen) and within-eval scores separately; fresh control mandatory.",
+      "Memory-state metrics (verified/contradicted counts) with per-seed means.",
+      "No comparison with mechanism-lab success rates (different environments/protocols)."
+    ]
+  }
+}
