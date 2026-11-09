@@ -17,7 +17,7 @@ of bounded compositional hypothesis memory with the v0.9 research line.
 from __future__ import annotations
 
 from collections import deque
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from typing import Optional
 
 MAX_HYPOTHESES = 128
@@ -39,6 +39,11 @@ CLOSES = "closes"
 
 def consequence_key(door: str, opened: bool) -> str:
     return f"door:{door}:{OPENS if opened else CLOSES}"
+
+
+def ctx_key(ctx) -> Optional[str]:
+    """Canonical string key for a context signature (None-safe)."""
+    return None if ctx is None else repr(tuple(ctx))
 
 
 def atom_text(atom) -> str:
@@ -68,6 +73,9 @@ class Hypothesis:
     created_step: int = 0
     last_update: int = 0
     h_id: int = 0
+    # v0.4: context-scoped evidence (mapped by context-signature string)
+    sup_by_ctx: dict = field(default_factory=dict)
+    con_by_ctx: dict = field(default_factory=dict)
 
     @property
     def door(self) -> str:
@@ -99,6 +107,12 @@ class Hypothesis:
             base += 2.0
         return base - 0.0001 * self.last_update
 
+    def ctx_support(self, ctx: str) -> int:
+        return self.sup_by_ctx.get(ctx, 0)
+
+    def ctx_contradiction(self, ctx: str) -> int:
+        return self.con_by_ctx.get(ctx, 0)
+
     def as_dict(self) -> dict:
         return {
             "antecedent": sorted(self.antecedent),
@@ -108,6 +122,8 @@ class Hypothesis:
             "created_step": self.created_step,
             "last_update": self.last_update,
             "h_id": self.h_id,
+            "sup_by_ctx": self.sup_by_ctx,
+            "con_by_ctx": self.con_by_ctx,
         }
 
     @classmethod
@@ -120,6 +136,8 @@ class Hypothesis:
             created_step=d["created_step"],
             last_update=d["last_update"],
             h_id=d["h_id"],
+            sup_by_ctx=dict(d.get("sup_by_ctx", {})),
+            con_by_ctx=dict(d.get("con_by_ctx", {})),
         )
 
 
@@ -142,6 +160,22 @@ class CompositionalMemory:
         for status are recomputed over the last ``evidence_window``
         evidence events (sliding recency), instead of being cumulative
         for the lifetime of the hypothesis.
+
+    v0.4 context-aware evidence (each independent and off by default):
+      * ``context_scoped`` — evidence is recorded per task-context
+        signature (set via ``set_context``). Status uses the *active*
+        context's support/contradiction counts only, so a hypothesis
+        that is correct in the context where it was learned is not
+        destroyed by contradictions observed in other contexts
+        (reversible confidence; no irreversible destruction).
+      * ``task_change_reset`` — when the context changes, reset the
+        consecutive-nonevent windows (``_continuous_true``). Prevents
+        a task switch from counting as evidence against hypotheses
+        from the previous task.
+      * ``context_gate_transfer`` — only hypotheses with support in the
+        *active* context may be considered usable/queryable. This is a
+        conservative transfer gate: new contexts start with no borrowed
+        knowledge until evidence arrives.
     """
 
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES,
@@ -154,7 +188,10 @@ class CompositionalMemory:
                  recycle_contradicted: bool = False,
                  contradiction_ratio: float = 0.0,
                  evidence_window: int = 0,
-                 dead_set_cap: int = 96):
+                 dead_set_cap: int = 96,
+                 context_scoped: bool = False,
+                 task_change_reset: bool = False,
+                 context_gate_transfer: bool = False):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -166,6 +203,10 @@ class CompositionalMemory:
         self.contradiction_ratio = float(contradiction_ratio)
         self.evidence_window = int(evidence_window)
         self.dead_set_cap = int(dead_set_cap)
+        self.context_scoped = bool(context_scoped)
+        self.task_change_reset = bool(task_change_reset)
+        self.context_gate_transfer = bool(context_gate_transfer)
+        self.current_ctx = None
         self.hypotheses: list[Hypothesis] = []
         self.next_id = 1
         self.step = 0
@@ -178,6 +219,26 @@ class CompositionalMemory:
         self._sup_timeline: dict[int, deque] = {}
         self._con_timeline: dict[int, deque] = {}
 
+    # -- context (v0.4) -----------------------------------------------------
+    def set_context(self, ctx: Optional[tuple]) -> None:
+        """Declare the current task-context signature (public-observation
+        derived). With ``task_change_reset``, a change resets consecutive-
+        nonevent windows so a task switch cannot count as evidence."""
+        key = ctx_key(ctx)
+        if self.current_ctx == key:
+            return
+        if self.current_ctx is not None and self.task_change_reset:
+            self._continuous_true.clear()
+        self.current_ctx = key
+
+    def _ctx_counts(self, h: Hypothesis) -> tuple:
+        """(sup, con) used for status: per-context when context_scoped,
+        otherwise global cumulative (with evidence-window override)."""
+        if self.context_scoped and self.current_ctx is not None:
+            return (h.ctx_support(self.current_ctx),
+                    h.ctx_contradiction(self.current_ctx))
+        return self._windowed_counts(h)
+
     # -- introspection ----------------------------------------------------
     def __len__(self) -> int:
         return len(self.hypotheses)
@@ -188,6 +249,10 @@ class CompositionalMemory:
             if h.door != door or not h.usable:
                 continue
             if opens is not None and h.predicted_opens != opens:
+                continue
+            if (self.context_gate_transfer and self.context_scoped
+                    and self.current_ctx is not None
+                    and h.ctx_support(self.current_ctx) <= 0):
                 continue
             out.append(h)
         out.sort(key=lambda h: (-h.confidence, -h.sup))
@@ -242,6 +307,14 @@ class CompositionalMemory:
 
     # -- evidence timeline (windowed counts) -------------------------------
     def _record_evidence(self, h: Hypothesis, kind: str) -> None:
+        if self.context_scoped and self.current_ctx is not None:
+            if kind == "s":
+                h.sup_by_ctx[self.current_ctx] = h.sup_by_ctx.get(
+                    self.current_ctx, 0) + 1
+            else:
+                h.con_by_ctx[self.current_ctx] = h.con_by_ctx.get(
+                    self.current_ctx, 0) + 1
+            return
         if self.evidence_window <= 0:
             return
         tl = (self._sup_timeline if kind == "s" else self._con_timeline)
@@ -260,8 +333,8 @@ class CompositionalMemory:
 
     def _contradiction_gated(self, h: Hypothesis) -> bool:
         """Whether a transition to contradicted is *allowed* by the ratio
-        gate (contradiction_ratio). Uses windowed counts when enabled."""
-        sup, con = self._windowed_counts(h)
+        gate (contradiction_ratio). Uses per-context or windowed counts."""
+        sup, con = self._ctx_counts(h)
         if self.contradiction_ratio <= 0.0:
             return True
         return con > 0 and con >= self.contradiction_ratio * max(sup, 0)
@@ -278,8 +351,9 @@ class CompositionalMemory:
         self.evictions += 1
 
     def _gated_con(self, h: Hypothesis) -> int:
-        """Contradiction count used for status (ratio-gated)."""
-        sup, con = self._windowed_counts(h)
+        """Contradiction count used for status (ratio-gated, per-context
+        when context_scoped)."""
+        sup, con = self._ctx_counts(h)
         if self.contradiction_ratio <= 0.0:
             return con
         if con > 0 and con >= self.contradiction_ratio * max(sup, 0):
@@ -288,7 +362,7 @@ class CompositionalMemory:
 
     def _recompute_status(self, h: Hypothesis):
         con = self._gated_con(h)
-        sup, _ = self._windowed_counts(h)
+        sup, _ = self._ctx_counts(h)
         if con > self.max_contradict:
             h.status = CONTRADICTED
         elif sup >= self.verify_support and con <= self.max_contradict:
@@ -298,18 +372,20 @@ class CompositionalMemory:
         else:
             h.status = HYPOTHESIS
 
-    def _support(self, h: Hypothesis):
+    def _support(self, h: Hypothesis, record_ctx: bool = True):
         h.sup += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
-        self._record_evidence(h, "s")
+        if record_ctx:
+            self._record_evidence(h, "s")
         self._recompute_status(h)
 
-    def _contradict(self, h: Hypothesis):
+    def _contradict(self, h: Hypothesis, record_ctx: bool = True):
         h.con += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
-        self._record_evidence(h, "c")
+        if record_ctx:
+            self._record_evidence(h, "c")
         self._recompute_status(h)
         if self.recycle_contradicted and h.status == CONTRADICTED:
             self._mark_dead(h)
@@ -394,6 +470,10 @@ class CompositionalMemory:
             "contradiction_ratio": self.contradiction_ratio,
             "evidence_window": self.evidence_window,
             "dead_set_cap": self.dead_set_cap,
+            "context_scoped": self.context_scoped,
+            "task_change_reset": self.task_change_reset,
+            "context_gate_transfer": self.context_gate_transfer,
+            "current_ctx": self.current_ctx,
             "hypotheses": [h.as_dict() for h in self.hypotheses],
             "next_id": self.next_id,
             "step": self.step,
@@ -418,6 +498,10 @@ class CompositionalMemory:
         self.contradiction_ratio = float(state.get("contradiction_ratio", 0.0))
         self.evidence_window = int(state.get("evidence_window", 0))
         self.dead_set_cap = int(state.get("dead_set_cap", 96))
+        self.context_scoped = bool(state.get("context_scoped", False))
+        self.task_change_reset = bool(state.get("task_change_reset", False))
+        self.context_gate_transfer = bool(state.get("context_gate_transfer", False))
+        self.current_ctx = state.get("current_ctx")
         self.hypotheses = [Hypothesis.from_dict(d) for d in state["hypotheses"]]
         self.next_id = state["next_id"]
         self.step = state["step"]
