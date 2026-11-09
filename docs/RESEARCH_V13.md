@@ -175,6 +175,14 @@ Per-seed exact D1:
   — nonzero seeds 2/4 → 3/4; previously dead seed 0 now discovers
   (27.5%).
 
+Paired bootstrap 95% CIs for the temporal exact-D1 delta (candidate
+minus baseline, per-seed diffs, seed 4301, 1500 rounds):
+- stable: +39.38 pp, CI **[0.00, 78.75] pp — includes 0**; per the
+  frozen criteria this is **not** claimed as a measured population effect;
+  it is directional pilot evidence.
+- novel: +33.13 pp, CI **[6.88, 66.25] pp — excludes 0**.
+Both deltas are supported by the `-gen`/`-notp` ablation controls (§5).
+
 (per-seed vectors in `results/v13/pilot_l.json` and
 `results/v13/final_l.json`; rendered in
 `results/v13/rendered_final_l.md`).
