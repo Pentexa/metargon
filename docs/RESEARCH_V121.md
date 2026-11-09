@@ -3,7 +3,7 @@
 **Date:** 9 November 2026.
 **Status:** Controlled paired study (4 seeds × 40 episodes, matched seeds,
 frozen worlds) vs v0.10 / v0.11 / v0.12 (legacy).
-**Branch:** `research/v121-regression-recovery` (never merged into `main`).
+**Branch:** `research/v121-regression-recovery` (merged into `main` via PR #33).
 **Headline:** v0.12.1 closes the **F-noisy regression** (72.5% → 80.6%,
 = v0.11) while preserving v0.12's temporal L discovery. H-stable and
 R-stable regressions are investigated exhaustively; demonstrate-stable is
@@ -115,6 +115,53 @@ Note: v0.12 legacy (recent-credit on) shows L exact D1 = 0/0 in the same
 condition — recent-credit protection disrupts the ordered D2 sequence.
 The v0.12.1 change (recent-credit off) is therefore *required* to
 preserve temporal L discovery; it is not merely neutral there.
+
+> *Docs-sync annotation (9 Nov 2026), findings recorded during the
+> public-documentation sync; report values are kept as written:*
+>
+> 1. **Cell provenance is mixed in the table above.** The F/H/R "v12
+>    (legacy)" cells match the committed final-run artifacts
+>    (`final_f/h/r.json`, where the legacy ablation is faithful for
+>    compositional families), but the L-row cells `16.9/23.1` and
+>    `27.5/29.4` for "v12 (legacy)" originate from the v0.12 study
+>    (`results/v12/summary_l_small.json`), **not** from
+>    `results/v121/final_l.json`: in the final run the
+>    `metargon12-legacy` ablation records exact D1 `0.0/0.0`, success
+>    `18.12/18.75`, and `temporal_probes = 0` (see caveat 2 below).
+> 2. **The legacy ablation is not a faithful v0.12 replica for family
+>    L.** In `python/benchmark_v12.py` the `metargon12-legacy` config
+>    pins dual-context + recent-credit **but leaves
+>    `use_temporal` at its False default**, so final-run legacy rows
+>    for L do not measure "v0.12 with recent-credit on". Consequently
+>    the interpretation in the note above — that recent-credit
+>    disruption of the ordered D2 sequence is the cause — is not
+>    supported by the final-run artifact; the comparison that actually
+>    measures temporal vs compositional behavior in the final runs is
+>    `metargon12` vs `metargon12-notp`, with temporal Δ +16.88
+>    [0, 50.6] (stable) / +23.12 [0, 50.6] (novel). A faithful v0.12
+>    replication exists: the diagnosis-phase `eval2_l.json`
+>    `metargon12` run (recorded before the default flip) matches the
+>    v0.12 study (success 27.5/29.4, exact D1 16.9/23.1; `eval2_l.json`
+>    records `temporal_probes` as raw counters 4475/4250, the same
+>    scale family as the study summary's 44.75/42.5 per-seed-run
+>    metric). The same semantics hold for the v0.12 study's own
+>    `-norc`/`-notp` L rows (their temporal memory is off by
+>    construction), so the only committed runs of the
+>    recent-credit-OFF + temporal-ON combination are the v0.12.1
+>    `final_l.json` runs themselves — which preserve temporal exact D1
+>    (16.88/23.12); the v0.12.1 preservation conclusion therefore
+>    stands independently of the legacy rows, without the
+>    "recent-credit disruption" interpretation.
+> 3. **Exact-D2 cells (`75.6` F-noisy, `70.0` H-stable for v0.12.1)
+>    trace to the diagnosis-phase `-norc` runs** (`diag_f_noisy.json`,
+>    `diag_h_stable.json`), not to the final artifacts, which record
+>    exact D2 `45.0` (metargon12, `final_f.json`) and `41.25`
+>    (metargon12, `final_h.json`) under nominally identical settings
+>    (4 seeds × 40 episodes; matched seeds/conditions). Headline
+>    success cells and L-temporal values DO match the final artifacts.
+>    This diagnosis-vs-final discrepancy is unresolved and documented
+>    as issue 3 in `docs/DOC_CONSISTENCY_NOTES.md` (requires a rerun;
+>    no artifact was rewritten).
 
 ## 5. Negative results
 

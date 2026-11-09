@@ -2,7 +2,9 @@
 
 **Date:** 8–9 November 2026.
 **Status:** Controlled paired study vs v0.10/v0.11 and established baselines.
-**Branch:** `research/v12-general-causality` (never merged into `main`).
+**Branch:** `research/v12-general-causality` (merged into `main` via PR #29).
+
+> *Docs-sync annotation (9 Nov 2026): the "never merged" wording in an earlier revision of this line was stale; v0.12 merged via PR #29. Report values were re-verified against the committed raw artifacts by the Independent Audit v0.3, which corrected two transcription errors in §4.4/§4.1 (temporal Δ swap; v0.11 F-shift exact-D2 66.9 → 65.0) with provenance notes therein.*
 **Headline:**
 - **Mission B (temporal) succeeds:** the new bounded ordered-sequence
   hypothesis language lifts exact D1 rule discovery on the audit's L

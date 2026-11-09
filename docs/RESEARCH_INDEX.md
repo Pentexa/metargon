@@ -2,7 +2,7 @@
 
 This index catalogues every research report in the repository. It is the authoritative map from version → report → results → artifacts.
 
-> **Reading guide.** Percentages across versions are **not directly comparable** — each study uses its own environment and protocol (matched seeds and bootstrap CIs apply *within* a study). "Bayes" always refers to the **privileged** family-knowing Bayesian particle-filter planner; "Oracle" is a privileged perfect-knowledge diagnostic **excluded from all rankings**. Family-agnostic student agents are the subject of study.
+> **Reading guide.** Percentages across versions are **not directly comparable** — each study uses its own environment and protocol (matched seeds and bootstrap CIs apply *within* a study). The v0.12/v0.12.1 studies run at 4 seeds × 40 episodes (vs 8 × 100 for v0.9–v0.11), so their CIs are wider and findings are directional. "Bayes" always refers to the **privileged** family-knowing Bayesian particle-filter planner; "Oracle" is a privileged perfect-knowledge diagnostic **excluded from all rankings**. Family-agnostic student agents are the subject of study. Delta signs follow the **candidate − baseline** convention fixed by the Independent Audit v0.2 (e.g. "v11 − v10" means v0.11 minus v0.10); the one known deviation is documented in [`DOC_CONSISTENCY_NOTES.md`](DOC_CONSISTENCY_NOTES.md).
 
 ## Merged research (on `main`)
 
@@ -65,7 +65,7 @@ Diagnosed v0.9's pathologies (discovery freeze, contradictory protected atoms, r
 - Ablations: robust belief (−rb) mainly reduces invalid actions and false-verified hypotheses, not raw success on clean conditions; cooldowns (−cd) cost 12.25pp on novel; fallback (−x) costs 8.6pp under noise.
 - Files: `docs/RESEARCH_V10.md`, `results/v10/benchmark_table_v10.md`, `results/v10/`.
 
-### METARGON v0.11 — Noise-Aware Learning (latest merged)
+### METARGON v0.11 — Noise-Aware Learning
 
 v0.11 targets the remaining `noisy_obs` gap: **confirmed events** (learning stream), **certainty-weighted evidence**, and **replay filtering/weighting**.
 
@@ -149,18 +149,177 @@ A fully standalone protocol audit plus a new benchmark on two structurally novel
 - Protocol-audit findings (leakage, baseline fairness, artifacts) are recorded in the report, including the Academy `EpisodeSpec` interface caveat and the v0.2 doc/artifact discrepancy.
 - Files: [`generalization_audit/docs/AUDIT_REPORT.md`](../generalization_audit/docs/AUDIT_REPORT.md), [`generalization_audit/results/rendered_tables.md`](../generalization_audit/results/rendered_tables.md), `generalization_audit/results/summary_r.json`, `summary_l.json`.
 
-## Unmerged development work (do not cite as completed)
+### Independent Audit v0.2 — Evaluation Integrity
 
-The following are active branches/worktrees owned by other working sessions. Their features are **not** part of this documentation and must not be presented as completed research:
+A second independent audit (by an evaluation & software-verification engineer)
+covering Academy statistical reporting and benchmark integrity.
 
-- `research/v12-general-causality` — METARGON v0.12 (in development).
-- `academy/memory-v04` — Academy Memory v0.4 (in development).
-- Follow-up independent audit work (Independent Audit v0.2, in development).
+- **Confirmed and corrected:** Memory v0.3 comparisons were reported with reversed
+  difference signs (`paired_difference(a, b)` computes `a − b`, and callers passed
+  `(original, variant)`, so every "Classic Δ" was actually baseline − candidate).
+  Committed `memory_v03_summary.json` comparisons were recomputed under the
+  **candidate − baseline** convention; raw evidence is unchanged. This convention
+  is now the project-wide standard.
+- **Confirmed and corrected:** a hidden `EnvConfig` was reachable by student
+  policies through `episode_start(spec, …)` — runner boundary fixed, adversarial
+  hidden-config access tests added.
+- **Confirmed and corrected:** a missing policy checkpoint silently evaluated an
+  untrained agent — now warns and marks the summary.
+- **Documented/added:** hash-seed dependence of `sample_substrate` (pin
+  `PYTHONHASHSEED`), validation tests that fail on metadata/artifact disagreement,
+  a frozen Academy evaluation grid for future implementations.
+- Files: [`generalization_audit/docs/AUDIT_V02.md`](../generalization_audit/docs/AUDIT_V02.md).
+
+### Academy Memory v0.4 — Context-Aware Evidence
+
+Memory v0.3 showed trained students score below fresh controls on held-out
+grids with ~70/128 hypotheses contradicted on held-out tasks. v0.4 makes
+evidence **context-aware**: signatures are derived purely from public
+observations at episode start.
+
+- **Mechanisms (all off by default):** `context_scoped` supports/contradicts
+  counted per context (reversible confidence), consecutive-nonevent windows
+  reset on context change, conservative transfer gating for new contexts;
+  plus a decisive **memory-wipe control** (`memory_wiped`).
+- **Headline finding:** `memory_wiped ≡ original` — deleting *all* learned
+  memory leaves frozen and adaptive held-out scores bit-identical. Within-
+  episode learning, not retained persistent memory, determines held-out
+  scores (motivating v0.5's frozen zero-shot regime).
+- Report numbers/CIs were corrected for flipped delta signs and re-verified
+  against raw artifacts by Independent Audit v0.3.
+- Files: `docs/MEMORY_V04.md`, `results/academy_v01/memory_v04/`.
+
+### Independent Audit v0.3 — Artifact Re-Verification
+
+Scope: the v0.12 report arithmetic and the Memory v0.4 report signs, checked
+against committed raw artifacts, plus frozen evaluation criteria for v0.12.1
+and Memory v0.5.
+
+- **Confirmed and corrected in `docs/RESEARCH_V12.md`:** the L-family temporal
+  Δ values were swapped (stable +16.88 / novel +23.12); the v0.11 F-shift
+  exact-D2 value was 65.0, not 66.9. Both corrected in the report with
+  provenance notes.
+- **Confirmed and corrected in `docs/MEMORY_V04.md`:** classic deltas sign-flipped
+  in code, summary, and report; recomputed under candidate − baseline.
+- **Verified vs raw:** v0.12 headline success tables (F/H/R/L) and Memory v0.4
+  train/memory/mid-curve numbers.
+- **Seed sensitivity (§5):** v0.12's temporal L exact-D1 result is real but
+  **seed-driven** — on L-stable it comes almost entirely from one of the 4
+  seeds (per-seed exact-D1 0.675 vs 0 for the others). Treat 16.9/23.1% as a
+  seed-sensitive preliminary estimate.
+- Files: [`generalization_audit/docs/AUDIT_V03.md`](../generalization_audit/docs/AUDIT_V03.md).
+
+### METARGON v0.12 — Robust General Causal Learning
+
+Dual-context candidate generation, adaptive confirmation persistence, short
+recent-credit protection, post-transition nonevent skip, and — the headline —
+a new **temporal (ordered-sequence) hypothesis language**
+(`<A becomes true> THEN <B becomes true> within 30 steps ⇒ door opens`).
+
+Family F success (4 seeds × 40 episodes):
+
+| Condition | v0.10 | v0.11 | v0.12 | Bayes | v12 − v11 pp |
+|---|---:|---:|---:|---:|---:|
+| stable | 85.62 | 85.62 | 85.62 | 78.75 | 0.00 |
+| shift | 86.25 | 90.62 | **91.25** | 80.62 | +0.62 |
+| noisy_obs | 44.38 | **80.62** | 72.50 | 76.25 | −8.12 [−24.4, +3.8] |
+| novel | 91.25 | 91.88 | 91.25 | 79.38 | −0.63 |
+| tight_budget | 73.12 | 90.00 | **90.62** | 65.62 | +0.63 |
+
+- **Positive:** exact D2 discovery on F recovered to 76.9–88.8% across all five
+  conditions (v0.11: 31.9–66.9%); the clean F-stable regression is gone; family L
+  exact D1 rises 0.0% → **16.9/23.1%** (stable/novel) via temporal memory, success
+  27.5/29.4 vs 18.1/19.4 for v0.11 (temporal Δ vs the temporal-off ablation:
+  +16.88 [0, 50.6] / +23.12 [0, 50.6]); L probe cost is lower than blind
+  exploration (v12 stable 349.8 s vs v10 489.8 s per seed-run).
+- **Negative:** F-noisy −8.1pp vs v0.11 (v0.11 remains the strongest noisy
+  variant at this scale); H-stable −10.6pp vs v0.10; R-stable −11.3pp vs v0.11.
+  Ablations: recent-credit costs F-noisy success (−8.75pp) — adopted fix in
+  v0.12.1; dual-context is what restores D2 (without it noisy D2 = 43.8 vs
+  76.9). Invalid actions slightly higher for v0.12 (16.0 vs 10.0 on noisy).
+- Sample: 4×40 (memory 2×20); CIs wide — directional evidence. Report table
+  values re-audited against raw artifacts by Audit v0.3.
+- Files: `docs/RESEARCH_V12.md`, `results/v12/summary_{f,h,r,l}_small.json`,
+  `results/v12/table_{f,h,r,l}.md`.
+
+### Academy Memory v0.5 — Three-Regime Transfer Protocol
+
+Separates transfer into **frozen zero-shot** (`frozen_policy` disables learning
+during evaluation), **adapt** (within-episode learning, v0.4 protocol), and
+**continual** (post-training probing) regimes; adds a bounded, checkpointed
+**evidence bank** of verified `(antecedent, consequence)` entries used as
+priority probe candidates. 2 train seeds × 160 episodes, pinned hash seed,
+frozen 16-config classic grid, 12-config OOD.
+
+Held-out means (2 seeds):
+
+| Variant | Train | Frozen classic | Adapt classic | OOD frozen | Continual OOD |
+|---|---:|---:|---:|---:|---:|
+| fresh (control) | — | **0.312** | **0.695** | 0.333 | 0.333 |
+| original | 0.341 | 0.281 | 0.594 | 0.333 | 0.500 |
+| memory_wiped | 0.341 | 0.281 | 0.594 | 0.333 | 0.500 |
+| ctx | 0.369 | 0.281 | 0.625 | 0.333 | 0.500 |
+| ctx_full | 0.497 | 0.250 | 0.562 | 0.333 | 0.500 |
+| bank | 0.341 | 0.281 | 0.594 | 0.333 | 0.500 |
+| bank_ctx | 0.369 | 0.281 | 0.625 | 0.333 | 0.500 |
+| bank_ctx_full | 0.231 | 0.273 | 0.633 | 0.333 | 0.472 |
+
+- **Zero-shot transfer is absent:** every trained variant scores below the
+  fresh control in the frozen regime; adapt − frozen ≈ 0.31–0.38 for every
+  variant, so all measured generalization is within-episode adaptation.
+- `memory_wiped ≡ original` (bit-identical) — replicating v0.4's control in
+  the new protocol. The evidence bank demonstrably runs (`bank_ctx_full`
+  made 79,345 retrievals) yet does not beat the control in any regime; the
+  combined `bank_ctx_full` is directionally beneficial on adapt (candidate −
+  baseline +0.037, CI [−0.039, +0.133], includes 0). No variant beats fresh.
+  Retention is flat; continual-OOD probing ≈ 0.5 for trained variants.
+- **Sign-convention caveat:** the committed `memory_v05_summary.json` and the
+  §4.2 table of `docs/MEMORY_V05.md` record comparisons with the reversed
+  (baseline − candidate) argument order — the same bug class Audit v0.2 fixed
+  for v0.3 and Audit v0.3 fixed for v0.4. Untouched in the report; documented
+  with corrected interpretations in [`DOC_CONSISTENCY_NOTES.md`](DOC_CONSISTENCY_NOTES.md).
+- Files: `docs/MEMORY_V05.md`, `results/academy_v01/memory_v05/`.
+
+### METARGON v0.12.1 — Regression Recovery (latest merged)
+
+Single adopted change vs v0.12: **`use_recent_credit=False`** (default).
+Dual-context, confirmed-event gating, adaptive confirmation and temporal
+memory unchanged.
+
+Final runs (4 seeds × 40 episodes; `results/v121/final_{f,h,r,l}.json`):
+
+| Condition (family) | v0.10 | v0.11 | v0.12.1 | Bayes | v12.1 − v0.11 pp [95% CI] |
+|---|---:|---:|---:|---:|---:|
+| noisy_obs (F) | 44.38 | 80.62 | **80.62** | 76.25 | 0.00 [−3.1, +2.5] |
+| stable (H) | 83.75 | 73.12 | 73.12 | 71.88 | 0.00 [0, 0] |
+| stable (R) | 61.25 | 71.88 | 60.62 | 77.50 | −11.25 [−33.8, 0] |
+| novel (R) | 80.00 | 84.38 | 79.38 | 84.38 | −5.00 [−15.0, 0] |
+| stable (L) | 21.25 | 18.12 | **26.88** | 48.12 | +8.75 [−11.3, +40.0] |
+| novel (L) | 21.88 | 19.38 | 25.00 | 42.50 | +5.62 [−3.8, +15.0] |
+
+- **Positive:** the v0.12 F-noisy regression is closed at v0.11's level
+  (Δ 0.00 [−3.1, +2.5]); temporal L exact D1 is preserved — **16.88/23.12%**
+  (stable/novel; Δ vs temporal-off ablation +16.88 [0, 50.6] / +23.12
+  [0, 50.6]) with ~40 temporal probes per seed-run.
+- **Negative (honest, unresolved):** H-stable (−10.6pp vs v0.10) and R-stable
+  (−11.3pp vs v0.11) trade-offs persist; the report documents diagnosed causes
+  (v0.11 confirmed-event gating; dual-context) and rejected prototypes
+  (`dual_if_changed`, adaptive gating-by-anomaly).
+- **Consistency caveats (documented, not silently fixed):** (1) the
+  `metargon12-legacy` ablation rows are not faithful v0.12 replicas for
+  family L because the legacy ablation lacks temporal memory; (2) exact-D2
+  cells in the report come from diagnosis-phase runs that conflict with the
+  committed final-run artifacts under nominally identical settings. Details:
+  [`DOC_CONSISTENCY_NOTES.md`](DOC_CONSISTENCY_NOTES.md).
+- Files: `docs/RESEARCH_V121.md`, `results/v121/final_*.json`,
+  `results/v121/diag_*.json`, `results/v121/eval*.json`,
+  `results/v121/table_*.md`.
 
 ## Cross-cutting limitations
 
 1. All environments are synthetic 7×5 grid worlds; no real-world generalization is claimed or measured.
-2. Study sizes are small (8 paired seeds for research benchmarks; 2–3 seeds for audit R/L); bootstrap CIs reflect that.
+2. Study sizes are small (8 paired seeds for v0.9–v0.11 benchmarks; 4 seeds × 40 episodes for v0.12/v0.12.1; 2–3 seeds for audit R/L; 2 train seeds for memory experiments); bootstrap CIs reflect that.
 3. The Bayesian comparator is deliberately privileged (receives the declared family); it is a strong upper reference, not a fair competitor.
 4. No hardware energy/latency measurements exist; operation counts are not equated with energy.
 5. Academy summary metrics reproduce under fixed `PYTHONHASHSEED`; internal hypothesis bookkeeping may vary across hash seeds.
+6. A small number of cross-artifact inconsistencies (sign convention in Memory v0.5, v0.12.1 legacy-label semantics, diagnosis-vs-final D2 disagreement) are documented rather than silently resolved; see [`DOC_CONSISTENCY_NOTES.md`](DOC_CONSISTENCY_NOTES.md).

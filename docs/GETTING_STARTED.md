@@ -18,7 +18,7 @@ cargo +1.88.0 --version
 ## 1. Run the test suites
 
 ```bash
-# full Python suite (historical + v0.9–v0.11) — from the repo root
+# full Python suite (historical + v0.9–v0.12.x) — from the repo root
 python -m unittest discover -s python -v
 
 # Academy suite
@@ -26,6 +26,9 @@ python -m unittest discover -s academy/tests
 
 # Independent generalization audit suite
 python -m unittest discover -s generalization_audit/tests -t . -v
+
+# Memory v0.5 experiment tests
+python -m unittest academy.tests.test_memory_v05
 
 # Repository hygiene (merge markers, Markdown links, Python compile)
 python scripts/check_repo.py
@@ -43,7 +46,21 @@ cd ..
 
 ## 2. Run a benchmark
 
-The quickest full-pipeline example is the v0.11 benchmark (8 seeds × 100 episodes, all seven conditions):
+The quickest full-pipeline example is the **v0.12 harness** (the same script
+produces the v0.12 and v0.12.1 policy sets — `metargon12` runs the merged
+v0.12.1 defaults with recent-credit off):
+
+```bash
+python python/benchmark_v12.py --seeds 4 --episodes 40 --family f \
+    --conditions stable,noisy_obs --parallel --workers 6 \
+    --json results/v12/summary_repro.json
+python python/v12_postprocess.py results/v12/summary_repro.json
+```
+
+Note: the environment requires **episodes ≥ 4**; use `--seeds 2 --episodes 4`
+for a fast sanity run.
+
+The equivalent v0.11 benchmark (8 seeds × 100 episodes):
 
 ```bash
 python python/benchmark_v11.py --seeds 8 --episodes 100 --parallel \
@@ -51,7 +68,7 @@ python python/benchmark_v11.py --seeds 8 --episodes 100 --parallel \
 python python/v11_postprocess.py            # renders results/v11/benchmark_table_v11.md
 ```
 
-See [BENCHMARK_GUIDE.md](BENCHMARK_GUIDE.md) for every benchmark (v0.9, v0.10, v0.11, family H, ablations, memory samples, audit families R/L) and its exact command line.
+See [BENCHMARK_GUIDE.md](BENCHMARK_GUIDE.md) for every benchmark (v0.9, v0.10, v0.11, v0.12/v0.12.1 families F/H/R/L, ablations, memory samples, memory experiments, audit families R/L) and its exact command line.
 
 ## 3. Academy CLI
 
@@ -112,11 +129,26 @@ python -m academy.cli.main evren-smoke
 python -m academy.cli.main evren-pilot
 ```
 
+## 4b. Academy Memory experiments (offline tools)
+
+```bash
+# v0.5 three-regime transfer protocol (frozen / adapt / continual)
+# 2 train seeds × 160 episodes; writes results/academy_v01/memory_v05/
+PYTHONHASHSEED=0 python academy/tools/memory_experiment_v05.py
+PYTHONHASHSEED=0 python x/run_chunks_v05.py     # per-variant subprocess runner
+python academy/tools/memory_merge_v05.py         # JSONL → summary + paired CIs
+
+# v0.3/v0.4 matched-budget variant comparisons
+PYTHONHASHSEED=0 python academy/tools/memory_experiment.py
+
+# pin the hash seed and record it; Academy runs are otherwise not bit-reproducible
+```
+
 ## 5. Rust kernels
 
 ```bash
 cd rust
-cargo +1.88.0 test                # metargon-core (v0.9–v0.11 kernels)
+cargo +1.88.0 test                # metargon-core (v0.9/v0.10 Mechanism Lab mirrors)
 cargo clippy --locked --all-targets -- -D warnings
 cd ..
 
