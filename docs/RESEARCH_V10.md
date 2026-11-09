@@ -3,7 +3,9 @@
 
 **Date:** 7–8 November 2026.
 **Status:** Controlled paired study vs v0.9 and established baselines.
-**Branch:** `research/v10-robust` (never merged into `main`).
+**Branch:** `research/v10-robust` (merged into `main` via PR #22).
+
+> *Docs-sync annotation (9 Nov 2026): the "never merged" wording in this line was stale; v0.10 merged via PR #22.*
 **Headline:** METARGON v0.10 closes the gap with (and on several
 conditions exceeds) the privileged-family Bayesian planner while keeping
 the same action budgets, planner budgets, memory cap and episode counts.

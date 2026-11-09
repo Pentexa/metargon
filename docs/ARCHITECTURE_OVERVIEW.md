@@ -1,6 +1,6 @@
 # METARGON — Architecture Overview
 
-This document explains how the implemented system actually works — the student agent, its memory and planner, the environments, and the Academy/EVREN teacher layers. It reflects the merged code on `main` (up to METARGON v0.11, Academy v0.1, EVREN curriculum v0.2, Academy Memory v0.3, and the independent generalization audit).
+This document explains how the implemented system actually works — the student agent, its memory and planner, the environments, and the Academy/EVREN teacher layers. It reflects the merged code on `main` (up to METARGON v0.12.1, Academy v0.1, EVREN curriculum v0.2, Academy Memory v0.3–v0.5, and the independent audits v0.1–v0.3).
 
 ## 1. The research loop
 
@@ -13,20 +13,21 @@ Observe → Learn → Hypothesize → Plan → Act → Feedback → (repeat)
 | Stage | What happens | Where |
 |---|---|---|
 | Observe | A fixed-size public observation: agent position, objects, switch/plate readings, door readings. The hidden rule wiring is never part of the observation. | `academy/envs/gridworld.py`, `python/lab_env.py` |
-| Learn | Door events and nonevents update a compositional hypothesis memory: candidate conjunctive rules over public atoms are generated, verified, contradicted, and evicted. | `python/compositional_memory.py`, `python/compositional_memory_v10.py`, `academy/agents/memory.py` |
-| Hypothesize | Verified hypotheses steer probing and door protection; contradicted hypotheses are recycled or replaced under a hard cap (128 slots). | same as above |
-| Plan | A bounded BFS planner converts beliefs and hypotheses into actions, under strict expansion and evaluation budgets. | `python/metargon_v09.py`, `python/metargon_v10.py`, `python/metargon_v11.py`, `academy/agents/planner.py` |
+| Learn | Door events and nonevents update a compositional hypothesis memory: candidate conjunctive rules over public atoms are generated (from both pre-event and post-event contexts since v0.12), verified, contradicted, and evicted. Since v0.12 a **temporal memory** additionally generates ordered-sequence hypotheses (`A then B ⇒ door opens`). | `python/compositional_memory.py`, `python/compositional_memory_v10.py`, `python/temporal_memory.py`, `academy/agents/memory.py` |
+| Hypothesize | Verified hypotheses steer probing and door protection; contradicted hypotheses are recycled or replaced under a hard cap (128 slots; temporal memory has its own bounded set of 64). | same as above |
+| Plan | A bounded BFS planner converts beliefs and hypotheses into actions, under strict expansion and evaluation budgets; temporal hypotheses direct ordered probing (first atom, then second). | `python/metargon_v09.py`, `python/metargon_v10.py`, `python/metargon_v11.py`, `python/metargon_v12.py`, `academy/agents/planner.py` |
 | Act | Actions are executed in the environment; outcomes feed back into belief and memory. | `academy/learning/loop.py` |
 
 ## 2. Environments
 
-### The Mechanism Lab (research benchmarks, v0.9–v0.11)
+### The Mechanism Lab (research benchmarks, v0.9–v0.12.1)
 
-A 7×5 grid with two movable objects, two pressure plates, two switches, two door barriers, optional delayed effects, and a noisy observation channel. Each door is governed by a hidden conjunctive rule over public atoms (e.g. `switch S1 on` AND `plate P1 loaded`). All configurations are verified solvable; training/validation/held-out test pools are disjoint.
+A 7×5 grid with two movable objects, two pressure plates, two switches, two door barriers, optional delayed effects, and a noisy observation channel. Each door is governed by a hidden rule over public atoms. In the base family **F** the rule is conjunctive (e.g. `switch S1 on` AND `plate P1 loaded`). All configurations are verified solvable; training/validation/held-out test pools are disjoint.
 
 - Conditions: `stable`, `shift` (mechanism changes mid-run), `rapid_shift`, `iid` (fresh config every episode), `novel` (held-out configs), `noisy_obs` (q = 0.08 corrupted readings), `tight_budget`.
-- Family **F** is the declared generative family; family **H** is a structurally novel family (different conjunctive shapes and polarities) that the Bayesian baseline's declared model class **cannot express** (model misspecification).
-- Budgets: memory ≤ 128 hypotheses, BFS ≤ 700 expansions per plan, ≤ 3(+2) plan evaluations per decision, identical action budgets, identical world seeds.
+- Family **F** is the declared generative family; family **H** is a structurally novel family (different conjunctive shapes and polarities) that the Bayesian baseline's declared model class **cannot express** (model misspecification). The v0.12 study additionally adopted the audit's families read-only: **R** (sustained-hold: a door opens only after its condition holds for 3 consecutive states) and **L** (ordered-sequence: two atoms must become true in a specific order).
+- Budgets: memory ≤ 128 hypotheses (compositional) + ≤ 64 hypotheses (temporal), BFS ≤ 700 expansions per plan, ≤ 3(+2) plan evaluations per decision, identical action budgets, identical world seeds.
+- **Discovery metrics (offline, never fed to the agent):** after each episode the harness counts a door as *exact-discovered* if the agent's verified hypothesis for that door **equals** the ground-truth rule — the compositional antecedent for F/H/R, or the ordered `(first, second)` pair in temporal memory for L (compositional hypotheses cannot express order). *Covered discovery* counts verified hypotheses whose antecedent is a superset of the true rule. Reported as the fraction of episodes.
 
 ### Academy MechanismGrid (Academy)
 
@@ -43,6 +44,8 @@ The agent maintains a reconciled belief from public observations:
 
 v0.11 splits the *learning* stream from the *planning* belief: the learning stream accepts a door event only when confirmed (two consecutive agreeing raw readings, or movement proof, with a same-direction dedupe window). Planning still adopts readings immediately so it never lags.
 
+v0.12 makes the confirmation requirement **adaptive**: the number of agreeing raw readings needed to confirm a door event follows the perceived anomaly rate (1 when calm, 2 when noisy). A prototype that gated the event stream purely on perceived reliability failed on F-noisy and was reverted in v0.12.1; only the confirmation-count adaptation survived.
+
 ## 4. Hypothesis memory
 
 The compositional memory is the agent's causal model. Each hypothesis is a candidate rule (singleton or pair of public atoms) with a lifecycle:
@@ -57,8 +60,21 @@ generated → predicted → verified → contradicted → evicted/recycled
 - **Prioritized replay (v0.10):** informative causal events are stored in a bounded (64) replay buffer, priority `1/(1+support)`; the top older entries are replayed after each event. A measured negative result: this mechanism is functionally validated but empirically neutral-to-negative in the Mechanism Lab (see `docs/RESEARCH_V10.md`).
 - **Noise-aware learning (v0.11):** each supporting update is weighted by `certainty` — the fraction of context atoms whose sensors were stable at event time (floor 0.25). Replay modes: `filtered` (default; only certainty ≥ 0.5 events replayed), `weighted`, `on` (legacy), `off`.
 - **Nonevent gating (v0.11):** contradiction signals count only while the door is stable, so spurious flips cannot destroy correct hypotheses.
+- **Dual-context candidate generation (v0.12):** candidates are generated from BOTH the pre-event and post-event context. v0.11's cleaned learning stream had dropped the event-flipped atom from candidate generation, so toggle-induced rules could never be learned — dual-context is what restores exact D2 discovery (measured: F-noisy exact D2 43.8 without it vs 76.9 with it in the v0.12 study).
+- **Post-transition nonevent skip (v0.12):** contradiction counting pauses for 2 steps after a confirmed transition, so the event window cannot count as self-contradiction.
+- **Recent-credit protection (v0.12, off by default since v0.12.1):** after a door opens, the atoms that held at opening are protected for up to 6 steps while the door is open and uncrossed. Recently measured to help planning but cost F-noisy success; see `docs/RESEARCH_V121.md`.
 
-Academy Memory v0.3 flags (all off by default) add `recycle_contradicted`, `contradiction_ratio`, `evidence_window`, `probe_adaptive`, and episode-local gates; see `docs/MEMORY_V03.md`.
+### Temporal memory (`python/temporal_memory.py`, v0.12)
+
+A second, family-agnostic store of ordered-sequence hypotheses:
+`<atom A becomes true> THEN <atom B becomes true> (within 30 steps) ⇒ door opens`.
+
+- Candidate pairs are generated from observed ordered completions (door-independent), credited when a confirmed door-open follows within 4 steps, and contradicted when completions remain uncredited — including reverse-order completions.
+- Bounds mirror the compositional store: ≤ 64 hypotheses, per-door transition ring ≤ 30, deterministic score eviction, weighted evidence with episode decay.
+- Agent integration: a predicted/verified temporal hypothesis for a closed door directs probing toward its first atom, then its second atom (bootstrapping the sequence).
+- This store is the only representational handle on order-dependent rules: compositional hypotheses cannot express order, which is why family-L exact discovery was 0.0% before v0.12.
+
+Academy Memory v0.3 flags (all off by default) add `recycle_contradicted`, `contradiction_ratio`, `evidence_window`, `probe_adaptive`, and episode-local gates; see `docs/MEMORY_V03.md`. v0.4 adds context-scoped evidence (per-context support/contradiction counts derived from a public-observation context signature, reversible confidence, conservative transfer gating); v0.5 adds a `frozen_policy` switch (blocks `learn()` during evaluation) and a bounded, checkpointed **evidence bank** of verified `(antecedent, consequence)` pairs used as priority-0 probe candidates. See `docs/MEMORY_V04.md` and `docs/MEMORY_V05.md`.
 
 ## 5. Planner
 
@@ -67,7 +83,8 @@ The planner is bounded BFS over public physics:
 - **Probe selection** is grouped by priority: hypothesis-backed antecedents > novel/informative changes > already-true antecedents.
 - **Probe cooldowns (v0.10):** failed probes are recorded with a timestamp and become eligible again after `PROBE_COOLDOWN=40` steps (fixing the v0.9 "discovery freeze" where a failed probe was permanently marked tried).
 - **Information-gathering fallback (v0.10):** when no plan/probe is executable, the agent cycles interaction targets (plates, switches) — guaranteeing continuous information gathering even with an empty or contradicted hypothesis store.
-- **Door protection:** verified hypotheses are protected while a door is open and not yet passed; v0.11 changed protection to hypothesis-satisfying atoms + the current load-bearing open-door state (fixing the v0.10 "recent causal credit" stall).
+- **Door protection:** verified hypotheses are protected while a door is open and not yet passed; v0.11 changed protection to hypothesis-satisfying atoms + the current load-bearing open-door state (fixing the v0.10 "recent causal credit" stall). v0.12 introduced a short (≤ 6 step) recent-credit protection for atoms that held at opening; since v0.12.1 it is **off by default** after measuring a success cost on F-noisy.
+- **Temporal bootstrapping (v0.12):** for family-L-style doors, a predicted or verified temporal hypothesis sequences the probes: first atom, then second atom — turning learned orders into executed behavior (measured: ~40 temporal probes per seed-run in the final L runs).
 - **Determinism:** same seed → identical traces (covered by dedicated tests). Academy runs are bit-reproducible under a fixed `PYTHONHASHSEED`.
 
 ## 6. Academy layer
@@ -87,6 +104,8 @@ The Academy (`academy/`) is a reproducible continual-learning laboratory. Strict
 - All policies consume the **identical episodic stream** (matched task exposure, seeds, noise, budgets).
 - Checkpoints are atomic (temp file + `os.replace`), fingerprinted, and restore-deterministic (a test confirms the next episode is bit-identical to a continuation).
 - A source-level audit test scans student modules for forbidden identifiers (hidden-state access).
+- **Evaluation protocols (Audit v0.2 / Memory v0.5):** a missing policy checkpoint now *warns and marks* the run instead of silently evaluating an untrained agent; `frozen_policy = True` blocks student learning during evaluation to measure zero-shot transfer; the evaluator re-asserts the public-observation boundary (the hidden `EnvConfig` is unreachable through student-facing interfaces — the `episode_start` leak found by Audit v0.2 is closed).
+- **Transfer regimes (Memory v0.5):** frozen zero-shot / within-episode adapt / continual post-training probing are separate, separately scored regimes.
 
 ## 7. EVREN teacher layer
 
@@ -101,34 +120,39 @@ The curriculum v0.2 experiment (`evren-curriculum`) is offline by construction (
 
 ## 8. Evaluation methodology
 
-- **Paired evaluation:** identical worlds per seed across policies; per-seed deltas with bootstrap 95% CIs.
+- **Paired evaluation:** identical worlds per seed across policies; per-seed deltas with bootstrap 95% CIs. Delta signs follow the **candidate − baseline** convention fixed by Audit v0.2 ("v11 − v10" means v0.11 minus v0.10).
 - **Frozen pools:** test configs are frozen before benchmarking; pools are disjoint from training.
 - **Comparators:** model-free baselines (random, episodic, Q-learning), a **privileged** model-based Bayesian particle-filter planner (receives the declared generative family — deliberately strong, misspecified on H/R/L), and a privileged oracle (diagnostic only, excluded from all rankings).
 - **Shortcut checks:** every frozen config is re-verified solvable at run time; runtime scans assert no student policy holds a hidden-config reference.
+- **Independent audits (v0.1–v0.3):** protocol/leakage audit, statistical sign corrections, hidden-config boundary hardening, missing-checkpoint handling, artifact-vs-report re-verification, and frozen criteria for future evaluations (`generalization_audit/docs/AUDIT_V02.md`, `AUDIT_V03.md`).
 
 ## 9. Rust kernels
 
-`rust/` (crate `metargon-core`) mirrors the research agent's memory/planner logic (v0.9, v0.10, v0.11) and `rust_academy/` mirrors the Academy memory core. Both are independent implementation artifacts (not FFI bindings) with `#![forbid(unsafe_code)]` and their own unit suites. The research version is pinned to the 1.88.0 toolchain in CI.
+`rust/` (crate `metargon-core`) independently implements the historical CORVID-era kernel components plus modules mirroring the Mechanism Lab student (v09/v10), including `#![forbid(unsafe_code)]` and its own unit suites. The research CI runs are pinned to the 1.88.0 toolchain. Note: the v0.11 noise-aware learning and the v0.12/v0.12.1 mechanisms (dual-context generation, temporal memory, adaptive confirmation) currently exist only in the Python implementation; there is no `v11.rs`/`v12.rs` mirror.
 
 ## 10. Where the code lives
 
 ```text
 python/lab_env.py                  Mechanism Lab environment
-python/robust_belief.py            reconciled belief (debounce, movement proof)
-python/compositional_memory_v10.py hypothesis memory (evidence decay, replay, certainty)
-python/metargon_v09/v10/v11.py     student agents
-python/benchmark_v09/v10/v11.py    paired benchmarks
+python/robust_belief.py            reconciled belief (debounce, movement proof, adaptive confirm)
+python/compositional_memory_v10.py hypothesis memory (evidence decay, replay, certainty, dual context)
+python/temporal_memory.py          ordered-sequence hypothesis memory (v0.12)
+python/metargon_v09/v10/v11/v12.py student agents
+python/benchmark_v09/v10/v11/v12.py paired benchmarks and harnesses
 python/diagnose_v09.py             v0.9 failure-mode diagnostics
 python/diagnose_noise_v10.py       v0.11 noise diagnostics
-python/v09/v10/v11_postprocess.py  table rendering
+python/v09/v10/v11/v12_postprocess.py  table rendering
+python/v121_show.py                one-line summary of a v121 eval artifact
 academy/envs/gridworld.py          Academy environment
-academy/agents/memory.py           Academy hypothesis memory (incl. v0.3 flags)
-academy/agents/metargon_agent.py   Academy student agent
+academy/agents/memory.py           Academy hypothesis memory (v0.3 flags; v0.4 contexts; v0.5 bank)
+academy/agents/metargon_agent.py   Academy student agent (frozen_policy, evidence-bank probing)
 academy/agents/planner.py          Academy bounded planner
 academy/learning/loop.py           training loop
 academy/eval/evaluator.py          frozen-pool evaluation
 academy/evren/                     teacher pipeline (validator, registry, selection, retention)
 academy/cli/main.py                CLI entry point
-generalization_audit/              independent audit (families R/L)
-rust/src/v09.rs, v10.rs, v11.rs   Rust kernels
+academy/tools/memory_experiment*.py  Academy memory harnesses (v03/v04/v05)
+academy/tools/memory_merge*.py     JSONL → summary + paired CIs (v03/v04/v05)
+generalization_audit/              independent audits (protocols, families R/L, frozen configs)
+rust/src/v04.rs … v10.rs          Rust kernels (CORVID-era modules + v0.9/v0.10 Mechanism Lab mirrors)
 ```

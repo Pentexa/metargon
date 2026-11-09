@@ -3,7 +3,9 @@
 
 **Date:** 8 November 2026.
 **Status:** Controlled paired study vs v0.10 and established baselines.
-**Branch:** `research/v11-noise` (never merged into `main`).
+**Branch:** `research/v11-noise` (merged into `main` via PR #25).
+
+> *Docs-sync annotation (9 Nov 2026): the "never merged" wording in this line was stale; v0.11 merged via PR #25.*
 **Headline:** v0.11 **more than doubles** success under noisy observations
 (45.1% → 84.9%, +39.75pp, CI [25.1, 56.4]) and now *exceeds the
 privileged-family Bayesian planner* there (+11.75pp). The gains come from

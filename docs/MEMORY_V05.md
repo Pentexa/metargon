@@ -83,6 +83,29 @@ CIs vs `original` on per-config vectors (frozen and adapt separately).
 
 ### 4.2 Paired deltas vs original (95% CI)
 
+> *Docs-sync annotation (9 Nov 2026): the Δ signs in this table follow the
+> reversed (baseline − candidate) convention because
+> `academy/tools/memory_merge_v05.py` (and the shared
+> `academy/eval/metrics.paired_difference`) is called as
+> `paired_difference(a=orig, b=candidate)` and computes
+> `mean(orig − candidate)`. This is the same bug class the Independent
+> Audit v0.2 confirmed and fixed for Memory v0.3 and Audit v0.3 fixed for
+> Memory v0.4; v0.5 was merged before the convention was re-checked. The
+> table is kept exactly as recorded. Read under the project-wide
+> candidate − baseline convention (sign-flip; CIs become [−hi, −lo]), the
+> deltas are: fresh frozen **+0.031** [0, +0.094], fresh adapt **+0.100**
+> [0, +0.211], ctx_full frozen/adapt **−0.030** [−0.094, 0], bank_ctx_full
+> frozen **−0.007** [−0.094, +0.070], bank_ctx_full adapt **+0.037**
+> [−0.039, +0.133]. These corrected values are consistent with the §4.1
+> means (e.g. fresh frozen 0.312 vs original 0.281). The **Train Δ column
+> is already in the candidate − baseline direction** (e.g. ctx +0.028 =
+> 0.369 − 0.341) and was not affected. Details: `docs/DOC_CONSISTENCY_NOTES.md`.*
+>
+> *The interpretation is unchanged in substance: no variant beats the
+> untrained control on frozen transfer, and `bank_ctx_full`'s adapt
+> delta is directionally positive under the corrected convention with a CI
+> that includes 0 — not evidence of a real bank benefit.*
+
 | Variant | Frozen Δ | Adapt Δ | Train Δ |
 |---|---|---|---|
 | fresh | −0.030 ([−0.094, 0.000]) | −0.100 ([−0.211, 0.000]) | −0.341 |
@@ -119,7 +142,11 @@ CIs vs `original` on per-config vectors (frozen and adapt separately).
 - **The evidence bank does not help.** `bank` / `bank_ctx` are
   bit-identical to `original` / `ctx`. `bank_ctx_full` performed 79k
   retrievals (the mechanism demonstrably runs) yet adaptation is
-  directionally negative (−0.037) vs original.
+  directionally negative (−0.037) vs original. *(Docs-sync annotation:
+  this Δ uses the reversed baseline − candidate convention — see the
+  §4.2 note; under the corrected candidate − baseline convention the value
+  is directionally positive (+0.037, CI [−0.039, +0.133], includes 0).
+  The conclusion — no measured bank benefit — is unchanged.)*
 - **No variant beats the untrained control** in either regime.
 - **Retention is flat** (+0.000 for all variants); continual-OOD probe
   is ~0.5 for all trained variants.
