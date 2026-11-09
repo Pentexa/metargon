@@ -25,7 +25,7 @@ from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Any, Callable, Iterable
 
-from .manifest import resolve_artifact_path, sha256_file
+from .manifest import resolve_artifact_path, sha256_file, canonical_sha256
 
 PASS = "PASS"
 FAIL = "FAIL"
@@ -174,15 +174,14 @@ def c_artifact_hashes(ctx: VerifierContext) -> list[CheckResult]:
         p = ctx.resolve(rel)
         if not p.exists():
             continue
-        actual = sha256_file(p)
+        actual, actual_size = canonical_sha256(p)
         ok = actual == a["sha256"]
         results.append(_check(
             f"artifact.hash:{rel}",
             ok,
             f"sha256 matches ({actual[:12]}…)",
             f"sha256 mismatch: expected {a['sha256'][:12]}… got {actual[:12]}…"))
-        if "size_bytes" in a and a["size_bytes"] is not None:
-            actual_size = p.stat().st_size
+        if "size_bytes" in a and a["size_bytes"] is not None and actual_size is not None:
             results.append(_check(
                 f"artifact.size:{rel}",
                 actual_size == a["size_bytes"],

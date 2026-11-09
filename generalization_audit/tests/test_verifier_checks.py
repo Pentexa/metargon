@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import hashlib
 import sys
 import tempfile
 import unittest
@@ -20,7 +21,7 @@ from generalization_audit.verification import (  # noqa: E402
     VerifierContext,
     load_manifest,
     run_checks,
-    sha256_file,
+    canonical_sha256,
 )
 from generalization_audit.verification.checks import harness_paired_bootstrap  # noqa: E402
 from generalization_audit.tools.verify_experiment import stamp_manifest  # noqa: E402
@@ -262,6 +263,26 @@ class TestAcademyMemoryFormat(unittest.TestCase):
         results = run_checks(VerifierContext(load_manifest(mpath), mpath))
         fails = [r for r in results if r.status == FAIL]
         self.assertEqual(fails, [], [r.message for r in fails])
+
+
+    def test_canonical_hash_matches_git_blob_for_tracked_artifact(self):
+        # The verifier/stamp hashes canonical git blob content, so hashes
+        # are identical across platforms regardless of checkout line-ending
+        # conversion (this is what CI checks against).
+        import subprocess
+        path = _ROOT / "results" / "v121" / "final_l.json"
+        rel = "results/v121/final_l.json"
+        try:
+            blob = subprocess.run(
+                ["git", "-C", str(_ROOT), "cat-file", "blob", f":{rel}"],
+                capture_output=True, check=False)
+        except Exception as exc:  # pragma: no cover
+            self.skipTest(f"git unavailable: {exc}")
+        if blob.returncode != 0:
+            self.skipTest("artifact not tracked in git")
+        digest, size = canonical_sha256(path)
+        self.assertEqual(digest, hashlib.sha256(blob.stdout).hexdigest())
+        self.assertEqual(size, len(blob.stdout))
 
 
 if __name__ == "__main__":

@@ -68,7 +68,7 @@ returns PASS, FAIL or INCONCLUSIVE with an explanation:
 
 | Check | Verifies |
 |---|---|
-| `artifact.exists` / `artifact.hash` / `artifact.size` | declared artifacts exist and match manifest hashes |
+| `artifact.exists` / `artifact.hash` / `artifact.size` | declared artifacts exist and match manifest hashes (canonical git-blob hash, line-ending independent) |
 | `artifact.records.unique` | no duplicate artifact records |
 | `raw.seeds` | per-seed row count == manifest seeds |
 | `raw.unique.rows` | no duplicate per-seed rows; no duplicate policy keys inside a row |
@@ -153,6 +153,9 @@ requirement (frozen criteria v01/v02) remains the rule for new experiments.
 1. **Hash verification is content-only.** A manifest proves the listed
    files are the listed files; it cannot prove the experiment was actually
    run as declared (provenance is still ultimately a trust claim).
+   Hashes are computed over the canonical git-blob bytes where the file is
+   tracked, so they are identical across platforms and line-ending
+   conversions; outside a git checkout the on-disk bytes are hashed.
 2. **Statistical reproducibility tolerance is a judgement call.** The
    default tolerance (0.01 absolute on metric rows) is documented and
    configurable; it is not a substitute for proper effect-size analysis.

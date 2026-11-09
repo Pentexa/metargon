@@ -127,6 +127,40 @@ def sha256_file(path: str | Path) -> str:
     return h.hexdigest()
 
 
+def canonical_sha256(path: str | Path) -> tuple[str, int | None]:
+    """Canonical content hash for an artifact.
+
+    Inside a git repository this hashes the git blob (the exact canonical
+    bytes) so results are identical on every platform regardless of
+    checkout line-ending conversions. Outside a repository, or when the
+    file is untracked, it falls back to the on-disk bytes.
+
+    Returns ``(hexdigest, size_bytes)``; size is None when unavailable.
+    """
+    import subprocess
+
+    p = Path(path)
+    try:
+        # repo-relative path from git's own view (robust to filesystem
+        # normalization differences such as NFC/NFD on Windows)
+        prefix = subprocess.run(
+            ["git", "-C", str(p.parent), "rev-parse", "--show-prefix"],
+            capture_output=True, text=True, check=False)
+        if prefix.returncode == 0:
+            rel = prefix.stdout.strip().replace("\\", "/") + p.name
+            blob = subprocess.run(
+                ["git", "cat-file", "blob", f":{rel}"],
+                capture_output=True, check=False)
+            if blob.returncode == 0 and blob.stdout:
+                return hashlib.sha256(blob.stdout).hexdigest(), len(blob.stdout)
+    except Exception:
+        pass
+    try:
+        return sha256_file(p), p.stat().st_size
+    except OSError:
+        return "", None
+
+
 def resolve_artifact_path(manifest_path: str | Path, rel: str) -> Path:
     """Resolve an artifact path relative to the manifest's directory."""
     base = Path(manifest_path).resolve().parent

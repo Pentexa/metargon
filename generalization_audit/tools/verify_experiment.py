@@ -49,6 +49,7 @@ from generalization_audit.verification import (  # noqa: E402
     PASS,
     ManifestError,
     VerifierContext,
+    canonical_sha256,
     load_manifest,
     run_checks,
     sha256_file,
@@ -79,8 +80,10 @@ def stamp_manifest(cfg: dict, base_dir: Path) -> dict:
         p = _resolve(base_dir, a["path"])
         if not p.exists():
             raise ManifestError(f"artifact path in stamp config not found: {p}")
-        a["sha256"] = sha256_file(p)
-        a["size_bytes"] = p.stat().st_size
+        digest, size = canonical_sha256(p)
+        a["sha256"] = digest
+        if size is not None:
+            a["size_bytes"] = size
     errors = validate_manifest(manifest)
     if errors:
         raise ManifestError(

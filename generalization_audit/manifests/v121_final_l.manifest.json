@@ -74,8 +74,8 @@
       "role": "raw",
       "generated_by": "benchmark_v12.py --family l --seeds 4 --episodes 40",
       "contains_per_seed": true,
-      "sha256": "3738f81842c75e4cf4a29989dd5d261cd44154178daaeb7ee18023abd905b6c5",
-      "size_bytes": 58464
+      "sha256": "5a54e6f183f741ecf6e08a449d0a1d039d50014ac5a85d698ca9c330ecd7b8b6",
+      "size_bytes": 56696
     }
   ]
 }
