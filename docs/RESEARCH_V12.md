@@ -90,8 +90,10 @@ conditions (F); memory sample 2 × 20. CIs are wider than the headline
 
 Exact discovery (D1/D2): v0.12 97.5/84.4 (stable), 95.0/88.8 (shift),
 87.5/76.9 (noisy), 96.2/88.1 (novel), 93.1/86.9 (tight). v0.11 was
-65.6/66.9/31.9/66.9/64.4 on D2 across those conditions — dual-context
-restores D2 learning everywhere.
+65.6/65.0/31.9/66.9/64.4 on D2 across those conditions - dual-context
+restores D2 learning everywhere. (*D2 values verified against
+`results/v12/summary_f_small.json`; the shift value is 65.0, not 66.9
+as in an earlier draft.)
 
 ### 4.2 Family H (structurally novel)
 | condition | v0.10 | v0.11 | v0.12 | v12−v10 |
@@ -117,10 +119,15 @@ Exact D1 recovered at v0.10 parity (72.5/84.4) vs v0.11's 70.6/75.6.
 | stable | 21.25 | 18.12 | **27.50** | 18.12 | 48.12 |
 | novel | 21.88 | 19.38 | **29.38** | 18.75 | 42.50 |
 
-| condition | exact D1 (v10/v11) | exact D1 (v12) | temporal Δ |
+| condition | exact D1 (v10/v11) | exact D1 (v12) | temporal Δ | 
 |---|---:|---:|---:|
-| stable | 0.0% | **16.9%** | +23.12 [0, 50.6] |
-| novel | 0.0% | **23.1%** | +16.88 [0, 50.6] |
+| stable | 0.0% | **16.9%** | +16.88 [0, 50.6] |
+| novel | 0.0% | **23.1%** | +23.12 [0, 50.6] |
+
+> Δ = v0.12 temporal exact D1 − v0.12-notp exact D1 (notp = 0 on both
+> conditions). Values verified against `results/v12/summary_l_small.json`
+> (`comparison:temporal_minus_notp_exact_D1`: 0.16875 / 0.23125). An
+> earlier draft swapped the two delta values; corrected in this audit.
 
 Temporal diagnostics (v12): generated ≈9, verified ≈0.75, probes ≈44 per
 seed-run — the bootstrapping probe policy turns learned sequences into

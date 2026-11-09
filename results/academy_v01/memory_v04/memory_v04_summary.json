@@ -3085,60 +3085,60 @@
  "comparisons": {
   "fresh_vs_original": {
    "classic_test": {
-    "mean": -0.0996640625,
+    "mean": 0.0996640625,
     "ci": [
-     -0.2109375,
-     0.0
+     0.0,
+     0.2109375
     ]
    },
    "train_delta": -0.34062499999999996
   },
   "probe_local_vs_original": {
    "classic_test": {
-    "mean": -0.031671875,
+    "mean": 0.031671875,
     "ci": [
-     -0.09375,
-     0.0
+     0.0,
+     0.09375
     ]
    },
    "train_delta": 0.08125000000000004
   },
   "ctx_vs_original": {
    "classic_test": {
-    "mean": -0.0303125,
+    "mean": 0.0303125,
     "ci": [
-     -0.09375,
-     0.0
+     0.0,
+     0.09375
     ]
    },
    "train_delta": 0.028125000000000067
   },
   "ctx_reset_vs_original": {
    "classic_test": {
-    "mean": -0.0303125,
+    "mean": 0.0303125,
     "ci": [
-     -0.09375,
-     0.0
+     0.0,
+     0.09375
     ]
    },
    "train_delta": 0.028125000000000067
   },
   "ctx_gate_vs_original": {
    "classic_test": {
-    "mean": -0.0303125,
+    "mean": 0.0303125,
     "ci": [
-     -0.09375,
-     0.0
+     0.0,
+     0.09375
     ]
    },
    "train_delta": 0.025000000000000022
   },
   "ctx_full_vs_original": {
    "classic_test": {
-    "mean": 0.0303125,
+    "mean": -0.0303125,
     "ci": [
-     0.0,
-     0.09375
+     -0.09375,
+     0.0
     ]
    },
    "train_delta": 0.15625
