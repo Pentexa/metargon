@@ -43,10 +43,13 @@ class MetargonV12(MetargonV11):
                  use_confirmed_events: bool = True,
                  use_certainty: bool = True,
                  use_dual_context: bool = True,
+                 dual_context_mode: str = "dual",
                  use_adaptive_confirm: bool = True,
-                 use_recent_credit: bool = True,
+                 use_recent_credit: bool = False,
                  use_temporal: bool = False,
-                 temporal_max: int = 64):
+                 temporal_max: int = 64,
+                 adaptive_confirmed_events: bool = False,
+                 anomaly_threshold: float = 0.03):
         super().__init__(
             seed=seed, max_hypotheses=max_hypotheses,
             use_robust_belief=use_robust_belief,
@@ -58,17 +61,44 @@ class MetargonV12(MetargonV11):
             use_certainty=use_certainty,
         )
         self.use_dual_context = use_dual_context
+        if not use_dual_context:
+            self.dual_context_mode = "off"
+            self.memory.event_context_mode = "clean"
+        else:
+            self.dual_context_mode = dual_context_mode
         self.use_adaptive_confirm = use_adaptive_confirm
         self.use_recent_credit = use_recent_credit
         self.use_temporal = use_temporal
-        if use_dual_context:
+        self.adaptive_confirmed_events = adaptive_confirmed_events
+        self.anomaly_threshold = anomaly_threshold
+        if self.dual_context_mode == "dual":
             self.memory.event_context_mode = "dual"
+        elif self.dual_context_mode == "dual_stable":
+            self.memory.event_context_mode = "dual_stable"
+        elif self.dual_context_mode == "dual_if_changed":
+            self.memory.event_context_mode = "dual_if_changed"
         if not use_adaptive_confirm:
             self.belief.adaptive_confirm_persist = 1
         self.temporal = TemporalMemory(max_hypotheses=temporal_max, seed=seed) \
             if use_temporal else None
         self._temporal_probes = 0
         self._prev_atoms = frozenset()
+        self._confirmed_gating_active = self.use_confirmed_events
+
+    def _confirmed_active(self) -> bool:
+        """Adaptive confirmed-event gating: use confirmed events only when
+        the observed anomaly rate suggests the channel is unreliable;
+        otherwise use raw belief-diff events (simpler, faster, and better
+        in clean environments where confirmation persistence would lag the
+        true transition)."""
+        if not self.use_confirmed_events:
+            return False
+        if not self.adaptive_confirmed_events:
+            return True
+        rate = self.belief._last_anomaly_rate
+        active = rate > self.anomaly_threshold
+        self._confirmed_gating_active = active
+        return active
 
     # -- Mission A: recent-causal-credit protection -----------------------
     def _protected_atoms(self) -> frozenset:
@@ -111,7 +141,8 @@ class MetargonV12(MetargonV11):
     # -- observation pipeline ---------------------------------------------
     def _observe_outcome_v11(self, obs_before, action, res):
         pre_atoms = atoms_from_belief(self.belief.belief)
-        if not self.use_confirmed_events:
+        confirmed_active = self._confirmed_active()
+        if not confirmed_active:
             prev_doors = dict(self.belief.belief.door_open)
         if self.use_robust_belief:
             self.belief.observe(res.observation)
@@ -123,7 +154,7 @@ class MetargonV12(MetargonV11):
         if self.use_temporal:
             self._feed_temporal(pre_atoms, post_atoms)
 
-        if self.use_confirmed_events:
+        if confirmed_active:
             confirmed = self.belief.poll_confirmed_events()
             self._confirmed_total += len(confirmed)
             self._dropped_total += (
@@ -152,8 +183,12 @@ class MetargonV12(MetargonV11):
             else:
                 certainty = 1.0
             self._certainty_sum += certainty
+            stable_post = self.belief.stable_atoms() \
+                if self.memory.event_context_mode == "dual_stable" \
+                else frozenset()
             self.memory.observe_event_ex(pre, post, door, opened,
-                                         certainty=certainty)
+                                         certainty=certainty,
+                                         stable_post_atoms=stable_post)
             if self.temporal is not None:
                 self.temporal.observe_open(door, opened, self.memory.step)
             self._passed[door] = False
@@ -172,7 +207,7 @@ class MetargonV12(MetargonV11):
             self._current_plan = []
 
         for door in DOORS:
-            if self.use_confirmed_events:
+            if confirmed_active:
                 if not self.belief.door_is_stable(door):
                     self._nonevent_gated += 1
                     continue
@@ -249,6 +284,8 @@ class MetargonV12(MetargonV11):
         d["dual_context"] = self.use_dual_context
         d["adaptive_confirm"] = self.use_adaptive_confirm
         d["recent_credit"] = self.use_recent_credit
+        d["adaptive_confirmed_events"] = self.adaptive_confirmed_events
+        d["confirmed_gating_active"] = getattr(self, "_confirmed_gating_active", None)
         d["temporal_probes"] = self._temporal_probes
         if self.temporal is not None:
             d["temporal"] = self.temporal.diagnostics()
