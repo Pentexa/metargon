@@ -26,6 +26,51 @@ frozen worlds) vs v0.10 / v0.11 / v0.12.1.
 
 ---
 
+## 0. Evidence, provenance & verification
+
+All results below are computed from the committed-format raw artifacts
+(per-seed vectors) listed here. Because the independent audit's frozen
+criteria v02 currently forbid committing `results/v13/` (see §9), the
+artifacts are archived outside the repository and will be committed to
+`results/v13/` once the QUALITY artifact-gate hotfix merges. Everything
+is restorable and verifiable:
+
+| experiment | artifact (repo path when committed) | quality v0.5 manifest |
+|---|---|---|
+| L final (v0.13 vs v0.12.1 + ablations) | `results/v13/final_l.json` | `generalization_audit/manifests/v13_final_l.manifest.json` |
+| F final (5 conditions) | `results/v13/final_f.json` | `generalization_audit/manifests/v13_final_f.manifest.json` |
+| H final (stable/novel) | `results/v13/final_h.json` | `generalization_audit/manifests/v13_final_h.manifest.json` |
+| R final (stable/novel + -nodc) | `results/v13/final_r.json` | `generalization_audit/manifests/v13_final_r.manifest.json` |
+| L baseline (v0.12.1 reproduction) | `results/v13/baseline_l.json` | `generalization_audit/manifests/v13_baseline_l.manifest.json` |
+| L pilot (full ablation set) | `results/v13/pilot_l.json` | `generalization_audit/manifests/v13_pilot_l.manifest.json` |
+| diagnostics (seed-dependence attribution) | `results/v13/diag_l_stable.json`, `diag_l_novel.json`, `diag_l_final.json`, `diag_r_stable_v13.json` | – (non-benchmark format) |
+
+Archive (current home, all files incl. manifests and verification reports):
+`…/Temp/opencode/metargon_v13_evidence/` (`results_v13/` +
+`ARCHIVE_README.md`). Restore by copying `results_v13/*` → `results/v13/`.
+
+**Quality v0.5 verification (merged PR #36, `verify_experiment.py`):**
+all six manifests stamp and verify with **0 FAIL**; every summary mean
+reproduces the raw per-seed mean exactly (tolerance 1e-9), every recorded
+delta follows the candidate-minus-baseline convention, and every recorded
+paired bootstrap 95% CI reproduces exactly from the raw diffs (seed 4301,
+1500 rounds, α=0.05). INCONCLUSIVE items are metadata omissions only
+(memory limit not byte-measured; the `v12_temporal` comparison key is
+ambiguous to the verifier's key resolver and is validated manually in
+§4.1). Verification reports: `results/v13/verify_v13_*.json`.
+
+**Provenance:** seeds 11800–11803 (world seed base), 40 episodes/seed,
+policy seed offset +1000003, `max_steps=80`, planner cap 700 expansions /
+decision, probe max 3 plans. Policy configs: v0.12.1 = recent-credit
+off + dual context + adaptive confirm + confirmed-event gating, temporal
+ON for L; v0.13 = same + rolling temporal completion (see §3). Runs were
+executed with code byte-identical to commit `437cf9d` (verified: `git
+diff 4e61903..437cf9d` empty for all v13 files); `PYTHONHASHSEED` was
+unset (randomized per process). Frozen pools (`frozen_l.json`,
+`frozen_r.json`) were read in read-only.
+
+---
+
 ## 1. Motivation
 
 v0.12.1 (PR #33) discovered exact ordered rules on family L (16.9% /
@@ -54,6 +99,13 @@ Results (v0.12.1 policy, 4 seeds, stable condition):
 | 1 | 4/40 | 4/40 | 2 | 0 | 0.000 |
 | 2 | 35/40 | 36/40 | 35 | 27 | 0.675 |
 | 3 | 3/40 | 3/40 | 2 | 0 | 0.000 |
+
+Diagnostic runs (`diag_l_stable.json` / `diag_l_novel.json`) use the
+identical worlds, seeds and policy as the benchmark (`final_l.json`);
+per-seed success from the diagnostic runs equals the benchmark's
+per-seed success exactly (Δ = 0.000 for all 8 seed-condition cells), so
+the diagnostic counters can be quoted alongside the benchmark exact-D1
+column. `exact D1` above is the benchmark's per-seed exact discovery.
 
 **Root cause:** the v0.12 generator keeps a SINGLE "active first" atom per
 door. When one step flips several atoms at once — e.g. loading a plate
@@ -99,12 +151,22 @@ Ablations (all other v0.13 knobs default OFF, preserved as flags):
 
 ### 4.1 Family L (ordered-sequence) — Mission A
 
-| condition | v0.10 | v0.11 | v0.12.1 | v0.13 | temporal Δ v12 | temporal Δ v13 |
+| condition | v0.10* | v0.11* | v0.12.1 | v0.13 | temporal Δ v12 | temporal Δ v13 |
 |---|---:|---:|---:|---:|---:|---:|
 | stable success | 21.25 | 18.12 | 27.50 | **29.38** | — | — |
 | novel success | 21.88 | 19.38 | 29.38 | 27.50 | — | — |
 | stable exact D1 | 0.0 | 0.0 | 16.9 | **39.4** | +16.88 | +39.38 |
 | novel exact D1 | 0.0 | 0.0 | 23.1 | **33.1** | +23.12 | +33.13 |
+
+\* v0.10/v0.11 L cells are **historical values from the v0.12 study**
+(`results/v12/summary_l_small.json`, audit v0.3-verified), not re-run in
+this study. The v0.12.1 column (`metargon12`) is measured in this study's
+harness and reproduces the v0.12 study's L summary exactly (success
+27.50/29.38; exact D1 16.9/23.1). (The v0.12.1 branch's own final runs
+recorded slightly different L-success values — 26.9/25.0 — for the same
+4×40 matched cells; both are pilot-scale samples of the same policy
+config.) Exact-D1 cells are identical across all three artifacts
+(v0.12 study, v0.12.1 final, this study).
 
 Per-seed exact D1:
 - stable: v0.12.1 [0, 0, 0.675, 0]; v0.13 [0.775, 0, 0.80, 0] —
@@ -118,8 +180,10 @@ Per-seed exact D1:
 `results/v13/rendered_final_l.md`).
 
 Temporal verification count per seed-run: v0.13 3.75 (stable) / 3.25
-(novel) vs v0.12.1 0.75 / 0.75; temporal probes 57 / 50.5 vs 44.75 /
-42.5; no evictions (≤32 distinct pairs in a 64-cap store).
+(novel); the `-gen` ablation (= v0.12 single-slot generator behavior,
+§5) verifies 0.75 / 0.75. Temporal probes: v0.13 57 / 50.5 vs v0.12.1
+44.75 / 42.5; no temporal evictions (≤32 distinct pairs in a 64-cap
+store).
 
 ### 4.2 Family F (declared) — preservation of noise robustness and D2
 
@@ -155,12 +219,19 @@ conditions). Exact D1: 97.5/95.0/80.6/96.2/93.1; exact D2 for noisy was
 
 ## 5. Ablations
 
+All L ablations come from `pilot_l.json` (4×40, same matched seeds); the
+final `-gen`/`-notp` rows were re-run in `final_l.json` and are
+identical. The pilot's "full" config had the experimental knobs
+proximity + probe-exemption ON; the final default is rolling + flat + no
+exemption — all four combinations measure the same exact D1 (39.4 /
+33.1), which is itself the neutrality evidence for those knobs.
+
 | variant | L stable exact D1 | L novel exact D1 | interpretation |
 |---|---:|---:|---|
-| v0.13 full | 39.4 | 33.1 | — |
+| v0.13 (rolling, any knob combination) | 39.4 | 33.1 | — |
 | -gen (active_first) | 16.9 | 23.1 | rolling generation is the sole driver |
-| -tw (proximity) | 39.4 | 33.1 | identical (neutral) |
-| -tpex (exemption) | 39.4 | 33.1 | identical (neutral; 0 blocked probes) |
+| -tw (proximity off) | 39.4 | 33.1 | identical to full (neutral) |
+| -tpex (exemption off) | 39.4 | 33.1 | identical to full (neutral; 0 blocked probes) |
 | -notp | 0.0 | 0.0 | temporal responsible for the entire gain |
 
 F/H/R ablations: v0.13 vs v0.12.1 exactly identical on every measured cell
@@ -206,37 +277,59 @@ python python/benchmark_v13.py --seeds 4 --episodes 40 --family f \
 python python/v13_postprocess.py results/v13/final_l.json
 python python/diagnose_v13.py --family l --conditions stable,novel \
     --seeds 4 --episodes 40 --policy v13 --json results/v13/diag_l_final.json
+
+# Quality v0.5 verification of the committed-format artifacts
+python -m generalization_audit.tools.verify_experiment \
+    --manifest generalization_audit/manifests/v13_final_l.manifest.json --json
+python -m generalization_audit.tools.verify_experiment \
+    --manifest generalization_audit/manifests/v13_final_f.manifest.json --json
+python -m generalization_audit.tools.verify_experiment \
+    --manifest generalization_audit/manifests/v13_final_h.manifest.json --json
+python -m generalization_audit.tools.verify_experiment \
+    --manifest generalization_audit/manifests/v13_final_r.manifest.json --json
+python -m generalization_audit.tools.verify_experiment \
+    --manifest generalization_audit/manifests/v13_baseline_l.manifest.json --json
+python -m generalization_audit.tools.verify_experiment \
+    --manifest generalization_audit/manifests/v13_pilot_l.manifest.json --json
 ```
 
 ## 8. Resources
 
-Per seed-run CPU (s, 4×40): L stable v0.13 44.7 vs v0.12.1 47.2;
-L novel v0.13 60.2 vs v0.12.1 57.4; F-noisy v0.13 17.7 (≈ v0.12.1).
-Peak memory unchanged scale (bounded stores; optional sample in final
-artifacts). `PYTHONHASHSEED` was unset in all runs (default random
-hashing); all artifacts record per-seed raw vectors so summaries are
-recomputable from the attached JSON.
+Per seed-run CPU (s, 4×40, from `final_l.json`/`final_f.json`): L stable
+v0.13 44.7 vs v0.12.1 47.2; L novel v0.13 60.2 vs v0.12.1 57.4;
+F-noisy v0.13 17.7 (≈ v0.12.1). Peak memory unchanged scale (bounded
+stores; not byte-measured in this study — recorded as null in the
+manifests, hence the verifier's INCONCLUSIVE fairness item).
+`PYTHONHASHSEED` was unset in all runs (default randomized hashing); all
+artifacts record per-seed raw vectors and the verifier confirms every
+summary mean and CI reproduces from them.
 
 ## 9. Protocol compliance note (deviation, documented)
 
 Independent audit frozen-eval-criteria v02 (PR #35,
 `generalization_audit/tests/test_future_eval_criteria_v02.py`) requires
 that **no committed v0.13 artifacts exist while the criteria are frozen**
-(`test_future_targets_have_no_committed_artifacts_yet`). This v0.13
-study produced its results *after* those criteria were defined; to keep
-the audit protocol intact the raw artifacts are therefore NOT committed.
-They are archived outside the repository at
+(`test_future_targets_have_no_committed_artifacts_yet`). Quality
+v0.5 (PR #36) merged the verifier infrastructure but the artifact-gate
+hotfix is still pending; the raw v0.13 artifacts are therefore **not
+committed in this PR**. They are archived outside the repository at
 `…/Temp/opencode/metargon_v13_evidence/results_v13/` (all raw per-seed
-JSON, rendered tables, diagnostics; inventory in `ARCHIVE_README.md`) and
-can be restored to `results/v13/` and committed once the audit unfreezes
-v0.13 criteria. This is the documented justification required by
-`frozen_eval_criteria_v02.json` ("Any deviation must be documented with
-justification in the PR"). All reproduction commands in §7 are unchanged;
-they write to `results/v13/` when run by any party.
+JSON, rendered tables, diagnostics, stamped manifests and verification
+reports; inventory in `ARCHIVE_README.md`) and are ready to be committed
+to `results/v13/` (together with `generalization_audit/manifests/v13_*`
+once the hotfix merges, per the mission workflow. This is the documented
+justification required by `frozen_eval_criteria_v02.json` ("Any deviation
+must be documented with justification in the PR"). All reproduction
+commands in §7 write to `results/v13/` and are unchanged.
 
 Per `evidence_for_improvement_claim`, the 4×40 results here are
 **preliminary only**: no population-level claim is made; the L finding is
 reported with per-seed vectors and paired CIs, and the mechanism is
 supported by the `-gen` ablation (controlled control). Confirmatory
 8×100 runs plus an independent audit recomputation are required before a
-population claim, per the frozen criteria.
+population claim, per the frozen criteria. Registration note: the frozen
+criteria v02 (including its preregistration expectation) were published
+while this study was already in execution; the study was run under the
+inherited v01/v12 protocol and is reported under v02 requirements
+(per-seed vectors, paired CIs, ablation control), with this timing
+documented as the deviation.
