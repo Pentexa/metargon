@@ -16,7 +16,7 @@ for v0.12.1 / Academy v0.5.
 | 3 | Memory v0.4 classic deltas sign-flipped in code, summary and report | **Confirmed → Corrected** |
 | 4 | v0.12 headline success tables (F/H/R/L) | **Verified** vs raw |
 | 5 | Memory v0.4 train/memory/mid-curve numbers | **Verified** vs raw |
-| 6 | v0.12 temporal exact-D1 "16.9/23.1%" provenance | **Not reproducible from committed summary (unresolved)** |
+| 6 | v0.12 temporal exact-D1 "16.9/23.1%" provenance | **Was mis-reported as unresolved; corrected** — field lookup error; values reproduce exactly from `exact_discovery_D1` (seed-sensitive, see §5) |
 | 7 | Frozen evaluation criteria for future v0.12.1 / v0.5 | **Added** |
 
 ---
@@ -94,20 +94,46 @@ raw exactly and were untouched.
 - v0.12 R success + exact D1 rows match.
 - Memory v0.4 train/memory/mid-curve values match JSONL exactly.
 
-## 5. Unresolved — temporal exact-D1 provenance
+## 5. Temporal exact-D1 provenance — corrected (was incorrectly "unresolved")
 
-The report claims v0.12 exact D1 = 16.9% (stable) / 23.1% (novel) on L.
-The committed `summary_l_small.json` contains only the *comparison*
-deltas (`temporal_minus_notp_exact_D1`); its per-policy
-`exact_discovery_D1` fields are 0.0 for every policy including v0.12
-(those fields count only `verified` compositional hypotheses, and the
-temporal branch is counted only when `verified` — the committed run
-reports 0.0). The 16.9/23.1 numbers cannot be reproduced from the
-committed summary alone except as the notp delta; the generating
-procedure for those percentages (likely a separate analysis including
-`predicted` temporal hypotheses) is not committed. The new v0.12.1
-protocol must record exact-discovery per policy per condition directly
-(and define whether predicted temporal hypotheses count as discovery).
+**Correction:** the previous audit draft claimed the v0.12 exact-D1
+values (16.9% stable / 23.1% novel) could not be reproduced from the
+committed artifacts. **That claim was wrong** — it resulted from
+reading the wrong JSON field: the draft looked for
+`discovery.D1.exact_rate` while the committed summary stores the metric
+as a flat per-policy field `exact_discovery_D1`.
+
+Verified from committed `results/v12/summary_l_small.json`
+(`raw` per-seed arrays vs `summary` means):
+
+| Seed | Stable exact D1 | Novel exact D1 |
+|---|---:|---:|
+| 0 | 0.000 | 0.000 |
+| 1 | 0.000 | 0.250 |
+| 2 | 0.675 | 0.675 |
+| 3 | 0.000 | 0.000 |
+| Mean | 0.16875 | 0.23125 |
+
+- All `metargon12-notp` exact-D1 values are 0.000, so
+  `temporal_minus_notp_exact_D1` deltas equal the v0.12 means:
+  **+16.875 pp** (stable) and **+23.125 pp** (novel), matching the
+  report's 16.9% / 23.1%.
+- Recorded metric definition: fraction of episodes (per seed) in which
+  a temporal hypothesis with `status == "verified"` exactly matches the
+  true ordered rule `(first, second)` for D1 (`benchmark_v12.py`
+  `discovery_row`). It counts verified temporal hypotheses only;
+  `predicted` hypotheses are not counted.
+
+**Seed sensitivity (honest limitation):** discovery is driven by a
+single seed per condition — stable: seed 2 only (0.675); novel: seeds 1
+(0.250) and 2 (0.675). Population stddev across the 4 seeds is 0.292
+(stable) and 0.276 (novel). The *recorded metrics* are reproducible
+(means match committed summaries exactly), but the *generalization
+across seeds* is not established: with n=4 seeds, most observed success
+originates from one or two seeds. The report's "16.9–23.1% exact D1"
+should be read as a seed-sensitive preliminary estimate, not a robust
+population estimate. The frozen protocol (below) therefore requires
+per-seed reporting and larger seed sets for any temporal-learning claim.
 
 ## 6. Frozen criteria for future evaluations
 

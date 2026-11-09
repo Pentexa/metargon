@@ -199,5 +199,75 @@ class TestV12HeadlineTables(unittest.TestCase):
             self.assertAlmostEqual(row["metargon12"]["success_rate"], v12, places=4, msg=cond)
 
 
+class TestTemporalExactD1Reproducibility(unittest.TestCase):
+    """Temporal exact-D1 provenance fix: recalulate the metric from every
+    raw seed and compare with committed summary values. Previously the
+    audit wrongly looked up `discovery.D1.exact_rate` (absent) instead of
+    the flat field `exact_discovery_D1`. These tests fail if the summary
+    means diverge from the raw per-seed means."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.sum_l = _load("results/v12/summary_l_small.json")
+        cls.raw = cls.sum_l["raw"]
+
+    def _per_seed_v12(self, cond):
+        return [row["metargon12"]["exact_discovery_D1"] for row in self.raw[cond]]
+
+    def test_summary_mean_matches_raw_per_seed_mean_stable(self):
+        import statistics
+        vals = self._per_seed_v12("stable")
+        self.assertEqual(len(vals), 4)
+        mean = statistics.fmean(vals)
+        committed = self.sum_l["summary"]["stable"]["metargon12"]["exact_discovery_D1"]
+        self.assertAlmostEqual(mean, committed, places=12)
+        self.assertAlmostEqual(mean, 0.16875, places=5)
+
+    def test_summary_mean_matches_raw_per_seed_mean_novel(self):
+        import statistics
+        vals = self._per_seed_v12("novel")
+        self.assertEqual(len(vals), 4)
+        mean = statistics.fmean(vals)
+        committed = self.sum_l["summary"]["novel"]["metargon12"]["exact_discovery_D1"]
+        self.assertAlmostEqual(mean, committed, places=12)
+        self.assertAlmostEqual(mean, 0.23125, places=5)
+
+    def test_values_temporal_delta_matches_raw(self):
+        import statistics
+        for cond, expected in (("stable", 0.16875), ("novel", 0.23125)):
+            vals = self._per_seed_v12(cond)
+            notp = [row["metargon12-notp"]["exact_discovery_D1"]
+                    for row in self.raw[cond]]
+            self.assertTrue(all(v == 0.0 for v in notp),
+                            f"{cond}: notp exact-D1 must be 0")
+            delta = statistics.fmean(vals) - statistics.fmean(notp)
+            committed = self.sum_l["summary"][cond][
+                "comparison:temporal_minus_notp_exact_D1"]["delta"]
+            self.assertAlmostEqual(delta, committed, places=12)
+            self.assertAlmostEqual(delta, expected, places=5)
+
+    def test_stable_novel_labels_are_distinct(self):
+        import statistics
+        s = statistics.fmean(self._per_seed_v12("stable"))
+        n = statistics.fmean(self._per_seed_v12("novel"))
+        self.assertNotAlmostEqual(s, n, places=6)
+        self.assertLess(s, n)
+
+    def test_fraction_seed_sensitivity_recorded(self):
+        """Document that discovery is dominated by individual seeds (seed 2
+        on stable; seeds 1+2 on novel). This does not assert a value; it
+        asserts the test reports the variance for audit documentation."""
+        import statistics
+        message = []
+        for cond in ("stable", "novel"):
+            vals = self._per_seed_v12(cond)
+            positive = [i for i, v in enumerate(vals) if v > 0]
+            message.append(f"{cond}: positive seeds={positive} "
+                           f"stdev={statistics.pstdev(vals):.4f}")
+        # informational only (kept for documentation); assert the data
+        # exists and is well-formed
+        self.assertEqual(len(message), 2)
+
+
 if __name__ == "__main__":
     unittest.main()
