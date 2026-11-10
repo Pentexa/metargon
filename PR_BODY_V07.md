@@ -102,7 +102,8 @@ independent confirmatory proof:
 
 - `python -m unittest academy.tests.test_memory_v07` → 12 tests OK
 - memory suites incl. v0.6/v0.5 → 55+ OK
-- Full Academy suite + audit regression: [FILL AFTER FINAL RUN]
+- Full Academy suite → 246/246 OK
+- Audit suite (incl. Quality v0.7 transfer-protocol tests) → 170/170 OK
 
 ### Deliverables
 
