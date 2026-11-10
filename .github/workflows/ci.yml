@@ -99,6 +99,23 @@ jobs:
         timeout-minutes: 10
 
   # ------------------------------------------------------------------
+  # METARGON NEST (interactive home) — fast integration tests
+  # ------------------------------------------------------------------
+  nest:
+    name: NEST (interactive home)
+    runs-on: ubuntu-latest
+    env:
+      PYTHONHASHSEED: "0"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+      - name: Run NEST tests
+        run: python -m unittest discover -s nest/tests -t . -v
+        timeout-minutes: 10
+
+  # ------------------------------------------------------------------
   # Rust research kernel + Academy kernel (pinned toolchain 1.88.0)
   # ------------------------------------------------------------------
   rust:
