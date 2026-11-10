@@ -80,7 +80,7 @@ class TestNestSession(unittest.TestCase):
         self.session.new_challenge(Challenge(description="train"))
         run_episode(self.session)
         mem = self.session.memory_snapshot()
-        reply = app._reply_what_remember()
+        reply = self.app.engine._reply_what_remember()
         self.assertIsInstance(reply, str)
 
     # -- Demo 2: first task (open a door) --------------------------------
@@ -160,7 +160,7 @@ class TestNestSession(unittest.TestCase):
     # -- Demo 6: no API --------------------------------------------------
     def test_demo6_no_api_full_workflow(self):
         app = self.app
-        self.assertEqual(app.config()["api_mode"], "none")
+        self.assertEqual(app.config()["conversation_mode"], "command")
         # full essential workflow without any API key
         r1 = app.handle_command("Hello")
         self.assertEqual(r1["command"]["intent"], "hello")
@@ -189,7 +189,7 @@ class TestNestServer(unittest.TestCase):
                 base = f"http://127.0.0.1:{port}"
                 with urllib.request.urlopen(base + "/api/config") as r:
                     cfg = json.loads(r.read())
-                self.assertEqual(cfg["api_mode"], "none")
+                self.assertEqual(cfg["conversation_mode"], "command")
                 with urllib.request.urlopen(base + "/api/state") as r:
                     st = json.loads(r.read())
                 self.assertIn("status", st)

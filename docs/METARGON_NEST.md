@@ -138,3 +138,67 @@ The founder can launch NEST, talk to METARGON, assign a supported
 challenge, watch its actual decisions, inspect its learning, save
 progress, and continue after restart — all driven by the real student
 agent, not an LLM impersonation.
+
+---
+
+# METARGON NEST v0.2 — genuine interactive conversation
+
+## What changed
+
+The conversation layer was redesigned around the real agent:
+
+- **Primary mode: API-based language model** (user-configured,
+  OpenAI-compatible). The model receives a sanitized grounding snapshot
+  (world state, challenge/status, last action + outcomes, verified and
+  unverified hypotheses with confidence/contradictions, telemetry,
+  conversational history) and produces grounded replies. It never touches
+  hidden state, never invents memories/observations, and can only request
+  actions through a validated intent tag (`[[ACTION:<intent>]]`).
+- **Offline fallback** remains and is explicitly labeled
+  (“command mode”): deterministic interpreter + telemetry-grounded
+  replies. It is not presented as conversational intelligence.
+- **Multi-turn context**: conversation history is maintained separately
+  from causal memory; the model can answer follow-ups (“why?”, “what
+  happened next?”, “what did I teach you?”) grounded in real data.
+- **Action bridge**: natural-language requests are converted to validated
+  goals/questions; execution runs through the existing agent; progress is
+  streamed via the live world panel; the UI distinguishes “I will try”
+  from “I succeeded”.
+- **Budgets**: call/token/cost budgets are tracked; when exhausted or
+  when the provider fails, the app degrades honestly to command mode —
+  never to fabricated success.
+
+## API configuration (all via environment variables)
+
+| Variable | Default | Purpose |
+|---|---|---|
+| `METARGON_NEST_API_KEY` | — | user-provided key (never embedded/stored) |
+| `METARGON_NEST_API_URL` | `https://api.openai.com/v1` | OpenAI-compatible base URL |
+| `METARGON_NEST_MODEL` | `gpt-4o-mini` | model id |
+| `METARGON_NEST_MAX_TOKENS` | 500 | max completion tokens |
+| `METARGON_NEST_TIMEOUT` | 15 | request timeout (s) |
+| `METARGON_NEST_MAX_CALLS` | 100 | call budget per session |
+| `METARGON_NEST_MAX_COST_USD` | 2.0 | approximate cost cap |
+
+The core agent and all offline workflows run without any of these.
+
+## Honesty contract (enforced in the system prompt and the bridge)
+
+- Only grounded data may be cited; verified rules are the only allowed
+  causal claims.
+- Unverified hypotheses are presented as hypotheses.
+- “I don’t know yet” and “the attempt did not finish” are normal.
+- Conversation history ≠ causal memory; the two are never conflated.
+- No emotions/consciousness claims; no system commands; no hidden-state
+  modification.
+
+## Validation
+
+- `nest/tests/test_conversation_v02.py` runs the full acceptance dialog
+  with a grounding-aware offline language layer (what do you remember →
+  open door D1 → why did it fail → another approach → save → restore →
+  grounded answer after restart).
+- Existing v0.1 fallback/UI tests continue to pass.
+- `nest/demo_conversation_v02.txt` contains a demonstrated multi-turn
+  transcript (English + Turkish) showing the real grounding behavior.
+
