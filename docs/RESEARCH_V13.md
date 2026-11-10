@@ -28,14 +28,14 @@ frozen worlds) vs v0.10 / v0.11 / v0.12.1.
 
 ## 0. Evidence, provenance & verification
 
-All results below are computed from the committed-format raw artifacts
-(per-seed vectors) listed here. Because the independent audit's frozen
-criteria v02 currently forbid committing `results/v13/` (see §9), the
-artifacts are archived outside the repository and will be committed to
-`results/v13/` once the QUALITY artifact-gate hotfix merges. Everything
-is restorable and verifiable:
+All results below are computed from committed raw artifacts (per-seed
+vectors) in this repository. Every data file under `results/v13/` is
+covered by a stamped Quality v0.5 provenance manifest under
+`generalization_audit/manifests/`; the independent artifact gate
+(`verification/artifact_gate.py`, Quality PR #39) passes with **0 FAIL**
+(see §9).
 
-| experiment | artifact (repo path when committed) | quality v0.5 manifest |
+| experiment | artifact | quality v0.5 manifest |
 |---|---|---|
 | L final (v0.13 vs v0.12.1 + ablations) | `results/v13/final_l.json` | `generalization_audit/manifests/v13_final_l.manifest.json` |
 | F final (5 conditions) | `results/v13/final_f.json` | `generalization_audit/manifests/v13_final_f.manifest.json` |
@@ -43,31 +43,35 @@ is restorable and verifiable:
 | R final (stable/novel + -nodc) | `results/v13/final_r.json` | `generalization_audit/manifests/v13_final_r.manifest.json` |
 | L baseline (v0.12.1 reproduction) | `results/v13/baseline_l.json` | `generalization_audit/manifests/v13_baseline_l.manifest.json` |
 | L pilot (full ablation set) | `results/v13/pilot_l.json` | `generalization_audit/manifests/v13_pilot_l.manifest.json` |
-| diagnostics (seed-dependence attribution) | `results/v13/diag_l_stable.json`, `diag_l_novel.json`, `diag_l_final.json`, `diag_r_stable_v13.json` | – (non-benchmark format) |
+| F/H/R regression checks | `results/v13/regress_*.json` | `generalization_audit/manifests/v13_regress_*.manifest.json` |
+| persistence-gate experiments (rejected) | `results/v13/r_gate*.json` | `generalization_audit/manifests/v13_r_gate.manifest.json` |
+| diagnostics (seed-dependence attribution) | `results/v13/diag_*.json` | `generalization_audit/manifests/v13_diagnostics.manifest.json` |
+| Q v0.5 verification reports | `results/verification_v13/verify_v13_*.json` (outside frozen target; tool outputs, regenerable via §7 commands) | — |
 
-Archive (current home, all files incl. manifests and verification reports):
-`…/Temp/opencode/metargon_v13_evidence/` (`results_v13/` +
-`ARCHIVE_README.md`). Restore by copying `results_v13/*` → `results/v13/`.
-
-**Quality v0.5 verification (merged PR #36, `verify_experiment.py`):**
-all six manifests stamp and verify with **0 FAIL**; every summary mean
+**Quality v0.5 verification (merged PR #36 + #39, `verify_experiment.py`):**
+all eleven manifests stamp and verify with **0 FAIL**; every summary mean
 reproduces the raw per-seed mean exactly (tolerance 1e-9), every recorded
 delta follows the candidate-minus-baseline convention, and every recorded
 paired bootstrap 95% CI reproduces exactly from the raw diffs (seed 4301,
 1500 rounds, α=0.05). INCONCLUSIVE items are metadata omissions only
 (memory limit not byte-measured; the `v12_temporal` comparison key is
 ambiguous to the verifier's key resolver and is validated manually in
-§4.1). Verification reports: `results/v13/verify_v13_*.json`.
+§4.1). Verification reports: `results/verification_v13/verify_v13_*.json`.
 
 **Provenance:** seeds 11800–11803 (world seed base), 40 episodes/seed,
 policy seed offset +1000003, `max_steps=80`, planner cap 700 expansions /
 decision, probe max 3 plans. Policy configs: v0.12.1 = recent-credit
 off + dual context + adaptive confirm + confirmed-event gating, temporal
 ON for L; v0.13 = same + rolling temporal completion (see §3). Runs were
-executed with code byte-identical to commit `437cf9d` (verified: `git
-diff 4e61903..437cf9d` empty for all v13 files); `PYTHONHASHSEED` was
-unset (randomized per process). Frozen pools (`frozen_l.json`,
-`frozen_r.json`) were read in read-only.
+executed with code byte-identical to commit `1518054` (the rebased v0.13
+implementation commit; contains identical content to the original
+`4e61903`/`437cf9d` — verified by empty `git diff`). **Historical runs did
+not pin `PYTHONHASHSEED`** (Python default: randomized per process);
+no determinism is claimed from hash seeding. Reproducibility rests on
+matched episode streams (identical seeds/pools), canonical git-blob
+artifact hashes (platform-independent), and the paired per-seed
+statistics. Frozen pools (`frozen_l.json`, `frozen_r.json`) were read
+read-only.
 
 ---
 
@@ -286,19 +290,19 @@ python python/v13_postprocess.py results/v13/final_l.json
 python python/diagnose_v13.py --family l --conditions stable,novel \
     --seeds 4 --episodes 40 --policy v13 --json results/v13/diag_l_final.json
 
-# Quality v0.5 verification of the committed-format artifacts
+# Quality v0.5 verification of all committed manifests (11)
 python -m generalization_audit.tools.verify_experiment \
-    --manifest generalization_audit/manifests/v13_final_l.manifest.json --json
-python -m generalization_audit.tools.verify_experiment \
-    --manifest generalization_audit/manifests/v13_final_f.manifest.json --json
-python -m generalization_audit.tools.verify_experiment \
-    --manifest generalization_audit/manifests/v13_final_h.manifest.json --json
-python -m generalization_audit.tools.verify_experiment \
-    --manifest generalization_audit/manifests/v13_final_r.manifest.json --json
-python -m generalization_audit.tools.verify_experiment \
-    --manifest generalization_audit/manifests/v13_baseline_l.manifest.json --json
-python -m generalization_audit.tools.verify_experiment \
-    --manifest generalization_audit/manifests/v13_pilot_l.manifest.json --json
+    --manifest generalization_audit/manifests/v13_final_l.manifest.json --json \
+    -o results/verification_v13/verify_v13_final_l.json
+# ... repeat for v13_final_f / v13_final_h / v13_final_r / v13_baseline_l /
+# v13_pilot_l / v13_regress_f_noisy / v13_regress_h_stable /
+# v13_regress_r_stable / v13_r_gate / v13_diagnostics
+
+# Artifact gate (Quality PR #39): must be PASS for results/v13
+python -c "from pathlib import Path; import sys; \
+sys.path += ['.','python','generalization_audit']; \
+from generalization_audit.verification.artifact_gate import check_frozen_target_artifacts; \
+[print(r.target, r.overall) for r in check_frozen_target_artifacts(Path('.').resolve())]"
 ```
 
 ## 8. Resources
@@ -315,20 +319,20 @@ summary mean and CI reproduces from them.
 ## 9. Protocol compliance note (deviation, documented)
 
 Independent audit frozen-eval-criteria v02 (PR #35,
-`generalization_audit/tests/test_future_eval_criteria_v02.py`) requires
-that **no committed v0.13 artifacts exist while the criteria are frozen**
-(`test_future_targets_have_no_committed_artifacts_yet`). Quality
-v0.5 (PR #36) merged the verifier infrastructure but the artifact-gate
-hotfix is still pending; the raw v0.13 artifacts are therefore **not
-committed in this PR**. They are archived outside the repository at
-`…/Temp/opencode/metargon_v13_evidence/results_v13/` (all raw per-seed
-JSON, rendered tables, diagnostics, stamped manifests and verification
-reports; inventory in `ARCHIVE_README.md`) and are ready to be committed
-to `results/v13/` (together with `generalization_audit/manifests/v13_*`
-once the hotfix merges, per the mission workflow. This is the documented
-justification required by `frozen_eval_criteria_v02.json` ("Any deviation
-must be documented with justification in the PR"). All reproduction
-commands in §7 write to `results/v13/` and are unchanged.
+`generalization_audit/tests/test_future_eval_criteria_v02.py`) originally
+required that no committed v0.13 artifacts exist while the criteria are
+frozen. Quality v0.5 (PR #36) added the verifier infrastructure, and
+Quality PR #39 replaced the *prohibition* with a provenance-aware
+publication gate (`generalization_audit/verification/artifact_gate.py`):
+frozen criteria are immutable, but evidence may be committed if and only
+if every artifact under the target is covered by a valid stamped manifest
+whose verification has zero FAIL. This study complies with the gate: all
+raw per-seed artifacts, diagnostics, summaries and rendered tables are
+committed under `results/v13/` and covered by eleven stamped manifests
+(§0), each verified with zero FAIL; the gate is PASS for `results/v13`
+and open for `results/academy_v01/memory_v06`. The temporary external
+archive (`…/Temp/opencode/metargon_v13_evidence/`) held the evidence
+while the gate was in force and is retained as an offline copy.
 
 Per `evidence_for_improvement_claim`, the 4×40 results here are
 **preliminary only**: no population-level claim is made; the L finding is

@@ -1,0 +1,125 @@
+{
+  "source": "generalization_audit\\manifests\\v13_diagnostics.manifest.json",
+  "overall": "INCONCLUSIVE",
+  "summary": {
+    "PASS": 15,
+    "FAIL": 0,
+    "INCONCLUSIVE": 4
+  },
+  "checks": [
+    {
+      "check": "artifact.exists:../../results/v13/diag_l_stable.json",
+      "status": "PASS",
+      "message": "artifact exists (C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon\\generalization_audit\\manifests\\..\\..\\results\\v13\\diag_l_stable.json)",
+      "detail": []
+    },
+    {
+      "check": "artifact.exists:../../results/v13/diag_l_novel.json",
+      "status": "PASS",
+      "message": "artifact exists (C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon\\generalization_audit\\manifests\\..\\..\\results\\v13\\diag_l_novel.json)",
+      "detail": []
+    },
+    {
+      "check": "artifact.exists:../../results/v13/diag_l_final.json",
+      "status": "PASS",
+      "message": "artifact exists (C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon\\generalization_audit\\manifests\\..\\..\\results\\v13\\diag_l_final.json)",
+      "detail": []
+    },
+    {
+      "check": "artifact.exists:../../results/v13/diag_r_stable_v13.json",
+      "status": "PASS",
+      "message": "artifact exists (C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon\\generalization_audit\\manifests\\..\\..\\results\\v13\\diag_r_stable_v13.json)",
+      "detail": []
+    },
+    {
+      "check": "artifact.hash:../../results/v13/diag_l_stable.json",
+      "status": "PASS",
+      "message": "sha256 matches (a7accdeb4e84\u2026)",
+      "detail": []
+    },
+    {
+      "check": "artifact.size:../../results/v13/diag_l_stable.json",
+      "status": "PASS",
+      "message": "size matches (1042702)",
+      "detail": []
+    },
+    {
+      "check": "artifact.hash:../../results/v13/diag_l_novel.json",
+      "status": "PASS",
+      "message": "sha256 matches (0eafd0169b98\u2026)",
+      "detail": []
+    },
+    {
+      "check": "artifact.size:../../results/v13/diag_l_novel.json",
+      "status": "PASS",
+      "message": "size matches (1047278)",
+      "detail": []
+    },
+    {
+      "check": "artifact.hash:../../results/v13/diag_l_final.json",
+      "status": "PASS",
+      "message": "sha256 matches (b852cc398dbb\u2026)",
+      "detail": []
+    },
+    {
+      "check": "artifact.size:../../results/v13/diag_l_final.json",
+      "status": "PASS",
+      "message": "size matches (3512316)",
+      "detail": []
+    },
+    {
+      "check": "artifact.hash:../../results/v13/diag_r_stable_v13.json",
+      "status": "PASS",
+      "message": "sha256 matches (0d46b221c03a\u2026)",
+      "detail": []
+    },
+    {
+      "check": "artifact.size:../../results/v13/diag_r_stable_v13.json",
+      "status": "PASS",
+      "message": "size matches (1898618)",
+      "detail": []
+    },
+    {
+      "check": "artifact.records.unique",
+      "status": "PASS",
+      "message": "no duplicate artifact records",
+      "detail": []
+    },
+    {
+      "check": "raw.present",
+      "status": "INCONCLUSIVE",
+      "message": "unsupported/unknown format 'generic'",
+      "detail": []
+    },
+    {
+      "check": "summary.vs.raw",
+      "status": "PASS",
+      "message": "not applicable for this format (no raw+summary pair)",
+      "detail": []
+    },
+    {
+      "check": "comparison.direction",
+      "status": "INCONCLUSIVE",
+      "message": "unsupported format 'generic'",
+      "detail": []
+    },
+    {
+      "check": "discovery.metrics",
+      "status": "INCONCLUSIVE",
+      "message": "unsupported format 'generic'",
+      "detail": []
+    },
+    {
+      "check": "fairness.planner_cap",
+      "status": "PASS",
+      "message": "planner expansion cap recorded: 700",
+      "detail": []
+    },
+    {
+      "check": "fairness.memory_limit",
+      "status": "INCONCLUSIVE",
+      "message": "memory limit not recorded in manifest",
+      "detail": []
+    }
+  ]
+}
