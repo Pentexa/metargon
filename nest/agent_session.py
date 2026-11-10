@@ -166,7 +166,7 @@ class NestSession:
         # injects unverified candidate hypotheses that the student's own
         # planner/probe machinery may or may not act on.
         action = self.agent.act(obs_before)
-        self.last_guidance = self.teaching.has_teacher_suggestion()
+        self.last_guidance = self.teaching.is_active()
         self.last_action = action
         self.last_action_reason = self._reason_for_action(action, obs_before)
         result = self.env.step(action)

@@ -1,0 +1,222 @@
+{
+  "T_topology": "TP1",
+  "E_topology": "TP1",
+  "T_key": "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, True)",
+  "E_key": "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)",
+  "seeds": [
+    90000,
+    90037
+  ],
+  "arms": {
+    "fresh": {
+      "success": {
+        "mean": 1.0,
+        "values": [
+          1.0,
+          1.0
+        ]
+      },
+      "mean_steps": {
+        "mean": 10.0,
+        "values": [
+          10.0,
+          10.0
+        ]
+      },
+      "invalid_total": {
+        "mean": 0.0,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "memory": {
+        "verified": 22.0,
+        "contradicted": 0.0,
+        "uncertain": 8.0,
+        "generated": 30.0
+      },
+      "trace": {
+        "plans_used": 6.0,
+        "memory_actions": 4.0,
+        "hypothesis_retrieved": 120.0,
+        "random_fallback_steps": 0.0
+      }
+    },
+    "train_no_guidance": {
+      "success": {
+        "mean": 0.0,
+        "values": [
+          0.0,
+          0.0
+        ]
+      },
+      "mean_steps": {
+        "mean": 80.0,
+        "values": [
+          80.0,
+          80.0
+        ]
+      },
+      "invalid_total": {
+        "mean": 0.0,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "memory": {
+        "verified": 10.0,
+        "contradicted": 10.0,
+        "uncertain": 0.0,
+        "generated": 20.0
+      },
+      "trace": {
+        "plans_used": 544.0,
+        "memory_actions": 33.0,
+        "hypothesis_retrieved": 370.0,
+        "random_fallback_steps": 0.0
+      }
+    },
+    "train_guidance": {
+      "success": {
+        "mean": 0.0,
+        "values": [
+          0.0,
+          0.0
+        ]
+      },
+      "mean_steps": {
+        "mean": 80.0,
+        "values": [
+          80.0,
+          80.0
+        ]
+      },
+      "invalid_total": {
+        "mean": 0.0,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "memory": {
+        "verified": 10.0,
+        "contradicted": 10.0,
+        "uncertain": 0.0,
+        "generated": 20.0
+      },
+      "trace": {
+        "plans_used": 544.0,
+        "memory_actions": 33.0,
+        "hypothesis_retrieved": 370.0,
+        "random_fallback_steps": 0.0
+      }
+    },
+    "train_claim": {
+      "success": {
+        "mean": 0.0,
+        "values": [
+          0.0,
+          0.0
+        ]
+      },
+      "mean_steps": {
+        "mean": 80.0,
+        "values": [
+          80.0,
+          80.0
+        ]
+      },
+      "invalid_total": {
+        "mean": 0.0,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "memory": {
+        "verified": 10.0,
+        "contradicted": 10.0,
+        "uncertain": 1.0,
+        "generated": 20.0
+      },
+      "trace": {
+        "plans_used": 544.0,
+        "memory_actions": 33.0,
+        "hypothesis_retrieved": 620.0,
+        "random_fallback_steps": 0.0
+      }
+    },
+    "train_misleading": {
+      "success": {
+        "mean": 0.0,
+        "values": [
+          0.0,
+          0.0
+        ]
+      },
+      "mean_steps": {
+        "mean": 80.0,
+        "values": [
+          80.0,
+          80.0
+        ]
+      },
+      "invalid_total": {
+        "mean": 0.0,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "memory": {
+        "verified": 10.0,
+        "contradicted": 10.0,
+        "uncertain": 0.0,
+        "generated": 20.0
+      },
+      "trace": {
+        "plans_used": 544.0,
+        "memory_actions": 33.0,
+        "hypothesis_retrieved": 370.0,
+        "random_fallback_steps": 0.0
+      }
+    },
+    "train_wiped": {
+      "success": {
+        "mean": 0.0,
+        "values": [
+          0.0,
+          0.0
+        ]
+      },
+      "mean_steps": {
+        "mean": 80.0,
+        "values": [
+          80.0,
+          80.0
+        ]
+      },
+      "invalid_total": {
+        "mean": 0.0,
+        "values": [
+          0,
+          0
+        ]
+      },
+      "memory": {
+        "verified": 10.0,
+        "contradicted": 0.0,
+        "uncertain": 0.0,
+        "generated": 20.0
+      },
+      "trace": {
+        "plans_used": 544.0,
+        "memory_actions": 0.0,
+        "hypothesis_retrieved": 40.0,
+        "random_fallback_steps": 0.0
+      }
+    }
+  }
+}

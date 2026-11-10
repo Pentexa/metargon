@@ -104,24 +104,19 @@ class NestApp:
         return self.session.snapshot()
 
     def teaching(self, payload: dict) -> dict:
-        """Teaching endpoint: objective / hint / clear."""
-        kind = payload.get("kind", "hint")
+        """Teaching endpoint: input (guidance/claim/objective) or clear."""
+        kind = payload.get("kind", "input")
         text = (payload.get("text") or "").strip()
-        if kind == "objective":
-            if not text:
-                raise ValueError("objective text required")
-            self.session.teaching.set_objective(text)
-        elif kind == "hint":
-            from .teaching import parse_hint_text
-            hint = parse_hint_text(text)
-            if hint is None:
-                raise ValueError("could not parse a supported hint (e.g. "
-                                 "'try switch S1', 'load P1', 'door D2')")
-            self.session.teaching.add_hint(hint)
-        elif kind == "clear":
-            self.session.teaching.clear_hints()
+        if kind == "clear":
+            self.session.teaching.clear_all()
         else:
-            raise ValueError(f"unknown teaching kind: {kind}")
+            from .teaching import parse_teaching_text
+            ti = parse_teaching_text(text)
+            if ti is None:
+                raise ValueError(
+                    "could not parse teaching input (e.g. 'try switch S1', "
+                    "'I think S1 opens door D1', 'discover how to open D1')")
+            self.session.teaching.apply(ti)
         return self.session.snapshot()
 
 

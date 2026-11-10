@@ -249,4 +249,34 @@ authority.
   transfer** (fresh 4/4 vs trained 0/4 on the selected config); this is
   reported plainly rather than claimed as a win.
 
+## Controlled learning-validation experiment
+
+`nest/tools/diagnose_learning.py` (and `test_learning_validation.py`)
+compares, under matched seeds/budgets and separated training/evaluation:
+fresh, trained without guidance, trained with exploration guidance,
+trained with an unverified causal claim, trained with misleading guidance,
+and trained-then-wiped. Metrics reported per arm: success, mean steps,
+invalid actions, verified/contradicted/uncertain/generated counts,
+planner/memory traces. A representative run (3 seeds, 4×3 episodes):
+
+| arm | success | mean steps | verified | contradicted | uncertain |
+|---|---|---:|---:|---:|---:|
+| fresh | 1.00 | 10.0 | 22 | 0 | 8 |
+| train_no_guidance | 0.00 | 80.0 | 10 | 10 | 0 |
+| train_guidance | 0.00 | 80.0 | 10 | 10 | 0 |
+| train_claim | 0.00 | 80.0 | 10 | 10 | 1 |
+| train_misleading | 0.00 | 80.0 | 10 | 10 | 0 |
+| train_wiped | 0.00 | 80.0 | 10 | 0 | 0 |
+
+Interpretation (honest): on this evaluation task the training phase
+itself — with or without teaching — abolished the successful exploratory
+behavior that fresh achieves (all trained arms exhaust the step budget and
+fail). Teaching did not further degrade beyond training; the claim arm
+added one uncertain hypothesis and much higher retrieval. The suspected
+mechanism is the same cross-task contradiction observed in Academy v0.6:
+trained hypotheses for the training rule dominate exploration on the
+unseen rule, and retrieval pressure replaces useful novelty. No positive
+transfer is claimed; the infrastructure reports the failure and its trace
+evidence.
+
 

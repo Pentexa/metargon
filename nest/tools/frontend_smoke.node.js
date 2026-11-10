@@ -58,12 +58,15 @@ const SNAPSHOT = {
   worker_error: null,
   messages_tail: [],
   teaching: {
+    inputs: [{ kind: 'claim', atoms: [['sw', 'S1', true]], door: 'D1',
+               label: 'I think switch S1 opens door D1' },
+             { kind: 'guidance', atoms: [['sw', 'S1', true]], door: null,
+               label: 'try switch S1' }],
     objectives: [{ text: 'learn to open D1' }],
-    hints: [{ atoms: [['sw', 'S1', true]], door: 'D1', kind: 'atoms',
-              label: 'try switch S1', status: 'unverified-preference' }],
     experiments_tail: [{ action: 'Toggle', door: 'D1', event: 'open',
-                         hint_used: true }],
-    stats: { guided_steps: 4, hints_added: 1 },
+                         note: '' }],
+    stats: { guidance_applied: 2, claims_added: 1, claims_removed: 0,
+             teacher_claim_probes: 0 },
     memory_delta: { before: { hypotheses: 0, verified: 0 },
                     after: { hypotheses: 12, verified: 1 } },
   },
@@ -219,10 +222,10 @@ async function runAssertions() {
      'challenge card renders');
   ok(els['api-badge'].textContent.includes('mode:'),
      'mode badge renders');
-  ok(els['teach-area'].innerHTML.includes('guided steps'),
+  ok(els['teach-area'].innerHTML.includes('guidance applied'),
      'teaching panel renders stats');
-  ok(els['teach-area'].innerHTML.includes('unverified'),
-     'teaching panel marks hints as unverified');
+  ok(els['teach-area'].innerHTML.includes('claim'),
+     'teaching panel lists inputs by kind');
 
   // click the Send button (not just Enter)
   els.input.value = 'Try opening door D1.';

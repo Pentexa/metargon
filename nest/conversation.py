@@ -24,7 +24,7 @@ from .llm import (
     build_grounding,
     extract_action_tag,
 )
-from .teaching import clean_tags, extract_hint_tags, parse_hint_text
+from .teaching import clean_tags, extract_teaching_tags, parse_teaching_text
 
 FALLBACK_LABEL = "command-mode (offline interpreter)"
 
@@ -110,17 +110,19 @@ class ConversationEngine:
         action = extract_action_tag(raw)
         if action not in VALID_ACTION_INTENTS:
             action = None
-        # teaching hints: unverified exploration preferences, recorded
-        hint_note = ""
-        for tag in extract_hint_tags(raw):
-            hint = parse_hint_text(tag)
-            if hint is not None:
-                self.session.teaching.add_hint(hint)
-                hint_note = "I'll treat that as an unverified preference to explore — I will still test it before believing it."
+        # teaching instructions: classified (guidance/claim/objective)
+        teach_note = ""
+        for tag in extract_teaching_tags(raw):
+            ti = parse_teaching_text(tag)
+            if ti is not None:
+                self.session.teaching.apply(ti)
+                teach_note = ("I'll record that teaching input. Claims remain "
+                              "unverified until I test them; guidance only "
+                              "changes what I investigate.")
         clean = clean_tags(raw)
         self._append_turn("assistant", clean)
-        if hint_note and clean:
-            clean = clean + "\n\n" + hint_note
+        if teach_note and clean:
+            clean = clean + "\n\n" + teach_note
         return clean, action
 
     # ------------------------------------------------------------------
@@ -129,13 +131,17 @@ class ConversationEngine:
     def _respond_fallback(self, text: str) -> dict:
         cmd = self.interpreter(text)
         # teaching instructions are recognized deterministically too
-        from .teaching import parse_hint_text
-        hint = parse_hint_text(text)
-        if hint is not None and cmd.intent in ("unsupported", "help", "hello"):
-            self.session.teaching.add_hint(hint)
-            reply = ("I'll keep that as an unverified preference and explore it — "
-                     "I still need evidence before I believe it. (command-mode fallback)")
-            return {"reply": reply, "action": None, "intent": "teaching_hint",
+        ti = parse_teaching_text(text)
+        if ti is not None and cmd.intent in ("unsupported", "help", "hello"):
+            self.session.teaching.apply(ti)
+            kind = {"guidance": "exploration guidance",
+                    "claim": "unverified causal claim",
+                    "objective": "learning objective",
+                    "novelty": "novelty guidance"}.get(ti.kind, ti.kind)
+            reply = (f"I recorded that as {kind}. "
+                     f"Claims stay unverified until I test them; guidance only "
+                     f"changes what I investigate. (command-mode fallback)")
+            return {"reply": reply, "action": None, "intent": "teaching",
                     "mode": "command", "grounded": True, "action_note": None,
                     "snapshot": self.session.snapshot()}
         reply, action = self._fallback_reply(cmd)

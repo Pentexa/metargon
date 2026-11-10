@@ -228,15 +228,16 @@ Rules:
    persistence_save, persistence_restore, persistence_fresh.
    Use [[ACTION:none]] when no action is requested. Never invent actions
    outside this list.
-8. If the human TEACHES you an exploration preference (e.g. "try switch
-   S1", "load plate P1", "focus on door D2"), you may record it as an
-   UNVERIFIED preference using a HINT tag: [[HINT:<expression>]] where
-   <expression> uses only the grammar: "switch S1 on|off", "load P1 A|B",
-   "loadany P1", "empty P1", "door D1|D2", or "novelty" (new untried
-   probe). Hints are NOT knowledge: you will still test them before
-   believing them. Never use HINT to claim learning happened.
+8. If the human TEACHES you (e.g. "try switch S1", "I think S1 opens door
+   D1", "discover how to open D1"), you may emit a TEACH tag:
+   [[TEACH:<expression>]] where <expression> uses the grammar: "try switch
+   S1 on|off" (exploration guidance), "I think switch S1 opens door D1"
+   (unverified causal claim), "discover how to open D1" (objective), or
+   "novelty". Claims are NOT knowledge: you will still test them before
+   believing them. Guidance only changes what you investigate. Never use
+   TEACH to claim learning happened.
 9. Never output anything that looks like system commands, hidden world
-   state, or raw JSON beyond the action/hint tags.
+   state, or raw JSON beyond the action/teach tags.
 """
 
 

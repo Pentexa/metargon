@@ -380,22 +380,21 @@ function renderTeaching(t){
   if(!t) return;
   const st = t.stats||{};
   const d = t.memory_delta||{};
-  let html = `<div class="teach-delta">guided steps: ${st.guided_steps||0} · `+
+  let html = `<div class="teach-delta">guidance applied: ${st.guidance_applied||0} · claims: ${st.claims_added||0} · `+
              `hypotheses ${(d.before||{}).hypotheses||0} → ${(d.after||{}).hypotheses||0} · `+
              `verified ${(d.before||{}).verified||0} → ${(d.after||{}).verified||0}</div>`;
-  (t.objectives||[]).slice(-3).reverse().forEach(o=>{
+  (t.inputs||[]).slice(-4).reverse().forEach(inp=>{
+    const atoms = (inp.atoms||[]).map(a=>a.join(" ")).join(", ") || "";
+    html += `<div class="teach-item"><b>${esc(inp.kind)}:</b> ${esc(inp.label||atoms)}`+
+            `<span class="muted"> · door ${esc(inp.door||"—")}</span></div>`;
+  });
+  (t.objectives||[]).slice(-2).reverse().forEach(o=>{
     html += `<div class="teach-item"><b>objective:</b> ${esc(o.text)}</div>`;
   });
-  (t.hints||[]).slice(-4).reverse().forEach(h=>{
-    const atoms = (h.atoms||[]).map(a=>a.join(" ")).join(", ") || "focus door";
-    html += `<div class="teach-item"><b>hint (unverified):</b> ${esc(h.label||atoms)}`+
-            `<span class="muted"> · door ${esc(h.door||"—")} · ${esc(h.status)}</span></div>`;
-  });
   (t.experiments_tail||[]).slice(-4).reverse().forEach(e=>{
-    html += `<div class="teach-item"><b>experiment:</b> ${esc(e.action)} → ${esc(e.door)} ${esc(e.event)}`+
-            (e.hint_used ? `<span class="muted"> · guided</span>` : "")+`</div>`;
+    html += `<div class="teach-item"><b>experiment:</b> ${esc(e.action)} → ${esc(e.door)} ${esc(e.event)}</div>`;
   });
-  teachArea.innerHTML = html || '<div class="muted">No teaching yet — give a hint like "try switch S1".</div>';
+  teachArea.innerHTML = html || '<div class="muted">No teaching yet — give guidance, a claim, or an objective.</div>';
 }
 
 async function teachSend(){
