@@ -16,13 +16,13 @@
     {
       "check": "artifact.hash:../../results/v13_confirmatory/final_f_8x100.json",
       "status": "PASS",
-      "message": "sha256 matches (ea5630897008\u2026)",
+      "message": "sha256 matches (b3d88fb29e67\u2026)",
       "detail": []
     },
     {
       "check": "artifact.size:../../results/v13_confirmatory/final_f_8x100.json",
       "status": "PASS",
-      "message": "size matches (13067)",
+      "message": "size matches (12663)",
       "detail": []
     },
     {

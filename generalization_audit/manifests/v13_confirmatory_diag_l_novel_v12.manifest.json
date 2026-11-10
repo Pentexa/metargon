@@ -7,7 +7,7 @@
     "format": "generic",
     "agent_version": "metargon_v12 + diagnose_v13.py",
     "harness": "python/diagnose_v13.py --seed-base 21800 --seeds 8 --episodes 40 --policy v12",
-    "commit_sha": "a617365",
+    "commit_sha": "e4972b6",
     "python_version": "3.11.0",
     "platform": "windows",
     "hash_seed": "0",
@@ -69,8 +69,8 @@
       "role": "summary",
       "generated_by": "python/diagnose_v13.py --seed-base 21800 --seeds 8 --episodes 40 --policy v12",
       "contains_per_seed": true,
-      "sha256": "78aad00d9ecf85cacb62b6e90c3213be228282e3d29dbc6e298b388e0d27ba4e",
-      "size_bytes": 2281889
+      "sha256": "2e37d9b25155ec0c9475bd6b7a87036d15f8e8e561951427c79f14a7309f91c2",
+      "size_bytes": 2183885
     }
   ]
 }

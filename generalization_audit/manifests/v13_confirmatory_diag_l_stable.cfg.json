@@ -7,7 +7,7 @@
     "format": "generic",
     "agent_version": "metargon_v13 + diagnose_v13.py",
     "harness": "python/diagnose_v13.py --seed-base 21800 --seeds 8 --episodes 40 --policy v13",
-    "commit_sha": "a617365",
+    "commit_sha": "e4972b6",
     "python_version": "3.11.0",
     "platform": "windows",
     "hash_seed": "0",

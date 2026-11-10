@@ -16,13 +16,13 @@
     {
       "check": "artifact.hash:../../results/v13_confirmatory/diag_l_stable_8x40.json",
       "status": "PASS",
-      "message": "sha256 matches (6167684059c3\u2026)",
+      "message": "sha256 matches (6792d4d24a16\u2026)",
       "detail": []
     },
     {
       "check": "artifact.size:../../results/v13_confirmatory/diag_l_stable_8x40.json",
       "status": "PASS",
-      "message": "size matches (3583055)",
+      "message": "size matches (3430331)",
       "detail": []
     },
     {

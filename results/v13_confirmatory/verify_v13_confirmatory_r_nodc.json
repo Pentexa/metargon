@@ -16,13 +16,13 @@
     {
       "check": "artifact.hash:../../results/v13_confirmatory/final_r_nodc_8x100.json",
       "status": "PASS",
-      "message": "sha256 matches (c6af1822a596\u2026)",
+      "message": "sha256 matches (fd59f6d9cc38\u2026)",
       "detail": []
     },
     {
       "check": "artifact.size:../../results/v13_confirmatory/final_r_nodc_8x100.json",
       "status": "PASS",
-      "message": "size matches (12881)",
+      "message": "size matches (12484)",
       "detail": []
     },
     {

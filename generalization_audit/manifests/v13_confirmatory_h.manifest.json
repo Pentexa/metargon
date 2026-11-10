@@ -7,7 +7,7 @@
     "format": "benchmark_v12",
     "agent_version": "metargon_v13 (frozen v0.13 defaults)",
     "harness": "python/benchmark_v13.py --seed-base 21800 --seeds 8 --episodes 100",
-    "commit_sha": "a617365",
+    "commit_sha": "e4972b6",
     "python_version": "3.11.0",
     "platform": "windows",
     "hash_seed": "0",
@@ -72,8 +72,8 @@
       "role": "raw",
       "generated_by": "python/benchmark_v13.py --seed-base 21800 --seeds 8 --episodes 100",
       "contains_per_seed": true,
-      "sha256": "42a7035ebcbf59e226f568c995c467e1c49ff2d3a9d5b912ad8df2182c74bf86",
-      "size_bytes": 12987
+      "sha256": "221979a3007b295d9869026b6c204064c0db54042c414b1af776fb5313a67826",
+      "size_bytes": 12583
     }
   ]
 }
