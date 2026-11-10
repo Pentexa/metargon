@@ -109,6 +109,11 @@ class FakeEl {
       add(...names) { names.forEach(n => this._set.add(n)); },
       remove(...names) { names.forEach(n => this._set.delete(n)); },
       contains(n) { return this._set.has(n); },
+      toggle(n, force) {
+        const on = force !== undefined ? force : !this._set.has(n);
+        if (on) this._set.add(n); else this._set.delete(n);
+        return on;
+      },
     };
   }
   appendChild(el) { this.children.push(el); return el; }

@@ -36,6 +36,7 @@
   .sub { color:var(--dim); font-size:12px; }
   .head-right { margin-left:auto; display:flex; align-items:center; gap:10px; }
   #api-badge { font-size:11px; padding:4px 10px; border-radius:999px; background:var(--panel3); border:1px solid var(--border2); color:var(--dim); }
+
   #api-badge.llm { color:var(--accent); border-color:var(--accent); }
   #status-pill { padding:5px 14px; border-radius:999px; font-size:12px; font-weight:600;
     background:var(--panel3); border:1px solid var(--border2); color:var(--dim); transition:all .2s; }
@@ -65,6 +66,7 @@
   .msg.user { align-self:flex-end; background:linear-gradient(135deg,#2b4c74,#24415f); border-bottom-right-radius:4px; }
   .msg.bot { align-self:flex-start; background:var(--panel3); border:1px solid var(--border); border-bottom-left-radius:4px; }
   .msg.sys { align-self:center; color:var(--faint); font-size:11.5px; background:transparent; border:0; }
+
   .msg.action { align-self:center; color:var(--accent); font-size:12px; background:rgba(94,200,255,.08); border:1px dashed var(--accent); border-radius:999px; padding:5px 12px; }
   .chips { display:flex; flex-wrap:wrap; gap:6px; margin:10px 0 2px; }
   .chip { font-size:11.5px; padding:5px 10px; border-radius:999px; cursor:pointer;
@@ -93,6 +95,7 @@
   #world-meta { color:var(--dim); font-size:12px; min-height:18px; margin-top:10px; text-align:center; }
   #world-meta .ev { color:var(--accent); }
   /* ---------- memory ---------- */
+
   #memory { flex:1; overflow-y:auto; font-size:12.5px; padding-right:6px; max-height:42%; }
   .teach-panel { border-top:1px solid var(--border); margin-top:10px; padding-top:10px; }
   .teach-panel h3 { font-size:11px; text-transform:uppercase; letter-spacing:1px; color:var(--warn); margin:0 0 8px; }
@@ -118,10 +121,12 @@
   .bar i { display:block; height:100%; border-radius:999px;
     background:linear-gradient(90deg, var(--good), var(--accent)); }
   .trace { color:var(--faint); font-size:11px; }
+
   ::-webkit-scrollbar { width:9px; }
   ::-webkit-scrollbar-thumb { background:var(--border2); border-radius:999px; }
   ::-webkit-scrollbar-thumb:hover { background:#3b5480; }
   ::-webkit-scrollbar-track { background:transparent; }
+
   @media (max-width:1120px) {
     body { overflow:auto; }
     main { grid-template-columns:1fr; height:auto; }
@@ -197,6 +202,7 @@
 const $ = id => document.getElementById(id);
 const chat = $("chat"), input = $("input"), memo = $("memory"),
       pill = $("status-pill"), badge = $("api-badge"), notice = $("notice-bar"),
+
       challengeEl = $("challenge"), meta = $("world-meta"), cv = $("cv"),
       teachInput = $("teach-input"), teachArea = $("teach-area");
 let state = null, sending = false, apiMode = "…";
@@ -236,6 +242,7 @@ async function send(){
   sending = true; $("send").disabled = true;
   addMsg("user", text);
   input.value = "";
+
   addMsg("sys", "Metargon is thinking…");
   try{
     const res = await post("/api/command", {text});
@@ -252,6 +259,7 @@ async function send(){
   }finally{
     sending = false; $("send").disabled = false; input.focus();
   }
+
 }
 
 function reflectMode(mode){
@@ -274,7 +282,16 @@ async function tick(){
     const r = await fetch("/api/state");
     state = await r.json();
     render(state);
-  }catch(e){}
+  }catch(e){ /* server momentarily unavailable */ }
+}
+
+async function loadConfig(){
+  try{
+    const r = await fetch("/api/config");
+    const cfg = await r.json();
+    apiMode = cfg.api_mode || "none";
+    badge.textContent = "API: " + apiMode;
+  }catch(e){ badge.textContent = "API: ?"; }
 }
 
 async function loadConfig(){
