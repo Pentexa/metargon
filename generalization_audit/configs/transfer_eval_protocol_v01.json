@@ -67,13 +67,13 @@
     "protocol_failure": "recorded when the evaluation cannot be interpreted (missing arms, overlap, hidden access) - the claim is then not assessable"
   },
   "seed_registration": {
-    "rule": "Evaluation seeds for transfer experiments are sampled once at protocol registration and recorded in this file; no further seeds are added after development runs begin.",
-    "mechanism": "Seeds are drawn from a deterministic, non-tunable source: SHA-256 of the concatenation of the protocol id, registration date, and a fixed counter, truncated and mapped to the required seed count; the resulting seed list is frozen below.",
+    "rule": "Evaluation seeds for transfer experiments are listed explicitly in this file and are frozen at registration; no seeds are added after development runs begin.",
+    "mechanism": "The registered seeds are listed explicitly in this protocol; their origin is the established mechanism-lab world-seed base (11800 + i) documented in the committed v0.12 / v0.12.1 / v0.13 paired studies, so transfer experiments align pairwise with historical evidence. The list is fixed at registration; future experiments must consume these seeds in order.",
     "frozen_seeds": [11800, 11801, 11802, 11803, 11804, 11805, 11806, 11807, 11808, 11809, 11810, 11811, 11812, 11813, 11814, 11815],
     "note": "The frozen list provides >=8 seeds for confirmatory mechanism-lab runs and is consumed in order; Academy runs use the Academy eval grid seeds (academy_eval_grid_v01.json) unchanged."
   },
   "control_role_mapping": {
-    "description": "Manifests of transfer experiments must declare a mapping from the semantic control roles above to their policy/variant names (field `experiment.transfer.roles`). The audit verifies presence, pairwise alignment, and that required roles are distinct.",
+    "description": "Manifests of transfer experiments must declare a mapping from the semantic control roles above to their policy/variant names (field `experiment.evaluation.transfer.roles`, an optional section of `experiment.evaluation`). The audit verifies presence, pairwise alignment, and that required roles are distinct.",
     "optional_roles": []
   }
 }

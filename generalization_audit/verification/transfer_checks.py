@@ -203,21 +203,31 @@ def check_transfer_frozen_immutability(ctx: VerifierContext) -> list[CheckResult
                             "evaluation mode not declared")]
     if mode == "frozen":
         asserted = decl.get("frozen_immutability_asserted")
-        if asserted is True:
-            return [CheckResult("transfer.frozen.immutability", PASS,
-                                "frozen evaluation immutability attested")]
-        # academy-style trace presence is treated as supporting evidence
-        for rel in _fmt_artifact_paths(ctx).get("summary", []):
+        # instrumented frozen-trace artifact: real counter evidence
+        trace_artifact = None
+        for rel in _fmt_artifact_paths(ctx).get("summary", []) + \
+                _fmt_artifact_paths(ctx).get("raw", []):
             try:
                 data = ctx.load_json(rel)
             except FileNotFoundError:
                 continue
             if isinstance(data, dict) and "classic_frozen_trace" in data:
-                return [CheckResult("transfer.frozen.immutability", PASS,
-                                    "frozen trace artifact present (inline)")
-                        ]
+                trace_artifact = rel
+                break
+        if asserted is True and trace_artifact is None:
+            # self-attestation alone is not verifiable: do not PASS on it.
+            return [CheckResult(
+                "transfer.frozen.immutability", INCONCLUSIVE,
+                "frozen immutability declared by attestation only; no instrumented trace artifact to verify")]
+        if trace_artifact is not None:
+            return [CheckResult(
+                "transfer.frozen.immutability", PASS,
+                "frozen evaluation immutability attested and trace artifact present",
+                detail=[f"trace artifact: {trace_artifact}",
+                        "limitation: deep immutability (counters unmoved) is asserted by the harness; "
+                        "this check verifies presence of instrumentation, not absence of mutation."])]
         return [CheckResult("transfer.frozen.immutability", INCONCLUSIVE,
-                            "frozen mode declared without immutability attestation")]
+                            "frozen mode declared without immutability attestation or trace artifact")]
     return [CheckResult("transfer.frozen.immutability", PASS,
                         f"evaluation mode {mode}; frozen immutability not applicable")]
 
@@ -241,11 +251,8 @@ def check_transfer_memory_ablation_paired(ctx: VerifierContext) -> list[CheckRes
                     continue
                 if mem not in rows[0] or wiped not in rows[0]:
                     continue
-                lengths = {p: len(rows[0][p]) for p in (mem, wiped)}
-                # per-policy rows are dicts; vector length check applies to
-                # per-config arrays in academy format (below)
                 return [CheckResult("transfer.ablation.paired", PASS,
-                                    "memory/wiped arms co-occur in raw rows")]
+                                    "memory/wiped arms co-occur in raw rows (paired per-seed)")]
         cd = b.get("conditions_detail") if isinstance(b, dict) else None
         if isinstance(cd, dict) and mem in cd and wiped in cd:
             v_mem = cd[mem].get("classic_frozen_per_config")
@@ -255,8 +262,20 @@ def check_transfer_memory_ablation_paired(ctx: VerifierContext) -> list[CheckRes
                     return [CheckResult("transfer.ablation.paired", FAIL,
                                         "memory/wiped per-config vectors differ in length",
                                         detail=[f"{len(v_mem)} vs {len(v_wiped)}"])]
+                # strengthen when per-config keyed dicts are available: the
+                # same configurations must be present in both arms.
+                k_mem = cd[mem].get("classic_frozen", {}).get("per_config")
+                k_wiped = cd[wiped].get("classic_frozen", {}).get("per_config")
+                if isinstance(k_mem, dict) and isinstance(k_wiped, dict):
+                    if set(k_mem) != set(k_wiped):
+                        return [CheckResult("transfer.ablation.paired", FAIL,
+                                            "memory/wiped per-config key sets differ",
+                                            detail=[f"{len(k_mem)} vs {len(k_wiped)} keys"])]
+                    return [CheckResult("transfer.ablation.paired", PASS,
+                                        "memory/wiped per-config vectors paired on identical config sets")]
                 return [CheckResult("transfer.ablation.paired", PASS,
-                                    "memory/wiped per-config vectors paired (same length)")]
+                                    "memory/wiped per-config vectors paired (same length)",
+                                    detail=["limitation: config keys not exposed; only vector lengths are comparable"])]
     return [CheckResult("transfer.ablation.paired", INCONCLUSIVE,
                         "memory/wiped arms not found in artifacts")]
 

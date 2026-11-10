@@ -91,10 +91,13 @@ def _write(base: Path, manifest: dict, summary: dict) -> Path:
 def _summary_with_vectors(lengths: dict[str, int]) -> dict:
     return {
         "conditions_detail": {
-            name: {"classic_frozen_per_config": [0.5] * n}
+            name: {"classic_frozen_per_config": [0.5] * n,
+                   "classic_frozen": {"per_config": {
+                       f"cfg-{i}": 0.5 for i in range(n)}}}
             for name, n in lengths.items()
         },
         "comparisons": {},
+        "classic_frozen_trace": {},
     }
 
 
@@ -129,6 +132,23 @@ class TestTransferProtocolFile(unittest.TestCase):
         seeds = self.protocol.data["seed_registration"]["frozen_seeds"]
         self.assertGreaterEqual(len(seeds), 8)
         self.assertEqual(len(seeds), len(set(seeds)))
+
+    def test_seed_provenance_not_hash_derived(self):
+        # The earlier draft claimed SHA-256 derivation; the committed seeds
+        # are sequential (11800..11815). The protocol must document the
+        # actual provenance (historical mechanism-lab base) and not claim a
+        # hashing mechanism.
+        reg = self.protocol.data["seed_registration"]
+        mechanism = reg["mechanism"].lower()
+        self.assertNotIn("sha", mechanism)
+        self.assertNotIn("hash", mechanism)
+        self.assertEqual(reg["frozen_seeds"], list(range(11800, 11816)))
+        self.assertIn("11800", mechanism)
+
+    def test_role_field_references_correct_schema_path(self):
+        text = json.dumps(self.protocol.data)
+        self.assertIn("experiment.evaluation.transfer.roles", text)
+        self.assertNotIn("experiment.transfer.roles", text)
 
 
 class TestTransferChecksSemantics(unittest.TestCase):
@@ -195,12 +215,53 @@ class TestTransferChecksSemantics(unittest.TestCase):
     def test_frozen_without_attestation_inconclusive(self):
         manifest = _base_manifest()
         manifest["experiment"]["evaluation"]["transfer"]["frozen_immutability_asserted"] = False
-        summary = _summary_with_vectors({})
+        summary = {k: v for k, v in _summary_with_vectors({}).items()
+                   if k != "classic_frozen_trace"}
         results = self._run(manifest, summary)
         r = next(r for r in results if r.name == "transfer.frozen.immutability")
         self.assertEqual(r.status, INCONCLUSIVE)
 
-    def test_ablation_vector_length_mismatch_fail(self):
+    def test_frozen_attestation_only_inconclusive(self):
+        # self-attestation without an instrumented trace artifact must NOT
+        # be treated as verification.
+        manifest = _base_manifest()
+        summary = {k: v for k, v in _summary_with_vectors({}).items()
+                   if k != "classic_frozen_trace"}
+        results = self._run(manifest, summary)
+        r = next(r for r in results if r.name == "transfer.frozen.immutability")
+        self.assertEqual(r.status, INCONCLUSIVE)
+        self.assertIn("attestation only", r.message)
+
+    def test_frozen_attestation_with_trace_pass(self):
+        manifest = _base_manifest()
+        summary = _summary_with_vectors({})
+        results = self._run(manifest, summary)
+        r = next(r for r in results if r.name == "transfer.frozen.immutability")
+        self.assertEqual(r.status, PASS)
+
+    def test_ablation_same_key_sets_pass(self):
+        manifest = _base_manifest()
+        summary = _summary_with_vectors(
+            {"fresh": 16, "original": 16, "wiped": 16,
+             "shuffled": 16, "planonly": 16})
+        results = self._run(manifest, summary)
+        r = next(r for r in results if r.name == "transfer.ablation.paired")
+        self.assertEqual(r.status, PASS)
+        self.assertIn("identical config sets", r.message)
+
+    def test_ablation_key_set_mismatch_fail(self):
+        manifest = _base_manifest()
+        summary = _summary_with_vectors(
+            {"fresh": 16, "original": 16, "wiped": 16,
+             "shuffled": 16, "planonly": 16})
+        # give wiped a different config-key set (same length)
+        summary["conditions_detail"]["wiped"]["classic_frozen"]["per_config"] = {
+            f"other-{i}": 0.5 for i in range(16)}
+        results = self._run(manifest, summary)
+        r = next(r for r in results if r.name == "transfer.ablation.paired")
+        self.assertEqual(r.status, FAIL)
+
+    def test_ablation_length_mismatch_fail(self):
         manifest = _base_manifest()
         summary = _summary_with_vectors(
             {"fresh": 16, "original": 16, "wiped": 12,

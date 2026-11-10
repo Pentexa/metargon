@@ -100,8 +100,8 @@ New module: `generalization_audit/verification/transfer_checks.py`
 | `transfer.protocol.registered` | FAIL when the manifest's protocol_version does not match the registered protocol; PASS otherwise |
 | `transfer.roles.declared` / `transfer.roles.resolve` | FAIL when required arms (fresh, trained_with_memory, trained_memory_wiped, shuffled_memory, planning_only) are missing/duplicate/unresolved; INCONCLUSIVE when no roles declared |
 | `transfer.unseen.separation` | PASS when registered disjoint split and (when pools are exposed in artifacts) zero overlap; FAIL on detected overlap; INCONCLUSIVE when separation is declared but pools not exposed |
-| `transfer.frozen.immutability` | PASS when frozen mode has immutability attestation or a frozen trace artifact; INCONCLUSIVE when frozen mode is declared without attestation |
-| `transfer.ablation.paired` | PASS when memory/wiped arms co-occur with paired vectors; FAIL on length mismatch; INCONCLUSIVE when arms absent |
+| `transfer.frozen.immutability` | PASS when frozen mode has BOTH immutability attestation and an instrumented frozen-trace artifact (limitation: presence of instrumentation is verified, not absence of mutation); INCONCLUSIVE when frozen mode is declared with attestation only (self-attestation not treated as verification) or without either |
+| `transfer.ablation.paired` | PASS when memory/wiped arms co-occur; for academy-style per-config data, PASS requires identical config-key sets when exposed (length-only PASS is flagged with an explicit limitation); FAIL on length or key-set mismatch; INCONCLUSIVE when arms absent |
 | `transfer.attribution.consistency` | PASS when sum(source_*) == plans_used (or probes_evaluated) across trace records; FAIL on mismatch; INCONCLUSIVE without trace data |
 | `transfer.budgets.*` | PASS/FAIL on recorded caps, CPU measurement, action budget; INCONCLUSIVE on missing metadata |
 
@@ -115,11 +115,13 @@ raw rows). We do **not** fabricate memory-limit bytes or seeds.
 
 - The protocol file is a separate versioned artifact; historical frozen
   criteria (`frozen_eval_criteria_v01/v02.json`) are untouched.
-- **Seed registration:** transfer-evaluation seeds are sampled once at
-  registration via SHA-256(protocol_id ‖ registration_date ‖ counter),
-  truncated and frozen in the protocol file (16 seeds, used in order).
-  No seeds are added after development runs begin; Academy runs keep the
-  Academy eval-grid seeds (frozen).
+- **Seed registration:** transfer-evaluation seeds are listed explicitly
+  in the protocol file and frozen at registration. They are **not**
+  hash-derived; they are inherited from the established mechanism-lab
+  world-seed base (11800 + i) used by the committed v0.12/v0.13 paired
+  studies, preserving pairwise alignment with historical evidence (16
+  seeds, used in order). No seeds are added after development runs begin;
+  Academy runs keep the Academy eval-grid seeds (frozen).
 - No retroactive edits to v0.13 / Memory v0.6 requirements; no tuning to
   unfinished EVREN results.
 
@@ -128,8 +130,8 @@ raw rows). We do **not** fabricate memory-limit bytes or seeds.
 ## 6. Mission E — lightweight automation
 
 - Regression tests: `generalization_audit/tests/test_transfer_protocol.py`
-  (15 tests) exercise PASS/FAIL/INCONCLUSIVE semantics on synthetic
-  manifests + the protocol file invariants. Runtime ≈ 2 s.
+  (21 tests) exercise PASS/FAIL/INCONCLUSIVE semantics on synthetic
+  manifests + the protocol file invariants. Runtime ≈ few seconds.
 - CI: the `generalization-audit` job already runs the whole audit suite;
   these tests are included (fast). No multi-hour benchmarks are run in CI.
 - Compatibility: `verify_experiment` unchanged by default; `--transfer`
@@ -141,7 +143,7 @@ raw rows). We do **not** fabricate memory-limit bytes or seeds.
 
 | Item | Result |
 |---|---|
-| Audit suite (incl. 15 new transfer tests) | **164/164 OK** |
+| Audit suite (incl. 21 transfer tests) | **170/170 OK** |
 | `--transfer` on historical `memory_v06` manifest | protocol mismatch → FAIL (correct: pre-dates protocol); undeclared roles/separation/immutability → INCONCLUSIVE; attribution sums PASS; budget checks PASS |
 | Repo hygiene | OK |
 
@@ -164,3 +166,39 @@ An independent reviewer can, for any future Memory v0.7 claim, map it to
 the protocol's quantities, check the required controls, and decide whether
 the result demonstrates retained-causal-knowledge transfer or merely a
 higher score — without relying on the agent's narrative.
+
+## 10. Review fixes and remaining limitations
+
+Review fixes applied on this branch (PR #41):
+
+1. **Seed provenance reconciled.** The earlier draft claimed SHA-256
+   derivation for the registered seeds; the committed list is sequential
+   (11800–11815). The protocol now documents the actual provenance —
+   inherited from the mechanism-lab world-seed base (11800 + i) used by
+   the committed v0.12/v0.12.1/v0.13 paired studies — and no longer
+   claims a hashing mechanism. The seed list is unchanged.
+2. **Schema-path references corrected** to `experiment.evaluation.transfer.roles`
+   (protocol file and docs); regression test guards against the stale
+   `experiment.transfer.roles` path.
+3. **Strengthened checks:**
+   - `transfer.frozen.immutability`: self-attestation alone is no longer
+     PASS — it now yields INCONCLUSIVE unless an instrumented frozen-trace
+     artifact is present.
+   - `transfer.ablation.paired`: when per-config key sets are exposed,
+     PASS now requires identical key sets (config alignment), not merely
+     equal vector lengths; length-only PASS carries an explicit
+     limitation note.
+
+Remaining limitations (documented, not hidden):
+
+- Deep frozen immutability (counters unmoved) is asserted by the harness;
+  the audit verifies the *presence* of instrumentation, not the absence
+  of mutation.
+- If an artifact exposes only flat per-config arrays (no keys), pairing is
+  verified by length only and is flagged as such.
+- `transfer.unseen.separation` relies on the registered split declaration
+  unless train/eval pools are exposed in artifacts; when pools are
+  exposed, overlap is detected directly.
+- Protocol checks do not (and cannot) prove the absence of hidden-rule
+  access at runtime; that is enforced at the harness boundary and checked
+  structurally (see the existing source conventions tests).
