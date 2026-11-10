@@ -26,7 +26,8 @@ const SNAPSHOT = {
   episode_successes: 0,
   global_steps: 0,
   steps_this_episode: 0,
-  challenge: null,
+  challenge: { pool_tag: 'train', difficulty: 'easy',
+               focus_door: 'D1', seed: 0, description: 'open door D1' },
   world: {
     present: true,
     pos: [0, 4],
@@ -99,6 +100,17 @@ class FakeEl {
     this._handlers = {};
     this.onclick = null;
     this.style = {};
+    this.classList = {
+      _set: new Set(),
+      add(...names) { names.forEach(n => this._set.add(n)); },
+      remove(...names) { names.forEach(n => this._set.delete(n)); },
+      contains(n) { return this._set.has(n); },
+      toggle(n, force) {
+        const on = force !== undefined ? force : !this._set.has(n);
+        if (on) this._set.add(n); else this._set.delete(n);
+        return on;
+      },
+    };
   }
   appendChild(el) { this.children.push(el); return el; }
   addEventListener(type, fn) { (this._handlers[type] = this._handlers[type] || []).push(fn); }
@@ -107,17 +119,22 @@ class FakeEl {
 }
 
 const els = {};
-['status-pill', 'chat', 'input', 'send', 'cv', 'world-meta', 'memory']
+['status-pill', 'chat', 'input', 'send', 'cv', 'world-meta', 'memory',
+ 'api-badge', 'notice-bar', 'challenge']
   .forEach(id => { els[id] = new FakeEl(id); });
 
 const controlButtons = ['start', 'pause', 'continue', 'step', 'stop',
                         'reset', 'save', 'restore', 'fresh']
   .map(op => { const b = new FakeEl('btn-' + op); b.dataset.op = op; return b; });
 
+const chips = ['Hello, Metargon!', 'What do you remember?', 'Open door D1']
+  .map(text => { const c = new FakeEl('chip'); c.dataset.text = text; return c; });
+
 global.document = {
   getElementById(id) { return els[id] || null; },
   querySelectorAll(sel) {
     if (sel === '#controls button') return controlButtons;
+    if (sel === '#chips .chip') return chips;
     return [];
   },
   createElement(tag) {
@@ -140,6 +157,12 @@ global.setInterval = () => 0;
 // keep real timers so async tick()/fetch can settle in the test
 global.setTimeout = global.setTimeout || setTimeout;
 
+// surface async errors for diagnosis
+process.on('unhandledRejection', (err) => {
+  console.error('UNHANDLED REJECTION:', err && err.stack || err);
+  process.exitCode = 1;
+});
+
 // ---- execute the page script ----
 try {
   (0, eval)(scriptSrc);
@@ -150,7 +173,20 @@ try {
 
 // allow the async tick() -> fetch -> render pipeline to complete
 (async () => {
-  await new Promise(r => setTimeout(r, 30));
+  // call render synchronously to surface any render error
+  try {
+    globalThis.__nest.render(SNAPSHOT);
+  } catch (e) {
+    console.error('DIRECT RENDER THREW:', e.stack || e);
+    process.exitCode = 1;
+  }
+  try {
+    await globalThis.__nest.tick();
+  } catch (e) {
+    console.error('TICK THREW:', e.stack || e);
+    process.exitCode = 1;
+  }
+  await new Promise(r => setTimeout(r, 20));
   runAssertions();
 })();
 
@@ -164,12 +200,16 @@ const ok = (cond, msg) => {
 ok(chatTexts.some(t => t.includes("Hello! I'm Metargon")),
    'initial welcome message appears in conversation');
 ok(ctxCalls > 0, 'world canvas received drawing calls (' + ctxCalls + ')');
-ok(els['world-meta'].textContent.includes('steps 0/80'),
+ok(els['world-meta'].innerHTML.includes('steps 0/80'),
    'world meta shows real steps summary');
 ok(els.memory.innerHTML.includes('verified') && els.memory.innerHTML.includes('generated'),
    'memory panel shows verified/generated statistics');
 ok(els.memory.innerHTML.includes('empty(P1)'),
    'memory panel lists the hypothesis');
+ok(els.challenge.innerHTML.includes('Challenge'),
+   'challenge card renders');
+ok(els['api-badge'].textContent.includes('API:'),
+   'api badge renders');
 
 // send via Enter
 els.input.value = 'Hello, Metargon!';
@@ -177,6 +217,13 @@ els.input.dispatch('keydown', { key: 'Enter' });
 const afterEnter = els.chat.children.map(c => c.textContent || '');
 ok(afterEnter.some(t => t.includes('Hello, Metargon!')), 'user message appears');
 ok(afterEnter.some(t => t.includes("I'm Metargon")), 'bot reply appears after send');
+
+// chip click sends a message
+const chip0 = chips[0];
+ok(typeof chip0.onclick === 'function', 'chip is wired');
+chip0.onclick();
+const afterChip = els.chat.children.map(c => c.textContent || '');
+ok(afterChip.some(t => t.includes('Hello, Metargon!')), 'chip sends user message');
 
 // control button wiring
 const startBtn = controlButtons.find(b => b.dataset.op === 'start');
