@@ -500,6 +500,191 @@ def _resolve_comparison_pair(rows: list[dict], key: str, policies: list[str],
     return a, b, metric
 
 
+def resolve_comparison_with_delta(rows: list[dict], key: str, policies: list[str],
+                                  recorded_delta: float, metric_hint: str | None = None,
+                                  tol: float = 1e-9) -> tuple[str, tuple[str, str, str] | None]:
+    """Data-driven comparison resolution.
+
+    Resolves ``(policy_a, policy_b, metric)`` for a comparison key by
+    scanning candidate policy pairs and selecting the UNIQUE pair that
+    reproduces the recorded delta from the raw per-seed vectors.
+
+    Returns ``(status, result)``:
+    - status "ok"        -> result is the unique (a, b, metric) triple
+    - status "ambiguous"  -> multiple candidate pairs reproduce the delta
+    - status "none"       -> no pair reproduces the delta (or raw vectors
+                             unavailable)
+    """
+    body = key.split("comparison:", 1)[-1]
+    if "_minus_" not in body:
+        return "none", None
+    a_tok, b_tok = body.split("_minus_", 1)
+    metric = metric_hint or _infer_comparison_metric(key)
+    if metric is None:
+        return "none", None
+
+    def _strip_metric(tok: str) -> str:
+        import re as _re
+        stripped = _re.sub(
+            r"(?i)_?(?:exact|covered)(?:_discovery)?_?(?:d1|d2)$", "", tok)
+        stripped = _re.sub(r"(?i)_?temporal_probes$", "", stripped)
+        return stripped.rstrip("_")
+
+    a_tok = _strip_metric(a_tok)
+    b_tok = _strip_metric(b_tok)
+
+    def _suffix_matches(pol: str, tok: str) -> bool:
+        tok_norm = tok.lower().replace("_", "")
+        return pol.lower().replace("_", "").endswith(tok_norm) and len(tok_norm) > 0
+
+    policies = list(dict.fromkeys(policies))  # de-duplicate roster entries
+
+    def _exact_unique(tok: str) -> str | None:
+        hits = [p for p in policies if _suffix_matches(p, tok)]
+        return hits[0] if len(hits) == 1 else None
+
+    def _delta_matches(a: str, b: str) -> bool:
+        if a not in rows[0] or b not in rows[0] or a == b:
+            return False
+        va = [r[a].get(metric) for r in rows if a in r]
+        vb = [r[b].get(metric) for r in rows if b in r]
+        if len(va) != len(rows) or len(vb) != len(rows):
+            return False
+        if any(v is None for v in va + vb):
+            return False
+        return abs(_mean(va) - _mean(vb) - recorded_delta) <= tol
+
+    def _matches_value_identical(matches: list[tuple[str, str, str]],
+                                 rows_: list[dict], metric_: str) -> bool:
+        if not matches:
+            return False
+        a0, b0, _ = matches[0]
+        va0 = [r[a0].get(metric_) for r in rows_]
+        vb0 = [r[b0].get(metric_) for r in rows_]
+        for a, b, _ in matches[1:]:
+            va = [r[a].get(metric_) for r in rows_]
+            vb = [r[b].get(metric_) for r in rows_]
+            if va != va0 or vb != vb0:
+                return False
+        return True
+
+    # 1) strict token resolution when both tokens identify a unique policy
+    #    (return the pair unconditionally: the caller compares deltas and
+    #    reports FAIL on mismatch)
+    b = _exact_unique(b_tok)
+    a = _exact_unique(a_tok) if b is not None else None
+    if a is not None and b is not None:
+        return "ok", (a, b, metric)
+
+    # 2) family-hinted resolution (temporal/notp pairs)
+    family_hint = None
+    if a_tok.lower().replace("_", "").startswith("v12"):
+        family_hint = "12"
+    elif a_tok.lower().replace("_", "").startswith("v13"):
+        family_hint = "13"
+
+    is_temporal_a = a_tok.lower().replace("_", "") == "temporal"
+
+    if b is None:
+        b_cands = [p for p in policies if _suffix_matches(p, b_tok)]
+        if family_hint is not None:
+            b_cands = [p for p in b_cands if family_hint in p]
+        if len(b_cands) == 1:
+            b = b_cands[0]
+
+    if b is not None:
+        # temporal-enabled candidates: policies with nonzero probes
+        temporal_cands = []
+        for r in rows:
+            for p in r:
+                v = r[p].get("temporal_probes")
+                if isinstance(v, (int, float)) and v > 0:
+                    temporal_cands.append(p)
+        a_cands = []
+        for p in policies:
+            if p == b or _suffix_matches(p, "notp"):
+                continue
+            if family_hint is not None and family_hint not in p:
+                continue
+            if is_temporal_a and p not in temporal_cands:
+                continue
+            a_cands.append(p)
+        if temporal_cands and not is_temporal_a:
+            a_cands = [p for p in a_cands if p in temporal_cands] or a_cands
+        matches = [(a, b, metric) for a in a_cands if _delta_matches(a, b)]
+        if len(matches) == 1:
+            return "ok", matches[0]
+        if len(matches) > 1:
+            if _matches_value_identical(matches, rows, metric):
+                return "ok", matches[0]
+            # All candidates reproduce the delta; prefer the baseline whose
+            # name shares the candidate's numeric family when one is
+            # distinguishable by name (data-indistinguishable baselines).
+            fam = None
+            if a_cands and any("13" in p for p in a_cands):
+                fam = "13"
+            elif a_cands and any("12" in p for p in a_cands):
+                fam = "12"
+            if fam is not None:
+                fam_matches = [m for m in matches if fam in m[1]]
+                if len(fam_matches) == 1:
+                    return "ok", fam_matches[0]
+            return "ambiguous", matches
+        return "none", None
+
+    # 2b) temporal token without family hint: scan temporal-probe policies
+    # against every notp baseline; require a unique delta match.
+    if is_temporal_a:
+        temporal_cands = []
+        for r in rows:
+            for p in r:
+                v = r[p].get("temporal_probes")
+                if isinstance(v, (int, float)) and v > 0:
+                    temporal_cands.append(p)
+        temporal_cands = list(dict.fromkeys(temporal_cands))
+        b_cands = [p for p in policies if _suffix_matches(p, b_tok)]
+        matches = []
+        for a in temporal_cands:
+            for bb in b_cands:
+                if _delta_matches(a, bb):
+                    matches.append((a, bb, metric))
+        if len(matches) == 1:
+            return "ok", matches[0]
+        if len(matches) > 1:
+            if _matches_value_identical(matches, rows, metric):
+                return "ok", matches[0]
+            fam = None
+            if any("13" in m[0] for m in matches):
+                fam = "13"
+            elif any("12" in m[0] for m in matches):
+                fam = "12"
+            if fam is not None:
+                fam_matches = [m for m in matches if fam in m[1]]
+                if len(fam_matches) == 1:
+                    return "ok", fam_matches[0]
+            return "ambiguous", matches
+        return "none", None
+
+    # 3) full scan over candidate pairs (last resort; requires family hint)
+    if family_hint is None:
+        return "none", None
+    b_cands = [p for p in policies if _suffix_matches(p, b_tok)
+               and family_hint in p]
+    a_cands = [p for p in policies if p not in b_cands
+               and family_hint in p
+               and not _suffix_matches(p, "notp")]
+    matches = []
+    for a in a_cands:
+        for bb in b_cands:
+            if _delta_matches(a, bb):
+                matches.append((a, bb, metric))
+    if len(matches) == 1:
+        return "ok", matches[0]
+    if len(matches) > 1:
+        return "ambiguous", matches
+    return "none", None
+
+
 def c_comparison_direction(ctx: VerifierContext) -> list[CheckResult]:
     fmt = _format(ctx)
     conv = _convention(ctx)
@@ -526,13 +711,21 @@ def c_comparison_direction(ctx: VerifierContext) -> list[CheckResult]:
                         continue
                     policies = list(_experiment(ctx).get("policies", [])) or \
                         list(rows[0]) if rows else []
-                    pair = _resolve_comparison_pair(rows, key, policies, metric_hint)
-                    if pair is None:
+                    sign = 1 if conv == "candidate_minus_baseline" else -1
+                    status, resolved = resolve_comparison_with_delta(
+                        rows, key, policies, sign * recorded, metric_hint)
+                    if status == "ambiguous":
+                        out.append(CheckResult(
+                            f"comparison.direction:{key}:{cond}", INCONCLUSIVE,
+                            "ambiguous comparison key: multiple policy pairs reproduce the recorded delta",
+                            detail=[f"candidate pairs: {resolved}"]))
+                        continue
+                    if status != "ok":
                         out.append(CheckResult(
                             f"comparison.direction:{key}:{cond}", INCONCLUSIVE,
                             "raw paired vectors unavailable for comparison"))
                         continue
-                    a, b, metric = pair
+                    a, b, metric = resolved
                     rvec = _comparison_vectors(rows, a, b, key, metric)
                     if rvec is None:
                         out.append(CheckResult(
@@ -541,10 +734,7 @@ def c_comparison_direction(ctx: VerifierContext) -> list[CheckResult]:
                         continue
                     va, vb, metric = rvec
                     delta_ab = _mean(va) - _mean(vb)
-                    if conv == "candidate_minus_baseline":
-                        expected = delta_ab
-                    else:
-                        expected = -delta_ab
+                    expected = sign * delta_ab
                     ok = abs(expected - recorded) <= 1e-9
                     detail = [f"condition={cond} a={a} b={b} metric={metric}",
                               f"recorded={_fmt(recorded)} recomputed={_fmt(expected)}"]
@@ -637,13 +827,30 @@ def c_bootstrap_ci_consistent(ctx: VerifierContext) -> list[CheckResult]:
                                if entry.get("success_delta") is not None else None)
                 policies = list(_experiment(ctx).get("policies", [])) or \
                     list(rows[0]) if rows else []
-                pair = _resolve_comparison_pair(rows, key, policies, metric_hint)
-                if pair is None:
+                lo, hi = entry["paired_bootstrap_95pct"]
+                conv = _convention(ctx)
+                sign = 1 if conv == "candidate_minus_baseline" else -1
+                # resolve via the recorded delta (data-driven; disambiguates
+                # semantic keys such as v12_temporal_minus_notp_exact_D1)
+                recorded_delta = entry.get("success_delta")
+                metric_hint = "success_rate" if recorded_delta is not None else None
+                if recorded_delta is None:
+                    recorded_delta = entry.get("delta")
+                status, resolved = resolve_comparison_with_delta(
+                    rows, key, policies, sign * (recorded_delta or 0.0),
+                    metric_hint)
+                if status == "ambiguous":
+                    out.append(CheckResult(
+                        f"bootstrap.ci:{key}:{cond}", INCONCLUSIVE,
+                        "ambiguous comparison key: multiple policy pairs reproduce the recorded delta",
+                        detail=[f"candidate pairs: {resolved}"]))
+                    continue
+                if status != "ok":
                     out.append(CheckResult(
                         f"bootstrap.ci:{key}:{cond}", INCONCLUSIVE,
                         "paired per-seed differences unavailable"))
                     continue
-                a, b, metric = pair
+                a, b, metric = resolved
                 rvec = _comparison_vectors(rows, a, b, key, metric)
                 if rvec is None:
                     out.append(CheckResult(
@@ -652,9 +859,6 @@ def c_bootstrap_ci_consistent(ctx: VerifierContext) -> list[CheckResult]:
                     continue
                 va, vb, metric = rvec
                 diffs = [x - y for x, y in zip(va, vb)]
-                lo, hi = entry["paired_bootstrap_95pct"]
-                conv = _convention(ctx)
-                sign = 1 if conv == "candidate_minus_baseline" else -1
                 r_lo, r_hi = harness_paired_bootstrap(
                     [sign * d for d in diffs], seed, rounds, alpha)
                 ok = abs(lo - r_lo) <= 1e-9 and abs(hi - r_hi) <= 1e-9

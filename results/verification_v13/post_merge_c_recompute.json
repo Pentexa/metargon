@@ -1,0 +1,251 @@
+{
+  "checks": [
+    {
+      "check": "v06.fresh_frozen_0.312",
+      "status": "PASS",
+      "detail": [
+        "fresh frozen = 0.3125"
+      ]
+    },
+    {
+      "check": "v06.original_frozen_0.281",
+      "status": "PASS",
+      "detail": [
+        "original frozen = 0.28125"
+      ]
+    },
+    {
+      "check": "v06.memory_wiped_equals_original",
+      "status": "PASS",
+      "detail": [
+        "bit-identical per-config vectors (frozen + adapt)"
+      ]
+    },
+    {
+      "check": "v06.memory_wiped_frozen_0.281",
+      "status": "PASS",
+      "detail": [
+        "memory_wiped frozen = 0.28125"
+      ]
+    },
+    {
+      "check": "v06.ctx_full_frozen_0.508",
+      "status": "PASS",
+      "detail": [
+        "ctx_full frozen = 0.5078125"
+      ]
+    },
+    {
+      "check": "v06.bank_ctx_full_frozen_0.219",
+      "status": "PASS",
+      "detail": [
+        "bank_ctx_full frozen = 0.21875"
+      ]
+    },
+    {
+      "check": "v06.reset_equals_original",
+      "status": "PASS",
+      "detail": [
+        "reset vs original bit-identical frozen vector"
+      ]
+    },
+    {
+      "check": "v06.atomtx_frozen_0.250",
+      "status": "PASS",
+      "detail": [
+        "atomtx frozen = 0.25"
+      ]
+    },
+    {
+      "check": "v06.atomtx_bank_frozen_0.250",
+      "status": "PASS",
+      "detail": [
+        "atomtx_bank frozen = 0.25"
+      ]
+    },
+    {
+      "check": "v06.random_walk_frozen_0.055",
+      "status": "PASS",
+      "detail": [
+        "random_walk frozen = 0.0546875"
+      ]
+    },
+    {
+      "check": "v06.novocab_frozen_0.461",
+      "status": "PASS",
+      "detail": [
+        "novocab frozen = 0.4609375"
+      ]
+    },
+    {
+      "check": "v06.original_vs_fresh_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=-0.0303 ci=(-0.0938, 0.0)",
+        "recomputed mean=-0.0303 ci=(-0.0938, 0.0)"
+      ]
+    },
+    {
+      "check": "v06.ctx_full_vs_fresh_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=0.1984 ci=(0.0391, 0.3594)",
+        "recomputed mean=0.1984 ci=(0.0391, 0.3594)"
+      ]
+    },
+    {
+      "check": "v06.bank_ctx_full_vs_fresh_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=-0.0896 ci=(-0.2812, 0.0625)",
+        "recomputed mean=-0.0896 ci=(-0.2812, 0.0625)"
+      ]
+    },
+    {
+      "check": "v06.atomtx_vs_fresh_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=-0.0606 ci=(-0.1875, 0.0)",
+        "recomputed mean=-0.0606 ci=(-0.1875, 0.0)"
+      ]
+    },
+    {
+      "check": "v06.fresh_vs_original_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=0.0303 ci=(0.0, 0.0938)",
+        "recomputed mean=0.0303 ci=(0.0, 0.0938)"
+      ]
+    },
+    {
+      "check": "v06.ctx_full_vs_original_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=0.2287 ci=(0.0859, 0.3672)",
+        "recomputed mean=0.2287 ci=(0.0859, 0.3672)"
+      ]
+    },
+    {
+      "check": "v06.atomtx_vs_original_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=-0.0303 ci=(-0.0938, 0.0)",
+        "recomputed mean=-0.0303 ci=(-0.0938, 0.0)"
+      ]
+    },
+    {
+      "check": "v06.original_vs_fresh_adapt_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "comparison original_vs_fresh/classic_adapt not recorded (by design for vs_fresh)"
+      ]
+    },
+    {
+      "check": "v06.ctx_full_vs_original_adapt_ci_reproduced",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=-0.0639 ci=(-0.2266, 0.0938)",
+        "recomputed mean=-0.0639 ci=(-0.2266, 0.0938)"
+      ]
+    },
+    {
+      "check": "v06.report_table_original_dfrozen_-0.030",
+      "status": "PASS",
+      "detail": [
+        "original-fresh frozen = -0.0303"
+      ]
+    },
+    {
+      "check": "v06.report_table_ctx_full_dfrozen_+0.198",
+      "status": "PASS",
+      "detail": [
+        "ctx_full-fresh frozen = 0.1984"
+      ]
+    },
+    {
+      "check": "v06.report_table_ctx_full_doriginal_+0.229",
+      "status": "PASS",
+      "detail": [
+        "ctx_full-original frozen = 0.2287"
+      ]
+    },
+    {
+      "check": "evren.pool_24_approved_solvable",
+      "status": "PASS",
+      "detail": [
+        "tasks=24 solvable=24"
+      ]
+    },
+    {
+      "check": "evren.pool_config_unique",
+      "status": "PASS",
+      "detail": [
+        "unique configs=24/24"
+      ]
+    },
+    {
+      "check": "evren.fresh_frozen_0.312",
+      "status": "PASS",
+      "detail": [
+        "fresh = 0.3125"
+      ]
+    },
+    {
+      "check": "evren.original_frozen_0.406",
+      "status": "PASS",
+      "detail": [
+        "original = 0.40625"
+      ]
+    },
+    {
+      "check": "evren.atomtx_bank_frozen_0.250",
+      "status": "PASS",
+      "detail": [
+        "atomtx_bank = 0.25"
+      ]
+    },
+    {
+      "check": "evren.teacher_holdout_flat_0.500",
+      "status": "PASS",
+      "detail": [
+        "original teacher holdout = 0.5"
+      ]
+    },
+    {
+      "check": "evren.original_dfresh_+0.094_ci",
+      "status": "PASS",
+      "detail": [
+        "recorded mean=0.0944 ci=(0.0, 0.1875)",
+        "recomputed mean=0.0944 ci=(0.0, 0.1875)"
+      ]
+    },
+    {
+      "check": "storage.verified_then_contradicted_present",
+      "status": "PASS",
+      "detail": [
+        "verified_then_contradicted per run = [0.0, 56.5, 56.5, 198.0, 56.5, 198.0, 76.0, 56.5, 172.5, 29.0, 31.0]"
+      ]
+    },
+    {
+      "check": "storage.classic_vtc_range_56_198",
+      "status": "PASS",
+      "detail": [
+        "classic variants vtc = [56.5, 56.5, 198.0, 56.5, 198.0, 76.0, 56.5, 172.5]"
+      ]
+    },
+    {
+      "check": "storage.atomtx_vtc_recorded",
+      "status": "PASS",
+      "detail": [
+        "atom-transfer variants vtc = [29.0, 31.0] (lower by design)"
+      ]
+    },
+    {
+      "check": "storage.mostly_contradicted",
+      "status": "PASS",
+      "detail": [
+        "mean contradicted=67.0 mean verified=3.0"
+      ]
+    }
+  ]
+}

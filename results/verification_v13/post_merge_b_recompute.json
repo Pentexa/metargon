@@ -1,0 +1,238 @@
+{
+  "checks": [
+    {
+      "check": "L.stable.v12_exactD1_16.9_23.1",
+      "status": "PASS",
+      "detail": [
+        "recomputed=16.88% per-seed=[0.0, 0.0, 0.675, 0.0]"
+      ]
+    },
+    {
+      "check": "L.stable.v13_exactD1_39.4_33.1",
+      "status": "PASS",
+      "detail": [
+        "recomputed=39.38% per-seed=[0.775, 0.0, 0.8, 0.0]"
+      ]
+    },
+    {
+      "check": "L.stable.rolling_ablation_equals_v12",
+      "status": "PASS",
+      "detail": [
+        "gen per-seed=[0.0, 0.0, 0.675, 0.0] v12 per-seed=[0.0, 0.0, 0.675, 0.0]"
+      ]
+    },
+    {
+      "check": "L.stable.notp_zero",
+      "status": "PASS",
+      "detail": [
+        "notp per-seed=[0.0, 0.0, 0.0, 0.0]"
+      ]
+    },
+    {
+      "check": "L.stable.temporal_delta_v13_ci",
+      "status": "PASS",
+      "detail": [
+        "delta=39.38pp CI=(0.0, 78.75)"
+      ]
+    },
+    {
+      "check": "L.stable.temporal_delta_v12_ci",
+      "status": "PASS",
+      "detail": [
+        "delta=16.88pp CI=(0.0, 50.63)"
+      ]
+    },
+    {
+      "check": "L.stable.v13_vs_v12_seed_carryover",
+      "status": "PASS",
+      "detail": [
+        "v12=[0.0, 0.0, 0.675, 0.0] v13=[0.775, 0.0, 0.8, 0.0]"
+      ]
+    },
+    {
+      "check": "L.novel.v12_exactD1_16.9_23.1",
+      "status": "PASS",
+      "detail": [
+        "recomputed=23.12% per-seed=[0.0, 0.25, 0.675, 0.0]"
+      ]
+    },
+    {
+      "check": "L.novel.v13_exactD1_39.4_33.1",
+      "status": "PASS",
+      "detail": [
+        "recomputed=33.13% per-seed=[0.275, 0.25, 0.8, 0.0]"
+      ]
+    },
+    {
+      "check": "L.novel.rolling_ablation_equals_v12",
+      "status": "PASS",
+      "detail": [
+        "gen per-seed=[0.0, 0.25, 0.675, 0.0] v12 per-seed=[0.0, 0.25, 0.675, 0.0]"
+      ]
+    },
+    {
+      "check": "L.novel.notp_zero",
+      "status": "PASS",
+      "detail": [
+        "notp per-seed=[0.0, 0.0, 0.0, 0.0]"
+      ]
+    },
+    {
+      "check": "L.novel.temporal_delta_v13_ci",
+      "status": "PASS",
+      "detail": [
+        "delta=33.13pp CI=(6.88, 66.25)"
+      ]
+    },
+    {
+      "check": "L.novel.temporal_delta_v12_ci",
+      "status": "PASS",
+      "detail": [
+        "delta=23.12pp CI=(0.0, 50.63)"
+      ]
+    },
+    {
+      "check": "L.novel.v13_vs_v12_seed_carryover",
+      "status": "PASS",
+      "detail": [
+        "v12=[0.0, 0.25, 0.675, 0.0] v13=[0.275, 0.25, 0.8, 0.0]"
+      ]
+    },
+    {
+      "check": "L.stable.pilot_equals_final",
+      "status": "PASS",
+      "detail": [
+        "pilot=0.39375000000000004 final=0.39375000000000004"
+      ]
+    },
+    {
+      "check": "L.novel.pilot_equals_final",
+      "status": "PASS",
+      "detail": [
+        "pilot=0.33125000000000004 final=0.33125000000000004"
+      ]
+    },
+    {
+      "check": "L.stable.m12_reproduces_v12_study",
+      "status": "PASS",
+      "detail": [
+        "exactD1: v12-study=0.16875 final_l=0.16875",
+        "success: v12-study=0.275 final_l=0.275"
+      ]
+    },
+    {
+      "check": "L.novel.m12_reproduces_v12_study",
+      "status": "PASS",
+      "detail": [
+        "exactD1: v12-study=0.23125 final_l=0.23125",
+        "success: v12-study=0.29375 final_l=0.29375"
+      ]
+    },
+    {
+      "check": "F.stable.v13_success",
+      "status": "PASS",
+      "detail": [
+        "v13=85.62% v12.1=85.62% expected v13=85.62%"
+      ]
+    },
+    {
+      "check": "F.shift.v13_success",
+      "status": "PASS",
+      "detail": [
+        "v13=91.25% v12.1=91.25% expected v13=91.25%"
+      ]
+    },
+    {
+      "check": "F.noisy_obs.v13_success",
+      "status": "PASS",
+      "detail": [
+        "v13=81.25% v12.1=81.25% expected v13=81.25%"
+      ]
+    },
+    {
+      "check": "F.novel.v13_success",
+      "status": "PASS",
+      "detail": [
+        "v13=91.25% v12.1=91.25% expected v13=91.25%"
+      ]
+    },
+    {
+      "check": "F.tight_budget.v13_success",
+      "status": "PASS",
+      "detail": [
+        "v13=90.62% v12.1=90.62% expected v13=90.62%"
+      ]
+    },
+    {
+      "check": "H.stable.preservation",
+      "status": "PASS",
+      "detail": [
+        "v13=73.12% v12.1=73.12% expected=73.12%"
+      ]
+    },
+    {
+      "check": "H.stable.d2_preservation",
+      "status": "PASS",
+      "detail": [
+        "v13 D2=70.00% v12.1 D2=70.00%"
+      ]
+    },
+    {
+      "check": "H.novel.preservation",
+      "status": "PASS",
+      "detail": [
+        "v13=79.38% v12.1=79.38% expected=79.38%"
+      ]
+    },
+    {
+      "check": "H.novel.d2_preservation",
+      "status": "PASS",
+      "detail": [
+        "v13 D2=76.88% v12.1 D2=76.88%"
+      ]
+    },
+    {
+      "check": "R.stable.preservation",
+      "status": "PASS",
+      "detail": [
+        "v13=60.62% v12.1=60.62% expected=60.62%"
+      ]
+    },
+    {
+      "check": "R.novel.preservation",
+      "status": "PASS",
+      "detail": [
+        "v13=79.38% v12.1=79.38% expected=79.38%"
+      ]
+    },
+    {
+      "check": "R.stable.nodc_reproduced",
+      "status": "PASS",
+      "detail": [
+        "-nodc stable = 71.88%"
+      ]
+    },
+    {
+      "check": "regress_f_noisy.expected",
+      "status": "PASS",
+      "detail": [
+        "metargon13 = 81.25% expected 81.25%"
+      ]
+    },
+    {
+      "check": "regress_h_stable.expected",
+      "status": "PASS",
+      "detail": [
+        "metargon13 = 73.12% expected 73.12%"
+      ]
+    },
+    {
+      "check": "regress_r_stable.expected",
+      "status": "PASS",
+      "detail": [
+        "metargon13 = 60.62% expected 60.62%"
+      ]
+    }
+  ],
+  "claims": []
+}
