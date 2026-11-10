@@ -1,0 +1,71 @@
+{
+  "source": "generalization_audit\\manifests\\v13_confirmatory_diag_r_stable.manifest.json",
+  "overall": "INCONCLUSIVE",
+  "summary": {
+    "PASS": 6,
+    "FAIL": 0,
+    "INCONCLUSIVE": 4
+  },
+  "checks": [
+    {
+      "check": "artifact.exists:../../results/v13_confirmatory/diag_r_stable_8x40.json",
+      "status": "PASS",
+      "message": "artifact exists (C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon\\generalization_audit\\manifests\\..\\..\\results\\v13_confirmatory\\diag_r_stable_8x40.json)",
+      "detail": []
+    },
+    {
+      "check": "artifact.hash:../../results/v13_confirmatory/diag_r_stable_8x40.json",
+      "status": "PASS",
+      "message": "sha256 matches (32fe8e5cba55\u2026)",
+      "detail": []
+    },
+    {
+      "check": "artifact.size:../../results/v13_confirmatory/diag_r_stable_8x40.json",
+      "status": "PASS",
+      "message": "size matches (3997278)",
+      "detail": []
+    },
+    {
+      "check": "artifact.records.unique",
+      "status": "PASS",
+      "message": "no duplicate artifact records",
+      "detail": []
+    },
+    {
+      "check": "raw.present",
+      "status": "INCONCLUSIVE",
+      "message": "unsupported/unknown format 'generic'",
+      "detail": []
+    },
+    {
+      "check": "summary.vs.raw",
+      "status": "PASS",
+      "message": "not applicable for this format (no raw+summary pair)",
+      "detail": []
+    },
+    {
+      "check": "comparison.direction",
+      "status": "INCONCLUSIVE",
+      "message": "unsupported format 'generic'",
+      "detail": []
+    },
+    {
+      "check": "discovery.metrics",
+      "status": "INCONCLUSIVE",
+      "message": "unsupported format 'generic'",
+      "detail": []
+    },
+    {
+      "check": "fairness.planner_cap",
+      "status": "PASS",
+      "message": "planner expansion cap recorded: 700",
+      "detail": []
+    },
+    {
+      "check": "fairness.memory_limit",
+      "status": "INCONCLUSIVE",
+      "message": "memory limit not recorded in manifest",
+      "detail": []
+    }
+  ]
+}
