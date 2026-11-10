@@ -16,6 +16,8 @@ directory.
 from __future__ import annotations
 
 import json
+import subprocess
+import sys
 import tempfile
 import threading
 import time
@@ -23,7 +25,6 @@ import unittest
 from pathlib import Path
 
 _ROOT = Path(__file__).resolve().parent.parent.parent
-import sys
 for _p in (_ROOT, _ROOT / "python", _ROOT / "academy"):
     _s = str(_p)
     if _s not in sys.path:
@@ -200,6 +201,33 @@ class TestNestServer(unittest.TestCase):
             finally:
                 server.shutdown()
                 server.server_close()
+
+
+class TestNestFrontendValidation(unittest.TestCase):
+    """Frontend syntax + DOM smoke (node) executed via the audit tool."""
+
+    @classmethod
+    def setUpClass(cls):
+        cls.audit = _ROOT / "nest" / "tools" / "frontend_audit.py"
+
+    def _node_available(self):
+        import shutil
+        return shutil.which("node") is not None
+
+    def test_frontend_syntax_and_balance(self):
+        r = subprocess.run([sys.executable, str(self.audit)],
+                           capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        self.assertIn("node --check: OK", r.stdout)
+
+    def test_frontend_dom_smoke(self):
+        if not self._node_available():
+            self.skipTest("node not available")
+        r = subprocess.run([sys.executable, str(self.audit), "--smoke"],
+                           capture_output=True, text=True)
+        self.assertEqual(r.returncode, 0, r.stdout + r.stderr)
+        for expected in ("PASS ", "DOM smoke test: OK"):
+            self.assertIn(expected, r.stdout)
 
 
 if __name__ == "__main__":

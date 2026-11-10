@@ -198,7 +198,7 @@ function renderMemory(m, tr){
   html += `<div><b>${st.verified||0}</b>verified</div>`;
   html += `<div><b>${st.contradicted||0}</b>contradicted</div>`;
   html += `<div><b>${(st.hypothesis||0)+(st.predicted||0)}</b>uncertain</div>`;
-  html += `<div><b>${m.generated||0}</b>generated</div></div>``;
+  html += `<div><b>${m.generated||0}</b>generated</div></div>`;
   (m.hypotheses||[]).slice(0,30).forEach(h=>{
     const cls = "hyp " + (h.status==="verified"?"verified":h.status==="contradicted"?"contradicted":"");
     html += `<div class="${cls}">door ${h.door}: ${h.antecedent_text||"(empty)"}<br>`+
