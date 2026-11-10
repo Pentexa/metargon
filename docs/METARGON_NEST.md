@@ -279,4 +279,42 @@ unseen rule, and retrieval pressure replaces useful novelty. No positive
 transfer is claimed; the infrastructure reports the failure and its trace
 evidence.
 
+## Post-training regression — isolated mechanism (diagnosis)
+
+`nest/tools/diagnose_regression.py` (and `test_regression_diagnosis.py`)
+reproduces fresh-vs-trained failure on identical evaluation episodes and
+isolates the cause with independent mutations (seeds 90000/90037; two
+training/eval pairs T1E1, T2E2; identical step budgets).
+
+| arm (T1E1) | success | memory_actions | retrieved |
+|---|---:|---:|---:|
+| fresh | 1.00 | 4 | 120 |
+| trained_full_thr1 | 0.00 | 33 | 370 |
+| trained_no_memory_content | 1.00 | 10 | 180 |
+| trained_memory_muted (functional) | 1.00 | 6 | 60 |
+| trained_explore_state_reset | 0.00 | 33 | 370 |
+| trained_counters_reset | 0.00 | 33 | 370 |
+| trained_rng_reset | 0.00 | 33 | 370 |
+| trained_full_thr2 | 0.00 | 33 | 370 |
+
+Findings:
+
+- **Confirmed mechanism: memory interference.** Both ablations —
+  clearing memory content and functionally muting all memory read paths
+  (query/bank/transfer/protection) while keeping the same state — restore
+  fresh-level success on T1E1. First probe-action divergence from fresh is
+  immediate for the trained agent (0) and delayed for the ablated arms
+  (6/2), tracing the interference to the trained hypotheses.
+- **Negative controls:** resetting exploration state, counters, RNG, or
+  raising the transfer threshold to 2 does not change the trained outcome
+  — none of these explain the regression.
+- **Not universal:** on T2E2 training actually helps (fresh 0.67 →
+  trained 1.00). The regression is task-specific: it occurs when the
+  trained rule conflicts with the evaluation rule, and the agent keeps
+  re-trying its verified but inapplicable hypothesis instead of exploring.
+- No NEST-side defect was identified; the observed behavior is the
+  student's cross-task interference (a documented Academy characteristic).
+  No evaluation-set tuning was performed. Full reproducible report:
+  `nest/diagnose_regression_report.json`.
+
 

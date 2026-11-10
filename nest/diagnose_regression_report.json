@@ -1,0 +1,629 @@
+{
+  "trains": [
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, True)",
+    "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, False)"
+  ],
+  "tests": [
+    "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)",
+    "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)"
+  ],
+  "seeds": [
+    90000,
+    90037
+  ],
+  "pairs": {
+    "T1E1": {
+      "fresh": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "memory_actions_mean": 4.0,
+        "retrieved_mean": 120.0,
+        "probe_sources": {
+          "novel_single": 2.0,
+          "hypothesis": 4.0
+        },
+        "memory": {
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 0.0,
+          "predicted": 8.0
+        }
+      },
+      "trained_full_thr1": {
+        "success_mean": 0.0,
+        "success_values": [
+          0.0,
+          0.0
+        ],
+        "steps_used": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "memory_actions_mean": 33.0,
+        "retrieved_mean": 370.0,
+        "probe_sources": {
+          "hypothesis": 27.0,
+          "atom_single": 213.0
+        },
+        "memory": {
+          "verified": 10.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_no_memory_content": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "memory_actions_mean": 10.0,
+        "retrieved_mean": 180.0,
+        "probe_sources": {
+          "novel_single": 2.0,
+          "hypothesis": 4.0
+        },
+        "memory": {
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 0.0,
+          "predicted": 8.0
+        }
+      },
+      "trained_memory_muted": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            10,
+            10,
+            10
+          ],
+          [
+            10,
+            10,
+            10
+          ]
+        ],
+        "memory_actions_mean": 6.0,
+        "retrieved_mean": 60.0,
+        "probe_sources": {
+          "novel_single": 6.0
+        },
+        "memory": {
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 0.0,
+          "predicted": 8.0
+        }
+      },
+      "trained_explore_state_reset": {
+        "success_mean": 0.0,
+        "success_values": [
+          0.0,
+          0.0
+        ],
+        "steps_used": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "memory_actions_mean": 33.0,
+        "retrieved_mean": 370.0,
+        "probe_sources": {
+          "hypothesis": 27.0,
+          "atom_single": 213.0
+        },
+        "memory": {
+          "verified": 10.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_counters_reset": {
+        "success_mean": 0.0,
+        "success_values": [
+          0.0,
+          0.0
+        ],
+        "steps_used": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "memory_actions_mean": 33.0,
+        "retrieved_mean": 370.0,
+        "probe_sources": {
+          "hypothesis": 27.0,
+          "atom_single": 213.0
+        },
+        "memory": {
+          "verified": 10.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_rng_reset": {
+        "success_mean": 0.0,
+        "success_values": [
+          0.0,
+          0.0
+        ],
+        "steps_used": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "memory_actions_mean": 33.0,
+        "retrieved_mean": 370.0,
+        "probe_sources": {
+          "hypothesis": 27.0,
+          "atom_single": 213.0
+        },
+        "memory": {
+          "verified": 10.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_full_thr2": {
+        "success_mean": 0.0,
+        "success_values": [
+          0.0,
+          0.0
+        ],
+        "steps_used": [
+          [
+            80,
+            80,
+            80
+          ],
+          [
+            80,
+            80,
+            80
+          ]
+        ],
+        "memory_actions_mean": 33.0,
+        "retrieved_mean": 370.0,
+        "probe_sources": {
+          "hypothesis": 27.0,
+          "atom_single": 213.0
+        },
+        "memory": {
+          "verified": 10.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "fresh_actions": [
+        "novel_single",
+        "novel_single",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis"
+      ],
+      "first_divergence_trained_full_thr1": 0,
+      "first_divergence_trained_no_memory_content": 6,
+      "first_divergence_trained_memory_muted": 2,
+      "first_divergence_trained_full_thr2": 0
+    },
+    "T2E2": {
+      "fresh": {
+        "success_mean": 0.667,
+        "success_values": [
+          0.67,
+          0.67
+        ],
+        "steps_used": [
+          [
+            19,
+            80,
+            23
+          ],
+          [
+            19,
+            80,
+            23
+          ]
+        ],
+        "memory_actions_mean": 11.0,
+        "retrieved_mean": 492.0,
+        "probe_sources": {
+          "novel_single": 8.0,
+          "hypothesis": 11.0,
+          "atom_single": 77.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_full_thr1": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            17,
+            39,
+            21
+          ],
+          [
+            17,
+            39,
+            21
+          ]
+        ],
+        "memory_actions_mean": 50.0,
+        "retrieved_mean": 1559.0,
+        "probe_sources": {
+          "hypothesis": 25.0,
+          "atom_single": 14.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 20.0,
+          "hypothesis": 13.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_no_memory_content": {
+        "success_mean": 0.667,
+        "success_values": [
+          0.67,
+          0.67
+        ],
+        "steps_used": [
+          [
+            19,
+            80,
+            21
+          ],
+          [
+            19,
+            80,
+            21
+          ]
+        ],
+        "memory_actions_mean": 34.0,
+        "retrieved_mean": 1340.0,
+        "probe_sources": {
+          "novel_single": 7.0,
+          "hypothesis": 9.0,
+          "atom_single": 75.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 10.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_memory_muted": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            19,
+            19,
+            19
+          ],
+          [
+            19,
+            19,
+            19
+          ]
+        ],
+        "memory_actions_mean": 25.0,
+        "retrieved_mean": 884.0,
+        "probe_sources": {
+          "novel_single": 21.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 10.0,
+          "hypothesis": 9.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_explore_state_reset": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            17,
+            39,
+            21
+          ],
+          [
+            17,
+            39,
+            21
+          ]
+        ],
+        "memory_actions_mean": 50.0,
+        "retrieved_mean": 1559.0,
+        "probe_sources": {
+          "hypothesis": 25.0,
+          "atom_single": 14.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 20.0,
+          "hypothesis": 13.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_counters_reset": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            19,
+            19,
+            19
+          ],
+          [
+            19,
+            19,
+            19
+          ]
+        ],
+        "memory_actions_mean": 46.0,
+        "retrieved_mean": 1244.0,
+        "probe_sources": {
+          "hypothesis": 21.0
+        },
+        "memory": {
+          "verified": 19.0,
+          "contradicted": 14.0,
+          "hypothesis": 0.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_rng_reset": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            17,
+            39,
+            21
+          ],
+          [
+            17,
+            39,
+            21
+          ]
+        ],
+        "memory_actions_mean": 50.0,
+        "retrieved_mean": 1559.0,
+        "probe_sources": {
+          "hypothesis": 25.0,
+          "atom_single": 14.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 20.0,
+          "hypothesis": 13.0,
+          "predicted": 0.0
+        }
+      },
+      "trained_full_thr2": {
+        "success_mean": 1.0,
+        "success_values": [
+          1.0,
+          1.0
+        ],
+        "steps_used": [
+          [
+            17,
+            39,
+            21
+          ],
+          [
+            17,
+            39,
+            21
+          ]
+        ],
+        "memory_actions_mean": 50.0,
+        "retrieved_mean": 1559.0,
+        "probe_sources": {
+          "hypothesis": 25.0,
+          "atom_single": 14.0
+        },
+        "memory": {
+          "verified": 14.0,
+          "contradicted": 20.0,
+          "hypothesis": 13.0,
+          "predicted": 0.0
+        }
+      },
+      "fresh_actions": [
+        "novel_single",
+        "novel_single",
+        "novel_single",
+        "novel_single",
+        "novel_single",
+        "novel_single",
+        "novel_single",
+        "novel_single",
+        "hypothesis",
+        "hypothesis",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "hypothesis",
+        "hypothesis",
+        "atom_single",
+        "atom_single",
+        "atom_single",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis",
+        "hypothesis"
+      ],
+      "first_divergence_trained_full_thr1": 0,
+      "first_divergence_trained_no_memory_content": 7,
+      "first_divergence_trained_memory_muted": 8,
+      "first_divergence_trained_full_thr2": 0
+    }
+  }
+}
