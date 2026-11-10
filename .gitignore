@@ -18,3 +18,5 @@ memory_v04_*.log
 # memory v05 scratch logs
 memory_v05_*.log
 
+
+# memory v06 raw artifacts are audit-gated (frozen eval criteria v02); keep out-of-tree

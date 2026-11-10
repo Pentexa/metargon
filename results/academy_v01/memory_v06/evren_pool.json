@@ -1,0 +1,1064 @@
+{
+ "source": "OfflineTaskGenerator (same validation pipeline as the EVREN curriculum teacher; zero external API calls)",
+ "seed": 20261109,
+ "n_requested": 24,
+ "n_approved": 24,
+ "max_attempts": 1200,
+ "api_calls": 0,
+ "quota_policy": "EVREN API calls capped at 10/run in config; not used here",
+ "tasks": [
+  {
+   "task_id": "offline-20261109-1",
+   "proposal": {
+    "task_id": "offline-20261109-1",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "loadany",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": false,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('sw', 'S2', True)}), (frozenset({('loadany', 'P2'), ('sw', 'S1', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)})), False, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-5",
+   "proposal": {
+    "task_id": "offline-20261109-5",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "empty",
+       "P2"
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('empty', 'P1')}), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-6",
+   "proposal": {
+    "task_id": "offline-20261109-6",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ]
+     ],
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', (frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S2', True), ('load', 'P1', 'A')})), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-9",
+   "proposal": {
+    "task_id": "offline-20261109-9",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "load",
+       "P1",
+       "A"
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', frozenset({('sw', 'S2', True)}), (frozenset({('empty', 'P2'), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', True)})), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-10",
+   "proposal": {
+    "task_id": "offline-20261109-10",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ],
+     [
+      [
+       "loadany",
+       "P1"
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "load",
+       "P2",
+       "B"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', (frozenset({('loadany', 'P1')}), frozenset({('sw', 'S2', False), ('loadany', 'P1')})), (frozenset({('sw', 'S1', False), ('load', 'P2', 'B')}), frozenset({('sw', 'S1', False)})), False, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-22",
+   "proposal": {
+    "task_id": "offline-20261109-22",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ],
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', (frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S2', False), ('empty', 'P1')})), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-24",
+   "proposal": {
+    "task_id": "offline-20261109-24",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), (frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), frozenset({('sw', 'S1', True)})), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-25",
+   "proposal": {
+    "task_id": "offline-20261109-25",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', (frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True)})), frozenset({('sw', 'S1', False), ('empty', 'P1')}), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-28",
+   "proposal": {
+    "task_id": "offline-20261109-28",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": false,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', (frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S2', True)})), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-29",
+   "proposal": {
+    "task_id": "offline-20261109-29",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "load",
+       "P2",
+       "B"
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('sw', 'S2', True)}), (frozenset({('load', 'P2', 'B')}), frozenset({('sw', 'S1', False)})), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-30",
+   "proposal": {
+    "task_id": "offline-20261109-30",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": false,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', (frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True)})), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-33",
+   "proposal": {
+    "task_id": "offline-20261109-33",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": false,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-36",
+   "proposal": {
+    "task_id": "offline-20261109-36",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "loadany",
+       "P2"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('load', 'P1', 'A')}), (frozenset({('sw', 'S2', False), ('loadany', 'P2')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)})), False, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-37",
+   "proposal": {
+    "task_id": "offline-20261109-37",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "loadany",
+       "P1"
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ],
+     [
+      [
+       "load",
+       "P2",
+       "B"
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('loadany', 'P1')}), (frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), frozenset({('load', 'P2', 'B')})), False, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-38",
+   "proposal": {
+    "task_id": "offline-20261109-38",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ],
+     [
+      [
+       "loadany",
+       "P2"
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('load', 'P1', 'A')}), (frozenset({('empty', 'P2'), ('sw', 'S1', False)}), frozenset({('loadany', 'P2')})), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-46",
+   "proposal": {
+    "task_id": "offline-20261109-46",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True), ('empty', 'P1')}), False, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-53",
+   "proposal": {
+    "task_id": "offline-20261109-53",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "empty",
+       "P2"
+      ]
+     ],
+     [
+      [
+       "loadany",
+       "P1"
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": false,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', (frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True)})), (frozenset({('empty', 'P2'), ('empty', 'P1')}), frozenset({('loadany', 'P1')})), True, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-56",
+   "proposal": {
+    "task_id": "offline-20261109-56",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ],
+     [
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', (frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S2', True)})), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-59",
+   "proposal": {
+    "task_id": "offline-20261109-59",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": false,
+    "difficulty_intent": "medium",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-63",
+   "proposal": {
+    "task_id": "offline-20261109-63",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ]
+     ],
+     [
+      [
+       "load",
+       "P2",
+       "B"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": false,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), (frozenset({('empty', 'P2')}), frozenset({('sw', 'S1', False), ('load', 'P2', 'B')})), True, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-66",
+   "proposal": {
+    "task_id": "offline-20261109-66",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ]
+     ],
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ]
+     ],
+     [
+      [
+       "loadany",
+       "P2"
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": false,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', (frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', False), ('loadany', 'P1')})), (frozenset({('empty', 'P2')}), frozenset({('loadany', 'P2')})), True, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-68",
+   "proposal": {
+    "task_id": "offline-20261109-68",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ],
+     [
+      [
+       "load",
+       "P2",
+       "B"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": false,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), (frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), frozenset({('sw', 'S1', False), ('load', 'P2', 'B')})), False, False)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-69",
+   "proposal": {
+    "task_id": "offline-20261109-69",
+    "topology": "TP1",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ],
+     [
+      [
+       "empty",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    "d1_delay": true,
+    "d2_delay": true,
+    "difficulty_intent": "hard",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP1', (frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S2', True), ('empty', 'P1')})), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, True)",
+   "solvable": true
+  },
+  {
+   "task_id": "offline-20261109-70",
+   "proposal": {
+    "task_id": "offline-20261109-70",
+    "topology": "TP2",
+    "d1_rule": [
+     [
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    "d2_rule": [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    "d1_delay": false,
+    "d2_delay": false,
+    "difficulty_intent": "easy",
+    "rationale": "offline procedural generator (deterministic seed 20261109)"
+   },
+   "config_key": "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S2', True)}), False, False)",
+   "solvable": true
+  }
+ ],
+ "rejected_statuses": {
+  "impossible": 34,
+  "duplicate": 6,
+  "eval_contamination": 6
+ }
+}

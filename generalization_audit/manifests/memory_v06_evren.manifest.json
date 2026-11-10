@@ -1,0 +1,84 @@
+{
+  "schema_version": "experiment-manifest-v01",
+  "protocol_version": "eval-protocol-v01",
+  "experiment": {
+    "name": "academy-memory-v06-evren",
+    "description": "Phase 4 EVREN teacher-experience benchmark: validated teacher task pool artifact and teacher-mixed training evaluation (pinned hash). Artifacts preserved out-of-tree pending the audit artifact-gate hotfix (frozen eval criteria v02).",
+    "format": "generic",
+    "agent_version": "academy-v0.6",
+    "harness": "academy/tools/memory_experiment_v06_evren.py",
+    "commit_sha": "fc81d4d",
+    "working_tree_status": "clean",
+    "python_version": "3.11.0",
+    "platform": "windows",
+    "hash_seed": 0,
+    "family": "academy-classic + evren-validated-pool",
+    "conditions": [
+      "teacher_mixed"
+    ],
+    "seeds": [
+      20261107,
+      20261108
+    ],
+    "episodes_per_seed": 160,
+    "action_budget_max_steps": 80,
+    "policies": [
+      "fresh",
+      "original",
+      "atomtx_bank"
+    ],
+    "ablation_flags": {
+      "teacher_share": 0.3,
+      "teacher_pool_n": 24,
+      "teacher_holdout_n": 6,
+      "api_calls": 0
+    },
+    "parameters": {
+      "classic_grid_configs": 16,
+      "eval_episodes_per_config": 4,
+      "eval_seeds_per_config": 2,
+      "ood_probe_configs": 12,
+      "teacher_holdout_grid_configs": 6,
+      "teacher_train_reuse_configs": 6
+    },
+    "resources": {
+      "planner_max_expand": 1500,
+      "probe_max_plans": 4,
+      "memory_limit_bytes": null,
+      "per_policy_cpu_s": false
+    },
+    "evaluation": {
+      "comparison_convention": "candidate_minus_baseline",
+      "bootstrap": {
+        "method": "paired",
+        "seed": 20261108,
+        "rounds": 2000,
+        "alpha": 0.05
+      },
+      "metrics": {
+        "teacher_pool_approved": "validated teacher-task pool size (TaskValidator: schema/leakage/solvability/contamination/duplicates)",
+        "classic_frozen": "zero-shot transfer on 16-config classic grid",
+        "teacher_holdout_frozen": "zero-shot transfer on held-out validated teacher tasks",
+        "teacher_train_reuse_frozen": "frozen probe on teacher tasks seen in training (diagnostic)"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "../../results/academy_v01/memory_v06/evren_pool.json",
+      "role": "raw",
+      "generated_by": "OfflineTaskGenerator + TaskValidator (memory_experiment_v06_evren.py)",
+      "contains_per_seed": false,
+      "sha256": "578f0cd2d7f1245db250209e8c20c365d631d28bc7fff515c776bc9cd26cb797",
+      "size_bytes": 19464
+    },
+    {
+      "path": "../../results/academy_v01/memory_v06/evren_v06_summary.json",
+      "role": "summary",
+      "generated_by": "memory_experiment_v06_evren.py",
+      "contains_per_seed": true,
+      "sha256": "1062a3e7dc4ce5effca198f7d15b54ea0befab58d0b66f63434b89927c396ac4",
+      "size_bytes": 61205
+    }
+  ]
+}

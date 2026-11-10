@@ -90,11 +90,18 @@ class MetargonAcademyAgent:
                  memory_context_scoped: bool = False,
                  memory_task_change_reset: bool = False,
                  memory_context_gate_transfer: bool = False,
-                 memory_evidence_bank_cap: int = 0):
+                 memory_evidence_bank_cap: int = 0,
+                 memory_atom_transfer: bool = False,
+                 memory_bank_refresh_on_contradiction: bool = False,
+                 probe_reset_per_episode: bool = False,
+                 probe_min_effective_confidence: float = 0.0,
+                 probe_bank_reuse: bool = False,
+                 memory_factory=None):
         self.seed = seed
         self.rng = random.Random(seed)
         self.replay_enabled = replay_enabled
-        self.memory = CompositionalMemory(
+        _memory_cls = memory_factory or CompositionalMemory
+        self.memory = _memory_cls(
             max_hypotheses=max_hypotheses,
             verify_support=verify_support,
             max_contradict=max_contradict,
@@ -109,8 +116,21 @@ class MetargonAcademyAgent:
             task_change_reset=memory_task_change_reset,
             context_gate_transfer=memory_context_gate_transfer,
             evidence_bank_cap=memory_evidence_bank_cap,
+            atom_transfer=memory_atom_transfer,
+            bank_refresh_on_contradiction=memory_bank_refresh_on_contradiction,
         )
+        self.memory_atom_transfer = bool(memory_atom_transfer)
+        self.memory_bank_refresh_on_contradiction = bool(
+            memory_bank_refresh_on_contradiction)
+        self.probe_reset_per_episode = bool(probe_reset_per_episode)
+        self.probe_min_effective_confidence = float(
+            probe_min_effective_confidence)
+        self.probe_bank_reuse = bool(probe_bank_reuse)
         self.probe_adaptive = bool(probe_adaptive)
+        # Diagnostic control: disable candidate probing entirely while
+        # keeping door-pass and goal-planning steps (isolates the value
+        # of vocabulary probing vs planning).
+        self.probe_vocab_disabled = False
         self.protect_episode_local = bool(protect_episode_local)
         self.probe_episode_local = bool(probe_episode_local)
         self._episode_mem_step = 0
@@ -136,6 +156,27 @@ class MetargonAcademyAgent:
         self._comp_cache = (None, None)
         self._goal_infeasible = {}
         self._steps_since_goal_check = 0
+        self._collect_probe_log = False
+        # v0.6 diagnostic trace (ephemeral; not part of persistent state)
+        self.trace = {
+            "source_hypothesis": 0, "source_bank": 0,
+            "source_atom_single": 0, "source_atom_pair": 0,
+            "source_novel_single": 0, "source_conjunctive_probe": 0,
+            "source_other": 0,
+            "skipped_tried": 0, "skipped_infeasible": 0,
+            "probes_evaluated": 0, "plans_used": 0,
+            "random_fallback_steps": 0,
+            "door_open_after_probe": 0,
+            "door_open_after_hypothesis": 0,
+            "door_open_after_bank": 0,
+            "door_open_after_atom_single": 0,
+            "door_open_after_atom_pair": 0,
+            "door_open_after_novel_single": 0,
+            "door_open_after_conjunction": 0,
+            "door_open_after_other": 0,
+            "query_calls": 0, "query_useful": 0,
+            "hypothesis_candidates": 0, "hypothesis_skipped_lowconf": 0,
+        }
 
     # -- perception ------------------------------------------------------
     def episode_start(self, spec, geom):
@@ -153,6 +194,14 @@ class MetargonAcademyAgent:
             self._derive_anchors(geom)
         if not self.tried:
             self.tried = {d: set() for d in geom.door_cell}
+        if self.probe_reset_per_episode:
+            # v0.6: probe bookkeeping is per-episode — a new task must
+            # be able to re-explore the vocabulary (the tried set from a
+            # previous task silently blocks reuse and exploration).
+            self.tried = {d: set() for d in geom.door_cell}
+            self.pending_probe = {}
+            self._goal_infeasible = {}
+            self.plan_cache = {}
         for door in geom.door_cell:
             self.passed[door] = False
 
@@ -323,28 +372,50 @@ class MetargonAcademyAgent:
 
     def _adaptive_probe_candidates(self, door, current) -> list:
         """Adaptive probe candidate construction:
-        * hypothesis-backed antecedents (unchanged priority; optionally
+        * hypothesis-backed antecedents (verbatim reuse gated by
+          context-conditioned confidence; unchanged priority, optionally
           restricted to hypotheses evidenced in the current episode);
-        * conjunctions of the most-supported atoms (composite targets —
-          the diagnosis shows singles rarely hit true conjunctive rules);
+        * v0.5 evidence-bank retrieval (high-priority reuse);
+        * v0.6 atom-transfer candidates (causal structure matching —
+          singles and compact conjunctions of cross-task-robust atoms);
+        * conjunctions of the most-supported atoms (composite targets);
         * remaining singles ordered by support-weighted popularity.
-        Deterministic: all ordering is by (count, str). Bounded."""
+        Candidates are tagged with a source for diagnostics and are
+        bounded and deterministic (ordering by (count, str))."""
         hyps = self.memory.query(door, opens=True)
         if self.probe_episode_local:
             hyps = [h for h in hyps
                     if h.last_update >= self._episode_mem_step]
         out = []
         for h in hyps[:3]:
-            out.append((door, h.antecedent, 0))
+            eff_conf = self.memory.effective_confidence(h)
+            if eff_conf < self.probe_min_effective_confidence:
+                self.trace["hypothesis_skipped_lowconf"] += 1
+                continue
+            self.trace["hypothesis_candidates"] += 1
+            prio = 0 if (len(h.antecedent) <= 2 and eff_conf >= 0.75) else 1
+            out.append((door, h.antecedent, prio, "hypothesis"))
         # v0.5: evidence-bank retrieval (high-priority reuse)
         if self.memory.evidence_bank_cap > 0:
             for ante, cons in self.memory.bank_entries():
                 if cons.split(":")[1] != door:
                     continue
                 if ante not in self.tried[door]:
-                    out.append((door, ante, 0))
+                    out.append((door, ante, 0, "bank"))
                     self.memory.mark_retrieval()
         tried = self.tried[door]
+        # v0.6: atom transfer (causal structure matching across tasks)
+        if self.memory_atom_transfer:
+            atoms = self.memory.transfer_atoms(door, k=6)
+            for a in atoms[:4]:
+                p = frozenset({a})
+                if p not in tried:
+                    out.append((door, p, 1, "atom_single"))
+            # pair co-occurrence from verified hypotheses (conjunctive
+            # structure transfer) — ordered before single probes.
+            for p in self.memory.transfer_pairs(door, k=4):
+                if p not in tried:
+                    out.append((door, p, 1, "atom_pair"))
         atom_count = {}
         for h in hyps[:8]:
             for a in h.antecedent:
@@ -361,11 +432,11 @@ class MetargonAcademyAgent:
             if len(comps) >= 8:
                 break
         for p in comps[:4]:
-            out.append((door, p, 1))
+            out.append((door, p, 1, "conjunction"))
         singles = [frozenset({a}) for a in popular]
         singles = [s for s in singles if s not in tried]
         for s in singles[:self.probe_max_plans]:
-            out.append((door, s, 1))
+            out.append((door, s, 1, "novel_single"))
         return out
 
     def _choose_probe(self):
@@ -393,6 +464,8 @@ class MetargonAcademyAgent:
             if plan is not None:
                 return plan, None
             self._goal_infeasible[pattern] = True
+        if self.probe_vocab_disabled:
+            return None, None
         # 2. candidates grouped by priority:
         #    prio 0: hypothesis-backed antecedents (strongest information)
         #    prio 1: probes that require changing the world (novel info)
@@ -406,27 +479,55 @@ class MetargonAcademyAgent:
                 candidates.extend(self._adaptive_probe_candidates(door, current))
                 continue
             hyps = self.memory.query(door, opens=True)
+            self.trace["query_calls"] += 1
+            if hyps:
+                self.trace["query_useful"] += 1
             if self.probe_episode_local:
                 hyps = [h for h in hyps
                         if h.last_update >= self._episode_mem_step]
             for h in hyps[:3]:
-                candidates.append((door, h.antecedent, 0))
+                eff_conf = self.memory.effective_confidence(h)
+                if eff_conf < self.probe_min_effective_confidence:
+                    self.trace["hypothesis_skipped_lowconf"] += 1
+                    continue
+                self.trace["hypothesis_candidates"] += 1
+                prio = 0 if (len(h.antecedent) <= 2
+                             and eff_conf >= 0.75) else 1
+                candidates.append((door, h.antecedent, prio, "hypothesis"))
+            if self.probe_bank_reuse and self.memory.evidence_bank_cap > 0:
+                for ante, cons in self.memory.bank_entries():
+                    if cons.split(":")[1] != door:
+                        continue
+                    if ante not in self.tried[door]:
+                        candidates.append((door, ante, 0, "bank"))
+                        self.memory.mark_retrieval()
+            if self.memory_atom_transfer:
+                atoms = self.memory.transfer_atoms(door, k=6)
+                for a in atoms[:4]:
+                    p = frozenset({a})
+                    if p not in self.tried[door]:
+                        candidates.append((door, p, 1, "atom_single"))
+                for p in self.memory.transfer_pairs(door, k=4):
+                    if p not in self.tried[door]:
+                        candidates.append((door, p, 1, "atom_pair"))
             probes = self._novel_singles(door) + self._conjunctive_probes(door)
             need_change = [s for s in probes if not (s <= current)]
             already_true = [s for s in probes if s <= current]
             for s in need_change[:self.probe_max_plans]:
-                candidates.append((door, s, 1))
+                candidates.append((door, s, 1, "novel_single"))
             for s in already_true[:2]:
-                candidates.append((door, s, 2))
+                candidates.append((door, s, 2, "other"))
         candidates.sort(key=lambda x: x[2])
         protected = self._protected_atoms()
         best = None
         evaluated = 0
-        for door, ante, prio in candidates:
+        for door, ante, prio, src in candidates:
             if ante in self.tried[door]:
+                self.trace["skipped_tried"] += 1
                 continue
             if not target_feasible(self.belief, ante, self.geom):
                 self.tried[door].add(ante)
+                self.trace["skipped_infeasible"] += 1
                 continue
             plan = self._plan_cached(self.belief, ante, on_expand)
             self.plan_calls += 1
@@ -436,7 +537,7 @@ class MetargonAcademyAgent:
                     continue
                 if (best is None or prio < best[3]
                         or (prio == best[3] and len(plan) < len(best[0]))):
-                    best = (plan, door, ante, prio)
+                    best = (plan, door, ante, prio, src)
             elif ante <= atoms_of_state(self.belief):
                 # antecedent already true: any preserving action will trigger
                 # the door transition; use it as the plan.
@@ -444,14 +545,22 @@ class MetargonAcademyAgent:
                 if pres is not None and not self._plan_breaks_protection([pres], protected):
                     if (best is None or prio < best[3]
                             or (prio == best[3] and len(best[0]) > 1)):
-                        best = ([pres], door, ante, prio)
+                        best = ([pres], door, ante, prio, src)
                 else:
                     self.tried[door].add(ante)
             if evaluated >= self.probe_max_plans:
                 break
         if best is not None:
-            plan, door, ante, _ = best
-            self.pending_probe[door] = (ante, self.memory.step + self.probe_timeout)
+            plan, door, ante, _, src = best
+            key = f"source_{src}"
+            if key not in self.trace:
+                key = "source_other"
+            self.trace[key] += 1
+            self.trace["plans_used"] += 1
+            self.pending_probe[door] = (ante, self.memory.step + self.probe_timeout, src)
+            if self._collect_probe_log:
+                self.trace.setdefault("planned_probes", []).append(
+                    [door, sorted(list(ante)), src])
             return plan, door
         return None, None
 
@@ -461,6 +570,7 @@ class MetargonAcademyAgent:
         plan, _ = self._choose_probe()
         if plan:
             return plan[0]
+        self.trace["random_fallback_steps"] += 1
         valid = valid_actions(self.belief, self.geom)
         return self.rng.choice(valid if valid else ("N",))
 
@@ -480,6 +590,10 @@ class MetargonAcademyAgent:
                 self.memory.observe_event(before_atoms, door, True, after_atoms)
                 event_happened = True
                 self.passed[door] = False
+                if door in self.pending_probe:
+                    _, _, src = self.pending_probe[door]
+                    self.trace["door_open_after_probe"] += 1
+                    self.trace[f"door_open_after_{src}"] += 1
                 self.pending_probe.pop(door, None)
             elif before_open and not after_open:
                 self.memory.observe_event(before_atoms, door, False, after_atoms)
@@ -498,7 +612,7 @@ class MetargonAcademyAgent:
                 self.memory.observe_nonevent(after_atoms, door, False)
                 self.memory.observe_maintain(after_atoms, door)
         self.memory.step_advance()
-        for door, (ante, deadline) in list(self.pending_probe.items()):
+        for door, (ante, deadline, _src) in list(self.pending_probe.items()):
             if self.memory.step >= deadline:
                 self.tried[door].add(ante)
                 del self.pending_probe[door]
@@ -563,6 +677,16 @@ class MetargonAcademyAgent:
             },
             "replay_enabled": self.replay_enabled,
             "memory": self.memory.save_state(),
+            "probe_adaptive": self.probe_adaptive,
+            "probe_episode_local": self.probe_episode_local,
+            "protect_episode_local": self.protect_episode_local,
+            "memory_atom_transfer": self.memory_atom_transfer,
+            "memory_bank_refresh_on_contradiction":
+                self.memory_bank_refresh_on_contradiction,
+            "probe_reset_per_episode": self.probe_reset_per_episode,
+            "probe_min_effective_confidence":
+                self.probe_min_effective_confidence,
+            "probe_bank_reuse": self.probe_bank_reuse,
             "planner_max_expand": self.planner_max_expand,
             "probe_max_plans": self.probe_max_plans,
             "probe_timeout": self.probe_timeout,
@@ -575,8 +699,8 @@ class MetargonAcademyAgent:
             "_ctx_signature": self._ctx_signature,
             "frozen_policy": self.frozen_policy,
             "pending_probe": {
-                d: [sorted(list(ante)), deadline]
-                for d, (ante, deadline) in self.pending_probe.items()
+                d: [sorted(list(ante)), deadline, src]
+                for d, (ante, deadline, src) in self.pending_probe.items()
             },
             "planner_ops": self.planner_ops,
             "plan_calls": self.plan_calls,
@@ -598,6 +722,17 @@ class MetargonAcademyAgent:
             self.rng.setstate(tuple(rng))
         self.replay_enabled = state["replay_enabled"]
         self.memory.load_state(state["memory"])
+        self.probe_adaptive = bool(state.get("probe_adaptive", False))
+        self.probe_episode_local = bool(state.get("probe_episode_local", False))
+        self.protect_episode_local = bool(state.get("protect_episode_local", False))
+        self.memory_atom_transfer = bool(state.get("memory_atom_transfer", False))
+        self.memory_bank_refresh_on_contradiction = bool(state.get(
+            "memory_bank_refresh_on_contradiction", False))
+        self.probe_reset_per_episode = bool(state.get(
+            "probe_reset_per_episode", False))
+        self.probe_min_effective_confidence = float(state.get(
+            "probe_min_effective_confidence", 0.0))
+        self.probe_bank_reuse = bool(state.get("probe_bank_reuse", False))
         self.planner_max_expand = state["planner_max_expand"]
         self.probe_max_plans = state["probe_max_plans"]
         self.probe_timeout = state["probe_timeout"]
@@ -609,10 +744,12 @@ class MetargonAcademyAgent:
         self._ctx_signature = state.get("_ctx_signature")
         self.frozen_policy = state.get("frozen_policy", False)
         self.far_anchor = {d: tuple(a) for d, a in state["far_anchor"].items()}
-        self.pending_probe = {
-            d: (frozenset(map(tuple, atoms)), deadline)
-            for d, (atoms, deadline) in state["pending_probe"].items()
-        }
+        self.pending_probe = {}
+        for d, row in state["pending_probe"].items():
+            atoms, deadline = row[0], row[1]
+            src = row[2] if len(row) > 2 else "other"
+            self.pending_probe[d] = (
+                frozenset(map(tuple, atoms)), deadline, src)
         self.planner_ops = state["planner_ops"]
         self.plan_calls = state["plan_calls"]
         self.plan_cache = {}
@@ -634,4 +771,10 @@ class MetargonAcademyAgent:
             "successes": self.successes,
             "replay_enabled": self.replay_enabled,
         }
+
+    def probe_trace(self) -> dict:
+        """Ephemeral probe-source diagnostics (not part of persistent
+        state; excluded from diagnostics() so checkpoint-restore
+        equality is preserved)."""
+        return dict(self.trace)
 
