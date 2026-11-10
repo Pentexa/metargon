@@ -1,0 +1,84 @@
+{
+  "schema_version": "experiment-manifest-v01",
+  "protocol_version": "eval-protocol-v01",
+  "experiment": {
+    "name": "v13-final-h",
+    "description": "METARGON v0.13 final paired runs, family H (structurally novel), stable/novel, 4 seeds x 40 episodes. Regression preservation.",
+    "format": "benchmark_v12",
+    "agent_version": "metargon_v13 (v0.13 defaults; temporal off on H)",
+    "harness": "python/benchmark_v13.py",
+    "commit_sha": "437cf9d",
+    "python_version": "3.11.0",
+    "platform": "windows",
+    "hash_seed": "unset (randomized per process)",
+    "family": "h",
+    "conditions": [
+      "stable",
+      "novel"
+    ],
+    "seeds": [
+      11800,
+      11801,
+      11802,
+      11803
+    ],
+    "episodes_per_seed": 40,
+    "action_budget_max_steps": 80,
+    "policies": [
+      "metargon10",
+      "metargon11",
+      "metargon12",
+      "metargon13",
+      "bayes",
+      "oracle"
+    ],
+    "ablation_flags": {
+      "use_recent_credit": false,
+      "use_temporal": false,
+      "h_pools_seed": 20261107
+    },
+    "parameters": {
+      "policy_seed_offset": 1000003,
+      "world_seed_base": 11800,
+      "note": "preservation matrix: v13 == v12 on every cell; produced with code byte-identical to commit 437cf9d (git diff 4e61903..437cf9d empty)"
+    },
+    "resources": {
+      "planner_max_expand": 700,
+      "probe_max_plans": 3,
+      "memory_limit_bytes": null,
+      "per_policy_cpu_s": true
+    },
+    "evaluation": {
+      "comparison_convention": "candidate_minus_baseline",
+      "bootstrap": {
+        "method": "paired",
+        "seed": 4301,
+        "rounds": 1500,
+        "alpha": 0.05
+      },
+      "metrics": {
+        "success_rate": "fraction of episodes completed (40 per seed)",
+        "exact_discovery_D1": "fraction of episodes where a verified temporal hypothesis exactly matches the true ordered rule (first, second) for D1; predicted hypotheses not counted",
+        "exact_discovery_D2": "fraction of episodes where a verified hypothesis (compositional or temporal) exactly matches the true rule for D2",
+        "covered_discovery_D1": "fraction of episodes where a verified hypothesis's antecedent is a subset of the true D1 rule",
+        "covered_discovery_D2": "fraction of episodes where a verified hypothesis's antecedent is a subset of the true D2 rule",
+        "temporal_probes": "temporal probe count per seed-run",
+        "cpu_s": "wall-clock CPU seconds for the seed-run"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "../../results/v13/final_h.json",
+      "role": "raw",
+      "generated_by": "python/benchmark_v13.py --seeds 4 --episodes 40 --family h --no-mem",
+      "contains_per_seed": true
+    },
+    {
+      "path": "../../results/v13/rendered_final_h.md",
+      "role": "table",
+      "generated_by": "python/v13_postprocess.py",
+      "contains_per_seed": true
+    }
+  ]
+}

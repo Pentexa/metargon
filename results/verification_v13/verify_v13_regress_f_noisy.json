@@ -1,0 +1,1102 @@
+{
+  "source": "generalization_audit\\manifests\\v13_regress_f_noisy.manifest.json",
+  "overall": "INCONCLUSIVE",
+  "summary": {
+    "PASS": 125,
+    "FAIL": 0,
+    "INCONCLUSIVE": 1
+  },
+  "checks": [
+    {
+      "check": "artifact.exists:../../results/v13/regress_f_noisy.json",
+      "status": "PASS",
+      "message": "artifact exists (C:\\Users\\USER\\OneDrive\\Masa\u00fcst\u00fc\\metargon\\generalization_audit\\manifests\\..\\..\\results\\v13\\regress_f_noisy.json)",
+      "detail": []
+    },
+    {
+      "check": "artifact.hash:../../results/v13/regress_f_noisy.json",
+      "status": "PASS",
+      "message": "sha256 matches (a57fa9099d48\u2026)",
+      "detail": []
+    },
+    {
+      "check": "artifact.size:../../results/v13/regress_f_noisy.json",
+      "status": "PASS",
+      "message": "size matches (18979)",
+      "detail": []
+    },
+    {
+      "check": "artifact.records.unique",
+      "status": "PASS",
+      "message": "no duplicate artifact records",
+      "detail": []
+    },
+    {
+      "check": "raw.seeds:../../results/v13/regress_f_noisy.json:noisy_obs",
+      "status": "PASS",
+      "message": "per-seed rows present (n=4)",
+      "detail": []
+    },
+    {
+      "check": "raw.unique.rows:../../results/v13/regress_f_noisy.json:noisy_obs",
+      "status": "PASS",
+      "message": "no duplicate raw rows (4 seeds)",
+      "detail": [
+        "condition=noisy_obs"
+      ]
+    },
+    {
+      "check": "raw.cover:../../results/v13/regress_f_noisy.json:noisy_obs:metargon10",
+      "status": "PASS",
+      "message": "policy metargon10 covered by raw rows",
+      "detail": []
+    },
+    {
+      "check": "raw.cover:../../results/v13/regress_f_noisy.json:noisy_obs:metargon11",
+      "status": "PASS",
+      "message": "policy metargon11 covered by raw rows",
+      "detail": []
+    },
+    {
+      "check": "raw.cover:../../results/v13/regress_f_noisy.json:noisy_obs:metargon12",
+      "status": "PASS",
+      "message": "policy metargon12 covered by raw rows",
+      "detail": []
+    },
+    {
+      "check": "raw.cover:../../results/v13/regress_f_noisy.json:noisy_obs:metargon13",
+      "status": "PASS",
+      "message": "policy metargon13 covered by raw rows",
+      "detail": []
+    },
+    {
+      "check": "raw.cover:../../results/v13/regress_f_noisy.json:noisy_obs:bayes",
+      "status": "PASS",
+      "message": "policy bayes covered by raw rows",
+      "detail": []
+    },
+    {
+      "check": "raw.cover:../../results/v13/regress_f_noisy.json:noisy_obs:oracle",
+      "status": "PASS",
+      "message": "policy oracle covered by raw rows",
+      "detail": []
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:success_rate",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=success_rate",
+        "raw mean=0.44375 summary=0.44375"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:mean_steps",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=mean_steps",
+        "raw mean=62.4625 summary=62.4625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:invalid_actions",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=invalid_actions",
+        "raw mean=9.75 summary=9.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:door_events_total",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=door_events_total",
+        "raw mean=274.75 summary=274.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:mean_first_event_step",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=mean_first_event_step",
+        "raw mean=10.01312741 summary=10.01312741"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:cpu_s",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=cpu_s",
+        "raw mean=46.8307095 summary=46.8307095"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:exact_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=exact_discovery_D1",
+        "raw mean=0.975 summary=0.975"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:exact_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=exact_discovery_D2",
+        "raw mean=0.59375 summary=0.59375"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:covered_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=covered_discovery_D1",
+        "raw mean=0.975 summary=0.975"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:covered_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=covered_discovery_D2",
+        "raw mean=0.59375 summary=0.59375"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:verified",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=verified",
+        "raw mean=39.75 summary=39.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:contradicted",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=contradicted",
+        "raw mean=12.75 summary=12.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon10:replay_applied",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon10 metric=replay_applied",
+        "raw mean=14658.75 summary=14658.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:success_rate",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=success_rate",
+        "raw mean=0.80625 summary=0.80625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:mean_steps",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=mean_steps",
+        "raw mean=36.475 summary=36.475"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:invalid_actions",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=invalid_actions",
+        "raw mean=10 summary=10"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:door_events_total",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=door_events_total",
+        "raw mean=84.5 summary=84.5"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:mean_first_event_step",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=mean_first_event_step",
+        "raw mean=6.472222222 summary=6.472222222"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:cpu_s",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=cpu_s",
+        "raw mean=27.08788387 summary=27.08788387"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:exact_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=exact_discovery_D1",
+        "raw mean=0.6375 summary=0.6375"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:exact_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=exact_discovery_D2",
+        "raw mean=0.31875 summary=0.31875"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:covered_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=covered_discovery_D1",
+        "raw mean=0.7 summary=0.7"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:covered_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=covered_discovery_D2",
+        "raw mean=0.4125 summary=0.4125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:verified",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=verified",
+        "raw mean=9.25 summary=9.25"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:contradicted",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=contradicted",
+        "raw mean=25.5 summary=25.5"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:replay_applied",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=replay_applied",
+        "raw mean=932.25 summary=932.25"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon11:confirmed_events",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon11 metric=confirmed_events",
+        "raw mean=117.75 summary=117.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:success_rate",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=success_rate",
+        "raw mean=0.8125 summary=0.8125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:mean_steps",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=mean_steps",
+        "raw mean=33.40625 summary=33.40625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:invalid_actions",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=invalid_actions",
+        "raw mean=12.75 summary=12.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:door_events_total",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=door_events_total",
+        "raw mean=76.25 summary=76.25"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:mean_first_event_step",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=mean_first_event_step",
+        "raw mean=6.743343653 summary=6.743343653"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:cpu_s",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=cpu_s",
+        "raw mean=18.90584097 summary=18.90584097"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:exact_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=exact_discovery_D1",
+        "raw mean=0.80625 summary=0.80625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:exact_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=exact_discovery_D2",
+        "raw mean=0.75625 summary=0.75625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:covered_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=covered_discovery_D1",
+        "raw mean=0.8125 summary=0.8125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:covered_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=covered_discovery_D2",
+        "raw mean=0.75625 summary=0.75625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:verified",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=verified",
+        "raw mean=15.5 summary=15.5"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:contradicted",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=contradicted",
+        "raw mean=21.75 summary=21.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:replay_applied",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=replay_applied",
+        "raw mean=837.5 summary=837.5"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:confirmed_events",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=confirmed_events",
+        "raw mean=105.75 summary=105.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon12:temporal_probes",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon12 metric=temporal_probes",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:success_rate",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=success_rate",
+        "raw mean=0.8125 summary=0.8125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:mean_steps",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=mean_steps",
+        "raw mean=33.40625 summary=33.40625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:invalid_actions",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=invalid_actions",
+        "raw mean=12.75 summary=12.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:door_events_total",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=door_events_total",
+        "raw mean=76.25 summary=76.25"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:mean_first_event_step",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=mean_first_event_step",
+        "raw mean=6.743343653 summary=6.743343653"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:cpu_s",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=cpu_s",
+        "raw mean=16.73402802 summary=16.73402802"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:exact_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=exact_discovery_D1",
+        "raw mean=0.80625 summary=0.80625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:exact_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=exact_discovery_D2",
+        "raw mean=0.75625 summary=0.75625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:covered_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=covered_discovery_D1",
+        "raw mean=0.8125 summary=0.8125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:covered_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=covered_discovery_D2",
+        "raw mean=0.75625 summary=0.75625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:verified",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=verified",
+        "raw mean=15.5 summary=15.5"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:contradicted",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=contradicted",
+        "raw mean=21.75 summary=21.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:replay_applied",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=replay_applied",
+        "raw mean=837.5 summary=837.5"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:confirmed_events",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=confirmed_events",
+        "raw mean=105.75 summary=105.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:metargon13:temporal_probes",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=metargon13 metric=temporal_probes",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:success_rate",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=success_rate",
+        "raw mean=0.7625 summary=0.7625"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:mean_steps",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=mean_steps",
+        "raw mean=46.0125 summary=46.0125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:invalid_actions",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=invalid_actions",
+        "raw mean=21 summary=21"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:door_events_total",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=door_events_total",
+        "raw mean=90.75 summary=90.75"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:mean_first_event_step",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=mean_first_event_step",
+        "raw mean=8.823660714 summary=8.823660714"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:cpu_s",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=cpu_s",
+        "raw mean=9.08058075 summary=9.08058075"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:exact_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=exact_discovery_D1",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:exact_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=exact_discovery_D2",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:covered_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=covered_discovery_D1",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:bayes:covered_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=bayes metric=covered_discovery_D2",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:success_rate",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=success_rate",
+        "raw mean=0.98125 summary=0.98125"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:mean_steps",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=mean_steps",
+        "raw mean=22.475 summary=22.475"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:invalid_actions",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=invalid_actions",
+        "raw mean=3 summary=3"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:door_events_total",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=door_events_total",
+        "raw mean=85 summary=85"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:mean_first_event_step",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=mean_first_event_step",
+        "raw mean=6.304875169 summary=6.304875169"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:cpu_s",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=cpu_s",
+        "raw mean=0.54081005 summary=0.54081005"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:exact_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=exact_discovery_D1",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:exact_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=exact_discovery_D2",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:covered_discovery_D1",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=covered_discovery_D1",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "summary.vs.raw:noisy_obs:oracle:covered_discovery_D2",
+      "status": "PASS",
+      "message": "summary mean equals raw per-seed mean",
+      "detail": [
+        "condition=noisy_obs policy=oracle metric=covered_discovery_D2",
+        "raw mean=0 summary=0"
+      ]
+    },
+    {
+      "check": "comparison.direction:comparison:metargon13_minus_metargon12:noisy_obs",
+      "status": "PASS",
+      "message": "comparison follows candidate_minus_baseline convention",
+      "detail": [
+        "condition=noisy_obs a=metargon13 b=metargon12 metric=success_rate",
+        "recorded=0 recomputed=0"
+      ]
+    },
+    {
+      "check": "comparison.direction:comparison:metargon13_minus_metargon10:noisy_obs",
+      "status": "PASS",
+      "message": "comparison follows candidate_minus_baseline convention",
+      "detail": [
+        "condition=noisy_obs a=metargon13 b=metargon10 metric=success_rate",
+        "recorded=0.36875 recomputed=0.36875"
+      ]
+    },
+    {
+      "check": "comparison.direction:comparison:metargon13_minus_metargon11:noisy_obs",
+      "status": "PASS",
+      "message": "comparison follows candidate_minus_baseline convention",
+      "detail": [
+        "condition=noisy_obs a=metargon13 b=metargon11 metric=success_rate",
+        "recorded=0.00625 recomputed=0.00625"
+      ]
+    },
+    {
+      "check": "comparison.direction:comparison:metargon12_minus_metargon10:noisy_obs",
+      "status": "PASS",
+      "message": "comparison follows candidate_minus_baseline convention",
+      "detail": [
+        "condition=noisy_obs a=metargon12 b=metargon10 metric=success_rate",
+        "recorded=0.36875 recomputed=0.36875"
+      ]
+    },
+    {
+      "check": "comparison.direction:comparison:metargon12_minus_metargon11:noisy_obs",
+      "status": "PASS",
+      "message": "comparison follows candidate_minus_baseline convention",
+      "detail": [
+        "condition=noisy_obs a=metargon12 b=metargon11 metric=success_rate",
+        "recorded=0.00625 recomputed=0.00625"
+      ]
+    },
+    {
+      "check": "bootstrap.ci:comparison:metargon13_minus_metargon12:noisy_obs",
+      "status": "PASS",
+      "message": "harness bootstrap CI reproduces exactly",
+      "detail": [
+        "condition=noisy_obs seed=4301 rounds=1500 alpha=0.05 convention=candidate_minus_baseline",
+        "recorded ci=(0,0) recomputed ci=(0,0)"
+      ]
+    },
+    {
+      "check": "bootstrap.ci:comparison:metargon13_minus_metargon10:noisy_obs",
+      "status": "PASS",
+      "message": "harness bootstrap CI reproduces exactly",
+      "detail": [
+        "condition=noisy_obs seed=4301 rounds=1500 alpha=0.05 convention=candidate_minus_baseline",
+        "recorded ci=(0.1875,0.6875) recomputed ci=(0.1875,0.6875)"
+      ]
+    },
+    {
+      "check": "bootstrap.ci:comparison:metargon13_minus_metargon11:noisy_obs",
+      "status": "PASS",
+      "message": "harness bootstrap CI reproduces exactly",
+      "detail": [
+        "condition=noisy_obs seed=4301 rounds=1500 alpha=0.05 convention=candidate_minus_baseline",
+        "recorded ci=(-0.01875,0.0375) recomputed ci=(-0.01875,0.0375)"
+      ]
+    },
+    {
+      "check": "bootstrap.ci:comparison:metargon12_minus_metargon10:noisy_obs",
+      "status": "PASS",
+      "message": "harness bootstrap CI reproduces exactly",
+      "detail": [
+        "condition=noisy_obs seed=4301 rounds=1500 alpha=0.05 convention=candidate_minus_baseline",
+        "recorded ci=(0.1875,0.6875) recomputed ci=(0.1875,0.6875)"
+      ]
+    },
+    {
+      "check": "bootstrap.ci:comparison:metargon12_minus_metargon11:noisy_obs",
+      "status": "PASS",
+      "message": "harness bootstrap CI reproduces exactly",
+      "detail": [
+        "condition=noisy_obs seed=4301 rounds=1500 alpha=0.05 convention=candidate_minus_baseline",
+        "recorded ci=(-0.01875,0.0375) recomputed ci=(-0.01875,0.0375)"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon10/exact_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.0306 vals=[0.925, 1.0, 0.975, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon10/exact_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3942 vals=[0.175, 1.0, 0.225, 0.975]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon10/covered_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.0306 vals=[0.925, 1.0, 0.975, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon10/covered_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3942 vals=[0.175, 1.0, 0.225, 0.975]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon11/exact_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3356 vals=[0.2, 0.425, 0.925, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon11/exact_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=3 stdev=0.2314 vals=[0.0, 0.575, 0.2, 0.5]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon11/covered_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3127 vals=[0.2, 0.675, 0.925, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon11/covered_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=3 stdev=0.3577 vals=[0.0, 0.95, 0.2, 0.5]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon12/exact_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.2374 vals=[0.4, 0.9, 0.925, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon12/exact_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3114 vals=[0.225, 1.0, 0.85, 0.95]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon12/covered_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.2401 vals=[0.4, 0.925, 0.925, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon12/covered_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3114 vals=[0.225, 1.0, 0.85, 0.95]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon13/exact_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.2374 vals=[0.4, 0.9, 0.925, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon13/exact_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3114 vals=[0.225, 1.0, 0.85, 0.95]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon13/covered_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.2401 vals=[0.4, 0.925, 0.925, 1.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/metargon13/covered_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=4 stdev=0.3114 vals=[0.225, 1.0, 0.85, 0.95]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/bayes/exact_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/bayes/exact_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/bayes/covered_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/bayes/covered_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/oracle/exact_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/oracle/exact_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/oracle/covered_discovery_D1",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "per_seed.variability:noisy_obs/oracle/covered_discovery_D2",
+      "status": "PASS",
+      "message": "per-seed discovery vector recorded (small sample)",
+      "detail": [
+        "n=4 positive=0 stdev=0.0000 vals=[0.0, 0.0, 0.0, 0.0]",
+        "n<8: pilot-grade evidence"
+      ]
+    },
+    {
+      "check": "fairness.cpu.measured",
+      "status": "PASS",
+      "message": "per-policy CPU measurements present",
+      "detail": []
+    },
+    {
+      "check": "fairness.planner_cap",
+      "status": "PASS",
+      "message": "planner expansion cap recorded: 700",
+      "detail": []
+    },
+    {
+      "check": "fairness.memory_limit",
+      "status": "INCONCLUSIVE",
+      "message": "memory limit not recorded in manifest",
+      "detail": []
+    }
+  ]
+}

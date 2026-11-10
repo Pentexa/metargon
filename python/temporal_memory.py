@@ -94,9 +94,27 @@ class _Completion:
 
 class TemporalMemory:
     def __init__(self, max_hypotheses: int = TEMPORAL_MAX, seed: int = 0,
-                 window: int = WINDOW):
+                 window: int = WINDOW,
+                 completion_mode: str = "active_first",
+                 support_weighting: str = "flat",
+                 max_cand_per_flip: int = 6,
+                 trigger_steps: int = 2,
+                 proximity_weight: float = 0.5):
         self.max_hypotheses = max_hypotheses
         self.window = window
+        # v0.13 generation/evidence options (defaults reproduce v0.12):
+        #   completion_mode - "active_first" (v0.12: single per-door slot)
+        #                     or "rolling" (v0.13: every recent first that
+        #                     pairs with a later flip generates a candidate)
+        #   support_weighting - "flat" (v0.12) or "proximity" (weight
+        #                     support by how close the completion is to the
+        #                     confirmed door-open: 1.0 within trigger_steps,
+        #                     proximity_weight beyond).
+        self.completion_mode = completion_mode
+        self.support_weighting = support_weighting
+        self.max_cand_per_flip = max_cand_per_flip
+        self.trigger_steps = trigger_steps
+        self.proximity_weight = proximity_weight
         self.hypotheses: list[TemporalHypothesis] = []
         self.transitions: dict[str, deque] = {
             d: deque(maxlen=TRANS_RING) for d in DOORS}
@@ -104,8 +122,11 @@ class TemporalMemory:
         self.step = 0
         self.evictions = 0
         self.generated = 0
-        # per-door active "first atom" waiting for completion
+        # per-door active "first atom" waiting for completion (v0.12)
         self._active_first: dict[str, tuple] = {}   # door -> (atom, step)
+        # per-door rolling buffer of recent first atoms (v0.13)
+        self._first_buf: dict[str, list[tuple]] = {
+            d: [] for d in DOORS}
         # pending completions awaiting open credit / contradiction
         self._pending: dict[str, list[_Completion]] = {
             d: [] for d in DOORS}
@@ -174,6 +195,9 @@ class TemporalMemory:
     def update(self, door: str, step: int, newly_true: frozenset):
         """Consume newly-true atoms: arm firsts, detect completions, prune
         expired pendings."""
+        if self.completion_mode == "rolling":
+            self._update_rolling(door, step, newly_true)
+            return
         # expire stale pendings and active firsts
         pend = self._pending[door]
         self._pending[door] = [p for p in pend
@@ -201,6 +225,44 @@ class TemporalMemory:
                     self._active_first[door] = (atom, step)
                     active = (atom, step)
 
+    def _update_rolling(self, door: str, step: int, newly_true: frozenset):
+        """v0.13 completion generation: keep a per-door buffer of recent
+        first atoms (within the window); every new flip generates one
+        candidate per buffered *different* first, so a true ordered pair is
+        never lost because an unrelated atom "consumed" the single
+        v0.12 active-first slot. Deterministic: within one step, atoms are
+        processed in sorted order and earlier same-step atoms also serve as
+        predecessor firsts (same convention as v0.12)."""
+        # prune expired pendings and old firsts
+        pend = self._pending[door]
+        self._pending[door] = [p for p in pend
+                               if step - p.step <= CONTRA_WINDOW + 2]
+        buf = [(a, s) for (a, s) in self._first_buf[door]
+               if step - s <= self.window]
+        step_atoms = []
+        for atom in sorted(newly_true, key=str):
+            if atom[0] in ("door_open",):
+                continue
+            # predecessors: buffered firsts + same-step atoms seen earlier
+            predecessors = [a for a, _ in buf] + step_atoms
+            generated = 0
+            for fa in predecessors:
+                if fa == atom:
+                    continue
+                self._pending[door].append(
+                    _Completion(frozenset({fa}), frozenset({atom}), step))
+                self._get_or_create(door, fa, atom)
+                generated += 1
+                if generated >= self.max_cand_per_flip:
+                    break
+            step_atoms.append(atom)
+            buf.append((atom, step))
+        # dedupe buffer by atom (keep the latest occurrence), keep order
+        seen: dict = {}
+        for a, s in buf:
+            seen[a] = (a, s)
+        self._first_buf[door] = list(seen.values())
+
     def _get_or_create(self, door, first, second):
         consequence = opens_key(door, True)
         self._add(frozenset({first}), frozenset({second}), consequence)
@@ -215,7 +277,12 @@ class TemporalMemory:
         for p in self._pending[door]:
             h = self._find(p.first, p.second, consequence)
             if h is not None and step - p.step <= OPEN_CREDIT:
-                self._support(h, step)
+                weight = 1.0
+                if self.support_weighting == "proximity":
+                    gap = step - p.step
+                    weight = 1.0 if gap <= self.trigger_steps \
+                        else self.proximity_weight
+                self._support(h, step, weight=weight)
             else:
                 keep.append(p)
         self._pending[door] = keep
@@ -233,8 +300,8 @@ class TemporalMemory:
                 keep.append(p)
         self._pending[door] = keep
 
-    def _support(self, h: TemporalHypothesis, step: int):
-        h.sup += 1.0
+    def _support(self, h: TemporalHypothesis, step: int, weight: float = 1.0):
+        h.sup += max(0.0, weight)
         h.n_sup += 1
         h.last_update = step
         self._recompute_status(h)
@@ -256,6 +323,7 @@ class TemporalMemory:
         self._active_first.clear()
         for d in DOORS:
             self._pending[d] = []
+            self._first_buf[d] = []
 
     # -- diagnostics ------------------------------------------------------
     def diagnostics(self) -> dict:
@@ -270,4 +338,6 @@ class TemporalMemory:
             },
             "pending": {d: len(v) for d, v in self._pending.items()},
             "ring_sizes": {d: len(q) for d, q in self.transitions.items()},
+            "completion_mode": self.completion_mode,
+            "support_weighting": self.support_weighting,
         }
