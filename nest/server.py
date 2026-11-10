@@ -103,6 +103,27 @@ class NestApp:
             raise ValueError(f"unknown control op: {op}")
         return self.session.snapshot()
 
+    def teaching(self, payload: dict) -> dict:
+        """Teaching endpoint: objective / hint / clear."""
+        kind = payload.get("kind", "hint")
+        text = (payload.get("text") or "").strip()
+        if kind == "objective":
+            if not text:
+                raise ValueError("objective text required")
+            self.session.teaching.set_objective(text)
+        elif kind == "hint":
+            from .teaching import parse_hint_text
+            hint = parse_hint_text(text)
+            if hint is None:
+                raise ValueError("could not parse a supported hint (e.g. "
+                                 "'try switch S1', 'load P1', 'door D2')")
+            self.session.teaching.add_hint(hint)
+        elif kind == "clear":
+            self.session.teaching.clear_hints()
+        else:
+            raise ValueError(f"unknown teaching kind: {kind}")
+        return self.session.snapshot()
+
 
 class NestHandler(BaseHTTPRequestHandler):
     app: NestApp = None
@@ -152,6 +173,11 @@ class NestHandler(BaseHTTPRequestHandler):
         if parsed.path == "/api/control":
             try:
                 return self._send(200, self.app.control(body.get("op", ""), body.get("params")))
+            except Exception as exc:
+                return self._send(400, {"error": str(exc)})
+        if parsed.path == "/api/teaching":
+            try:
+                return self._send(200, self.app.teaching(body))
             except Exception as exc:
                 return self._send(400, {"error": str(exc)})
         return self._send(404, {"error": "unknown endpoint"})

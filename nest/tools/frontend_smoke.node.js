@@ -57,6 +57,16 @@ const SNAPSHOT = {
   notice: '',
   worker_error: null,
   messages_tail: [],
+  teaching: {
+    objectives: [{ text: 'learn to open D1' }],
+    hints: [{ atoms: [['sw', 'S1', true]], door: 'D1', kind: 'atoms',
+              label: 'try switch S1', status: 'unverified-preference' }],
+    experiments_tail: [{ action: 'Toggle', door: 'D1', event: 'open',
+                         hint_used: true }],
+    stats: { guided_steps: 4, hints_added: 1 },
+    memory_delta: { before: { hypotheses: 0, verified: 0 },
+                    after: { hypotheses: 12, verified: 1 } },
+  },
 };
 
 const REPLY = {
@@ -122,7 +132,8 @@ class FakeEl {
 
 const els = {};
 ['status-pill', 'chat', 'input', 'send', 'cv', 'world-meta', 'memory',
- 'api-badge', 'notice-bar', 'challenge']
+ 'api-badge', 'notice-bar', 'challenge', 'teach-input', 'teach-send',
+ 'teach-area']
   .forEach(id => { els[id] = new FakeEl(id); });
 
 const controlButtons = ['start', 'pause', 'continue', 'step', 'stop',
@@ -208,6 +219,10 @@ async function runAssertions() {
      'challenge card renders');
   ok(els['api-badge'].textContent.includes('mode:'),
      'mode badge renders');
+  ok(els['teach-area'].innerHTML.includes('guided steps'),
+     'teaching panel renders stats');
+  ok(els['teach-area'].innerHTML.includes('unverified'),
+     'teaching panel marks hints as unverified');
 
   // click the Send button (not just Enter)
   els.input.value = 'Try opening door D1.';

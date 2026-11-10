@@ -26,6 +26,7 @@ from academy.envs.gridworld import (
 from academy.envs.tasks import EpisodeSpec, get_splits, make_episodes
 
 from .storage import NestStorage
+from .teaching import Teaching
 
 STATUS_IDLE = "idle"
 STATUS_RUNNING = "running"
@@ -68,7 +69,22 @@ class NestSession:
     agent_kwargs: dict = field(default_factory=dict)
 
     def __post_init__(self):
+        # Memory v0.7 student configuration for NEST: episode-scoped causal
+        # memory (avoids cross-task contradiction destroying everything),
+        # atom-level transfer, bank reuse, and a transfer threshold of 1
+        # verified epoch so rules verified in one teaching episode can
+        # influence later related tasks.
+        defaults = dict(
+            memory_episode_scoped=True,
+            memory_min_verified_epochs_for_transfer=1,
+            memory_atom_transfer=True,
+            probe_bank_reuse=True,
+            probe_reset_per_episode=True,
+        )
+        defaults.update(self.agent_kwargs)
+        self.agent_kwargs = defaults
         self.agent = MetargonAcademyAgent(seed=self.seed, **self.agent_kwargs)
+        self.teaching = Teaching(self)
         self.env = None
         self.spec = None
         self.challenge: Optional[Challenge] = None
@@ -94,6 +110,7 @@ class NestSession:
         self.messages = []          # bounded conversational log (client may also keep history)
         self.notice = ""
         self._last_error = None
+        self.last_guidance = False
 
     # ------------------------------------------------------------------ #
     # Episode / environment lifecycle
@@ -119,6 +136,7 @@ class NestSession:
         env = MechanismGrid(spec.config, spec.max_steps, spec.noise_q)
         obs = env.reset(spec.spec_seed)
         self.agent.episode_start(spec, env.geom)
+        self.teaching.begin_episode_snapshot()
         self.env = env
         self.spec = spec
         self.challenge = challenge
@@ -144,11 +162,18 @@ class NestSession:
             self._request_stop("Global step budget exhausted.")
             return
         obs_before = self.last_obs or self.env.observe()
+        # The student remains the sole action authority. Teaching only
+        # injects unverified candidate hypotheses that the student's own
+        # planner/probe machinery may or may not act on.
         action = self.agent.act(obs_before)
+        self.last_guidance = self.teaching.has_teacher_suggestion()
         self.last_action = action
         self.last_action_reason = self._reason_for_action(action, obs_before)
         result = self.env.step(action)
         self.agent.learn(obs_before, action, result)
+        self.teaching.record_step(
+            action, result,
+            note="teacher-suggestion active" if self.last_guidance else "")
         self.steps_this_episode += 1
         self.global_steps += 1
         self.last_result_valid = result.valid
@@ -432,5 +457,7 @@ class NestSession:
                 "trace": self.trace_snapshot(),
                 "notice": self.notice,
                 "worker_error": self._last_error,
+                "last_guidance": self.last_guidance,
+                "teaching": self.teaching.as_dict(),
                 "messages_tail": self.messages[-20:],
             }

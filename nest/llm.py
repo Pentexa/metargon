@@ -145,6 +145,11 @@ def build_grounding(snapshot: dict, recent_history: list[dict]) -> dict:
             "description": challenge.get("description") if challenge else None,
             "focus_door": challenge.get("focus_door") if challenge else None,
         },
+        "teaching": {
+            "objectives": (snapshot.get("teaching") or {}).get("objectives") or [],
+            "active_hints": (snapshot.get("teaching") or {}).get("hints") or [],
+            "guided_steps": (snapshot.get("teaching") or {}).get("stats", {}).get("guided_steps", 0),
+        },
         "world": {
             "present": world.get("present", False),
             "steps": world.get("steps"),
@@ -223,8 +228,15 @@ Rules:
    persistence_save, persistence_restore, persistence_fresh.
    Use [[ACTION:none]] when no action is requested. Never invent actions
    outside this list.
-8. Never output anything that looks like system commands, hidden world
-   state, or raw JSON beyond the action tag.
+8. If the human TEACHES you an exploration preference (e.g. "try switch
+   S1", "load plate P1", "focus on door D2"), you may record it as an
+   UNVERIFIED preference using a HINT tag: [[HINT:<expression>]] where
+   <expression> uses only the grammar: "switch S1 on|off", "load P1 A|B",
+   "loadany P1", "empty P1", "door D1|D2", or "novelty" (new untried
+   probe). Hints are NOT knowledge: you will still test them before
+   believing them. Never use HINT to claim learning happened.
+9. Never output anything that looks like system commands, hidden world
+   state, or raw JSON beyond the action/hint tags.
 """
 
 

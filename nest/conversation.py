@@ -24,6 +24,7 @@ from .llm import (
     build_grounding,
     extract_action_tag,
 )
+from .teaching import clean_tags, extract_hint_tags, parse_hint_text
 
 FALLBACK_LABEL = "command-mode (offline interpreter)"
 
@@ -109,10 +110,17 @@ class ConversationEngine:
         action = extract_action_tag(raw)
         if action not in VALID_ACTION_INTENTS:
             action = None
-        clean = raw
-        if action is not None:
-            clean = raw.split("[[ACTION:")[0].strip()
+        # teaching hints: unverified exploration preferences, recorded
+        hint_note = ""
+        for tag in extract_hint_tags(raw):
+            hint = parse_hint_text(tag)
+            if hint is not None:
+                self.session.teaching.add_hint(hint)
+                hint_note = "I'll treat that as an unverified preference to explore — I will still test it before believing it."
+        clean = clean_tags(raw)
         self._append_turn("assistant", clean)
+        if hint_note and clean:
+            clean = clean + "\n\n" + hint_note
         return clean, action
 
     # ------------------------------------------------------------------
@@ -120,6 +128,16 @@ class ConversationEngine:
     # ------------------------------------------------------------------
     def _respond_fallback(self, text: str) -> dict:
         cmd = self.interpreter(text)
+        # teaching instructions are recognized deterministically too
+        from .teaching import parse_hint_text
+        hint = parse_hint_text(text)
+        if hint is not None and cmd.intent in ("unsupported", "help", "hello"):
+            self.session.teaching.add_hint(hint)
+            reply = ("I'll keep that as an unverified preference and explore it — "
+                     "I still need evidence before I believe it. (command-mode fallback)")
+            return {"reply": reply, "action": None, "intent": "teaching_hint",
+                    "mode": "command", "grounded": True, "action_note": None,
+                    "snapshot": self.session.snapshot()}
         reply, action = self._fallback_reply(cmd)
         note = self._execute_action(action) if action else None
         return {"reply": reply, "action": action, "intent": cmd.intent,

@@ -59,6 +59,8 @@ class FakeLlm:
 
         if "remember" in low and "learned" in low:
             return "I'll save what I've learned now. [[ACTION:persistence_save]]"
+        if "remember" in low and "learned" in low:
+            return "I'll save what I've learned now. [[ACTION:persistence_save]]"
         if "remember" in low and ("what" in low or "learned" in low):
             if hv and verified:
                 h = hv[0]

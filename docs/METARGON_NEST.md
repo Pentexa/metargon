@@ -202,3 +202,51 @@ The core agent and all offline workflows run without any of these.
 - `nest/demo_conversation_v02.txt` contains a demonstrated multi-turn
   transcript (English + Turkish) showing the real grounding behavior.
 
+---
+
+# Interactive teaching (student-centric)
+
+Teaching never bypasses the student's intelligence. A hint is converted
+into an **unverified candidate hypothesis** inserted into the student's
+own hypothesis list; `MetargonAcademyAgent.act()` remains the only action
+authority.
+
+## How hints interact with the planner and learning loop
+
+1. The user (or the LLM bridge, restricted to interpreting) provides a
+   structured hint, e.g. `"try switch S1"` → `{atoms: {sw S1 true}, door:
+   D1}`.
+2. NEST constructs a `Hypothesis` object with `status="hypothesis"` (i.e.,
+   unverified, `sup=0`, `con=0`) and appends it to the student's memory
+   list with a teacher marker. No support, reward or hidden information is
+   injected; the student's own `_choose_probe()` will evaluate it among its
+   candidates, rank it by its own rules, and may accept or reject it.
+3. When the student selects that candidate, its own planner
+   (`plan_to_atoms`, expansion caps, protection checks) produces the
+   actions exactly as for any other hypothesis candidate. NEST never
+   executes outside plans.
+4. Every action still goes through `env.step()` and every transition
+   through `agent.learn()` — so verification/contradiction of the teacher
+   claim happens only through real observations. Teacher claims are never
+   auto-verified.
+5. The teaching panel shows the hint, the experiments performed, the
+   hypotheses (formed by the student, including teacher-suggested ones
+   with their current status), and metric deltas. Audit data: the
+   student's `planned_probes` log marks which hypotheses it chose
+   (teacher-suggested hits are counted separately).
+
+## Measured result (honest)
+
+`nest/tests/test_transfer_teaching.py` proves the mechanism:
+
+- Teacher-suggested hypotheses were selected by the student's own `act()`
+  (measured probe hits) during guided training — teaching changed behavior.
+- On a related unseen task, the trained agent's memory traces
+  (`memory_actions`, `hypothesis_retrieved`) are non-zero while the
+  memory-wiped control is zero — persistent learning affects later
+  decisions.
+- The success comparison on this pilot unseen task showed **no positive
+  transfer** (fresh 4/4 vs trained 0/4 on the selected config); this is
+  reported plainly rather than claimed as a win.
+
+
