@@ -184,6 +184,26 @@ class CompositionalMemory:
         candidates in new tasks (useful evidence reuse). The bank
         stores only antecedent/consequence pairs, is bounded, and is
         fully checkpointed. It never accesses hidden configuration.
+
+    v0.6 transfer mechanisms (each independent and off by default):
+      * ``atom_transfer`` — maintain a bounded per-door evidence
+        profile over *atoms* derived from the antecedents of verified
+        and contradicted hypotheses. Atoms that recur across tasks in
+        verified rules accumulate support; atoms unique to contradicted
+        rules accumulate contradiction. ``transfer_atoms`` returns the
+        most cross-task-robust atoms for a door, which the agent can
+        probe singly or as compact conjunctions — causal structure
+        matching across tasks without replaying verbatim (fragile)
+        antecedents.
+      * ``bank_refresh_on_contradiction`` — when a banked hypothesis is
+        contradicted, its bank entry is removed immediately (adaptive
+        forgetting of genuinely invalid evidence; the bank only keeps
+        currently verified entries).
+      * ``effective_confidence`` — context-conditioned confidence for a
+        hypothesis: per-context counts when context-scoped, otherwise
+        cumulative; returns 0.0 when the active context has no local
+        evidence (so stale cross-task hypotheses are not trusted
+        verbatim in a new task unless they have support there).
     """
 
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES,
@@ -200,7 +220,9 @@ class CompositionalMemory:
                  context_scoped: bool = False,
                  task_change_reset: bool = False,
                  context_gate_transfer: bool = False,
-                 evidence_bank_cap: int = 0):
+                 evidence_bank_cap: int = 0,
+                 atom_transfer: bool = False,
+                 bank_refresh_on_contradiction: bool = False):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -216,6 +238,9 @@ class CompositionalMemory:
         self.task_change_reset = bool(task_change_reset)
         self.context_gate_transfer = bool(context_gate_transfer)
         self.evidence_bank_cap = int(evidence_bank_cap)
+        self.atom_transfer = bool(atom_transfer)
+        self.bank_refresh_on_contradiction = bool(
+            bank_refresh_on_contradiction)
         self.current_ctx = None
         self.hypotheses: list[Hypothesis] = []
         self.next_id = 1
@@ -231,6 +256,24 @@ class CompositionalMemory:
         # v0.5 evidence bank: list of (antecedent, consequence_key)
         self.evidence_bank: list = []
         self.bank_retrievals = 0
+        # v0.6 atom-transfer profile: door -> atom -> [sup, con, n_ctxs,
+        # last_update]; bounded per door (FIFO by lowest score).
+        self._atom_stats: dict = {}
+        self._atom_ctxs: dict = {}
+        self._ATOM_STATS_CAP = 32
+        # v0.6 pair-co-occurrence profile: door -> pair -> [sup, con];
+        # built from hypotheses with >=2 antecedent atoms (bounded).
+        self._pair_stats: dict = {}
+        self._PAIR_STATS_CAP = 16
+        # v0.6 event counts per door (for conditional atom probability).
+        self._door_event_count: dict = {}
+        # v0.6 event-level support per (door, atom): counts only the
+        # directly observed opening events, not hypothesis-derived credit.
+        self._atom_event_support: dict = {}
+        # v0.6 nonevent-level support per (door, atom): atoms present at
+        # steps where the door stayed closed (used for lift filtering).
+        self._atom_nonevent_support: dict = {}
+        self._door_nonevent_count: dict = {}
 
     # -- context (v0.4) -----------------------------------------------------
     def set_context(self, ctx: Optional[tuple]) -> None:
@@ -352,6 +395,179 @@ class CompositionalMemory:
             return True
         return con > 0 and con >= self.contradiction_ratio * max(sup, 0)
 
+    # -- v0.6: context-conditioned confidence -----------------------------
+    def effective_confidence(self, h: Hypothesis) -> float:
+        """Context-conditioned confidence for a hypothesis.
+
+        With ``context_scoped``, the *active* context's counts decide;
+        a context with zero local evidence yields confidence 0.0 (the
+        hypothesis is not trusted verbatim in a new task). Otherwise
+        the global cumulative counts are used.
+        """
+        if self.context_scoped and self.current_ctx is not None:
+            sup = h.ctx_support(self.current_ctx)
+            con = h.ctx_contradiction(self.current_ctx)
+            if sup == 0 and con == 0:
+                return 0.0
+            return (sup + 1.0) / (sup + con + 2.0)
+        sup, con = self._ctx_counts(h)
+        return (sup + 1.0) / (sup + con + 2.0)
+
+    # -- v0.6: atom-level cross-task evidence ------------------------------
+    def _note_atom_evidence(self, h: Hypothesis, sign: int) -> None:
+        """Update the cross-task atom profile from a verified (+1) or
+        contradicted (−1) hypothesis. Bounded per door."""
+        if h.antecedent is None:
+            return
+        stats = self._atom_stats.setdefault(h.door, {})
+        ctx = self.current_ctx
+        atoms = sorted(h.antecedent)
+        for i, a in enumerate(atoms):
+            e = stats.get(a)
+            if e is None:
+                if len(stats) >= self._ATOM_STATS_CAP:
+                    victim = min(
+                        stats,
+                        key=lambda k: (self.atom_score(stats[k]), str(k)))
+                    del stats[victim]
+                    self._atom_ctxs.pop((h.door, victim), None)
+                e = [0, 0, 0, self.step]
+                stats[a] = e
+            if sign > 0:
+                e[0] += 1
+            else:
+                e[1] += 1
+            if ctx is not None:
+                key = (h.door, a)
+                s = self._atom_ctxs.setdefault(key, set())
+                if len(s) < 8 and ctx not in s:
+                    s.add(ctx)
+                e[2] = len(s)
+            e[3] = self.step
+        # pair co-occurrence (for conjunctive structure transfer)
+        if len(atoms) >= 2:
+            pairs = self._pair_stats.setdefault(h.door, {})
+            for i in range(len(atoms)):
+                for j in range(i + 1, len(atoms)):
+                    pair = frozenset({atoms[i], atoms[j]})
+                    pe = pairs.get(pair)
+                    if pe is None:
+                        if len(pairs) >= self._PAIR_STATS_CAP:
+                            victim = min(pairs, key=lambda p: (pairs[p][1]
+                                                               - pairs[p][0],
+                                                               p))
+                            del pairs[victim]
+                        pe = [0, 0]
+                        pairs[pair] = pe
+                    if sign > 0:
+                        pe[0] += 1
+                    else:
+                        pe[1] += 1
+
+    def transfer_pairs(self, door: str, k: int = 4) -> list:
+        """Top-k atom pairs for a door by verified co-occurrence (sup > con).
+        These are compact conjunctive structure candidates. Pairs that are
+        self-contradictory (e.g. S2 on ∧ S2 off) are never proposed."""
+        pairs = self._pair_stats.get(door, {})
+        pos = {}
+        for p, e in pairs.items():
+            if e[0] <= e[1]:
+                continue
+            atoms = list(p)
+            if len(atoms) == 2 and atoms[0][0] == atoms[1][0] \
+                    and atoms[0][1] == atoms[1][1] \
+                    and atoms[0][2] != atoms[1][2]:
+                continue
+            pos[p] = e
+        ranked = sorted(pos.items(),
+                        key=lambda kv: (-kv[1][0], kv[0]))
+        return [p for p, _ in ranked[:k]]
+
+    def atom_score(self, e) -> float:
+        """Cross-task robustness of an atom: confidence × context spread."""
+        sup, con, n_ctxs, _ = e
+        conf = (sup + 1.0) / (sup + con + 2.0)
+        return conf * (1.0 + 0.25 * min(n_ctxs, 8))
+
+    def _note_event_atoms(self, atoms: frozenset, door: str) -> None:
+        """Event-level positive atom evidence: every atom present *before*
+        a door-opening event is supported for that door. This is much
+        denser than hypothesis-verification-derived evidence (which is
+        nearly absent because few hypotheses reach VERIFIED).
+        ``transfer_atoms`` converts these counts to a conditional
+        probability (support / door event count) so that atoms that are
+        merely often co-present at openings are not over-trusted."""
+        if not atoms:
+            return
+        self._door_event_count[door] = self._door_event_count.get(door, 0) + 1
+        stats = self._atom_stats.setdefault(door, {})
+        ctx = self.current_ctx
+        for a in atoms:
+            e = stats.get(a)
+            if e is None:
+                if len(stats) >= self._ATOM_STATS_CAP:
+                    victim = min(
+                        stats,
+                        key=lambda k: (self.atom_score(stats[k]), str(k)))
+                    del stats[victim]
+                    self._atom_ctxs.pop((door, victim), None)
+                e = [0, 0, 0, self.step]
+                stats[a] = e
+            e[0] += 1
+            key_e = (door, a)
+            self._atom_event_support[key_e] = \
+                self._atom_event_support.get(key_e, 0) + 1
+            if ctx is not None:
+                key = (door, a)
+                s = self._atom_ctxs.setdefault(key, set())
+                if len(s) < 8 and ctx not in s:
+                    s.add(ctx)
+                e[2] = len(s)
+            e[3] = self.step
+
+    def transfer_atoms(self, door: str, k: int = 6,
+                       min_prob: float = 0.25) -> list:
+        """Top-k atoms for a door by cross-task evidence (causal structure
+        matching). With event-level data, an atom must be present at
+        openings at least ``min_prob`` and strictly more often than at
+        closed-door steps (lift over the standing-state baseline), with
+        net positive hypothesis-derived evidence. Without event-level
+        data, only the net positive hypothesis-derived evidence is used
+        (fallback for small/hypothesis-only profiles)."""
+        stats = self._atom_stats.get(door, {})
+        n_events = self._door_event_count.get(door, 0)
+        n_nonevents = self._door_nonevent_count.get(door, 0)
+        pos = {}
+        for a, e in stats.items():
+            if e[0] <= e[1]:
+                continue
+            if n_events > 0:
+                ev_sup = self._atom_event_support.get((door, a), 0)
+                p_open = ev_sup / n_events
+                if p_open < min_prob:
+                    continue
+                if n_nonevents > 0:
+                    p_closed = self._atom_nonevent_support.get((door, a), 0) \
+                        / n_nonevents
+                    if p_open <= p_closed:
+                        continue
+            pos[a] = e
+        ranked = sorted(pos.items(),
+                        key=lambda kv: (-kv[1][0] / max(1, n_events),
+                                        kv[0]))
+        return [a for a, _ in ranked[:k]]
+
+    def atom_profile_size(self) -> int:
+        return sum(len(s) for s in self._atom_stats.values())
+
+    def atom_profile(self) -> dict:
+        """Diagnostics for the atom-transfer profile (bounded)."""
+        return {
+            door: {str(sorted(list(a))): list(e)
+                   for a, e in stats.items()}
+            for door, stats in self._atom_stats.items()
+        }
+
     def _evict_one(self):
         if not self.hypotheses:
             return
@@ -376,6 +592,7 @@ class CompositionalMemory:
     def _recompute_status(self, h: Hypothesis):
         con = self._gated_con(h)
         sup, _ = self._ctx_counts(h)
+        before = h.status
         if con > self.max_contradict:
             h.status = CONTRADICTED
         elif sup >= self.verify_support and con <= self.max_contradict:
@@ -384,8 +601,17 @@ class CompositionalMemory:
             h.status = PREDICTED
         else:
             h.status = HYPOTHESIS
+        if self.atom_transfer:
+            if before != VERIFIED and h.status == VERIFIED:
+                self._note_atom_evidence(h, +1)
+            elif before != CONTRADICTED and h.status == CONTRADICTED:
+                self._note_atom_evidence(h, -1)
         if self.evidence_bank_cap > 0 and h.status == VERIFIED:
             self._bank_verified(h)
+        elif (self.evidence_bank_cap > 0
+                and self.bank_refresh_on_contradiction
+                and h.status == CONTRADICTED):
+            self._bank_remove(h)
 
     def _bank_verified(self, h: Hypothesis) -> None:
         """Add a verified hypothesis to the compact evidence bank
@@ -397,6 +623,13 @@ class CompositionalMemory:
         self.evidence_bank.append(entry)
         if len(self.evidence_bank) > self.evidence_bank_cap:
             self.evidence_bank.pop(0)   # FIFO eviction
+
+    def _bank_remove(self, h: Hypothesis) -> None:
+        """Remove a bank entry (adaptive forgetting of invalid evidence)."""
+        self.evidence_bank = [
+            (ante, cons) for ante, cons in self.evidence_bank
+            if not (ante == h.antecedent and cons == h.consequence)
+        ]
 
     def bank_entries(self) -> list:
         return list(self.evidence_bank)
@@ -441,6 +674,10 @@ class CompositionalMemory:
         from the *after* state (for persistent doors the true cause often
         only appears in the after-state)."""
         consequence = consequence_key(door, opened)
+        if opened and self.atom_transfer:
+            # event-level positive atom evidence (dense; not dependent on
+            # hypothesis verification, which rarely happens)
+            self._note_event_atoms(before_atoms, door)
         contexts = [before_atoms]
         if after_atoms is not None:
             contexts.append(after_atoms)
@@ -474,6 +711,13 @@ class CompositionalMemory:
 
     def observe_nonevent(self, atoms: frozenset, door: str, wants_open: bool):
         consequence = consequence_key(door, wants_open)
+        if wants_open and self.atom_transfer and atoms:
+            self._door_nonevent_count[door] = \
+                self._door_nonevent_count.get(door, 0) + 1
+            for a in atoms:
+                key = (door, a)
+                self._atom_nonevent_support[key] = \
+                    self._atom_nonevent_support.get(key, 0) + 1
         for h in list(self.hypotheses):
             if h.door != door or h.consequence != consequence or not h.usable:
                 continue
@@ -506,11 +750,35 @@ class CompositionalMemory:
             "task_change_reset": self.task_change_reset,
             "context_gate_transfer": self.context_gate_transfer,
             "evidence_bank_cap": self.evidence_bank_cap,
+            "atom_transfer": self.atom_transfer,
+            "bank_refresh_on_contradiction": self.bank_refresh_on_contradiction,
             "current_ctx": self.current_ctx,
             "evidence_bank": [
                 [sorted(list(ante)), cons] for ante, cons in self.evidence_bank
             ],
             "bank_retrievals": self.bank_retrievals,
+            "atom_stats": {
+                door: {tuple(a): e for a, e in stats.items()}
+                for door, stats in self._atom_stats.items()
+            },
+            "atom_ctxs": {
+                f"{door}|{tuple(a)}": sorted(s)
+                for (door, a), s in self._atom_ctxs.items()
+            },
+            "pair_stats": {
+                door: {tuple(sorted(p)): e for p, e in pairs.items()}
+                for door, pairs in self._pair_stats.items()
+            },
+            "door_event_count": dict(self._door_event_count),
+            "atom_event_support": {
+                f"{door}|{tuple(a)}": c
+                for (door, a), c in self._atom_event_support.items()
+            },
+            "atom_nonevent_support": {
+                f"{door}|{tuple(a)}": c
+                for (door, a), c in self._atom_nonevent_support.items()
+            },
+            "door_nonevent_count": dict(self._door_nonevent_count),
             "hypotheses": [h.as_dict() for h in self.hypotheses],
             "next_id": self.next_id,
             "step": self.step,
@@ -540,11 +808,44 @@ class CompositionalMemory:
         self.context_gate_transfer = bool(state.get("context_gate_transfer", False))
         self.current_ctx = state.get("current_ctx")
         self.evidence_bank_cap = int(state.get("evidence_bank_cap", 0))
+        self.atom_transfer = bool(state.get("atom_transfer", False))
+        self.bank_refresh_on_contradiction = bool(state.get(
+            "bank_refresh_on_contradiction", False))
         self.evidence_bank = [
             (frozenset(map(tuple, ante)), cons)
             for ante, cons in state.get("evidence_bank", [])
         ]
         self.bank_retrievals = int(state.get("bank_retrievals", 0))
+        self._atom_stats = {
+            door: {tuple(a): list(e) for a, e in stats.items()}
+            for door, stats in state.get("atom_stats", {}).items()
+        }
+        self._atom_ctxs = {
+            (door, tuple(a)): set(s)
+            for k, s in state.get("atom_ctxs", {}).items()
+            for door, a in [k.split("|", 1)]
+        }
+        self._pair_stats = {
+            door: {frozenset(p): list(e) for p, e in pairs.items()}
+            for door, pairs in state.get("pair_stats", {}).items()
+        }
+        self._door_event_count = {
+            str(d): int(c) for d, c in state.get("door_event_count", {}).items()
+        }
+        self._atom_event_support = {
+            (door, tuple(a)): int(c)
+            for k, c in state.get("atom_event_support", {}).items()
+            for door, a in [k.split("|", 1)]
+        }
+        self._atom_nonevent_support = {
+            (door, tuple(a)): int(c)
+            for k, c in state.get("atom_nonevent_support", {}).items()
+            for door, a in [k.split("|", 1)]
+        }
+        self._door_nonevent_count = {
+            str(d): int(c)
+            for d, c in state.get("door_nonevent_count", {}).items()
+        }
         self.hypotheses = [Hypothesis.from_dict(d) for d in state["hypotheses"]]
         self.next_id = state["next_id"]
         self.step = state["step"]
@@ -574,4 +875,8 @@ class CompositionalMemory:
                 s: sum(1 for h in self.hypotheses if h.status == s)
                 for s in (HYPOTHESIS, PREDICTED, VERIFIED, CONTRADICTED)
             },
+            "bank_size": len(self.evidence_bank),
+            "bank_retrievals": self.bank_retrievals,
+            "atom_profile_size": sum(
+                len(stats) for stats in self._atom_stats.values()),
         }

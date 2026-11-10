@@ -1,0 +1,115 @@
+{
+  "schema_version": "experiment-manifest-v01",
+  "protocol_version": "eval-protocol-v01",
+  "experiment": {
+    "name": "academy-memory-v06",
+    "description": "Academy Memory v0.6 three-regime experiment (frozen/adapt/continual) with diagnosis instrumentation and atom-level transfer interventions. Artifacts preserved out-of-tree pending the audit artifact-gate hotfix (frozen eval criteria v02).",
+    "format": "academy_memory",
+    "agent_version": "academy-v0.6",
+    "harness": "academy/tools/memory_experiment_v06.py + memory_merge_v06.py",
+    "commit_sha": "fc81d4d",
+    "working_tree_status": "clean",
+    "python_version": "3.11.0",
+    "platform": "windows",
+    "hash_seed": 0,
+    "family": "academy-classic",
+    "conditions": [
+      "classic"
+    ],
+    "seeds": [
+      20261107,
+      20261108
+    ],
+    "episodes_per_seed": 160,
+    "action_budget_max_steps": 80,
+    "policies": [
+      "fresh",
+      "original",
+      "memory_wiped",
+      "ctx",
+      "ctx_full",
+      "bank",
+      "bank_ctx",
+      "bank_ctx_full",
+      "reset",
+      "atomtx",
+      "atomtx_bank"
+    ],
+    "ablation_flags": {
+      "frozen_policy": true,
+      "candidate_minus_baseline": true,
+      "probe_reset_per_episode": true,
+      "memory_atom_transfer": true,
+      "memory_bank_refresh_on_contradiction": true,
+      "probe_min_effective_confidence": 0.5,
+      "probe_bank_reuse": true
+    },
+    "parameters": {
+      "classic_grid_configs": 16,
+      "eval_episodes_per_config": 4,
+      "eval_seeds_per_config": 2,
+      "ood_probe_configs": 12,
+      "ood_episodes_per_seed": 3,
+      "continual_probe_configs": 6,
+      "continual_episodes_per_seed": 3,
+      "substrate_n": 8,
+      "retention_episodes_per_config": 2,
+      "controls": {
+        "random_walk": "pure random valid actions; no door/goal planning",
+        "novocab": "goal/door planning with vocabulary probing disabled"
+      }
+    },
+    "resources": {
+      "planner_max_expand": 1500,
+      "probe_max_plans": 4,
+      "memory_limit_bytes": null,
+      "per_policy_cpu_s": false
+    },
+    "evaluation": {
+      "comparison_convention": "candidate_minus_baseline",
+      "bootstrap": {
+        "method": "paired",
+        "seed": 20261108,
+        "rounds": 2000,
+        "alpha": 0.05
+      },
+      "metrics": {
+        "train_success_mean": "mean training-phase success over 160 episodes per seed",
+        "classic_frozen": "zero-shot transfer: config_mean_success over 16-config classic grid, learning disabled and asserted frozen",
+        "classic_adapt": "within-episode learning: config_mean_success over 16-config classic grid, learning enabled",
+        "ood_frozen": "frozen OOD probe over 12-config pool",
+        "continual_ood": "continual OOD probe over 6-config pool",
+        "retention_delta_mean": "first-vs-last substrate retention delta",
+        "atom_profile_size": "per-door atom transfer profile size (memory_atom_transfer)",
+        "frozen_trace_mean": "aggregated probe-source trace during frozen evaluation",
+        "frozen_relevance_mean": "planned-probe relevance vs true rules (exact/partial/irrelevant)"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "../../results/academy_v01/memory_v06/memory_v06_summary.json",
+      "role": "summary",
+      "generated_by": "memory_merge_v06.py",
+      "contains_per_seed": true,
+      "sha256": "56f16c2838d3e0aed5c6d4c072161f856617968b40f9269514d19fb02c01dc70",
+      "size_bytes": 289024
+    },
+    {
+      "path": "../../results/academy_v01/memory_v06/memory_v06_runs.jsonl",
+      "role": "log",
+      "generated_by": "memory_experiment_v06.py",
+      "contains_per_seed": true,
+      "sha256": "596ebecb33c6f88b0730f8494c0f51d4e25943bc4ffd21f94f4179e4fcaa0894",
+      "size_bytes": 230124
+    },
+    {
+      "path": "../../results/academy_v01/memory_v06/fresh_control.json",
+      "role": "raw",
+      "generated_by": "memory_experiment_v06.py (fresh-control cache)",
+      "contains_per_seed": true,
+      "sha256": "9313894fb53c9a2b422bd5f19bb0931b9da76ba2c7c3168f1c20d6baa0c104b3",
+      "size_bytes": 5698
+    }
+  ]
+}
