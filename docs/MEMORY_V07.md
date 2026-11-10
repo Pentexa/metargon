@@ -223,7 +223,23 @@ a follow-up teacher-mix ablation.
 
 ---
 
-## 6. Files
+## 6. Quality manifests & artifact gate
+
+- Quality v0.5 manifest: `generalization_audit/manifests/memory_v07.manifest.json`
+  (`academy_memory` format; canonical git-blob hashes; pinned hash; 2
+  seeds; 160 episodes/seed; candidate − baseline convention).
+- Verifier: **47 PASS / 0 FAIL / 1 INCONCLUSIVE** (fairness.memory_limit
+  not recorded — same as committed v0.5/v0.6/v121 examples).
+- Artifact gate: the Audit-owned `FROZEN_TARGETS` list currently covers
+  `results/v13` and `results/academy_v01/memory_v06` (both PASS).
+  `results/academy_v01/memory_v07` is a new experiment target not yet in
+  that Audit-owned list; extending it is an Audit-side change not
+  performed here. Provenance is nevertheless fully established via the
+  covering manifest (47 PASS / 0 FAIL).
+
+---
+
+## 7. Files
 
 | Path | Role |
 |---|---|
