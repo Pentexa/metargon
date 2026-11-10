@@ -76,6 +76,10 @@ class Hypothesis:
     # v0.4: context-scoped evidence (mapped by context-signature string)
     sup_by_ctx: dict = field(default_factory=dict)
     con_by_ctx: dict = field(default_factory=dict)
+    # v0.7: episode-scoped evidence (mapped by episode index)
+    sup_by_epoch: dict = field(default_factory=dict)
+    con_by_epoch: dict = field(default_factory=dict)
+    verified_epochs: list = field(default_factory=list)   # sorted ints
 
     @property
     def door(self) -> str:
@@ -113,6 +117,17 @@ class Hypothesis:
     def ctx_contradiction(self, ctx: str) -> int:
         return self.con_by_ctx.get(ctx, 0)
 
+    # -- v0.7 epoch-scoped evidence -------------------------------------
+    def epoch_support(self, epoch: int) -> int:
+        return self.sup_by_epoch.get(epoch, 0)
+
+    def epoch_contradiction(self, epoch: int) -> int:
+        return self.con_by_epoch.get(epoch, 0)
+
+    @property
+    def verified_epoch_count(self) -> int:
+        return len(self.verified_epochs)
+
     def as_dict(self) -> dict:
         return {
             "antecedent": sorted(self.antecedent),
@@ -124,6 +139,9 @@ class Hypothesis:
             "h_id": self.h_id,
             "sup_by_ctx": self.sup_by_ctx,
             "con_by_ctx": self.con_by_ctx,
+            "sup_by_epoch": {str(k): v for k, v in self.sup_by_epoch.items()},
+            "con_by_epoch": {str(k): v for k, v in self.con_by_epoch.items()},
+            "verified_epochs": self.verified_epochs,
         }
 
     @classmethod
@@ -138,6 +156,9 @@ class Hypothesis:
             h_id=d["h_id"],
             sup_by_ctx=dict(d.get("sup_by_ctx", {})),
             con_by_ctx=dict(d.get("con_by_ctx", {})),
+            sup_by_epoch={int(k): v for k, v in d.get("sup_by_epoch", {}).items()},
+            con_by_epoch={int(k): v for k, v in d.get("con_by_epoch", {}).items()},
+            verified_epochs=list(d.get("verified_epochs", [])),
         )
 
 
@@ -222,7 +243,9 @@ class CompositionalMemory:
                  context_gate_transfer: bool = False,
                  evidence_bank_cap: int = 0,
                  atom_transfer: bool = False,
-                 bank_refresh_on_contradiction: bool = False):
+                 bank_refresh_on_contradiction: bool = False,
+                 episode_scoped: bool = False,
+                 min_verified_epochs_for_transfer: int = 2):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -241,7 +264,11 @@ class CompositionalMemory:
         self.atom_transfer = bool(atom_transfer)
         self.bank_refresh_on_contradiction = bool(
             bank_refresh_on_contradiction)
+        self.episode_scoped = bool(episode_scoped)
+        self.min_verified_epochs_for_transfer = int(
+            min_verified_epochs_for_transfer)
         self.current_ctx = None
+        self._current_epoch = None
         self.hypotheses: list[Hypothesis] = []
         self.next_id = 1
         self.step = 0
@@ -287,9 +314,39 @@ class CompositionalMemory:
             self._continuous_true.clear()
         self.current_ctx = key
 
+    def begin_episode(self, epoch: int) -> None:
+        """Declare a new episode (task) boundary.
+
+        With ``episode_scoped``, each episode is an evidence epoch:
+        * the consecutive-nonevent windows are reset, so a task switch
+          can never be read as latent contradiction;
+        * support / contradiction are recorded per epoch and status is
+          computed relative to the active epoch only (cross-epoch
+          contradictions demote but do not destroy a hypothesis);
+        * every hypothesis status is recomputed against the fresh epoch
+          (no evidence yet => neutral), so a hypothesis contradicted in
+          a past epoch can be retrieved again as a cross-epoch transfer
+          candidate in the new task.
+        """
+        self._current_epoch = int(epoch)
+        if self.episode_scoped:
+            self._continuous_true.clear()
+            for h in self.hypotheses:
+                self._recompute_status(h)
+
+    def _epoch_counts(self, h: Hypothesis) -> tuple:
+        """(sup, con) used for status in episode-scoped mode."""
+        ep = self._current_epoch
+        if ep is None:
+            return h.sup, h.con
+        return (h.epoch_support(ep), h.epoch_contradiction(ep))
+
     def _ctx_counts(self, h: Hypothesis) -> tuple:
         """(sup, con) used for status: per-context when context_scoped,
-        otherwise global cumulative (with evidence-window override)."""
+        per-epoch when episode_scoped, otherwise global cumulative (with
+        evidence-window override)."""
+        if self.episode_scoped:
+            return self._epoch_counts(h)
         if self.context_scoped and self.current_ctx is not None:
             return (h.ctx_support(self.current_ctx),
                     h.ctx_contradiction(self.current_ctx))
@@ -311,8 +368,35 @@ class CompositionalMemory:
                     and h.ctx_support(self.current_ctx) <= 0):
                 continue
             out.append(h)
-        out.sort(key=lambda h: (-h.confidence, -h.sup))
+        if self.episode_scoped:
+            out.sort(key=lambda h: (-self._retrieval_key(h), h.h_id))
+        else:
+            out.sort(key=lambda h: (-h.confidence, -h.sup))
         return out
+
+    def _retrieval_key(self, h: Hypothesis) -> float:
+        """Retrieval priority in episode-scoped mode.
+
+        1. VERIFIED in the active epoch;
+        2. PREDICTED in the active epoch;
+        3. cross-epoch transfer candidates — verified in >=
+           ``min_verified_epochs_for_transfer`` past epochs and untested
+           in the active epoch (uncertainty-aware reuse);
+        4. everything else usable.
+        """
+        ep = self._current_epoch
+        if h.status == VERIFIED:
+            base = 100.0
+        elif h.status == PREDICTED:
+            base = 50.0
+        else:
+            base = 0.0
+        if ep is not None and h.epoch_support(ep) == 0 \
+                and h.epoch_contradiction(ep) == 0 \
+                and h.verified_epoch_count >= self.min_verified_epochs_for_transfer:
+            # untested cross-epoch verified hypothesis
+            base = max(base, 20.0)
+        return base + h.confidence
 
     def best_for_door(self, door: str, opens: Optional[bool] = None) -> Optional[Hypothesis]:
         q = self.query(door, opens)
@@ -363,6 +447,12 @@ class CompositionalMemory:
 
     # -- evidence timeline (windowed counts) -------------------------------
     def _record_evidence(self, h: Hypothesis, kind: str) -> None:
+        if self.episode_scoped and self._current_epoch is not None:
+            ep = self._current_epoch
+            if kind == "s":
+                h.sup_by_epoch[ep] = h.sup_by_epoch.get(ep, 0) + 1
+            else:
+                h.con_by_epoch[ep] = h.con_by_epoch.get(ep, 0) + 1
         if self.context_scoped and self.current_ctx is not None:
             if kind == "s":
                 h.sup_by_ctx[self.current_ctx] = h.sup_by_ctx.get(
@@ -370,6 +460,8 @@ class CompositionalMemory:
             else:
                 h.con_by_ctx[self.current_ctx] = h.con_by_ctx.get(
                     self.current_ctx, 0) + 1
+            return
+        if self.episode_scoped:
             return
         if self.evidence_window <= 0:
             return
@@ -568,11 +660,27 @@ class CompositionalMemory:
             for door, stats in self._atom_stats.items()
         }
 
+    def _epoch_eviction_score(self, h: Hypothesis) -> float:
+        """Eviction priority in episode-scoped mode: hypotheses verified
+        across more epochs and with higher confidence are retained; a
+        hypothesis contradicted in the active epoch is evicted first."""
+        if h.status == CONTRADICTED:
+            con_active = h.epoch_contradiction(self._current_epoch) \
+                if self._current_epoch is not None else h.con
+            return -10.0 + con_active * 0.01
+        return (h.verified_epoch_count * 5.0 + h.confidence
+                - 0.0001 * h.last_update)
+
     def _evict_one(self):
         if not self.hypotheses:
             return
-        victim = min(self.hypotheses,
-                     key=lambda h: (h.score(), -h.last_update, -h.h_id))
+        if self.episode_scoped:
+            victim = min(self.hypotheses,
+                         key=lambda h: (self._epoch_eviction_score(h),
+                                        -h.last_update, -h.h_id))
+        else:
+            victim = min(self.hypotheses,
+                         key=lambda h: (h.score(), -h.last_update, -h.h_id))
         self.hypotheses.remove(victim)
         self._continuous_true.pop(victim.h_id, None)
         self._sup_timeline.pop(victim.h_id, None)
@@ -601,6 +709,16 @@ class CompositionalMemory:
             h.status = PREDICTED
         else:
             h.status = HYPOTHESIS
+        if h.status == VERIFIED and before != VERIFIED:
+            # record the epoch in which this hypothesis became verified
+            # (episode-scoped mode); bounded, sorted, deduplicated.
+            if self._current_epoch is not None:
+                ep = self._current_epoch
+                if ep not in h.verified_epochs:
+                    h.verified_epochs.append(ep)
+                    h.verified_epochs.sort()
+                    if len(h.verified_epochs) > 512:
+                        h.verified_epochs = h.verified_epochs[-512:]
         if self.atom_transfer:
             if before != VERIFIED and h.status == VERIFIED:
                 self._note_atom_evidence(h, +1)
@@ -752,6 +870,10 @@ class CompositionalMemory:
             "evidence_bank_cap": self.evidence_bank_cap,
             "atom_transfer": self.atom_transfer,
             "bank_refresh_on_contradiction": self.bank_refresh_on_contradiction,
+            "episode_scoped": self.episode_scoped,
+            "min_verified_epochs_for_transfer":
+                self.min_verified_epochs_for_transfer,
+            "current_epoch": self._current_epoch,
             "current_ctx": self.current_ctx,
             "evidence_bank": [
                 [sorted(list(ante)), cons] for ante, cons in self.evidence_bank
@@ -806,6 +928,10 @@ class CompositionalMemory:
         self.context_scoped = bool(state.get("context_scoped", False))
         self.task_change_reset = bool(state.get("task_change_reset", False))
         self.context_gate_transfer = bool(state.get("context_gate_transfer", False))
+        self.episode_scoped = bool(state.get("episode_scoped", False))
+        self.min_verified_epochs_for_transfer = int(state.get(
+            "min_verified_epochs_for_transfer", 2))
+        self._current_epoch = state.get("current_epoch")
         self.current_ctx = state.get("current_ctx")
         self.evidence_bank_cap = int(state.get("evidence_bank_cap", 0))
         self.atom_transfer = bool(state.get("atom_transfer", False))
@@ -879,4 +1005,11 @@ class CompositionalMemory:
             "bank_retrievals": self.bank_retrievals,
             "atom_profile_size": sum(
                 len(stats) for stats in self._atom_stats.values()),
+            "current_epoch": self._current_epoch,
+            "episode_scoped": self.episode_scoped,
+            "verified_hypotheses": sum(
+                1 for h in self.hypotheses if h.status == VERIFIED),
+            "cross_epoch_verified": sum(
+                1 for h in self.hypotheses
+                if h.verified_epoch_count >= self.min_verified_epochs_for_transfer),
         }
