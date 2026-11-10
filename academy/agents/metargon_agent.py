@@ -96,6 +96,8 @@ class MetargonAcademyAgent:
                  probe_reset_per_episode: bool = False,
                  probe_min_effective_confidence: float = 0.0,
                  probe_bank_reuse: bool = False,
+                 memory_episode_scoped: bool = False,
+                 memory_min_verified_epochs_for_transfer: int = 2,
                  memory_factory=None):
         self.seed = seed
         self.rng = random.Random(seed)
@@ -118,10 +120,15 @@ class MetargonAcademyAgent:
             evidence_bank_cap=memory_evidence_bank_cap,
             atom_transfer=memory_atom_transfer,
             bank_refresh_on_contradiction=memory_bank_refresh_on_contradiction,
+            episode_scoped=memory_episode_scoped,
+            min_verified_epochs_for_transfer=memory_min_verified_epochs_for_transfer,
         )
         self.memory_atom_transfer = bool(memory_atom_transfer)
         self.memory_bank_refresh_on_contradiction = bool(
             memory_bank_refresh_on_contradiction)
+        self.memory_episode_scoped = bool(memory_episode_scoped)
+        self.memory_min_verified_epochs_for_transfer = int(
+            memory_min_verified_epochs_for_transfer)
         self.probe_reset_per_episode = bool(probe_reset_per_episode)
         self.probe_min_effective_confidence = float(
             probe_min_effective_confidence)
@@ -176,6 +183,12 @@ class MetargonAcademyAgent:
             "door_open_after_other": 0,
             "query_calls": 0, "query_useful": 0,
             "hypothesis_candidates": 0, "hypothesis_skipped_lowconf": 0,
+            # v0.7 memory-to-action attribution
+            "hypothesis_retrieved": 0,
+            "cross_epoch_transfer_retrieved": 0,
+            "memory_actions": 0,
+            "memory_correct": 0,
+            "memory_incorrect": 0,
         }
 
     # -- perception ------------------------------------------------------
@@ -189,6 +202,11 @@ class MetargonAcademyAgent:
         self._steps_since_goal_check = 0
         self._episode_mem_step = self.memory.step
         self._ctx_signature = None
+        # v0.7: each episode is an evidence epoch (task boundary); the
+        # memory resets consecutive-nonevent windows and scopes evidence
+        # per epoch so cross-task contradictions do not destroy verified
+        # hypotheses.
+        self.memory.begin_episode(self.episodes)
         # derive door anchors once per topology
         if not self.far_anchor:
             self._derive_anchors(geom)
@@ -482,6 +500,12 @@ class MetargonAcademyAgent:
             self.trace["query_calls"] += 1
             if hyps:
                 self.trace["query_useful"] += 1
+            self.trace["hypothesis_retrieved"] += len(hyps)
+            if self.memory.episode_scoped:
+                self.trace["cross_epoch_transfer_retrieved"] += sum(
+                    1 for h in hyps
+                    if h.verified_epoch_count
+                    >= self.memory.min_verified_epochs_for_transfer)
             if self.probe_episode_local:
                 hyps = [h for h in hyps
                         if h.last_update >= self._episode_mem_step]
@@ -557,6 +581,8 @@ class MetargonAcademyAgent:
                 key = "source_other"
             self.trace[key] += 1
             self.trace["plans_used"] += 1
+            if src == "hypothesis":
+                self.trace["memory_actions"] += 1
             self.pending_probe[door] = (ante, self.memory.step + self.probe_timeout, src)
             if self._collect_probe_log:
                 self.trace.setdefault("planned_probes", []).append(
@@ -594,6 +620,8 @@ class MetargonAcademyAgent:
                     _, _, src = self.pending_probe[door]
                     self.trace["door_open_after_probe"] += 1
                     self.trace[f"door_open_after_{src}"] += 1
+                    if src == "hypothesis":
+                        self.trace["memory_correct"] += 1
                 self.pending_probe.pop(door, None)
             elif before_open and not after_open:
                 self.memory.observe_event(before_atoms, door, False, after_atoms)
@@ -615,6 +643,8 @@ class MetargonAcademyAgent:
         for door, (ante, deadline, _src) in list(self.pending_probe.items()):
             if self.memory.step >= deadline:
                 self.tried[door].add(ante)
+                if _src == "hypothesis":
+                    self.trace["memory_incorrect"] += 1
                 del self.pending_probe[door]
 
     def learn_from_experience(self, exp):
@@ -683,6 +713,9 @@ class MetargonAcademyAgent:
             "memory_atom_transfer": self.memory_atom_transfer,
             "memory_bank_refresh_on_contradiction":
                 self.memory_bank_refresh_on_contradiction,
+            "memory_episode_scoped": self.memory_episode_scoped,
+            "memory_min_verified_epochs_for_transfer":
+                self.memory_min_verified_epochs_for_transfer,
             "probe_reset_per_episode": self.probe_reset_per_episode,
             "probe_min_effective_confidence":
                 self.probe_min_effective_confidence,
@@ -728,6 +761,10 @@ class MetargonAcademyAgent:
         self.memory_atom_transfer = bool(state.get("memory_atom_transfer", False))
         self.memory_bank_refresh_on_contradiction = bool(state.get(
             "memory_bank_refresh_on_contradiction", False))
+        self.memory_episode_scoped = bool(state.get(
+            "memory_episode_scoped", False))
+        self.memory_min_verified_epochs_for_transfer = int(state.get(
+            "memory_min_verified_epochs_for_transfer", 2))
         self.probe_reset_per_episode = bool(state.get(
             "probe_reset_per_episode", False))
         self.probe_min_effective_confidence = float(state.get(
