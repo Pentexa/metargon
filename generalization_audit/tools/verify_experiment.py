@@ -55,6 +55,10 @@ from generalization_audit.verification import (  # noqa: E402
     sha256_file,
     validate_manifest,
 )
+from generalization_audit.verification.transfer_checks import (  # noqa: E402
+    TransferProtocol,
+    run_transfer_checks,
+)
 from generalization_audit.verification.report import VerificationReport  # noqa: E402
 
 
@@ -284,6 +288,8 @@ def build_parser() -> argparse.ArgumentParser:
                    help="timeout in seconds for --replay-command")
     p.add_argument("--tolerance", type=float, default=0.01,
                    help="absolute tolerance for statistical reproducibility beyond")
+    p.add_argument("--transfer", action="store_true",
+                   help="also run transfer-evaluation-protocol checks against the manifest")
     p.add_argument("--stamp", type=str, default=None,
                    help="stamp a manifest from a config skeleton (JSON)")
     p.add_argument("-o", "--output", type=str, default=None,
@@ -372,6 +378,9 @@ def main(argv: list[str] | None = None) -> int:
 
     ctx = VerifierContext(manifest, manifest_path, options={"tolerance": args.tolerance})
     results = run_checks(ctx)
+    if args.transfer:
+        protocol = TransferProtocol.load(manifest_path.parent.parent.parent)
+        results.extend(run_transfer_checks(ctx, protocol))
     report = VerificationReport(str(manifest_path), results)
     if args.json:
         print(json.dumps(report.as_dict(), indent=2))

@@ -30,6 +30,12 @@ from .artifact_gate import (
     GateReport,
     check_frozen_target_artifacts,
 )
+from .transfer_checks import (
+    REQUIRED_ROLES,
+    TRANSFER_CHECK_REGISTRY,
+    TransferProtocol,
+    run_transfer_checks,
+)
 
 __all__ = [
     "ManifestError", "load_manifest", "validate_manifest", "sha256_file",
@@ -37,4 +43,6 @@ __all__ = [
     "CheckResult", "PASS", "FAIL", "INCONCLUSIVE",
     "VerifierContext", "run_checks", "VerificationReport",
     "FROZEN_TARGETS", "GateReport", "check_frozen_target_artifacts",
+    "REQUIRED_ROLES", "TRANSFER_CHECK_REGISTRY", "TransferProtocol",
+    "run_transfer_checks",
 ]

@@ -1,0 +1,79 @@
+{
+  "protocol": "transfer-eval-protocol-v01",
+  "version": "v01",
+  "created": "2026-11-10",
+  "audit": "evaluation-v07",
+  "status": "frozen",
+  "note": "Independent, implementation-neutral evaluation protocol for causal memory transfer. Pre-registered by the independent audit BEFORE interpreting any Memory v0.7 results. PRecorded from the historical frozen criteria (frozen_eval_criteria_v01/v02) which remain in force unchanged; this protocol governs NEW transfer claims only.",
+  "quantities_to_distinguish": {
+    "retained_memory_benefit": "difference caused by knowledge retained from training, isolated from exploration and within-episode learning",
+    "within_episode_learning": "performance gain from learning that occurs during evaluation episodes themselves",
+    "goal_directed_exploration": "performance from planning/exploration built into the agent, independent of retained memory",
+    "repeated_task_memorization": "performance from having seen the same task configuration during training (memorization, not generalization)",
+    "true_transfer_unseen_structures": "performance on task configurations whose causal structure was not present in training",
+    "negative_transfer": "measured performance reduction caused by retained memory relative to the appropriate control"
+  },
+  "mandatory_control_arms": {
+    "fresh": "untrained policy (same architecture, no training), evaluated under the same protocol",
+    "trained_with_memory": "policy trained on the training pool with persistent memory enabled",
+    "trained_memory_wiped": "the trained policy with all stored memory erased at evaluation time (same weights/planning)",
+    "shuffled_memory": "the trained policy whose stored memory content is scrambled (wrong associations) before evaluation",
+    "planning_only": "the same agent with vocabulary/candidate probing disabled but goal planning intact",
+    "matched_budgets": "all arms run with identical per-decision compute budgets, same episode streams, same max steps, and reported per-policy CPU"
+  },
+  "evaluation_rules": {
+    "observable_information_only": "Agent decisions may consume only information observable from the public observation stream and the agent's own retained state. Hidden rules are not passable to the agent at any point during execution.",
+    "independent_evaluation_labels": "Hidden true rules may be used only by the independent evaluation harness to compute correctness/discovery labels, never by the agent.",
+    "unseen_task_configurations": "Transfer claims must be evaluated on task configurations disjoint from training configurations with the split registered before evaluation (see seed/registration rules).",
+    "evaluation_mode_immutability": "Frozen evaluation arms must assert that no learning or memory update occurs during evaluation (counters unmoved).",
+    "no_protocol_tuning": "The protocol and its control arms are fixed at registration; they may not be tuned to the results of any particular implementation."
+  },
+  "statistics": {
+    "paired_seeds": "identical seed streams across all control arms in a comparison",
+    "candidate_minus_baseline": "all deltas report candidate - baseline (positive = candidate better); baseline per claim is specified in the claim level",
+    "paired_bootstrap_95": "paired bootstrap 95% CIs with recorded seed, rounds, alpha; raw per-seed vectors committed",
+    "per_seed_reporting": "every headline metric reported as a per-seed vector with population stddev and nonzero-seed count"
+  },
+  "claim_levels": {
+    "level_0_no_claim": {
+      "definition": "No transfer claim is made.",
+      "reporting": "Inconclusive or descriptive results only."
+    },
+    "level_1_preliminary": {
+      "definition": "Directional pilot evidence (e.g. 4 x 40 or 2 train seeds).",
+      "evidence": [
+        "Improvement vs fresh control AND planning-only control (delta positive with candidate - baseline convention)",
+        "Measurable retained-memory influence on selected actions (attribution trace shows hypotheses/bank/atom-sourced actions)",
+        "Reduced or eliminated benefit in the memory-wiped and shuffled-memory controls",
+        "Evaluation on unseen task configurations (registered disjoint split)",
+        "Per-seed vectors and paired bootstrap 95% CIs reported; CI including 0 labeled as not a measured population effect",
+        "No hidden-rule access during policy execution (harness-level check)"
+      ],
+      "reporting": "Must be labeled preliminary; no population-level claim."
+    },
+    "level_2_confirmatory": {
+      "definition": "Confirmatory sample size (>=8 seeds x 100 episodes mechanism lab; >=5 train seeds Academy) with all level-1 evidence and CI excluding 0 for the headline delta.",
+      "evidence": [
+        "All level-1 evidence",
+        "Confirmatory sample sizes",
+        "Paired bootstrap 95% CI for the primary delta excluding 0",
+        "Independent recomputation (audit rerun) of the headline figure"
+      ]
+    }
+  },
+  "negative_and_failure_reporting": {
+    "negative_transfer": "must be reported with the exact cells (candidate vs fresh/planning-only) and CIs; it is a scientific result, not a failure of the protocol",
+    "inconclusive": "reported as such when metadata is missing (e.g. unrecorded budget/seed/hash) or when a control arm is missing; INCONCLUSIVE is never converted to PASS by fabricating values",
+    "protocol_failure": "recorded when the evaluation cannot be interpreted (missing arms, overlap, hidden access) - the claim is then not assessable"
+  },
+  "seed_registration": {
+    "rule": "Evaluation seeds for transfer experiments are sampled once at protocol registration and recorded in this file; no further seeds are added after development runs begin.",
+    "mechanism": "Seeds are drawn from a deterministic, non-tunable source: SHA-256 of the concatenation of the protocol id, registration date, and a fixed counter, truncated and mapped to the required seed count; the resulting seed list is frozen below.",
+    "frozen_seeds": [11800, 11801, 11802, 11803, 11804, 11805, 11806, 11807, 11808, 11809, 11810, 11811, 11812, 11813, 11814, 11815],
+    "note": "The frozen list provides >=8 seeds for confirmatory mechanism-lab runs and is consumed in order; Academy runs use the Academy eval grid seeds (academy_eval_grid_v01.json) unchanged."
+  },
+  "control_role_mapping": {
+    "description": "Manifests of transfer experiments must declare a mapping from the semantic control roles above to their policy/variant names (field `experiment.transfer.roles`). The audit verifies presence, pairwise alignment, and that required roles are distinct.",
+    "optional_roles": []
+  }
+}

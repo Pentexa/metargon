@@ -88,6 +88,23 @@
             "metrics": {
               "type": "object",
               "description": "Metric definitions: metric name -> definition string. Discovery metrics must also provide per-seed arrays."
+            },
+            "transfer": {
+              "type": "object",
+              "description": "Transfer-evaluation declarations (protocol transfer-eval-protocol-v01). Optional; required only for transfer claims.",
+              "properties": {
+                "roles": {
+                  "type": "object",
+                  "description": "Map from semantic control roles (fresh, trained_with_memory, trained_memory_wiped, shuffled_memory, planning_only) to policy/variant names in this experiment.",
+                  "additionalProperties": {"type": "string"}
+                },
+                "eval_mode": {
+                  "enum": ["frozen", "adapt", "continual"]
+                },
+                "unseen_configs_declared": {"type": "boolean"},
+                "split_source": {"type": "string"},
+                "frozen_immutability_asserted": {"type": "boolean"}
+              }
             }
           }
         }
