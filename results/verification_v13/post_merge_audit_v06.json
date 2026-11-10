@@ -1,0 +1,294 @@
+{
+  "audit": "post-merge-v06",
+  "date": "2026-11-10",
+  "starting_commit": "cb56c0bf514e7b5b5e08fcd33c94c2565e21efee",
+  "manifest_verification": {
+    "sum": {
+      "PASS": 2927,
+      "FAIL": 0,
+      "INCONCLUSIVE": 19
+    },
+    "per_manifest": {
+      "generalization_audit/manifests\\v13_baseline_l.manifest.json": {
+        "PASS": 188,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_diagnostics.manifest.json": {
+        "PASS": 15,
+        "FAIL": 0,
+        "INCONCLUSIVE": 4,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "raw.present",
+            "unsupported/unknown format 'generic'"
+          ],
+          [
+            "comparison.direction",
+            "unsupported format 'generic'"
+          ],
+          [
+            "discovery.metrics",
+            "unsupported format 'generic'"
+          ],
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_final_f.manifest.json": {
+        "PASS": 604,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_final_h.manifest.json": {
+        "PASS": 247,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_final_l.manifest.json": {
+        "PASS": 365,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_final_r.manifest.json": {
+        "PASS": 317,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_pilot_l.manifest.json": {
+        "PASS": 462,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_r_gate.manifest.json": {
+        "PASS": 253,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_regress_f_noisy.manifest.json": {
+        "PASS": 125,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_regress_h_stable.manifest.json": {
+        "PASS": 125,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\v13_regress_r_stable.manifest.json": {
+        "PASS": 140,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\memory_v06.manifest.json": {
+        "PASS": 77,
+        "FAIL": 0,
+        "INCONCLUSIVE": 1,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      },
+      "generalization_audit/manifests\\memory_v06_evren.manifest.json": {
+        "PASS": 9,
+        "FAIL": 0,
+        "INCONCLUSIVE": 4,
+        "overall": "INCONCLUSIVE",
+        "fail_checks": [],
+        "inconclusive_checks": [
+          [
+            "raw.present",
+            "unsupported/unknown format 'generic'"
+          ],
+          [
+            "comparison.direction",
+            "unsupported format 'generic'"
+          ],
+          [
+            "discovery.metrics",
+            "unsupported format 'generic'"
+          ],
+          [
+            "fairness.memory_limit",
+            "memory limit not recorded in manifest"
+          ]
+        ]
+      }
+    }
+  },
+  "artifact_gate": {
+    "results/v13": {
+      "overall": "PASS",
+      "checks": [
+        {
+          "name": "gate.results/v13.manifest:v13_baseline_l.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_diagnostics.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_final_f.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_final_h.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_final_l.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_final_r.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_pilot_l.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_r_gate.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_regress_f_noisy.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_regress_h_stable.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/v13.manifest:v13_regress_r_stable.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        }
+      ]
+    },
+    "results/academy_v01/memory_v06": {
+      "overall": "PASS",
+      "checks": [
+        {
+          "name": "gate.results/academy_v01/memory_v06.manifest:memory_v06.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        },
+        {
+          "name": "gate.results/academy_v01/memory_v06.manifest:memory_v06_evren.manifest.json",
+          "status": "PASS",
+          "message": "covering manifest verifies with zero FAIL"
+        }
+      ]
+    }
+  },
+  "research_v13_recomputation": {
+    "checks": 33,
+    "FAIL": 0,
+    "PASS": 33
+  },
+  "academy_v06_recomputation": {
+    "checks": 34,
+    "FAIL": 0,
+    "PASS": 34
+  }
+}
