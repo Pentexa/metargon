@@ -1,0 +1,74 @@
+{
+  "schema_version": "experiment-manifest-v01",
+  "protocol_version": "eval-protocol-v01",
+  "experiment": {
+    "name": "v13-confirmatory-diag-r-stable",
+    "description": "METARGON v0.13 confirmatory diagnostics (Mission D), family R stable, 8 independent seeds x 40 episodes, instrumented v13 policy. Non-benchmark diagnostic format.",
+    "format": "generic",
+    "agent_version": "metargon_v13 + diagnose_v13.py",
+    "harness": "python/diagnose_v13.py --seed-base 21800 --seeds 8 --episodes 40 --policy v13",
+    "commit_sha": "a617365",
+    "python_version": "3.11.0",
+    "platform": "windows",
+    "hash_seed": "0",
+    "family": "r",
+    "conditions": [
+      "stable"
+    ],
+    "seeds": [
+      21800,
+      21801,
+      21802,
+      21803,
+      21804,
+      21805,
+      21806,
+      21807
+    ],
+    "episodes_per_seed": 40,
+    "action_budget_max_steps": 80,
+    "policies": [],
+    "ablation_flags": {
+      "use_recent_credit": false,
+      "use_temporal": true,
+      "PYTHONHASHSEED": 0,
+      "study": "confirmatory-8x100"
+    },
+    "parameters": {
+      "policy_seed_offset": 1000003,
+      "world_seed_base": 21800
+    },
+    "resources": {
+      "planner_max_expand": 700,
+      "probe_max_plans": 3,
+      "memory_limit_bytes": null,
+      "per_policy_cpu_s": true
+    },
+    "evaluation": {
+      "comparison_convention": "candidate_minus_baseline",
+      "bootstrap": {
+        "method": "paired",
+        "seed": 4301,
+        "rounds": 1500,
+        "alpha": 0.05
+      },
+      "metrics": {
+        "success_rate": "fraction of episodes completed (100 per seed)",
+        "exact_discovery_D1": "fraction of episodes where a verified temporal hypothesis exactly matches the true ordered rule (first, second) for D1; predicted hypotheses not counted",
+        "exact_discovery_D2": "fraction of episodes where a verified hypothesis exactly matches the true rule for D2",
+        "covered_discovery_D1": "fraction of episodes where a verified hypothesis's antecedent is a subset of the true D1 rule",
+        "covered_discovery_D2": "fraction of episodes where a verified hypothesis's antecedent is a subset of the true D2 rule",
+        "temporal_probes": "temporal probe count per seed-run",
+        "cpu_s": "wall-clock CPU seconds for the seed-run"
+      }
+    }
+  },
+  "artifacts": [
+    {
+      "path": "../../results/v13_confirmatory/diag_r_stable_8x40.json",
+      "role": "summary",
+      "generated_by": "python/diagnose_v13.py --seed-base 21800 --seeds 8 --episodes 40 --policy v13",
+      "contains_per_seed": true
+    }
+  ]
+}

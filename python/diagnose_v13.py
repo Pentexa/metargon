@@ -181,6 +181,53 @@ class DiagAgent(MetargonV12):
         self.temporal_probe_blocked = 0
         self.temporal_probe_attempts = 0
 
+    def _feed_temporal(self, pre_atoms, post_atoms):
+        if self.temporal is None:
+            return
+        step = self.memory.step
+        newly_true = post_atoms - pre_atoms
+        for atom in newly_true:
+            if atom[0] in ("door_open",):
+                continue
+            comp = atom[1]
+            door = "D1" if comp in ("P1", "S1") else "D2"
+            self.temporal.transitions[door].append((step, atom))
+        if self._diag is not None:
+            for door in ("D1", "D2"):
+                sub_new = frozenset(a for a in newly_true
+                                    if (a[1] in ("P1", "S1") and door == "D1")
+                                    or (a[1] in ("P2", "S2") and door == "D2"))
+                self._diag.observe_flips(door, step, sub_new)
+        super()._feed_temporal(pre_atoms, post_atoms)
+
+    def _choose_probe(self):
+        if self.temporal is not None:
+            b = self.belief.belief
+            protected = self._protected_atoms()
+            for d in ("D1", "D2"):
+                if b.door_open[d]:
+                    continue
+                h = self.temporal.best_for_door(d)
+                if h is None or h.status not in (VERIFIED, PREDICTED):
+                    continue
+                now = atoms_of_state(b)
+                target = h.first if not h.first <= now else h.second
+                if target <= now:
+                    continue
+                self.temporal_probe_attempts += 1
+                if any(a in protected for a in target):
+                    self.temporal_probe_blocked += 1
+        return super()._choose_probe()
+
+    def set_diag(self, diag):
+        self._diag = diag
+
+    def ep_diag(self):
+        return {
+            "probe_attempts": self.temporal_probe_attempts,
+            "probe_blocked": self.temporal_probe_blocked,
+        }
+
 
 class DiagAgentV13(MetargonV13):
     """MetargonV13 with the same hooks."""
@@ -233,6 +280,12 @@ class DiagAgentV13(MetargonV13):
     def set_diag(self, diag):
         self._diag = diag
 
+    def ep_diag(self):
+        return {
+            "probe_attempts": self.temporal_probe_attempts,
+            "probe_blocked": self.temporal_probe_blocked,
+        }
+
     def _feed_temporal(self, pre_atoms, post_atoms):
         if self.temporal is None:
             return
@@ -271,12 +324,6 @@ class DiagAgentV13(MetargonV13):
                 if any(a in protected for a in target):
                     self.temporal_probe_blocked += 1
         return super()._choose_probe()
-
-    def ep_diag(self):
-        return {
-            "probe_attempts": self.temporal_probe_attempts,
-            "probe_blocked": self.temporal_probe_blocked,
-        }
 
 
 def play_episode_diag(spec, policy: DiagAgent, family="l"):
@@ -373,7 +420,13 @@ def diag_condition(condition, seed, episodes, family, policy_cls=DiagAgent):
             "events": 0,
             "first_event_step": None,
             "door_event_flags": {"D1": False, "D2": False},
-            "config": spec.config.key(),
+            "config": (spec.config.key() if hasattr(spec.config, "key")
+                       else tuple(sorted(tuple(a) for c in (
+                           (spec.config.d1_cond, spec.config.d2_cond)
+                           if hasattr(spec.config, "d1_cond")
+                           else (spec.config.d1_first, spec.config.d1_second,
+                                 spec.config.d2_first, spec.config.d2_second))
+                           for a in c))),
             "agent": {"probe_attempts": 0, "probe_blocked": 0},
             "discovery": {"D1": [False, False], "D2": [False, False]},
         }
@@ -434,6 +487,10 @@ def main():
     ap.add_argument("--json", type=Path, default=Path("results/v13/diag.json"))
     ap.add_argument("--policy", type=str, default="v12",
                     choices=("v12", "v13"))
+    ap.add_argument("--seed-base", type=int, default=_SEED_OFFSET,
+                    help="world-seed base offset (default 11800 = pilot "
+                         "seeds; confirmatory diagnostics must use an "
+                         "independent base)")
     args = ap.parse_args()
 
     policy_cls = DiagAgentV13 if args.policy == "v13" else DiagAgent
@@ -443,15 +500,16 @@ def main():
         "conditions": args.conditions.split(","),
         "seeds": args.seeds,
         "episodes_per_seed": args.episodes,
-        "seed_offset": _SEED_OFFSET,
+        "seed_offset": args.seed_base,
         "policy": f"metargon{12 if args.policy == 'v12' else 13} "
                   f"(use_temporal=True on l)",
-        "note": "worlds identical to benchmark_v12; policy serial 11800+seed +1000003",
+        "note": f"worlds identical to benchmark_v12; policy serial "
+                f"{args.seed_base}+seed +1000003",
     }, "runs": []}
 
     for condition in args.conditions.split(","):
         for i in range(args.seeds):
-            seed = i + _SEED_OFFSET
+            seed = i + args.seed_base
             out["runs"].append(diag_condition(
                 condition, seed, args.episodes, args.family, policy_cls))
 

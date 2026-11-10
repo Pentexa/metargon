@@ -377,7 +377,7 @@ def build_summary(conds, seeds, roster, scores):
 
 
 def benchmark(seeds=8, episodes=60, family="f", conditions=None,
-             measure_mem=False, policies=None):
+             measure_mem=False, policies=None, seed_base=11800):
     conds = list(CONDITIONS) if conditions is None else list(conditions)
     pools, _ = family_pools(family)
     roster = _default_roster(family, policies)
@@ -385,7 +385,7 @@ def benchmark(seeds=8, episodes=60, family="f", conditions=None,
     for condition in conds:
         per_seed = []
         for i in range(seeds):
-            seed = i + 11800
+            seed = i + seed_base
             row = {p: score_policy(condition, seed, p, episodes, family,
                                    pools, measure_mem=measure_mem)
                    for p in roster}
@@ -396,6 +396,7 @@ def benchmark(seeds=8, episodes=60, family="f", conditions=None,
         "metadata": {
             "name": "METARGON", "version": "0.13", "family": family,
             "seeds": seeds, "episodes_per_seed": episodes,
+            "seed_base": seed_base,
             "conditions": list(conds), "policies": roster,
             "same_pre_generated_worlds": True,
             "oracle_has_hidden_config": True,
@@ -415,21 +416,24 @@ def _score_one(args):
 
 
 def benchmark_parallel(seeds=8, episodes=60, family="f", conditions=None,
-                       workers=None, measure_mem=False, policies=None):
+                       workers=None, measure_mem=False, policies=None,
+                       seed_base=11800):
     import concurrent.futures
     conds = list(CONDITIONS) if conditions is None else list(conditions)
     roster = _default_roster(family, policies)
-    tasks = [(cond, i + 11800, episodes, family, measure_mem, tuple(roster))
+    tasks = [(cond, i + seed_base, episodes, family, measure_mem,
+              tuple(roster))
              for cond in conds for i in range(seeds)]
     scores = {cond: [None] * seeds for cond in conds}
     with concurrent.futures.ProcessPoolExecutor(max_workers=workers) as ex:
         for cond, seed, row in ex.map(_score_one, tasks):
-            scores[cond][seed - 11800] = row
+            scores[cond][seed - seed_base] = row
     summary = build_summary(conds, seeds, roster, scores)
     return {
         "metadata": {
             "name": "METARGON", "version": "0.13", "family": family,
             "seeds": seeds, "episodes_per_seed": episodes,
+            "seed_base": seed_base,
             "conditions": list(conds), "policies": roster,
             "same_pre_generated_worlds": True,
             "oracle_has_hidden_config": True,
@@ -450,16 +454,21 @@ def main():
     parser.add_argument("--workers", type=int, default=None)
     parser.add_argument("--no-mem", action="store_true")
     parser.add_argument("--policies", type=str, default=None)
+    parser.add_argument("--seed-base", type=int, default=11800,
+                        help="world-seed base offset (default 11800 = pilot "
+                             "seeds; confirmatory runs must use an "
+                             "independent base)")
     args = parser.parse_args()
     conditions = None if not args.conditions else args.conditions.split(",")
     policies = None if not args.policies else args.policies.split(",")
     mem = not args.no_mem
     if args.parallel:
         result = benchmark_parallel(args.seeds, args.episodes, args.family,
-                                    conditions, args.workers, mem, policies)
+                                    conditions, args.workers, mem, policies,
+                                    seed_base=args.seed_base)
     else:
         result = benchmark(args.seeds, args.episodes, args.family, conditions,
-                           mem, policies)
+                           mem, policies, seed_base=args.seed_base)
     if args.json:
         args.json.parent.mkdir(parents=True, exist_ok=True)
         args.json.write_text(json.dumps(result, indent=2) + "\n",
