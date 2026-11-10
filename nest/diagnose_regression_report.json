@@ -5,8 +5,18 @@
   ],
   "tests": [
     "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)",
-    "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)"
+    "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)"
   ],
+  "pair_topology": {
+    "T1E1": {
+      "train": "TP1",
+      "eval": "TP1"
+    },
+    "T2E2": {
+      "train": "TP2",
+      "eval": "TP1"
+    }
+  },
   "seeds": [
     90000,
     90037
@@ -261,49 +271,72 @@
         }
       },
       "fresh_actions": [
-        "novel_single",
-        "novel_single",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis"
+        "E",
+        "PushE",
+        "N",
+        "E",
+        "N",
+        "N",
+        "E",
+        "E",
+        "E",
+        "N",
+        "E",
+        "PushE",
+        "N",
+        "E",
+        "N",
+        "N",
+        "E",
+        "E",
+        "E",
+        "N",
+        "E",
+        "PushE",
+        "N",
+        "E",
+        "N",
+        "N",
+        "E",
+        "E",
+        "E",
+        "N"
       ],
-      "first_divergence_trained_full_thr1": 0,
-      "first_divergence_trained_no_memory_content": 6,
-      "first_divergence_trained_memory_muted": 2,
-      "first_divergence_trained_full_thr2": 0
+      "first_divergence_trained_full_thr1": 1,
+      "first_divergence_trained_no_memory_content": 30,
+      "first_divergence_trained_memory_muted": 30,
+      "first_divergence_trained_full_thr2": 1
     },
     "T2E2": {
       "fresh": {
-        "success_mean": 0.667,
+        "success_mean": 1.0,
         "success_values": [
-          0.67,
-          0.67
+          1.0,
+          1.0
         ],
         "steps_used": [
           [
-            19,
-            80,
-            23
+            10,
+            10,
+            10
           ],
           [
-            19,
-            80,
-            23
+            10,
+            10,
+            10
           ]
         ],
-        "memory_actions_mean": 11.0,
-        "retrieved_mean": 492.0,
+        "memory_actions_mean": 4.0,
+        "retrieved_mean": 120.0,
         "probe_sources": {
-          "novel_single": 8.0,
-          "hypothesis": 11.0,
-          "atom_single": 77.0
+          "novel_single": 2.0,
+          "hypothesis": 4.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 10.0,
+          "verified": 22.0,
+          "contradicted": 0.0,
           "hypothesis": 0.0,
-          "predicted": 0.0
+          "predicted": 8.0
         }
       },
       "trained_full_thr1": {
@@ -314,59 +347,57 @@
         ],
         "steps_used": [
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ],
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ]
         ],
-        "memory_actions_mean": 50.0,
-        "retrieved_mean": 1559.0,
+        "memory_actions_mean": 31.0,
+        "retrieved_mean": 1108.0,
         "probe_sources": {
-          "hypothesis": 25.0,
-          "atom_single": 14.0
+          "hypothesis": 6.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 20.0,
-          "hypothesis": 13.0,
-          "predicted": 0.0
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 12.0,
+          "predicted": 8.0
         }
       },
       "trained_no_memory_content": {
-        "success_mean": 0.667,
+        "success_mean": 1.0,
         "success_values": [
-          0.67,
-          0.67
+          1.0,
+          1.0
         ],
         "steps_used": [
           [
-            19,
-            80,
-            21
+            12,
+            12,
+            12
           ],
           [
-            19,
-            80,
-            21
+            12,
+            12,
+            12
           ]
         ],
-        "memory_actions_mean": 34.0,
-        "retrieved_mean": 1340.0,
+        "memory_actions_mean": 29.0,
+        "retrieved_mean": 1004.0,
         "probe_sources": {
-          "novel_single": 7.0,
-          "hypothesis": 9.0,
-          "atom_single": 75.0
+          "novel_single": 2.0,
+          "hypothesis": 4.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 10.0,
+          "verified": 22.0,
+          "contradicted": 0.0,
           "hypothesis": 0.0,
-          "predicted": 0.0
+          "predicted": 8.0
         }
       },
       "trained_memory_muted": {
@@ -377,26 +408,26 @@
         ],
         "steps_used": [
           [
-            19,
-            19,
-            19
+            12,
+            12,
+            12
           ],
           [
-            19,
-            19,
-            19
+            12,
+            12,
+            12
           ]
         ],
         "memory_actions_mean": 25.0,
         "retrieved_mean": 884.0,
         "probe_sources": {
-          "novel_single": 21.0
+          "novel_single": 6.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 10.0,
-          "hypothesis": 9.0,
-          "predicted": 0.0
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 12.0,
+          "predicted": 8.0
         }
       },
       "trained_explore_state_reset": {
@@ -407,27 +438,26 @@
         ],
         "steps_used": [
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ],
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ]
         ],
-        "memory_actions_mean": 50.0,
-        "retrieved_mean": 1559.0,
+        "memory_actions_mean": 31.0,
+        "retrieved_mean": 1108.0,
         "probe_sources": {
-          "hypothesis": 25.0,
-          "atom_single": 14.0
+          "hypothesis": 6.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 20.0,
-          "hypothesis": 13.0,
-          "predicted": 0.0
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 12.0,
+          "predicted": 8.0
         }
       },
       "trained_counters_reset": {
@@ -438,26 +468,26 @@
         ],
         "steps_used": [
           [
-            19,
-            19,
-            19
+            12,
+            12,
+            12
           ],
           [
-            19,
-            19,
-            19
+            12,
+            12,
+            12
           ]
         ],
-        "memory_actions_mean": 46.0,
-        "retrieved_mean": 1244.0,
+        "memory_actions_mean": 31.0,
+        "retrieved_mean": 1068.0,
         "probe_sources": {
-          "hypothesis": 21.0
+          "hypothesis": 6.0
         },
         "memory": {
-          "verified": 19.0,
-          "contradicted": 14.0,
+          "verified": 30.0,
+          "contradicted": 10.0,
           "hypothesis": 0.0,
-          "predicted": 0.0
+          "predicted": 2.0
         }
       },
       "trained_rng_reset": {
@@ -468,27 +498,26 @@
         ],
         "steps_used": [
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ],
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ]
         ],
-        "memory_actions_mean": 50.0,
-        "retrieved_mean": 1559.0,
+        "memory_actions_mean": 31.0,
+        "retrieved_mean": 1108.0,
         "probe_sources": {
-          "hypothesis": 25.0,
-          "atom_single": 14.0
+          "hypothesis": 6.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 20.0,
-          "hypothesis": 13.0,
-          "predicted": 0.0
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 12.0,
+          "predicted": 8.0
         }
       },
       "trained_full_thr2": {
@@ -499,131 +528,64 @@
         ],
         "steps_used": [
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ],
           [
-            17,
-            39,
-            21
+            12,
+            12,
+            12
           ]
         ],
-        "memory_actions_mean": 50.0,
-        "retrieved_mean": 1559.0,
+        "memory_actions_mean": 31.0,
+        "retrieved_mean": 1108.0,
         "probe_sources": {
-          "hypothesis": 25.0,
-          "atom_single": 14.0
+          "hypothesis": 6.0
         },
         "memory": {
-          "verified": 14.0,
-          "contradicted": 20.0,
-          "hypothesis": 13.0,
-          "predicted": 0.0
+          "verified": 22.0,
+          "contradicted": 0.0,
+          "hypothesis": 12.0,
+          "predicted": 8.0
         }
       },
       "fresh_actions": [
-        "novel_single",
-        "novel_single",
-        "novel_single",
-        "novel_single",
-        "novel_single",
-        "novel_single",
-        "novel_single",
-        "novel_single",
-        "hypothesis",
-        "hypothesis",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "hypothesis",
-        "hypothesis",
-        "atom_single",
-        "atom_single",
-        "atom_single",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis",
-        "hypothesis"
+        "E",
+        "PushE",
+        "N",
+        "E",
+        "N",
+        "N",
+        "E",
+        "E",
+        "E",
+        "N",
+        "E",
+        "PushE",
+        "N",
+        "E",
+        "N",
+        "N",
+        "E",
+        "E",
+        "E",
+        "N",
+        "E",
+        "PushE",
+        "N",
+        "E",
+        "N",
+        "N",
+        "E",
+        "E",
+        "E",
+        "N"
       ],
-      "first_divergence_trained_full_thr1": 0,
-      "first_divergence_trained_no_memory_content": 7,
-      "first_divergence_trained_memory_muted": 8,
-      "first_divergence_trained_full_thr2": 0
+      "first_divergence_trained_full_thr1": 6,
+      "first_divergence_trained_no_memory_content": 6,
+      "first_divergence_trained_memory_muted": 6,
+      "first_divergence_trained_full_thr2": 6
     }
   }
 }

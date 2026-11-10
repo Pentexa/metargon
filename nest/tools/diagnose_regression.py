@@ -121,10 +121,12 @@ def run_episodes(agent, episodes, collect_probe=True):
         steps = 0
         invalid = 0
         probes = []
+        actions_seq = []
         for _ in range(MAX_STEPS):
             if env.finished or env.steps >= env.max_steps:
                 break
             action = agent.act(obs)
+            actions_seq.append(action)
             before = obs
             res = env.step(action)
             agent.learn(before, action, res)
@@ -138,7 +140,7 @@ def run_episodes(agent, episodes, collect_probe=True):
                 break
         agent.finish_episode(success)
         rows.append({"success": success, "steps": steps, "invalid": invalid,
-                     "probes": probes})
+                     "probes": probes, "actions": actions_seq})
     return rows
 
 
@@ -157,7 +159,7 @@ def arm(seed, thr, train_eps, eval_eps, mutations=()):
         "success": statistics.fmean([r["success"] for r in ev]),
         "steps_used": [r["steps"] for r in ev],
         "invalid": sum(r["invalid"] for r in ev),
-        "first_divergence_actions": [a for r in ev for a in _actions(r)],
+        "first_divergence_actions": [a for r in ev for a in r["actions"]],
         "probe_sources": _source_hist(ev),
         "memory": {k: mem["stats"].get(k, 0)
                    for k in ("verified", "contradicted", "hypothesis", "predicted")},
@@ -170,9 +172,7 @@ def arm(seed, thr, train_eps, eval_eps, mutations=()):
 
 
 def _actions(row):
-    # probe actions are counted; full action seq is not stored to keep the
-    # report compact; we derive divergence from probe/door events instead
-    return [p[2] for p in row["probes"]]
+    return row["actions"]
 
 
 def _source_hist(ev):
@@ -219,12 +219,21 @@ def main(argv=None):
     args = ap.parse_args(argv)
 
     splits = get_splits()
-    # two independent training/eval pairs: same topology, different rules
+    # two independent training/eval pairs; each pair records the actual
+    # topology of each side (they need not match).
     trains = [c for c in splits["train"] if c.n_atoms() <= 2][:2]
-    tests = [c for c in splits["test"]
-             if c.topology == trains[0].topology and c.key != trains[0].key][:2]
+    tests = []
+    # T1E1: same topology as train[0], different rule
+    same = [c for c in splits["test"]
+            if c.topology == trains[0].topology and c.key != trains[0].key]
+    tests.append(same[0] if same else trains[0])
+    # T2E2: deliberately CROSS-topology — train TP2, eval TP1
+    cross = [c for c in splits["test"] if c.topology != trains[1].topology]
+    tests.append(cross[0] if cross else tests[0])
     pairs = {"T1E1": (trains[0], tests[0]),
              "T2E2": (trains[1], tests[1])}
+    pair_topology = {tag: {"train": T.topology, "eval": E.topology}
+                     for tag, (T, E) in pairs.items()}
 
     per_seed = {}
     for i in range(args.seeds):
@@ -234,6 +243,7 @@ def main(argv=None):
     # aggregate arms across seeds per pair
     report = {"trains": [str(t.key) for t in trains],
               "tests": [str(t.key) for t in tests],
+              "pair_topology": pair_topology,
               "seeds": sorted(per_seed),
               "pairs": {}}
     for tag in pairs:
@@ -294,7 +304,9 @@ def _print_report(report):
     print("POST-TRAINING REGRESSION DIAGNOSIS (matched budgets; identical eval episodes)")
     print("=" * 86)
     for tag, arms in report["pairs"].items():
-        print(f"\n-- pair {tag} (train {report['trains'][0] if tag=='T1E1' else report['trains'][1]}, "
+        topo = report["pair_topology"][tag]
+        print(f"\n-- pair {tag}: train {topo['train']} -> eval {topo['eval']} "
+              f"(train {report['trains'][0] if tag=='T1E1' else report['trains'][1]}, "
               f"eval {report['tests'][0] if tag=='T1E1' else report['tests'][1]}) --")
         print(f"{'arm':26s} {'succ':>6s} {'memAct':>7s} {'retr':>6s} {'ver':>4s} {'con':>4s} {'unc':>4s}")
         for name in ("fresh", "trained_full_thr1", "trained_no_memory_content",
@@ -311,7 +323,7 @@ def _print_report(report):
                      "trained_memory_muted", "trained_full_thr2"):
             key = f"first_divergence_{name}"
             if key in arms:
-                print(f"  first probe-action divergence fresh vs {name}: {arms[key]}")
+                print(f"  first ACTION divergence (true environment actions) fresh vs {name}: {arms[key]}")
     print()
 
 

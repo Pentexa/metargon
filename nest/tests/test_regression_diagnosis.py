@@ -97,6 +97,17 @@ class TestRegressionDiagnosis(unittest.TestCase):
         self.assertIn("seeds", self.report)
         self.assertEqual(len(self.report["seeds"]), 2)
 
+    def test_cross_topology_pair_documented(self):
+        # T2E2 deliberately uses different topologies for training and
+        # evaluation; the report must record each side explicitly.
+        topo = self.report["pair_topology"]
+        t2 = topo["T2E2"]
+        self.assertNotEqual(t2["train"], t2["eval"],
+                            "T2E2 must be a cross-topology pair")
+        t1 = topo["T1E1"]
+        self.assertEqual(t1["train"], t1["eval"],
+                         "T1E1 is the same-topology pair")
+
 
 if __name__ == "__main__":
     unittest.main()

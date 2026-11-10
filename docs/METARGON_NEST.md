@@ -283,8 +283,13 @@ evidence.
 
 `nest/tools/diagnose_regression.py` (and `test_regression_diagnosis.py`)
 reproduces fresh-vs-trained failure on identical evaluation episodes and
-isolates the cause with independent mutations (seeds 90000/90037; two
-training/eval pairs T1E1, T2E2; identical step budgets).
+isolates the cause with independent mutations (seeds 90000/90037;
+identical step budgets).
+
+Two training/eval pairs (topology of each side recorded in the report):
+
+- **T1E1** — same topology (TP1→TP1), different hidden rule;
+- **T2E2** — deliberately cross-topology (TP2→TP1).
 
 | arm (T1E1) | success | memory_actions | retrieved |
 |---|---:|---:|---:|
@@ -297,21 +302,23 @@ training/eval pairs T1E1, T2E2; identical step budgets).
 | trained_rng_reset | 0.00 | 33 | 370 |
 | trained_full_thr2 | 0.00 | 33 | 370 |
 
-Findings:
+Findings (first divergence is now computed on the **actual environment
+action sequences**, not probe-source lists):
 
 - **Confirmed mechanism: memory interference.** Both ablations —
   clearing memory content and functionally muting all memory read paths
   (query/bank/transfer/protection) while keeping the same state — restore
-  fresh-level success on T1E1. First probe-action divergence from fresh is
-  immediate for the trained agent (0) and delayed for the ablated arms
-  (6/2), tracing the interference to the trained hypotheses.
+  fresh-level success on T1E1. First action divergence from fresh is
+  immediate for the trained agent (step 1) and delayed for the ablated
+  arms, tracing the interference to the trained hypotheses.
 - **Negative controls:** resetting exploration state, counters, RNG, or
   raising the transfer threshold to 2 does not change the trained outcome
   — none of these explain the regression.
-- **Not universal:** on T2E2 training actually helps (fresh 0.67 →
-  trained 1.00). The regression is task-specific: it occurs when the
-  trained rule conflicts with the evaluation rule, and the agent keeps
-  re-trying its verified but inapplicable hypothesis instead of exploring.
+- **Not universal:** on T2E2 training actually helps (fresh 1.00 →
+  trained 1.00 in the current run; earlier runs showed 0.67 → 1.00). The
+  regression is task-specific: it occurs when the trained rule conflicts
+  with the evaluation rule, and the agent keeps re-trying its verified but
+  inapplicable hypothesis instead of exploring.
 - No NEST-side defect was identified; the observed behavior is the
   student's cross-task interference (a documented Academy characteristic).
   No evaluation-set tuning was performed. Full reproducible report:
