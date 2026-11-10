@@ -114,6 +114,10 @@ jobs:
       - name: Run NEST tests
         run: python -m unittest discover -s nest/tests -t . -v
         timeout-minutes: 10
+      - name: Frontend syntax + DOM smoke validation
+        run: |
+          python nest/tools/frontend_audit.py --smoke
+        timeout-minutes: 5
 
   # ------------------------------------------------------------------
   # Rust research kernel + Academy kernel (pinned toolchain 1.88.0)
