@@ -162,7 +162,8 @@ def attribution_metrics(rows):
     without_mem = [r for r in rows
                    if r.get("trace", {}).get("source_hypothesis", 0) == 0]
     tot = {"memory_actions": 0, "memory_correct": 0,
-           "memory_incorrect": 0, "cross_epoch_transfer_retrieved": 0}
+           "memory_incorrect": 0, "cross_epoch_transfer_retrieved": 0,
+           "source_hypothesis": 0, "plans_used": 0}
     for r in rows:
         t = r.get("trace", {})
         for k in tot:
@@ -339,6 +340,7 @@ def run_v07_experiment(splits=None, episodes=160,
                 "wall_s": round(wall, 2),
                 "classic_frozen": frozen["summary"],
                 "classic_frozen_per_config": frozen["per_config_list"],
+                "classic_frozen_trace": frozen.get("trace_agg"),
                 "classic_frozen_attribution": attribution_metrics(
                     frozen["rows"]),
                 "classic_adapt": adapt["summary"],

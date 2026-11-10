@@ -100,8 +100,55 @@ for _kind in ("random_walk", "novocab"):
                 summary["comparisons"][f"{name}_vs_{_kind}"] = {
                     "classic_frozen": compare_delta(a, cvec, seed=20261108),
                 }
+        # expose the planning-only control as a first-class condition so
+        # the transfer-role mapping can resolve it (Quality v0.7)
+        if _kind == "novocab":
+            summary["conditions_detail"]["novocab"] = {
+                "train_success_mean": 0.0,
+                "classic_frozen_per_config": list(cvec),
+                "classic_frozen": {
+                    "config_mean_success": c["summary"]["config_mean_success"],
+                    "per_config": c["summary"].get("per_config", {}),
+                },
+                "classic_adapt_per_config": list(cvec),
+                "classic_adapt": {
+                    "config_mean_success": c["summary"]["config_mean_success"],
+                },
+                "ood_frozen": {"config_mean_success": 0.0},
+                "continual_ood": {"config_mean_success": 0.0},
+                "retention_delta_mean": 0.0,
+                "memory_mean": {},
+                "attribution_mean": {},
+            }
     except Exception as e:
         summary[f"{_kind}_control"] = {"error": str(e)}
+
+# aggregate frozen trace per variant (for transfer attribution checks)
+for name, per in records.items():
+    rows = [p.get("classic_frozen_trace") for p in per.get("per_seed", [])
+            if p.get("classic_frozen_trace")]
+    if rows:
+        keys = set()
+        for r in rows:
+            keys.update(r)
+        per["frozen_trace_mean"] = {
+            k: sum(r.get(k, 0) for r in rows) / len(rows) for k in keys
+        }
+if "epoch" in records:
+    # action-side frozen attribution (learn-side outcome counters are 0
+    # by construction in frozen cells; see docs/MEMORY_V07.md §4.1)
+    attrs = [p.get("classic_frozen_attribution")
+             for p in records["epoch"].get("per_seed", [])
+             if p.get("classic_frozen_attribution")]
+    if attrs:
+        keys = set()
+        for a in attrs:
+            keys.update(a)
+        summary["classic_frozen_trace"] = {
+            k: sum(a.get(k, 0) for a in attrs) / len(attrs)
+            for k in keys if all(isinstance(a.get(k), (int, float))
+                                 for a in attrs)
+        }
 
 with open(OUT, "w", encoding="utf-8") as f:
     json.dump(summary, f, indent=1, default=str)

@@ -3033,6 +3033,78 @@
      }
     }
    ]
+  },
+  "novocab": {
+   "train_success_mean": 0.0,
+   "classic_frozen_per_config": [
+    0.25,
+    0.25,
+    1.0,
+    0.375,
+    0.5,
+    0.25,
+    0.625,
+    0.125,
+    0.5,
+    1.0,
+    0.75,
+    0.375,
+    0.875,
+    0.0,
+    0.0,
+    0.5
+   ],
+   "classic_frozen": {
+    "config_mean_success": 0.4609375,
+    "per_config": {
+     "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)": 0.25,
+     "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.25,
+     "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+     "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)": 0.375,
+     "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.5,
+     "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.25,
+     "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)": 0.625,
+     "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('empty', 'P2')}), False, False)": 0.125,
+     "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2')}), True, True)": 0.5,
+     "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+     "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, True)": 0.75,
+     "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": 0.375,
+     "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, False)": 0.875,
+     "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)": 0.0,
+     "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
+     "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)": 0.5
+    }
+   },
+   "classic_adapt_per_config": [
+    0.25,
+    0.25,
+    1.0,
+    0.375,
+    0.5,
+    0.25,
+    0.625,
+    0.125,
+    0.5,
+    1.0,
+    0.75,
+    0.375,
+    0.875,
+    0.0,
+    0.0,
+    0.5
+   ],
+   "classic_adapt": {
+    "config_mean_success": 0.4609375
+   },
+   "ood_frozen": {
+    "config_mean_success": 0.0
+   },
+   "continual_ood": {
+    "config_mean_success": 0.0
+   },
+   "retention_delta_mean": 0.0,
+   "memory_mean": {},
+   "attribution_mean": {}
   }
  },
  "comparisons": {
@@ -3472,5 +3544,16 @@
    "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
    "('TP2', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)": 0.5
   }
+ },
+ "classic_frozen_trace": {
+  "memory_incorrect": 0.0,
+  "cross_epoch_transfer_retrieved": 128844.0,
+  "memory_correct": 0.0,
+  "rows_without_memory": 9.0,
+  "success_without_memory": 0.6666666666666666,
+  "success_with_memory": 0.5192307692307692,
+  "rows_with_memory": 23.0,
+  "memory_actions": 3568.0,
+  "memory_attributable_improvement": -0.14743589743589744
  }
 }

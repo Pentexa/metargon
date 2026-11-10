@@ -180,6 +180,15 @@ open the door. The decisive memory-attributable evidence is the
 counts, only the antecedent→consequence associations broken → frozen
 drops from 0.594 back to 0.281.
 
+**Attribution limitation (frozen regime).** The frozen evaluation
+disables `learn()` entirely, so door-outcome counters that live inside
+`learn()` (`memory_correct`, `memory_incorrect`, `door_open_after_probe`)
+are 0 by construction in frozen cells; only action-side counters
+(`memory_actions`, cross-epoch retrievals, success rates) are measurable
+there. Door-outcome attribution must be measured in the adaptation
+regime (or via action-driven success splits) — a documented limitation,
+not a claim of zero correctness.
+
 #### Interpretation
 
 - v0.7 **improves frozen zero-shot transfer** above fresh and above
@@ -209,17 +218,24 @@ a follow-up teacher-mix ablation.
 
 ---
 
-## 5bis. Preregistration
+## 5bis. Registration status (honest)
 
-- Controls and v0.7 mechanism: preregistered above (§4) before any
-  full-scale run; only a small development pilot (6-config grid, 40
-  episodes) was executed first.
+- The Quality v0.7 transfer protocol (`transfer-eval-protocol-v01`) was
+  frozen by the independent audit on 2026-11-10 **after** this
+  experiment's runs and analysis. This experiment is therefore **not**
+  protocol-preregistered; it is reported as **preliminary evidence**
+  (protocol level_1_preliminary):
+  - improvement vs fresh AND vs planning-only control (deltas
+    positive, candidate − baseline);
+  - 2 train seeds (pilot-grade per the protocol);
+  - per-seed vectors and paired bootstrap 95% CIs committed;
+  - CI including 0 labeled as not a measured population effect.
 - No new evaluation seeds were introduced: eval seed 20261108, OOD seed
   20261110, continual seed 20261113, retention substrate seed 20261138
-  (all as in v0.6).
-- Success criterion: frozen zero-shot improvement vs fresh AND vs
-  shuffled-memory negative control, with paired-bootstrap CI excluding 0
-  and positive memory-attributable action evidence.
+  (all as in v0.6 / the committed Academy eval grid).
+- The manifest declares the transfer roles per protocol v01
+  (`experiment.evaluation.transfer.roles`) and eval mode frozen; the
+  protocol checks verify zero FAIL (see §6).
 
 ---
 
@@ -227,15 +243,27 @@ a follow-up teacher-mix ablation.
 
 - Quality v0.5 manifest: `generalization_audit/manifests/memory_v07.manifest.json`
   (`academy_memory` format; canonical git-blob hashes; pinned hash; 2
-  seeds; 160 episodes/seed; candidate − baseline convention).
-- Verifier: **47 PASS / 0 FAIL / 1 INCONCLUSIVE** (fairness.memory_limit
-  not recorded — same as committed v0.5/v0.6/v121 examples).
+  seeds; 160 episodes/seed; candidate − baseline convention; protocol
+  `transfer-eval-protocol-v01` with transfer role mapping).
+- Verifier (incl. `--transfer` protocol checks): **52 PASS / 0 FAIL /
+  4 INCONCLUSIVE** — INCONCLUSIVE items: `fairness.memory_limit` (not
+  recorded, same as committed v0.5/v0.6/v121 examples),
+  `c_missing_duplicate_records` (format-level), `transfer.unseen.
+  separation` (train/eval pools not exposed in artifacts; separation
+  rests on the declaration), `transfer.attribution.consistency` (no
+  `frozen_trace_mean` block merged into the runs JSONL; action-side
+  attribution is recorded under `attribution_mean` instead).
+  Protocol checks PASS: `transfer.protocol.registered`,
+  `transfer.roles.resolve` (fresh/original/memory_wiped/shuffled/
+  novocab), `transfer.frozen.immutability` (attested + trace artifact
+  present), `transfer.ablation.paired` (memory/wiped per-config vectors),
+  `transfer.budgets.*`.
 - Artifact gate: the Audit-owned `FROZEN_TARGETS` list currently covers
   `results/v13` and `results/academy_v01/memory_v06` (both PASS).
   `results/academy_v01/memory_v07` is a new experiment target not yet in
   that Audit-owned list; extending it is an Audit-side change not
   performed here. Provenance is nevertheless fully established via the
-  covering manifest (47 PASS / 0 FAIL).
+  covering manifest (52 PASS / 0 FAIL).
 
 ---
 

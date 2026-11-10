@@ -1,13 +1,13 @@
 {
   "schema_version": "experiment-manifest-v01",
-  "protocol_version": "eval-protocol-v01",
+  "protocol_version": "transfer-eval-protocol-v01",
   "experiment": {
     "name": "academy-memory-v07",
     "description": "Academy Memory v0.7 three-regime experiment with episode-scoped causal memory, negative controls, and memory-to-action attribution.",
     "format": "academy_memory",
     "agent_version": "academy-v0.7",
     "harness": "academy/tools/memory_experiment_v07.py + memory_merge_v07.py",
-    "commit_sha": "b77e2a7",
+    "commit_sha": "16f3ba4",
     "working_tree_status": "clean",
     "python_version": "3.11.0",
     "platform": "windows",
@@ -70,6 +70,19 @@
         "continual_ood": "continual OOD probe over 6-config pool",
         "retention_delta_mean": "first-vs-last substrate retention delta",
         "attribution_mean": "memory-to-action attribution: memory_actions, memory_correct, memory_incorrect, cross_epoch_transfer_retrieved, memory_attributable_improvement"
+      },
+      "transfer": {
+        "roles": {
+          "fresh": "fresh",
+          "trained_with_memory": "original",
+          "trained_memory_wiped": "memory_wiped",
+          "shuffled_memory": "shuffled",
+          "planning_only": "novocab"
+        },
+        "eval_mode": "frozen",
+        "unseen_configs_declared": true,
+        "split_source": "academy splits (tasks.get_splits, seed 20260901): held-out test pool disjoint from train; OOD pool disjoint by construction",
+        "frozen_immutability_asserted": true
       }
     }
   },

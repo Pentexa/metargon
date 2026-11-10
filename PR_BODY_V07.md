@@ -25,9 +25,14 @@ destroys previously verified hypotheses. v0.7:
   memory-attributable improvement metric.
 - **Controlled evaluation (Mission D):** fresh, original (v0.6
   baseline), memory_wiped, atomtx (v0.6 atom-transfer baseline),
-  shuffled-memory negative control, and epoch (v0.7). Preregistered
-  evaluation (no new eval seeds): eval seed 20261108, 16-config classic
-  grid, 12-config OOD, 8-config retention substrate.
+  shuffled-memory negative control, and epoch (v0.7). Evaluation
+  configuration is that of v0.6 (eval seed 20261108, 16-config classic
+  grid, 12-config OOD, 8-config retention substrate; no new eval seeds).
+  **Registration note:** the Quality v0.7 transfer protocol
+  (`transfer-eval-protocol-v01`) was frozen by the audit after these
+  runs; this experiment is therefore reported as **preliminary
+  evidence** (protocol level_1_preliminary), not as protocol-
+  preregistered or confirmatory.
 
 ### Measured results (2 seeds × 160 episodes, frozen 16-config grid, pinned hash)
 
@@ -52,18 +57,24 @@ Paired frozen deltas (candidate − baseline):
 
 Controls: random_walk 0.050, novocab 0.463 (same frozen grid).
 
-### Honest statement
+### Honest statement (preliminary)
 
-v0.7 demonstrates **measurable zero-shot improvement attributable to
-retained causal knowledge**: frozen 0.594 vs fresh 0.312 (CI excludes
-0), and the shuffled-memory negative control (same training, broken
-associations) loses the gain entirely (0.281). Against the
-exploration-only `novocab` control the delta remains positive (+0.134)
-but its CI includes 0, so a planning-only contribution cannot be fully
-excluded at 95%; the memory-attributable component is established by
-the shuffled ablation. This is a cautious genuine-transfer claim, not an
-overclaim. Negative results are preserved: all v0.6 baselines remain at
-or below fresh; atomtx and shuffled do not transfer.
+v0.7 offers **preliminary memory-dependent transfer evidence**, not yet
+independent confirmatory proof:
+
+- frozen 0.594 vs fresh 0.312 (Δ +0.285, CI [0.063, 0.531]) — 2 train
+  seeds (pilot-grade per protocol v01), CI excludes 0 for this primary
+  delta;
+- shuffled-memory negative control (same training, broken associations)
+  loses the gain entirely (0.281; Δ vs shuffled +0.315, CI
+  [0.094, 0.531]) — the memory-attributable component;
+- against the exploration-only `novocab` control the delta is positive
+  (+0.134) but its CI includes 0 — a planning-only contribution cannot
+  be fully excluded at 95%; the claim is therefore preliminary, not
+  confirmatory (confirmatory would require ≥5 train seeds and
+  independent audit recomputation);
+- negative results preserved: all v0.6 baselines ≤ fresh; atomtx and
+  shuffled do not transfer.
 
 ### Memory diagnosis (confirmed)
 
@@ -72,9 +83,20 @@ or below fresh; atomtx and shuffled do not transfer.
   ~15 and raises verified to ~10, with 47 hypotheses verified in ≥2
   epochs (transferable).
 - Attribution: 23/32 frozen cells show memory-driven actions (3568
-  actions); naive success split favours no-memory rows because memory
-  concentrates on hard configs — the shuffled ablation is the decisive
-  control.
+  actions). Frozen cells disable learn(), so door-outcome counters are
+  0 by construction there; action-side attribution and success splits
+  are measurable, and the shuffled ablation is the decisive control
+  (see docs/MEMORY_V07.md §4.1 limitation).
+
+### Quality v0.7 checks
+
+- Verifier (incl. --transfer): **52 PASS / 0 FAIL / 4 INCONCLUSIVE**
+  (memory-limit; format-level c_missing_duplicate_records;
+  transfer.unseen.separation — resting on declaration; transfer.
+  attribution.consistency — no merged frozen_trace_mean block).
+- Protocol checks PASS: protocol registered, roles resolve
+  (fresh/original/memory_wiped/shuffled/novocab), frozen immutability
+  attested + trace artifact, ablation paired, budgets.
 
 ### Testing
 
