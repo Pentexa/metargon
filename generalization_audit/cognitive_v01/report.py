@@ -24,6 +24,12 @@ def _fmt_ci(s):
     return f"{m:.3f}  [{ci[0]:.3f}, {ci[1]:.3f}]"
 
 
+def _fmt_method(s):
+    if s.get("method") == "wilson":
+        return f"W ({s.get('n_events', 0)} events)"
+    return f"t ({s.get('n', 0)} seeds)"
+
+
 def _table(rows, headers=None):
     if not rows:
         return ""
@@ -92,6 +98,10 @@ def render_scorecard(scorecard, path=DEFAULT_REPORT):
         lines.append("")
 
     # ---- dimension metric tables ------------------------------------------
+    lines.append("CI methods — **W** = pooled Wilson interval (bounded "
+                 "probability metrics); **t** = Student-t on per-seed "
+                 "means (unbounded metrics).")
+    lines.append("")
     for key, title in DIM_ORDER:
         dim = scorecard["dimensions"].get(key)
         if not dim:
@@ -101,8 +111,8 @@ def render_scorecard(scorecard, path=DEFAULT_REPORT):
         rows = []
         for name, s in dim["metrics"].items():
             rows.append({"metric": name, "mean ± 95% CI": _fmt_ci(s),
-                         "n": s.get("n", "")})
-        lines.append(_table(rows, ["metric", "mean ± 95% CI", "n"]))
+                         "CI": _fmt_method(s)})
+        lines.append(_table(rows, ["metric", "mean ± 95% CI", "CI"]))
         lines.append("")
 
     lines.append("## Baseline context (evaluation pools)")
@@ -114,11 +124,12 @@ def render_scorecard(scorecard, path=DEFAULT_REPORT):
         for pol, s in row.items():
             rows.append({"policy": pol,
                          "success_rate": _fmt_ci(s["success_rate"]),
+                         "success CI": _fmt_method(s["success_rate"]),
                          "mean_steps_to_success": _fmt_ci(
                              s["mean_steps_to_success"]),
                          "within_episode_adaptation": _fmt_ci(
                              s["within_episode_adaptation"])})
-        lines.append(_table(rows, ["policy", "success_rate",
+        lines.append(_table(rows, ["policy", "success_rate", "success CI",
                                    "mean_steps_to_success",
                                    "within_episode_adaptation"]))
         lines.append("")
@@ -144,8 +155,16 @@ def render_scorecard(scorecard, path=DEFAULT_REPORT):
     lines.append("- **Leakage prevention**: students receive public "
                  "observations only; hidden dynamics are used solely by the "
                  "oracle; a test audits this.")
-    lines.append("- **Statistics**: per-seed metrics summarized as mean ± "
-                 "95% CI (Student-t).")
+    lines.append("- **Statistics**: bounded probability metrics (rates, "
+                 "coverage, precision, correction fractions) use a pooled "
+                 "95% Wilson interval, which stays inside [0, 1]; "
+                 "unbounded metrics (steps, episodes-to-event, planner "
+                 "counters) use a Student-t interval on per-seed means.")
+    lines.append("- **Planning counters**: the earlier `plan_cache_hit_rate` "
+                 "(cache hits / plans used) was removed because the two "
+                 "counters are not a hit/miss pair; it is replaced by "
+                 "`plan_cache_hits_per_step` and `plans_used_per_step`, "
+                 "reported separately with accurate names.")
     lines.append("")
 
     lines.append("## Limitations")

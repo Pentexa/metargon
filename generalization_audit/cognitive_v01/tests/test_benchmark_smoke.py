@@ -59,12 +59,23 @@ class TestBenchmarkSmoke(unittest.TestCase):
                              train_stream_specs=train)
         self.assertIn("dimensions", sc)
         self.assertEqual(len(sc["dimensions"]), 6)
+        # bounded proportion metrics use the Wilson method
+        succ = sc["dimensions"]["generalization"]["metrics"]
+        self.assertIn("metargon_trained.eval_test.success_rate", succ)
+        self.assertEqual(succ["metargon_trained.eval_test.success_rate"]["method"],
+                         "wilson")
+        # the misleading hit-rate metric must not reappear
+        plan = sc["dimensions"]["planning_efficiency"]["metrics"]
+        self.assertNotIn("metargon_trained.eval_test.plan_cache_hit_rate", plan)
+        self.assertIn("metargon_trained.eval_test.plan_cache_hits_per_step", plan)
+        self.assertIn("metargon_trained.eval_test.plans_used_per_step", plan)
         with tempfile.TemporaryDirectory() as td:
             p = render_scorecard(sc, Path(td) / "report.md")
             self.assertTrue(p.exists())
             text = p.read_text(encoding="utf-8")
             self.assertIn("Causal discovery", text)
             self.assertIn("Planning efficiency", text)
+            self.assertIn("Wilson", text)
 
 
 if __name__ == "__main__":

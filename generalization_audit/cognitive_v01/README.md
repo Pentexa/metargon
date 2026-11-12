@@ -26,13 +26,22 @@ Independent cognitive evaluation of the **actual** Academy student agent
 - **No hidden leakage** — the student only receives public observations;
   hidden dynamics are used only by the privileged *oracle* (diagnostic,
   excluded from rankings). A leakage test audits this.
-- **Multiple seeds + CIs** — all metrics are reported as mean ± 95% CI
-  (Student-t) over independent seeds.
+- **Multiple seeds + CIs** — bounded probability metrics (success rates,
+  coverage, precision, correction fractions) report a pooled 95% Wilson
+  interval (always inside [0, 1]); unbounded metrics (steps,
+  episodes-to-event, planner counters) report mean ± 95% Student-t CI
+  over independent seeds. The method is recorded per metric in the
+  scorecard and report.
 - **Performance vs memory vs search separated** — the scorecard reports
   task success, verified-knowledge quality (precision/coverage), and
   planner/search counters independently, plus a memory-muted control
   (identical training exposure, declarative memory emptied before
   evaluation) to isolate the contribution of learned knowledge.
+- **Planning counters are named accurately** — `plan_cache_hits` counts
+  cache lookups that found an entry, while `plans_used` counts executed
+  plans; they are not a hit/miss pair, so no "hit rate" is computed.
+  The scorecard reports `plan_cache_hits_per_step` and
+  `plans_used_per_step` separately.
 
 ## Policies
 

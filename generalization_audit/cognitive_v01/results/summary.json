@@ -2,7 +2,7 @@
  "meta": {
   "benchmark": "METARGON Cognitive Intelligence Benchmark v0.1",
   "date": "2026-11-12",
-  "git_head": "6531b6b48de307c6f83828785dcf4be4038e3496",
+  "git_head": "ccb1627f3f1fd504c62ee471c17d7df017fc415f",
   "seeds": [
    0,
    1,
@@ -66,15 +66,6 @@
   "causal_discovery": {
    "title": "Causal discovery",
    "metrics": {
-    "metargon_trained.discovery_coverage": {
-     "mean": 1.0,
-     "sem": 0.0,
-     "ci": [
-      1.0,
-      1.0
-     ],
-     "n": 4
-    },
     "metargon_trained.verified_correct": {
      "mean": 1.75,
      "sem": 0.25,
@@ -82,7 +73,8 @@
       1.056,
       2.444
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.verified_wrong": {
      "mean": 7,
@@ -91,16 +83,8 @@
       2.327295715184479,
       11.67270428481552
      ],
-     "n": 4
-    },
-    "metargon_trained.verified_precision": {
-     "mean": 0.22873931623931626,
-     "sem": 0.06404921212830571,
-     "ci": [
-      0.05093870337113962,
-      0.4065399291074929
-     ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.candidates_correct": {
      "mean": 0,
@@ -109,7 +93,8 @@
       0.0,
       0.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.contradicted_truth": {
      "mean": 5.25,
@@ -118,7 +103,8 @@
       4.556,
       5.944
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.hypotheses_total": {
      "mean": 54.5,
@@ -127,16 +113,30 @@
       34.33813540368848,
       74.66186459631152
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
-    "metargon_muted.discovery_coverage": {
+    "metargon_trained.discovery_coverage": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8793527963418923,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "metargon_trained.verified_precision": {
+     "mean": 0.2,
+     "sem": null,
+     "ci": [
+      0.10042319445900805,
+      0.3589193660946251
+     ],
+     "n": 4,
+     "n_events": 35,
+     "method": "wilson"
     },
     "metargon_muted.verified_correct": {
      "mean": 1.75,
@@ -145,7 +145,8 @@
       1.056,
       2.444
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.verified_wrong": {
      "mean": 7,
@@ -154,16 +155,8 @@
       2.327295715184479,
       11.67270428481552
      ],
-     "n": 4
-    },
-    "metargon_muted.verified_precision": {
-     "mean": 0.22873931623931626,
-     "sem": 0.06404921212830571,
-     "ci": [
-      0.05093870337113962,
-      0.4065399291074929
-     ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.candidates_correct": {
      "mean": 0,
@@ -172,7 +165,8 @@
       0.0,
       0.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.contradicted_truth": {
      "mean": 5.25,
@@ -181,7 +175,8 @@
       4.556,
       5.944
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.hypotheses_total": {
      "mean": 54.5,
@@ -190,40 +185,36 @@
       34.33813540368848,
       74.66186459631152
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.discovery_coverage": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8793527963418923,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "metargon_muted.verified_precision": {
+     "mean": 0.2,
+     "sem": null,
+     "ci": [
+      0.10042319445900805,
+      0.3589193660946251
+     ],
+     "n": 4,
+     "n_events": 35,
+     "method": "wilson"
     }
    }
   },
   "learning_efficiency": {
    "title": "Learning efficiency",
    "metrics": {
-    "metargon_trained.success_rate": {
-     "mean": 0.6979166666666667,
-     "sem": 0.07090478422452132,
-     "ci": [
-      0.5010849856593955,
-      0.894748347673938
-     ],
-     "n": 4
-    },
-    "metargon_trained.success_rate_first_half": {
-     "mean": 0.5416666666666666,
-     "sem": 0.07978559231302818,
-     "ci": [
-      0.32018186240570046,
-      0.7631514709276328
-     ],
-     "n": 4
-    },
-    "metargon_trained.success_rate_second_half": {
-     "mean": 0.8541666666666666,
-     "sem": 0.07115938031916388,
-     "ci": [
-      0.6566282269006677,
-      1.0517051064326655
-     ],
-     "n": 4
-    },
     "metargon_trained.episodes_to_first_success": {
      "mean": 1,
      "sem": 0.0,
@@ -231,7 +222,8 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.episodes_to_first_verified_correct": {
      "mean": 1,
@@ -240,7 +232,8 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.mean_steps_to_success_second_half": {
      "mean": 20.064204545454544,
@@ -249,34 +242,41 @@
       10.667961981191585,
       29.460447109717503
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
-    "metargon_muted.success_rate": {
-     "mean": 0.6979166666666667,
-     "sem": 0.07090478422452132,
+    "metargon_trained.success_rate": {
+     "mean": 0.6979166666666666,
+     "sem": null,
      "ci": [
-      0.5010849856593955,
-      0.894748347673938
+      0.5999131207004743,
+      0.7806897542534527
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 96,
+     "method": "wilson"
     },
-    "metargon_muted.success_rate_first_half": {
+    "metargon_trained.success_rate_first_half": {
      "mean": 0.5416666666666666,
-     "sem": 0.07978559231302818,
+     "sem": null,
      "ci": [
-      0.32018186240570046,
-      0.7631514709276328
+      0.4029083309494732,
+      0.6742497814544648
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
     },
-    "metargon_muted.success_rate_second_half": {
+    "metargon_trained.success_rate_second_half": {
      "mean": 0.8541666666666666,
-     "sem": 0.07115938031916388,
+     "sem": null,
      "ci": [
-      0.6566282269006677,
-      1.0517051064326655
+      0.7283255295714138,
+      0.9275184258620602
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
     },
     "metargon_muted.episodes_to_first_success": {
      "mean": 1,
@@ -285,7 +285,8 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.episodes_to_first_verified_correct": {
      "mean": 1,
@@ -294,7 +295,8 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.mean_steps_to_success_second_half": {
      "mean": 20.064204545454544,
@@ -303,7 +305,41 @@
       10.667961981191585,
       29.460447109717503
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.success_rate": {
+     "mean": 0.6979166666666666,
+     "sem": null,
+     "ci": [
+      0.5999131207004743,
+      0.7806897542534527
+     ],
+     "n": 4,
+     "n_events": 96,
+     "method": "wilson"
+    },
+    "metargon_muted.success_rate_first_half": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.4029083309494732,
+      0.6742497814544648
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "metargon_muted.success_rate_second_half": {
+     "mean": 0.8541666666666666,
+     "sem": null,
+     "ci": [
+      0.7283255295714138,
+      0.9275184258620602
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
     }
    }
   },
@@ -312,30 +348,36 @@
    "metrics": {
     "metargon_trained.retention_preserved": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.7574992425007574,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
     },
     "metargon_trained.success_early": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.7574992425007574,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
     },
     "metargon_trained.success_late": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.7574992425007574,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
     },
     "metargon_trained.restart_parity": {
      "mean": 1.0,
@@ -344,43 +386,52 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.restart_success_restored": {
      "mean": 0.8125,
-     "sem": 0.03608439182435161,
+     "sem": null,
      "ci": [
-      0.7123297282955999,
-      0.9126702717044001
+      0.6469050424507756,
+      0.9111057606383721
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_muted.retention_preserved": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.7574992425007574,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
     },
     "metargon_muted.success_early": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.7574992425007574,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
     },
     "metargon_muted.success_late": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.7574992425007574,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
     },
     "metargon_muted.restart_parity": {
      "mean": 1.0,
@@ -389,16 +440,19 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.restart_success_restored": {
      "mean": 0.71875,
-     "sem": 0.07864410870073697,
+     "sem": null,
      "ci": [
-      0.5004339542467542,
-      0.9370660457532458
+      0.546251630618882,
+      0.8443559315435214
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    }
   },
@@ -407,12 +461,14 @@
    "metrics": {
     "metargon_trained.eval_val.success_rate": {
      "mean": 0.78125,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      0.6945,
-      0.868
+      0.6124466920955516,
+      0.8897630306846815
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_trained.eval_val.mean_steps_to_success": {
      "mean": 23.375,
@@ -421,16 +477,19 @@
       15.80700504316588,
       30.94299495683412
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_fresh.eval_val.success_rate": {
      "mean": 0.5,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      0.5,
-      0.5
+      0.33630614316859386,
+      0.6636938568314061
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_fresh.eval_val.mean_steps_to_success": {
      "mean": 10.25,
@@ -439,16 +498,19 @@
       9.8493189131824,
       10.6506810868176
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.eval_test.success_rate": {
      "mean": 0.8125,
-     "sem": 0.03608439182435161,
+     "sem": null,
      "ci": [
-      0.7123297282955999,
-      0.9126702717044001
+      0.6469050424507756,
+      0.9111057606383721
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_trained.eval_test.mean_steps_to_success": {
      "mean": 18.333333333333332,
@@ -457,16 +519,19 @@
       12.389169887159436,
       24.277496779507228
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_fresh.eval_test.success_rate": {
      "mean": 0.75,
-     "sem": 0.125,
+     "sem": null,
      "ci": [
-      0.403,
-      1.097
+      0.5789310822975338,
+      0.8674775601737845
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_fresh.eval_test.mean_steps_to_success": {
      "mean": 21.38095238095238,
@@ -475,16 +540,19 @@
       10.796217359520671,
       31.965687402384088
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.eval_ood.success_rate": {
      "mean": 0.15625,
-     "sem": 0.09375,
+     "sem": null,
      "ci": [
-      -0.10399999999999998,
-      0.4165
+      0.06864319106627216,
+      0.31754492553566527
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_trained.eval_ood.mean_steps_to_success": {
      "mean": 12.5,
@@ -493,16 +561,19 @@
       1.7424999999999997,
       23.2575
      ],
-     "n": 2
+     "n": 2,
+     "method": "t"
     },
     "metargon_fresh.eval_ood.success_rate": {
      "mean": 0.3125,
-     "sem": 0.18042195912175804,
+     "sem": null,
      "ci": [
-      -0.18835135852200025,
-      0.8133513585220002
+      0.17952352116618736,
+      0.4856699969803239
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_fresh.eval_ood.mean_steps_to_success": {
      "mean": 15.600000000000001,
@@ -511,34 +582,41 @@
       11.296999999999997,
       19.903000000000006
      ],
-     "n": 2
+     "n": 2,
+     "method": "t"
     },
     "metargon_trained.eval_val.zero_shot_coverage": {
      "mean": 0.4375,
-     "sem": 0.0625,
+     "sem": null,
      "ci": [
-      0.264,
-      0.611
+      0.2816508596944317,
+      0.6067469796877387
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_trained.eval_test.zero_shot_coverage": {
      "mean": 0.46875,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      0.382,
-      0.5555
+      0.30869129901682335,
+      0.6355076206742619
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "metargon_trained.eval_ood.zero_shot_coverage": {
      "mean": 0.5625,
-     "sem": 0.14877975892797604,
+     "sem": null,
      "ci": [
-      0.14948738921593852,
-      0.9755126107840615
+      0.3932530203122613,
+      0.7183491403055682
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    }
   },
@@ -547,21 +625,25 @@
    "metrics": {
     "metargon_trained.success_before": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.9123754607496077,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
     },
     "metargon_trained.success_after": {
      "mean": 0.6,
-     "sem": 0.08164965809277261,
+     "sem": null,
      "ci": [
-      0.37334054913446324,
-      0.8266594508655367
+      0.44595619827393507,
+      0.7365188938759863
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
     },
     "metargon_trained.recovery_lag": {
      "mean": 1,
@@ -570,34 +652,41 @@
       1.0,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_trained.wrong_belief_correction": {
-     "mean": 0.3888888888888889,
-     "sem": 0.2421610524189263,
+     "mean": 0.5263157894736842,
+     "sem": null,
      "ci": [
-      -0.2833501926260505,
-      1.0611279704038283
+      0.31707482511825114,
+      0.7267049451255145
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 19,
+     "method": "wilson"
     },
     "metargon_muted.success_before": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.9123754607496077,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
     },
     "metargon_muted.success_after": {
      "mean": 0.625,
-     "sem": 0.0629152869605896,
+     "sem": null,
      "ci": [
-      0.4503471633974033,
-      0.7996528366025967
+      0.47032160054531913,
+      0.7577722646420829
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
     },
     "metargon_muted.recovery_lag": {
      "mean": 1.5,
@@ -606,34 +695,41 @@
       0.6986378263647995,
       2.3013621736352006
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "metargon_muted.wrong_belief_correction": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
-      1.0
+      0.9398260695220669,
+      0.9999999999999999
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 60,
+     "method": "wilson"
     },
     "metargon_fresh.success_before": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.9123754607496077,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
     },
     "metargon_fresh.success_after": {
      "mean": 0.45,
-     "sem": 0.08660254037844387,
+     "sem": null,
      "ci": [
-      0.20959134790943987,
-      0.6904086520905601
+      0.30705075280944694,
+      0.6017117011155924
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
     },
     "metargon_fresh.recovery_lag": {
      "mean": 2.5,
@@ -642,7 +738,8 @@
       0.09591347909439873,
       4.904086520905601
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     }
    }
   },
@@ -650,31 +747,26 @@
    "title": "Planning efficiency",
    "metrics": {
     "metargon_trained.eval_test.fallback_rate": {
-     "mean": 0.16916221154373207,
-     "sem": 0.056397922320175785,
+     "mean": 0.16804979253112035,
+     "sem": null,
      "ci": [
-      0.012601579182924094,
-      0.32572284390454004
+      0.14577347816420197,
+      0.19296129000447362
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 964,
+     "method": "wilson"
     },
     "metargon_trained.eval_test.invalid_rate": {
      "mean": 0.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
       0.0,
-      0.0
+      0.003969244554067526
      ],
-     "n": 4
-    },
-    "metargon_trained.eval_test.plan_cache_hit_rate": {
-     "mean": 5.505455155241359,
-     "sem": 0.5234425379600285,
-     "ci": [
-      4.05237866986432,
-      6.958531640618398
-     ],
-     "n": 4
+     "n": 4,
+     "n_events": 964,
+     "method": "wilson"
     },
     "metargon_trained.eval_test.planner_ops_per_step": {
      "mean": 177.82071405572236,
@@ -683,34 +775,50 @@
       107.68504460262012,
       247.95638350882462
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.eval_test.plan_cache_hits_per_step": {
+     "mean": 2.9063331555235488,
+     "sem": 0.035862569098536745,
+     "ci": [
+      2.8067786637060106,
+      3.005887647341087
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.eval_test.plans_used_per_step": {
+     "mean": 0.5476543817485461,
+     "sem": 0.06949470636616946,
+     "ci": [
+      0.3547370768760597,
+      0.7405716866210325
+     ],
+     "n": 4,
+     "method": "t"
     },
     "metargon_fresh.eval_test.fallback_rate": {
-     "mean": 0.2294769681849251,
-     "sem": 0.04974800517964784,
+     "mean": 0.24581939799331104,
+     "sem": null,
      "ci": [
-      0.0913765058062227,
-      0.3675774305636275
+      0.22225612313824528,
+      0.2710103213657626
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 1196,
+     "method": "wilson"
     },
     "metargon_fresh.eval_test.invalid_rate": {
      "mean": 0.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
       0.0,
-      0.0
+      0.003201755965120729
      ],
-     "n": 4
-    },
-    "metargon_fresh.eval_test.plan_cache_hit_rate": {
-     "mean": 4.950912535082711,
-     "sem": 0.5563520025029293,
-     "ci": [
-      3.4064793761345795,
-      6.495345694030843
-     ],
-     "n": 4
+     "n": 4,
+     "n_events": 1196,
+     "method": "wilson"
     },
     "metargon_fresh.eval_test.planner_ops_per_step": {
      "mean": 289.38561844850807,
@@ -719,7 +827,28 @@
       217.1094645930453,
       361.66177230397085
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_test.plan_cache_hits_per_step": {
+     "mean": 2.419573389820836,
+     "sem": 0.18589755069156344,
+     "ci": [
+      1.9035217891010556,
+      2.935624990540616
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_test.plans_used_per_step": {
+     "mean": 0.4963342606519254,
+     "sem": 0.028447130095865303,
+     "ci": [
+      0.4173650275058033,
+      0.5753034937980475
+     ],
+     "n": 4,
+     "method": "t"
     }
    }
   }
@@ -1289,7 +1418,7 @@
  "indicators": {
   "causal_discovery": {
    "coverage": 1.0,
-   "verified_precision": 0.22873931623931626
+   "verified_precision": 0.2
   },
   "learning_efficiency": {
    "success_rate_second_half": 0.8541666666666666,
@@ -1306,10 +1435,10 @@
   "adaptability": {
    "success_after_switch": 0.6,
    "recovery_speed": 0.5,
-   "wrong_belief_correction": 0.3888888888888889
+   "wrong_belief_correction": 0.5263157894736842
   },
   "planning_efficiency": {
-   "fallback_reduction": 0.8308377884562679,
+   "fallback_reduction": 0.8319502074688796,
    "steps_to_success_improvement": 0.1425389755011136
   }
  },
@@ -1318,12 +1447,14 @@
    "metargon_trained": {
     "success_rate": {
      "mean": 0.78125,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      0.6945,
-      0.868
+      0.6124466920955516,
+      0.8897630306846815
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 23.375,
@@ -1332,27 +1463,32 @@
       15.80700504316588,
       30.94299495683412
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.8080357142857143,
-     "sem": 0.033704618014601555,
+     "mean": 0.8064516129032258,
+     "sem": null,
      "ci": [
-      0.7144716946771804,
-      0.9015997338942482
+      0.6371939644454013,
+      0.9081311641365236
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
     }
    },
    "metargon_fresh": {
     "success_rate": {
      "mean": 0.5,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      0.5,
-      0.5
+      0.33630614316859386,
+      0.6636938568314061
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 10.25,
@@ -1361,79 +1497,94 @@
       9.8493189131824,
       10.6506810868176
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.5178571428571428,
-     "sem": 0.01785714285714285,
+     "mean": 0.5161290322580645,
+     "sem": null,
      "ci": [
-      0.46828571428571425,
-      0.5674285714285714
+      0.34840118286973176,
+      0.6803001396872117
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
     }
    },
    "random": {
     "success_rate": {
      "mean": 0.03125,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      -0.055499999999999994,
-      0.118
+      0.005537717362550945,
+      0.15744607800372734
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 28,
      "sem": null,
      "ci": null,
-     "n": 1
+     "n": 1,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.03571428571428571,
-     "sem": 0.03571428571428571,
+     "mean": 0.034482758620689655,
+     "sem": null,
      "ci": [
-      -0.06342857142857142,
-      0.13485714285714284
+      0.006113056614032261,
+      0.1717589106470025
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 29,
+     "method": "wilson"
     }
    },
    "episodic": {
     "success_rate": {
      "mean": 0.03125,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      -0.055499999999999994,
-      0.118
+      0.005537717362550945,
+      0.15744607800372734
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 28,
      "sem": null,
      "ci": null,
-     "n": 1
+     "n": 1,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.03571428571428571,
-     "sem": 0.03571428571428571,
+     "mean": 0.034482758620689655,
+     "sem": null,
      "ci": [
-      -0.06342857142857142,
-      0.13485714285714284
+      0.006113056614032261,
+      0.1717589106470025
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 29,
+     "method": "wilson"
     }
    },
    "qlearning": {
     "success_rate": {
      "mean": 0.40625,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      0.3195,
-      0.493
+      0.255194024803138,
+      0.5774027342701177
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 37.04166666666667,
@@ -1442,27 +1593,32 @@
       34.90157283867861,
       39.18176049465473
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.4464285714285714,
-     "sem": 0.017857142857142863,
+     "mean": 0.4482758620689655,
+     "sem": null,
      "ci": [
-      0.3968571428571428,
-      0.496
+      0.2841291114874579,
+      0.6245233293193238
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 29,
+     "method": "wilson"
     }
    },
    "oracle": {
     "success_rate": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8928172849426366,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 12.875,
@@ -1471,16 +1627,19 @@
       12.875,
       12.875
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8928172849426366,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    }
   },
@@ -1488,12 +1647,14 @@
    "metargon_trained": {
     "success_rate": {
      "mean": 0.8125,
-     "sem": 0.03608439182435161,
+     "sem": null,
      "ci": [
-      0.7123297282955999,
-      0.9126702717044001
+      0.6469050424507756,
+      0.9111057606383721
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 18.333333333333332,
@@ -1502,27 +1663,32 @@
       12.389169887159436,
       24.277496779507228
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.8392857142857143,
-     "sem": 0.030058050411791895,
+     "mean": 0.8387096774193549,
+     "sem": null,
      "ci": [
-      0.75584456634258,
-      0.9227268622288486
+      0.6736529727502113,
+      0.9290748009456006
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
     }
    },
    "metargon_fresh": {
     "success_rate": {
      "mean": 0.75,
-     "sem": 0.125,
+     "sem": null,
      "ci": [
-      0.403,
-      1.097
+      0.5789310822975338,
+      0.8674775601737845
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 21.38095238095238,
@@ -1531,79 +1697,94 @@
       10.796217359520671,
       31.965687402384088
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 0.75,
-     "sem": 0.125,
+     "sem": null,
      "ci": [
-      0.403,
-      1.097
+      0.5789310822975338,
+      0.8674775601737845
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    },
    "random": {
     "success_rate": {
      "mean": 0.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
       0.0,
-      0.0
+      0.1071827150573635
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": null,
      "sem": null,
      "ci": null,
-     "n": 0
+     "n": 0,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 0.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
       0.0,
-      0.0
+      0.11025900073475385
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
     }
    },
    "episodic": {
     "success_rate": {
      "mean": 0.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
       0.0,
-      0.0
+      0.1071827150573635
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": null,
      "sem": null,
      "ci": null,
-     "n": 0
+     "n": 0,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 0.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
       0.0,
-      0.0
+      0.11025900073475385
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
     }
    },
    "qlearning": {
     "success_rate": {
      "mean": 0.25,
-     "sem": 0.05103103630798288,
+     "sem": null,
      "ci": [
-      0.10833784320903955,
-      0.39166215679096045
+      0.1325224398262155,
+      0.42106891770246624
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 34.166666666666664,
@@ -1612,27 +1793,32 @@
       21.81251364475177,
       46.520819688581554
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 0.2857142857142857,
-     "sem": 0.05832118435198043,
+     "sem": null,
      "ci": [
-      0.12381467795318804,
-      0.4476138934753834
+      0.15253815848329969,
+      0.470596357370175
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
     }
    },
    "oracle": {
     "success_rate": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8928172849426366,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 14.25,
@@ -1641,16 +1827,19 @@
       13.4486378263648,
       15.0513621736352
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8928172849426366,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    }
   },
@@ -1658,12 +1847,14 @@
    "metargon_trained": {
     "success_rate": {
      "mean": 0.15625,
-     "sem": 0.09375,
+     "sem": null,
      "ci": [
-      -0.10399999999999998,
-      0.4165
+      0.06864319106627216,
+      0.31754492553566527
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 12.5,
@@ -1672,27 +1863,32 @@
       1.7424999999999997,
       23.2575
      ],
-     "n": 2
+     "n": 2,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 0.15625,
-     "sem": 0.09375,
+     "sem": null,
      "ci": [
-      -0.10399999999999998,
-      0.4165
+      0.06864319106627216,
+      0.31754492553566527
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    },
    "metargon_fresh": {
     "success_rate": {
      "mean": 0.3125,
-     "sem": 0.18042195912175804,
+     "sem": null,
      "ci": [
-      -0.18835135852200025,
-      0.8133513585220002
+      0.17952352116618736,
+      0.4856699969803239
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 15.600000000000001,
@@ -1701,79 +1897,94 @@
       11.296999999999997,
       19.903000000000006
      ],
-     "n": 2
+     "n": 2,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 0.3125,
-     "sem": 0.18042195912175804,
+     "sem": null,
      "ci": [
-      -0.18835135852200025,
-      0.8133513585220002
+      0.17952352116618736,
+      0.4856699969803239
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    },
    "random": {
     "success_rate": {
      "mean": 0.03125,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      -0.055499999999999994,
-      0.118
+      0.005537717362550945,
+      0.15744607800372734
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 40,
      "sem": null,
      "ci": null,
-     "n": 1
+     "n": 1,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.03125,
-     "sem": 0.03125,
+     "mean": 0.03333333333333333,
+     "sem": null,
      "ci": [
-      -0.055499999999999994,
-      0.118
+      0.0059084379948573795,
+      0.16670751396958874
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 30,
+     "method": "wilson"
     }
    },
    "episodic": {
     "success_rate": {
      "mean": 0.03125,
-     "sem": 0.03125,
+     "sem": null,
      "ci": [
-      -0.055499999999999994,
-      0.118
+      0.005537717362550945,
+      0.15744607800372734
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 40,
      "sem": null,
      "ci": null,
-     "n": 1
+     "n": 1,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.03125,
-     "sem": 0.03125,
+     "mean": 0.03333333333333333,
+     "sem": null,
      "ci": [
-      -0.055499999999999994,
-      0.118
+      0.0059084379948573795,
+      0.16670751396958874
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 30,
+     "method": "wilson"
     }
    },
    "qlearning": {
     "success_rate": {
      "mean": 0.09375,
-     "sem": 0.05983919423477113,
+     "sem": null,
      "ci": [
-      -0.07236360319572466,
-      0.25986360319572466
+      0.032400962626319516,
+      0.24218499335778831
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 60.75,
@@ -1782,27 +1993,32 @@
       42.462250000000004,
       79.03774999999999
      ],
-     "n": 2
+     "n": 2,
+     "method": "t"
     },
     "within_episode_adaptation": {
-     "mean": 0.09821428571428571,
-     "sem": 0.06077552933530398,
+     "mean": 0.1111111111111111,
+     "sem": null,
      "ci": [
-      -0.07049858372051813,
-      0.26692715514908955
+      0.03851964789498727,
+      0.2805818254397294
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 27,
+     "method": "wilson"
     }
    },
    "oracle": {
     "success_rate": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8928172849426366,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     },
     "mean_steps_to_success": {
      "mean": 15.96875,
@@ -1811,16 +2027,19 @@
       14.045193858587261,
       17.89230614141274
      ],
-     "n": 4
+     "n": 4,
+     "method": "t"
     },
     "within_episode_adaptation": {
      "mean": 1.0,
-     "sem": 0.0,
+     "sem": null,
      "ci": [
-      1.0,
+      0.8928172849426366,
       1.0
      ],
-     "n": 4
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
     }
    }
   }

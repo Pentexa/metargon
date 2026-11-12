@@ -28,20 +28,72 @@ def _t(n):
 
 
 def summarize(values):
-    """mean / sem / ci95 from a list of per-seed values (None filtered)."""
+    """mean / sem / ci95 from a list of per-seed values (None filtered).
+
+    Used for *unbounded* metrics (steps, episodes-to-event, planner
+    counters). For bounded probability metrics use ``summarize_proportion``.
+    """
     if isinstance(values, (int, float)):
         values = [values]
     vals = [v for v in values if v is not None]
     if not vals:
-        return {"mean": None, "sem": None, "ci": None, "n": 0}
+        return {"mean": None, "sem": None, "ci": None, "n": 0,
+                "method": "t"}
     n = len(vals)
     mean = statistics.mean(vals)
     if n < 2:
-        return {"mean": mean, "sem": None, "ci": None, "n": n}
+        return {"mean": mean, "sem": None, "ci": None, "n": n,
+                "method": "t"}
     sem = statistics.stdev(vals) / math.sqrt(n)
     half = _t(n) * sem
     return {"mean": mean, "sem": sem, "ci": (mean - half, mean + half),
-            "n": n}
+            "n": n, "method": "t"}
+
+
+def _wilson_ci(k, n, z=1.96):
+    """Wilson score interval for a binomial proportion (respects [0,1])."""
+    if n <= 0:
+        return None
+    p = k / n
+    denom = 1.0 + z * z / n
+    centre = (p + z * z / (2.0 * n)) / denom
+    half = (z * math.sqrt((p * (1.0 - p) + z * z / (4.0 * n)) / n)
+            / denom)
+    return (max(0.0, centre - half), min(1.0, centre + half))
+
+
+def summarize_proportion(counts):
+    """Pooled 95% Wilson interval for a bounded probability metric.
+
+    ``counts`` is a list of per-seed ``(k, n)`` success/trial counts (or
+    None). A single ``(k, n)`` pair is also accepted. Pooling across
+    seeds keeps the interval inside [0, 1], which a Student-t interval on
+    per-seed means does not guarantee for small, extreme samples.
+    """
+    if isinstance(counts, tuple) and len(counts) == 2 and not isinstance(
+            counts[0], (tuple, list)):
+        counts = [counts]
+    pairs = [tuple(c) for c in counts if c is not None and c[1] > 0]
+    if not pairs:
+        return {"mean": None, "sem": None, "ci": None, "n": 0,
+                "n_events": 0, "method": "wilson"}
+    k = sum(p[0] for p in pairs)
+    n = sum(p[1] for p in pairs)
+    return {
+        "mean": k / n,
+        "sem": None,
+        "ci": _wilson_ci(k, n),
+        "n": len(pairs),
+        "n_events": n,
+        "method": "wilson",
+    }
+
+
+def _rate_counts(recs, key):
+    """(k, n) success/trial counts for a boolean per-episode field."""
+    if not recs:
+        return None
+    return sum(1 for r in recs if r.get(key)), len(recs)
 
 
 def _rate(recs, key):
@@ -117,6 +169,11 @@ def discovery_metrics(mem, truths, generated=None):
         "contradicted_truth": len(m["contradicted_truth"]),
         "hypotheses_total": len(mem),
         "generated_lifetime": generated,
+        # counts for pooled Wilson intervals
+        "_counts": {
+            "discovery_coverage": (len(m["correct_any"]), n_truths),
+            "verified_precision": (len(m["verified_correct"]), n_verified),
+        },
     }
 
 
@@ -145,6 +202,10 @@ def train_metrics(recs, truths):
     half = len(recs) // 2 or 1
     first, second = recs[:half], recs[half:]
     curve = learning_curve(recs, truths)
+    final = discovery_metrics(
+        recs[-1].get("memory", []) if recs else [],
+        truths, generated=recs[-1].get("diagnostics", {}).get(
+            "memory", {}).get("generated") if recs else None)
     return {
         "success_rate": _rate(recs, "success"),
         "success_rate_first_half": _rate(first, "success"),
@@ -157,10 +218,14 @@ def train_metrics(recs, truths):
             recs, lambda r: match_hypotheses(
                 r.get("memory", []), truths)["verified_correct"]),
         "discovery_curve": curve,
-        "final_discovery": discovery_metrics(
-            recs[-1].get("memory", []) if recs else [],
-            truths, generated=recs[-1].get("diagnostics", {}).get(
-                "memory", {}).get("generated") if recs else None),
+        "final_discovery": final,
+        "_counts": {
+            "success_rate": _rate_counts(recs, "success"),
+            "success_rate_first_half": _rate_counts(first, "success"),
+            "success_rate_second_half": _rate_counts(second, "success"),
+            "discovery_coverage": final["_counts"]["discovery_coverage"],
+            "verified_precision": final["_counts"]["verified_precision"],
+        },
     }
 
 
@@ -170,10 +235,11 @@ def _trace_delta_sum(recs, key):
 
 def eval_metrics(recs):
     steps_total = sum(r["steps"] for r in recs) if recs else 0
-    plans_used = _trace_delta_sum(recs, "plans_used")
     # within-episode adaptation: episodes that produced at least one door
     # event and then reached the goal (discovered mechanism used in-episode)
     with_events = [r for r in recs if r.get("events")]
+    fallback = _trace_delta_sum(recs, "random_fallback_steps")
+    invalid = sum(r["invalid"] for r in recs)
     return {
         "success_rate": _rate(recs, "success"),
         "door_open_rate": _rate(recs, "door_open"),
@@ -181,24 +247,39 @@ def eval_metrics(recs):
             _rate(with_events, "success") if with_events else None),
         "mean_steps": _mean(recs, "steps", only_success=False),
         "mean_steps_to_success": _mean(recs, "steps"),
-        "invalid_rate": (sum(r["invalid"] for r in recs) / steps_total
-                         if steps_total else None),
-        "fallback_rate": (_trace_delta_sum(recs, "random_fallback_steps") /
-                          steps_total if steps_total else None),
+        "invalid_rate": (invalid / steps_total if steps_total else None),
+        "fallback_rate": (fallback / steps_total if steps_total else None),
         "planner_ops_per_step": (_trace_delta_sum(recs, "planner_ops") /
                                  steps_total if steps_total else None),
-        "plan_cache_hit_rate": (
-            _trace_delta_sum(recs, "plan_cache_hits") / plans_used
-            if plans_used else None),
+        # NOTE: `plan_cache_hits` counts cache lookups that found an entry,
+        # while `plans_used` counts executed plans — they are not a
+        # hit/miss pair, so a "hit rate" would be misleading. Report both
+        # per step instead, with accurate names.
+        "plan_cache_hits_per_step": (
+            _trace_delta_sum(recs, "plan_cache_hits") / steps_total
+            if steps_total else None),
+        "plans_used_per_step": (
+            _trace_delta_sum(recs, "plans_used") / steps_total
+            if steps_total else None),
+        "_counts": {
+            "success_rate": _rate_counts(recs, "success"),
+            "door_open_rate": _rate_counts(recs, "door_open"),
+            "within_episode_adaptation": (
+                _rate_counts(with_events, "success")
+                if with_events else None),
+            "invalid_rate": (invalid, steps_total) if steps_total else None,
+            "fallback_rate": (fallback, steps_total) if steps_total else None,
+        },
     }
 
 
 def zero_shot_coverage(pre_mem, eval_stream):
-    """Fraction of eval configs whose true door-rules are already verified
-    in pre-evaluation memory (clean zero-shot knowledge measure)."""
+    """(covered, total) eval configs whose true door-rules are already
+    verified in pre-evaluation memory (clean zero-shot knowledge measure)."""
     truths = truth_rules(eval_stream)
     m = match_hypotheses(pre_mem, truths)
     covered = set()
+    total = len(set(config_signature(s.config) for s in eval_stream))
     for spec in eval_stream:
         sig = config_signature(spec.config)
         if sig in covered:
@@ -209,8 +290,7 @@ def zero_shot_coverage(pre_mem, eval_stream):
                 if (door, clause) in m["verified_correct"]:
                     covered.add(sig)
                     break
-    return len(covered) / (len(set(config_signature(s.config)
-                                    for s in eval_stream)) or 1)
+    return len(covered), total
 
 
 def revisit_metrics(recs, occurrences):
@@ -226,13 +306,20 @@ def revisit_metrics(recs, occurrences):
             "late": bool(recs[late]["success"]),
         })
     keep = [l for l in labels if l["early"]]
+    early_recs = [recs[l["early"]] for l in labels]
+    late_recs = [recs[l["late"]] for l in labels]
+    preserved = sum(1 for l in labels if l["early"] and l["late"])
     return {
         "configs": labels,
         "retention_preserved": (
-            sum(1 for l in labels if l["early"] and l["late"]) /
-            len(keep) if keep else None),
-        "success_early": _rate([recs[l["early"]] for l in labels], "success"),
-        "success_late": _rate([recs[l["late"]] for l in labels], "success"),
+            preserved / len(keep) if keep else None),
+        "success_early": _rate(early_recs, "success"),
+        "success_late": _rate(late_recs, "success"),
+        "_counts": {
+            "retention_preserved": (preserved, len(keep)) if keep else None,
+            "success_early": _rate_counts(early_recs, "success"),
+            "success_late": _rate_counts(late_recs, "success"),
+        },
     }
 
 
@@ -255,13 +342,19 @@ def switch_metrics(recs, split_point, target_door="D1"):
                         if h["status"] == "contradicted"
                         and h["door"] == target_door}
     corrected = sum(1 for hid in set(pre_hyps) if hid in contradicted_ids)
+    n_pre = len(set(pre_hyps))
     return {
         "success_before": _rate(before, "success"),
         "success_after": _rate(after, "success"),
         "recovery_lag": lag,
         "wrong_belief_correction": (
-            corrected / len(set(pre_hyps)) if pre_hyps else None),
+            corrected / n_pre if n_pre else None),
         "target_door": target_door,
+        "_counts": {
+            "success_before": _rate_counts(before, "success"),
+            "success_after": _rate_counts(after, "success"),
+            "wrong_belief_correction": (corrected, n_pre) if n_pre else None,
+        },
     }
 
 
@@ -276,6 +369,9 @@ def restart_metrics(direct_recs, restored_recs):
         "steps_direct": _mean(direct_recs, "steps", only_success=False),
         "steps_restored": _mean(restored_recs, "steps",
                                  only_success=False),
+        "_counts": {
+            "success_restored": _rate_counts(restored_recs, "success"),
+        },
     }
 
 
@@ -298,8 +394,19 @@ def build_scorecard(seed_results, meta, extra_vectors=None,
 
     protocols = meta["protocols"]
 
-    # helper to extract per-seed vectors
+    # helpers to extract per-seed vectors
     def vectors(policy, protocol, metric_fn):
+        out = []
+        for seed, policies in seed_results.items():
+            recs = policies.get(policy, {}).get(protocol, {}).get("recs")
+            if recs is None:
+                out.append(None)
+                continue
+            out.append(metric_fn(recs))
+        return out
+
+    def vectors_counts(policy, protocol, metric_fn):
+        """Per-seed (k, n) counts for proportion metrics."""
         out = []
         for seed, policies in seed_results.items():
             recs = policies.get(policy, {}).get(protocol, {}).get("recs")
@@ -318,64 +425,66 @@ def build_scorecard(seed_results, meta, extra_vectors=None,
             per_seed.append(None if not recs else
                             discovery_metrics(recs[-1].get("memory", []),
                                               truths))
-        for key in ("discovery_coverage", "verified_correct",
-                    "verified_wrong", "verified_precision",
+        for key in ("verified_correct", "verified_wrong",
                     "candidates_correct", "contradicted_truth",
                     "hypotheses_total"):
             dim["metrics"][f"{pol}.{key}"] = summarize(
                 [d[key] if d else None for d in per_seed])
+        for key in ("discovery_coverage", "verified_precision"):
+            dim["metrics"][f"{pol}.{key}"] = summarize_proportion(
+                [d["_counts"][key] if d else None for d in per_seed])
     scorecard["dimensions"]["causal_discovery"] = dim
 
     # ---- 2. learning efficiency ----------------------------------------
     dim = {"title": "Learning efficiency", "metrics": {}}
     for pol in ("metargon_trained", "metargon_muted"):
-        train = {
-            "success_rate": lambda r: _rate(r, "success"),
-            "success_rate_first_half": lambda r: train_metrics(r, truths)["success_rate_first_half"],
-            "success_rate_second_half": lambda r: train_metrics(r, truths)["success_rate_second_half"],
+        tr = {
             "episodes_to_first_success": lambda r: train_metrics(r, truths)["episodes_to_first_success"],
             "episodes_to_first_verified_correct": lambda r: train_metrics(r, truths)["episodes_to_first_verified_correct"],
             "mean_steps_to_success_second_half": lambda r: train_metrics(r, truths)["mean_steps_to_success_second_half"],
         }
-        for name, fn in train.items():
+        for name, fn in tr.items():
             dim["metrics"][f"{pol}.{name}"] = summarize(
                 vectors(pol, "train", fn))
+        for name in ("success_rate", "success_rate_first_half",
+                     "success_rate_second_half"):
+            dim["metrics"][f"{pol}.{name}"] = summarize_proportion(
+                vectors_counts(pol, "train",
+                               lambda r, n=name: train_metrics(r, truths)["_counts"][n]))
     scorecard["dimensions"]["learning_efficiency"] = dim
 
     # ---- 3. knowledge retention ----------------------------------------
     dim = {"title": "Knowledge retention", "metrics": {}}
     for pol in ("metargon_trained", "metargon_muted"):
-        dim["metrics"][f"{pol}.retention_preserved"] = summarize(
-            vectors(pol, "revisit",
-                    lambda r: revisit_metrics(r, meta["revisit_occurrences"])["retention_preserved"]))
-        dim["metrics"][f"{pol}.success_early"] = summarize(
-            vectors(pol, "revisit",
-                    lambda r: revisit_metrics(r, meta["revisit_occurrences"])["success_early"]))
-        dim["metrics"][f"{pol}.success_late"] = summarize(
-            vectors(pol, "revisit",
-                    lambda r: revisit_metrics(r, meta["revisit_occurrences"])["success_late"]))
+        for name in ("retention_preserved", "success_early", "success_late"):
+            dim["metrics"][f"{pol}.{name}"] = summarize_proportion(
+                vectors_counts(pol, "revisit",
+                               lambda r, n=name: revisit_metrics(
+                                   r, meta["revisit_occurrences"])["_counts"][n]))
         dim["metrics"][f"{pol}.restart_parity"] = summarize(
             vectors(pol, "restart",
                     lambda r: restart_metrics(
                         r.get("direct", []), r.get("restored", []))["parity"]))
-        dim["metrics"][f"{pol}.restart_success_restored"] = summarize(
-            vectors(pol, "restart",
-                    lambda r: restart_metrics(
-                        r.get("direct", []), r.get("restored", []))["success_restored"]))
+        dim["metrics"][f"{pol}.restart_success_restored"] = summarize_proportion(
+            vectors_counts(pol, "restart",
+                           lambda r: restart_metrics(
+                               r.get("direct", []),
+                               r.get("restored", []))["_counts"]["success_restored"]))
     scorecard["dimensions"]["knowledge_retention"] = dim
 
     # ---- 4. generalization ----------------------------------------------
     dim = {"title": "Generalization", "metrics": {}}
     for pool in ("eval_val", "eval_test", "eval_ood"):
         for pol in ("metargon_trained", "metargon_fresh"):
-            dim["metrics"][f"{pol}.{pool}.success_rate"] = summarize(
-                vectors(pol, pool, lambda r: _rate(r, "success")))
+            dim["metrics"][f"{pol}.{pool}.success_rate"] = summarize_proportion(
+                vectors_counts(pol, pool,
+                               lambda r: eval_metrics(r)["_counts"]["success_rate"]))
             dim["metrics"][f"{pol}.{pool}.mean_steps_to_success"] = summarize(
                 vectors(pol, pool, lambda r: _mean(r, "steps")))
-    # zero-shot knowledge transfer (pre-eval memory per seed)
+    # zero-shot knowledge transfer (pre-eval memory per seed) — counts
     for pool in ("eval_val", "eval_test", "eval_ood"):
         key = f"metargon_trained.{pool}.zero_shot_coverage"
-        dim["metrics"][key] = summarize(
+        dim["metrics"][key] = summarize_proportion(
             extra_vectors.get(key))
     scorecard["dimensions"]["generalization"] = dim
 
@@ -383,33 +492,33 @@ def build_scorecard(seed_results, meta, extra_vectors=None,
     dim = {"title": "Adaptability", "metrics": {}}
     t_door = meta.get("switch_target_door", "D1")
     for pol in ("metargon_trained", "metargon_muted", "metargon_fresh"):
-        dim["metrics"][f"{pol}.success_before"] = summarize(
-            vectors(pol, "switch",
-                    lambda r: switch_metrics(r, meta["switch_split"], t_door)["success_before"]))
-        dim["metrics"][f"{pol}.success_after"] = summarize(
-            vectors(pol, "switch",
-                    lambda r: switch_metrics(r, meta["switch_split"], t_door)["success_after"]))
+        for name in ("success_before", "success_after"):
+            dim["metrics"][f"{pol}.{name}"] = summarize_proportion(
+                vectors_counts(pol, "switch",
+                               lambda r, n=name: switch_metrics(
+                                   r, meta["switch_split"], t_door)["_counts"][n]))
         dim["metrics"][f"{pol}.recovery_lag"] = summarize(
             vectors(pol, "switch",
                     lambda r: switch_metrics(r, meta["switch_split"], t_door)["recovery_lag"]))
         if pol != "metargon_fresh":
-            dim["metrics"][f"{pol}.wrong_belief_correction"] = summarize(
-                vectors(pol, "switch",
-                        lambda r: switch_metrics(r, meta["switch_split"], t_door)["wrong_belief_correction"]))
+            dim["metrics"][f"{pol}.wrong_belief_correction"] = summarize_proportion(
+                vectors_counts(pol, "switch",
+                               lambda r: switch_metrics(
+                                   r, meta["switch_split"], t_door)["_counts"]["wrong_belief_correction"]))
     scorecard["dimensions"]["adaptability"] = dim
 
     # ---- 6. planning efficiency -----------------------------------------
     dim = {"title": "Planning efficiency", "metrics": {}}
     for pol in ("metargon_trained", "metargon_fresh"):
         suffix = "eval_test"
-        dim["metrics"][f"{pol}.{suffix}.fallback_rate"] = summarize(
-            vectors(pol, suffix, lambda r: eval_metrics(r)["fallback_rate"]))
-        dim["metrics"][f"{pol}.{suffix}.invalid_rate"] = summarize(
-            vectors(pol, suffix, lambda r: eval_metrics(r)["invalid_rate"]))
-        dim["metrics"][f"{pol}.{suffix}.plan_cache_hit_rate"] = summarize(
-            vectors(pol, suffix, lambda r: eval_metrics(r)["plan_cache_hit_rate"]))
-        dim["metrics"][f"{pol}.{suffix}.planner_ops_per_step"] = summarize(
-            vectors(pol, suffix, lambda r: eval_metrics(r)["planner_ops_per_step"]))
+        for name in ("fallback_rate", "invalid_rate"):
+            dim["metrics"][f"{pol}.{suffix}.{name}"] = summarize_proportion(
+                vectors_counts(pol, suffix,
+                               lambda r, n=name: eval_metrics(r)["_counts"][n]))
+        for name in ("planner_ops_per_step", "plan_cache_hits_per_step",
+                     "plans_used_per_step"):
+            dim["metrics"][f"{pol}.{suffix}.{name}"] = summarize(
+                vectors(pol, suffix, lambda r, n=name: eval_metrics(r)[n]))
     scorecard["dimensions"]["planning_efficiency"] = dim
 
     # ---- descriptive 0-1 indicators (NOT a composite IQ score) -----------
@@ -500,18 +609,26 @@ def _add_baselines(sc, seed_results):
             out.append(None if recs is None else metric_fn(recs))
         return out
 
+    def vectors_counts(policy, protocol, metric_fn):
+        out = []
+        for seed, policies in seed_results.items():
+            recs = policies.get(policy, {}).get(protocol, {}).get("recs")
+            out.append(None if recs is None else metric_fn(recs))
+        return out
+
     for pool in ("eval_val", "eval_test", "eval_ood"):
         row = {}
         for pol in ("metargon_trained", "metargon_fresh", "random",
                     "episodic", "qlearning", "oracle"):
             row[pol] = {
-                "success_rate": summarize(vectors(pol, pool,
-                                                  lambda r: _rate(r, "success"))),
+                "success_rate": summarize_proportion(
+                    vectors_counts(pol, pool,
+                                   lambda r: eval_metrics(r)["_counts"]["success_rate"])),
                 "mean_steps_to_success": summarize(
                     vectors(pol, pool, lambda r: _mean(r, "steps"))),
-                "within_episode_adaptation": summarize(
-                    vectors(pol, pool,
-                            lambda r: eval_metrics(r)["within_episode_adaptation"])),
+                "within_episode_adaptation": summarize_proportion(
+                    vectors_counts(pol, pool,
+                                   lambda r: eval_metrics(r)["_counts"]["within_episode_adaptation"])),
             }
         sc["baselines"][pool] = row
 

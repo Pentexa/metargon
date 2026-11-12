@@ -8,12 +8,14 @@ from academy.envs.gridworld import EnvConfig
 from generalization_audit.cognitive_v01.metrics import (
     _rate,
     discovery_metrics,
+    eval_metrics,
     first_episode_with,
     learning_curve,
     match_hypotheses,
     restart_metrics,
     revisit_metrics,
     summarize,
+    summarize_proportion,
     switch_metrics,
     truth_rules,
     zero_shot_coverage,
@@ -38,6 +40,36 @@ class TestMetrics(unittest.TestCase):
         s2 = summarize([None, 0.2])
         self.assertEqual(s2["mean"], 0.2)
         self.assertEqual(summarize([])["mean"], None)
+
+    def test_summarize_proportion_wilson_respects_bounds(self):
+        # extreme pooled proportions must stay inside [0, 1]
+        s = summarize_proportion([(0, 4), (1, 8)])
+        self.assertAlmostEqual(s["mean"], 1 / 12)
+        self.assertEqual(s["method"], "wilson")
+        self.assertGreaterEqual(s["ci"][0], 0.0)
+        self.assertLessEqual(s["ci"][1], 1.0)
+        s1 = summarize_proportion([(4, 4), (8, 8)])
+        self.assertEqual(s1["mean"], 1.0)
+        self.assertEqual(s1["ci"][1], 1.0)   # upper bound clamped to 1
+        self.assertGreater(s1["ci"][0], 0.7)  # Wilson lower bound < 1
+        self.assertIsNone(summarize_proportion([None])["mean"])
+
+    def test_plan_cache_metrics_renamed_no_fake_rate(self):
+        recs = [
+            {"success": True, "steps": 10, "invalid": 0,
+             "door_open": {"D1": True}, "events": [("D1", "open")],
+             "trace_delta": {"plans_used": 5, "plan_cache_hits": 40,
+                             "planner_ops": 120,
+                             "random_fallback_steps": 1}},
+        ]
+        m = eval_metrics(recs)
+        self.assertNotIn("plan_cache_hit_rate", m)
+        self.assertIn("plan_cache_hits_per_step", m)
+        self.assertIn("plans_used_per_step", m)
+        self.assertEqual(m["plan_cache_hits_per_step"], 4.0)
+        self.assertEqual(m["plans_used_per_step"], 0.5)
+        self.assertEqual(m["_counts"]["success_rate"], (1, 1))
+        self.assertEqual(m["_counts"]["fallback_rate"], (1, 10))
 
     def test_truth_rules_from_stream(self):
         cfg = _cfg(frozenset({("sw", "S1", True)}))
@@ -120,8 +152,8 @@ class TestMetrics(unittest.TestCase):
                               spec_seed=0, pool_tag="test")]
         pre_mem = [{"door": "D1", "antecedent": [["sw", "S1", True]],
                     "status": "verified", "sup": 3, "con": 0, "id": 1}]
-        self.assertEqual(zero_shot_coverage(pre_mem, stream), 1.0)
-        self.assertEqual(zero_shot_coverage([], stream), 0.0)
+        self.assertEqual(zero_shot_coverage(pre_mem, stream), (1, 1))
+        self.assertEqual(zero_shot_coverage([], stream), (0, 1))
 
     def test_rate_helper(self):
         self.assertEqual(_rate([{"success": True}, {"success": False}], "success"), 0.5)
