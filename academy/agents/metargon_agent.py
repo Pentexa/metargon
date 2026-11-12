@@ -118,6 +118,8 @@ class MetargonAcademyAgent:
                  cog_recovery: Optional[bool] = None,
                  cog_decompose: Optional[bool] = None,
                  cog_probe_hold: Optional[bool] = None,
+                 cog_noise_robust: bool = False,
+                 noise_confirm_n: int = 2,
                  recovery_budget: int = RECOVERY_BUDGET,
                  hold_budget: int = HOLD_BUDGET,
                  planner_budget_per_act: int = MAX_PLANNER_BUDGET_PER_ACT):
@@ -177,6 +179,17 @@ class MetargonAcademyAgent:
         self.cog_probe_hold = bool(
             cog_probe_hold if cog_probe_hold is not None
             else cognitive_exploration)
+        # v0.2: motion-robust measurement confirmation. Independent opt-in
+        # (NOT implied by cognitive_exploration) so v0.1 configurations
+        # keep their exact behavior. When enabled, door/switch readings
+        # are confirmed by ``noise_confirm_n`` consecutive observations
+        # before they drive belief, memory events or hold resolution.
+        self.cog_noise_robust = bool(cog_noise_robust)
+        self.noise_confirm_n = max(2, int(noise_confirm_n))
+        self._reading_streak = {}
+        self._confirmed_door = {}
+        self._confirmed_switch = {}
+        self._newly_confirmed = []
         self.recovery_budget = int(recovery_budget)
         self.hold_budget = int(hold_budget)
         self.planner_budget_per_act = int(planner_budget_per_act)
@@ -270,6 +283,8 @@ class MetargonAcademyAgent:
             "probes_new": 0,
             "probes_repeat": 0,
             "skipped_search_failed": 0,
+            "confirmed_events": 0,
+            "unconfirmed_flips": 0,
         }
 
     # -- perception ------------------------------------------------------
@@ -298,6 +313,10 @@ class MetargonAcademyAgent:
         self._attempts_per_antecedent = {}
         self._trace_last_probe = None
         self._trace_completed_probes = set()
+        self._reading_streak = {}
+        self._confirmed_door = {}
+        self._confirmed_switch = {}
+        self._newly_confirmed = []
         # v0.7: each episode is an evidence epoch (task boundary); the
         # memory resets consecutive-nonevent windows and scopes evidence
         # per epoch so cross-task contradictions do not destroy verified
@@ -350,6 +369,8 @@ class MetargonAcademyAgent:
     def _sync(self, obs):
         from .common import belief_from_obs
         self.belief = belief_from_obs(obs, self.geom)
+        if self.cog_noise_robust:
+            self._apply_confirmed_belief()
         if self._ctx_signature is None:
             b = self.belief
             self._ctx_signature = (
@@ -363,6 +384,101 @@ class MetargonAcademyAgent:
         # `passed` is updated in _choose_probe by physically standing on the
         # far cell of an open door (component-based labels are unreliable
         # once doors merge regions).
+
+    # -- noise-robust measurement confirmation (v0.2) --------------------
+    # Bounded, evidence-based confirmation: door/switch readings must be
+    # observed ``noise_confirm_n`` consecutive times before a change is
+    # treated as an environmental event. This separates actual changes
+    # from unreliable readings (perception noise), so phantom flips no
+    # longer generate false memory events, false pass-through attempts
+    # (-> false stalls) or premature hold resolution.
+
+    @staticmethod
+    def _read_door(obs, door):
+        return bool(getattr(obs, "d1" if door == "D1" else "d2"))
+
+    @staticmethod
+    def _read_switch(obs, switch):
+        return bool(getattr(obs, "s1" if switch == "S1" else "s2"))
+
+    def _apply_confirmed_belief(self):
+        """Override belief door/switch state with the currently confirmed
+        readings (fallback to raw readings until first confirmation)."""
+        door_open = dict(self.belief.door_open)
+        for d in door_open:
+            if d in self._confirmed_door:
+                door_open[d] = self._confirmed_door[d]
+        switch_state = dict(self.belief.switch_state)
+        for s in switch_state:
+            if s in self._confirmed_switch:
+                switch_state[s] = self._confirmed_switch[s]
+        self.belief = self.belief._replace(
+            door_open=door_open, switch_state=switch_state)
+
+    def _init_confirmed_from(self, obs):
+        """Seed confirmed states from a first observation (the episode
+        starts from a known initial state; the first reading is correct
+        with probability 1 - q)."""
+        for d in self.geom.door_cell:
+            if d not in self._confirmed_door:
+                self._confirmed_door[d] = self._read_door(obs, d)
+        for s in ("S1", "S2"):
+            if s not in self._confirmed_switch:
+                self._confirmed_switch[s] = self._read_switch(obs, s)
+
+    def _update_confirmed(self, obs):
+        """Advance confirmation streaks with a fresh observation. Returns
+        nothing; confirmed transitions are appended to
+        ``self._newly_confirmed`` as (door, opened) pairs."""
+        self._newly_confirmed = []
+        if not self._confirmed_door:
+            self._init_confirmed_from(obs)
+            return
+        n = self.noise_confirm_n
+        for d in self.geom.door_cell:
+            r = self._read_door(obs, d)
+            cur = self._confirmed_door[d]
+            if r == cur:
+                self._reading_streak[d] = 0
+                continue
+            streak = self._reading_streak.get(d, 0) + 1
+            if streak >= n:
+                self._confirmed_door[d] = r
+                self._reading_streak[d] = 0
+                self._newly_confirmed.append((d, r))
+            else:
+                self._reading_streak[d] = streak
+        for s in ("S1", "S2"):
+            r = self._read_switch(obs, s)
+            cur = self._confirmed_switch[s]
+            if r == cur:
+                self._reading_streak[("sw", s)] = 0
+                continue
+            streak = self._reading_streak.get(("sw", s), 0) + 1
+            if streak >= n:
+                self._confirmed_switch[s] = r
+                self._reading_streak[("sw", s)] = 0
+            else:
+                self._reading_streak[("sw", s)] = streak
+
+    def _clean_atoms(self, obs) -> frozenset:
+        """Atoms with plate loads derived exactly from (reliable) object
+        positions and switch states taken from confirmed readings."""
+        from ..envs.gridworld import atoms_from_state
+        plate_load = {}
+        for p, pc in self.geom.plate_cell.items():
+            obj = None
+            for o in ("A", "B"):
+                if obs.objs[o] == pc:
+                    obj = o
+                    break
+            plate_load[p] = obj or "none"
+        switch_state = {
+            s: self._confirmed_switch.get(
+                s, self._read_switch(obs, s))
+            for s in ("S1", "S2")
+        }
+        return atoms_from_state(plate_load, switch_state)
 
     # -- planner ---------------------------------------------------------
     def _components(self):
@@ -1201,8 +1317,12 @@ class MetargonAcademyAgent:
         if self.frozen_policy:
             return
         self.steps += 1
-        before_atoms = atoms_from_observation(obs_before)
         after_obs = result.observation
+        if self.cog_noise_robust:
+            self._learn_noise_robust(obs_before, action, after_obs,
+                                     result.valid)
+            return
+        before_atoms = atoms_from_observation(obs_before)
         after_atoms = atoms_from_observation(after_obs)
         if self.cognitive_exploration:
             if result.valid:
@@ -1262,6 +1382,83 @@ class MetargonAcademyAgent:
             if self.cog_knowledge_gaps and not after_open:
                 self._note_local_evidence(door, after_atoms, False)
             if not after_open:
+                self.memory.observe_nonevent(after_atoms, door, True)
+            else:
+                self.memory.observe_nonevent(after_atoms, door, False)
+                self.memory.observe_maintain(after_atoms, door)
+        self.memory.step_advance()
+        for door, (ante, deadline, _src) in list(self.pending_probe.items()):
+            if self.memory.step >= deadline:
+                self._mark_probe_completed(door, ante, _src)
+                self.tried[door].add(ante)
+                if _src == "hypothesis":
+                    self.trace["memory_incorrect"] += 1
+                del self.pending_probe[door]
+
+    def _learn_noise_robust(self, obs_before, action, after_obs, valid):
+        """Noise-robust learning path (v0.2): memory events fire only on
+        *confirmed* door transitions; plate loads are derived exactly from
+        object positions; switch atoms use confirmed readings. Raw
+        single-step flips are ignored (they are perception noise)."""
+        before_atoms = self._clean_atoms(obs_before)
+        after_atoms = self._clean_atoms(after_obs)
+        if self.cognitive_exploration:
+            # ``valid`` reflects the true world (public physics on the
+            # real state), not noisy readings — a reliable signal for
+            # stagnation detection
+            self._invalid_streak = 0 if valid \
+                else self._invalid_streak + 1
+            self._recent_actions.append(action)
+        # confirm readings from the new observation; events fire on
+        # confirmed transitions only
+        self._update_confirmed(after_obs)
+        # count raw flips that were not confirmed this step (perception
+        # noise or a real event still inside its 1-step confirmation
+        # window); the gap vs confirmed_events grows with noise
+        for door in self.geom.door_cell:
+            raw_before = self._read_door(obs_before, door)
+            raw_after = self._read_door(after_obs, door)
+            if raw_before != raw_after and (door, raw_after) \
+                    not in self._newly_confirmed:
+                self.trace["unconfirmed_flips"] += 1
+        event_happened = False
+        for door, opened in self._newly_confirmed:
+            if opened:
+                self.memory.observe_event(before_atoms, door, True,
+                                          after_atoms)
+                self.passed[door] = False
+                if self.cog_knowledge_gaps:
+                    self._note_local_evidence(door, before_atoms, True)
+                if self._active_hold is not None \
+                        and self._active_hold["door"] == door:
+                    if self._active_hold["src"] == "hypothesis":
+                        self.trace["memory_correct"] += 1
+                    self._mark_probe_completed(
+                        door, self._active_hold["ante"],
+                        self._active_hold["src"])
+                    self._active_hold = None
+                    self._pending_hold_target = None
+                    self.trace["holds_resolved_open"] += 1
+                if door in self.pending_probe:
+                    _, _, src = self.pending_probe[door]
+                    self._mark_probe_completed(
+                        door, self.pending_probe[door][0], src)
+                    self.trace["door_open_after_probe"] += 1
+                    self.trace[f"door_open_after_{src}"] += 1
+                    if src == "hypothesis":
+                        self.trace["memory_correct"] += 1
+                self.pending_probe.pop(door, None)
+            else:
+                self.memory.observe_event(before_atoms, door, False,
+                                          after_atoms)
+            event_happened = True
+            self.trace["confirmed_events"] = \
+                self.trace.get("confirmed_events", 0) + 1
+        for door in self.geom.door_cell:
+            confirmed_open = self._confirmed_door.get(door, False)
+            if self.cog_knowledge_gaps and not confirmed_open:
+                self._note_local_evidence(door, after_atoms, False)
+            if not confirmed_open:
                 self.memory.observe_nonevent(after_atoms, door, True)
             else:
                 self.memory.observe_nonevent(after_atoms, door, False)
@@ -1357,6 +1554,12 @@ class MetargonAcademyAgent:
             "cog_recovery": self.cog_recovery,
             "cog_decompose": self.cog_decompose,
             "cog_probe_hold": self.cog_probe_hold,
+            "cog_noise_robust": self.cog_noise_robust,
+            "noise_confirm_n": self.noise_confirm_n,
+            "confirmed_door": dict(self._confirmed_door),
+            "confirmed_switch": dict(self._confirmed_switch),
+            "reading_streak": {
+                str(k): v for k, v in self._reading_streak.items()},
             "recovery_budget": self.recovery_budget,
             "hold_budget": self.hold_budget,
             "planner_budget_per_act": self.planner_budget_per_act,
@@ -1427,6 +1630,19 @@ class MetargonAcademyAgent:
             "cog_decompose", self.cognitive_exploration))
         self.cog_probe_hold = bool(state.get(
             "cog_probe_hold", self.cognitive_exploration))
+        self.cog_noise_robust = bool(state.get(
+            "cog_noise_robust", False))
+        self.noise_confirm_n = max(2, int(state.get(
+            "noise_confirm_n", 2)))
+        self._confirmed_door = {k: bool(v) for k, v in
+                                state.get("confirmed_door", {}).items()}
+        self._confirmed_switch = {k: bool(v) for k, v in
+                                  state.get("confirmed_switch", {}).items()}
+        self._reading_streak = {}
+        for k, v in state.get("reading_streak", {}).items():
+            key = eval(k) if k.startswith("(") else k
+            self._reading_streak[key] = int(v)
+        self._newly_confirmed = []
         self.recovery_budget = int(state.get(
             "recovery_budget", RECOVERY_BUDGET))
         self.hold_budget = int(state.get("hold_budget", HOLD_BUDGET))

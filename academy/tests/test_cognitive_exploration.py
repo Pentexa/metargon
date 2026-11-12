@@ -6,6 +6,7 @@ from __future__ import annotations
 
 import unittest
 
+from academy.agents.common import belief_from_obs
 from academy.agents.metargon_agent import MetargonAcademyAgent
 from academy.agents.planner import maximal_feasible_subset
 from academy.envs.gridworld import EnvConfig, TOPOLOGIES, make_ws
@@ -357,6 +358,86 @@ class TestGoalPrefilterGating(unittest.TestCase):
         # reachable; every _plan_cached call has to_pos=None (probes)
         for call in plan.call_args_list:
             self.assertIsNone(call.kwargs.get("to_pos"))
+
+
+class TestNoiseRobustConfirmation(unittest.TestCase):
+    """v0.2: readings must be confirmed before they count as events."""
+
+    def _agent(self, **kw):
+        kw.setdefault("cognitive_exploration", True)
+        kw.setdefault("cog_noise_robust", True)
+        a = MetargonAcademyAgent(seed=0, **kw)
+        a.geom = TP1
+        from academy.agents.planner import plan_to_atoms  # noqa
+        a.belief = make_ws(TP1)
+        return a
+
+    @staticmethod
+    def _obs(doors=("D1",), d1=False, d2=False, s1=False, s2=False,
+              x=0, y=4, ax=2, ay=4, bx=4, by=3, p1="none", p2="none"):
+        from academy.envs.gridworld import Observation
+        return Observation(x=x, y=y, ax=ax, ay=ay, bx=bx, by=by,
+                           s1=s1, s2=s2, p1=p1, p2=p2,
+                           d1=d1, d2=d2, finished=False)
+
+    def test_single_flip_not_confirmed(self):
+        a = self._agent()
+        obs0 = self._obs(d1=False)
+        obs1 = self._obs(d1=True)
+        a._init_confirmed_from(obs0)
+        a._update_confirmed(obs1)
+        self.assertEqual(a._confirmed_door["D1"], False)
+        self.assertEqual(a._newly_confirmed, [])
+
+    def test_double_flip_confirmed(self):
+        a = self._agent()
+        obs0 = self._obs(d1=False)
+        obs1 = self._obs(d1=True)
+        obs2 = self._obs(d1=True)
+        a._init_confirmed_from(obs0)
+        a._update_confirmed(obs1)
+        a._update_confirmed(obs2)
+        self.assertEqual(a._confirmed_door["D1"], True)
+        self.assertEqual(a._newly_confirmed, [("D1", True)])
+
+    def test_interleaved_noise_resets_streak(self):
+        a = self._agent()
+        a._init_confirmed_from(self._obs(d1=False))
+        a._update_confirmed(self._obs(d1=True))     # streak 1
+        a._update_confirmed(self._obs(d1=False))    # back -> reset
+        a._update_confirmed(self._obs(d1=True))     # streak 1 again
+        a._update_confirmed(self._obs(d1=True))     # streak 2 -> confirm
+        self.assertTrue(a._confirmed_door["D1"])
+
+    def test_belief_override(self):
+        a = self._agent()
+        a._init_confirmed_from(self._obs(d1=False, s1=True))
+        # confirmed says D1 closed, S1 on; raw obs says D1 open, S1 off
+        a.belief = belief_from_obs(
+            self._obs(d1=True, s1=False), TP1)
+        a._apply_confirmed_belief()
+        self.assertFalse(a.belief.door_open["D1"])
+        self.assertTrue(a.belief.switch_state["S1"])
+
+    def test_clean_atoms_derive_plates_from_positions(self):
+        a = self._agent()
+        a._init_confirmed_from(self._obs(d1=False, s1=True))
+        # object A sits on P1 cell (3,4); raw p1 reading says "none"
+        obs = self._obs(ax=3, ay=4, p1="none", s1=True)
+        atoms = a._clean_atoms(obs)
+        self.assertIn(("load", "P1", "A"), atoms)
+        self.assertNotIn(("empty", "P1"), atoms)
+
+    def test_checkpoint_roundtrip_confirmation(self):
+        a = self._agent()
+        a._init_confirmed_from(self._obs(d1=True, s1=False))
+        a._reading_streak["D1"] = 1
+        s = a.save_state()
+        b = MetargonAcademyAgent(seed=0)
+        b.load_state(s)
+        self.assertTrue(b.cog_noise_robust)
+        self.assertEqual(b._confirmed_door, {"D1": True, "D2": False})
+        self.assertEqual(b._reading_streak.get("D1"), 1)
 
 
 class TestArtifactCounts(unittest.TestCase):
