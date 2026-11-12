@@ -231,5 +231,157 @@ class TestCheckpointFlags(unittest.TestCase):
                          a._local_atom_evidence)
 
 
+class TestPlanCacheCapAwareReuse(unittest.TestCase):
+    """Results produced under different BFS expansion caps must never be
+    incorrectly reused: a *failure* under a small cap is provisional and
+    must not satisfy a request with a larger cap. Successes are
+    cap-independent. Legacy (pre-v0.1) entries carry no cap and are
+    treated as produced under the default cap."""
+
+    def _agent(self, **kw):
+        a = _agent(cognitive_exploration=True, **kw)
+        a.geom = TP1
+        a.belief = make_ws(TP1)
+        return a
+
+    def _key(self, a, target, to_pos=None):
+        return (a._plan_cached.__self__ is not None and
+                ("state_key", to_pos, tuple(sorted(target))))
+
+    def test_failure_under_small_cap_not_reused_by_larger(self):
+        from unittest.mock import patch
+        a = self._agent()
+        target = frozenset({("sw", "S1", True)})
+        with patch("academy.agents.metargon_agent.plan_to_atoms",
+                   return_value=None) as p1:
+            first = a._plan_cached(a.belief, target, lambda: None,
+                                   max_expand=700)
+            self.assertIsNone(first)
+            self.assertEqual(p1.call_count, 1)
+        # larger cap must recompute (cached small-cap failure is not
+        # authoritative for a larger budget)
+        with patch("academy.agents.metargon_agent.plan_to_atoms",
+                   return_value=["N"]) as p2:
+            second = a._plan_cached(a.belief, target, lambda: None,
+                                    max_expand=1500)
+            self.assertEqual(second, ["N"])
+            self.assertEqual(p2.call_count, 1)
+
+    def test_failure_under_large_cap_reused_by_smaller(self):
+        from unittest.mock import patch
+        a = self._agent()
+        target = frozenset({("sw", "S1", True)})
+        with patch("academy.agents.metargon_agent.plan_to_atoms",
+                   return_value=None):
+            a._plan_cached(a.belief, target, lambda: None,
+                           max_expand=1500)
+        with patch("academy.agents.metargon_agent.plan_to_atoms",
+                   return_value=["N"]) as p:
+            second = a._plan_cached(a.belief, target, lambda: None,
+                                    max_expand=700)
+            self.assertIsNone(second)      # safe cache reuse
+            self.assertEqual(p.call_count, 0)
+
+    def test_success_reused_across_caps(self):
+        from unittest.mock import patch
+        a = self._agent()
+        target = frozenset({("sw", "S1", True)})
+        with patch("academy.agents.metargon_agent.plan_to_atoms",
+                   return_value=["E", "N"]):
+            a._plan_cached(a.belief, target, lambda: None,
+                           max_expand=1500)
+        with patch("academy.agents.metargon_agent.plan_to_atoms",
+                   return_value=[]) as p:
+            second = a._plan_cached(a.belief, target, lambda: None,
+                                    max_expand=700)
+            self.assertEqual(second, ["E", "N"])
+            self.assertEqual(p.call_count, 0)
+
+    def test_legacy_cache_entries_normalized_on_load(self):
+        a = _agent()
+        legacy = {repr(("sk", None, (("sw", "S1", True),))): ["N"]}
+        state = a.save_state()
+        state["plan_cache"] = legacy
+        b = _agent()
+        b.load_state(state)
+        key = eval(next(iter(legacy)))
+        cap, plan = b.plan_cache[key]
+        self.assertEqual(cap, b.planner_max_expand)
+        self.assertEqual(plan, ["N"])
+
+    def test_cache_roundtrip_preserves_cap(self):
+        a = _agent()
+        key = ("sk", None, (("sw", "S1", True),))
+        a.plan_cache[key] = (700, [])
+        b = _agent()
+        b.load_state(a.save_state())
+        self.assertEqual(b.plan_cache[key], (700, []))
+
+
+class TestGoalPrefilterGating(unittest.TestCase):
+    """The goal-connectivity prefilter is cognitive-only: with default
+    flags it must not run (baseline behavior unchanged)."""
+
+    def _agent(self, **kw):
+        a = _agent(**kw)
+        a.geom = TP1
+        a.belief = make_ws(TP1)
+        # minimal per-episode bookkeeping expected by _choose_probe
+        a.tried = {d: set() for d in TP1.door_cell}
+        a.passed = {d: False for d in TP1.door_cell}
+        a.far_anchor = a.far_anchor or {d: TP1.goal for d in TP1.door_cell}
+        a._goal_infeasible = {}
+        a._steps_since_goal_check = 0
+        return a
+
+    def test_baseline_does_not_call_prefilter(self):
+        from unittest.mock import patch
+        a = self._agent()          # all flags off
+        with patch.object(a, "_goal_component_reachable",
+                          side_effect=AssertionError(
+                              "prefilter must not run for baseline")):
+            plan, door = a._choose_probe()
+        # baseline still plans toward the goal (door/goal path), or at
+        # least does not raise; door is None for non-goal plans
+        self.assertIsInstance(plan, (list, type(None)))
+
+    def test_cognitive_uses_prefilter(self):
+        from unittest.mock import patch
+        a = self._agent(cognitive_exploration=True)
+        with patch.object(a, "_goal_component_reachable",
+                          return_value=False) as pre:
+            with patch.object(a, "_plan_cached") as plan:
+                out = a._choose_probe()
+        pre.assert_called_once()
+        # goal plan must NOT be requested when the goal is not component-
+        # reachable; every _plan_cached call has to_pos=None (probes)
+        for call in plan.call_args_list:
+            self.assertIsNone(call.kwargs.get("to_pos"))
+
+
+class TestArtifactCounts(unittest.TestCase):
+    """The committed experiment artifacts must match the module defaults
+    (reconciliation guard)."""
+
+    def test_defaults_match_committed_artifacts(self):
+        import json
+        import os
+        from academy.tests import test_cognitive_exploration_experiment as m
+        root = os.path.join(os.path.dirname(__file__), "..", "..")
+        main_path = os.path.join(root, "results", "academy_v01",
+                                 "cognitive_exploration", "main_summary.json")
+        ab_path = os.path.join(root, "results", "academy_v01",
+                               "cognitive_exploration",
+                               "ablations_summary.json")
+        if not (os.path.exists(main_path) and os.path.exists(ab_path)):
+            self.skipTest("experiment artifacts not present")
+        main = json.load(open(main_path, encoding="utf-8"))
+        ab = json.load(open(ab_path, encoding="utf-8"))
+        self.assertEqual(main["n_seeds"], m.N_SEEDS_MAIN)
+        self.assertEqual(main["episodes"], m.EPISODES_MAIN)
+        self.assertEqual(ab["n_seeds"], m.N_SEEDS_ABLATION)
+        self.assertEqual(ab["episodes"], m.EPISODES_ABLATION)
+
+
 if __name__ == "__main__":
     unittest.main()

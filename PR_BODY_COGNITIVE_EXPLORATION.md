@@ -53,11 +53,11 @@ loop/fallback shares, post-hoc ground-truth useful/exact evidence.
 | classic_test (unseen conjunctive) | 40.4 | 55.6 | +15.6 [−2.7, +41.7] |
 | tight_test (44-step budget) | 40.4 | 53.1 | +12.6 [−4.0, +39.0] |
 | conflict (mid-run rule flip) | 50.4 | 59.6 | +8.9 [−17.3, +41.5] |
-| noisy_test (noise_q=0.08) | 67.1 | 56.0 | **−10.8 [−26.9, −1.0]** |
+| noisy_test (noise_q=0.08) | 68.3 | 56.0 | **−12.1 [−28.3, −1.5]** |
 
 Secondary metrics (base → proposed): useful/exact ground-truth evidence
 rises to ~100% on classic/tight/conflict; repeated probes collapse in the
-noisy cell (4.14 → 0.27); successful-episode steps are flat
+noisy cell (3.87 → 0.27); successful-episode steps are flat
 (±0.5–0.7). Full tables in
 `results/academy_v01/cognitive_exploration/main_summary.json`.
 
@@ -65,9 +65,9 @@ noisy cell (4.14 → 0.27); successful-episode steps are flat
 
 | ablation | classic Δ pp [CI] | ood Δ pp [CI] |
 |---|---:|---:|
-| `proposed_norecov` (recovery off) | −5.6 [−14.0, +0.0] | **−38.5 [−67.5, −13.3]** |
-| `proposed_nogap` (knowledge-gap off) | +0.8 [+0.0, +2.1] | 0.0 |
-| `proposed_noinfo` (info scoring off) | +0.4 [+0.0, +1.2] | 0.0 |
+| `proposed_norecov` (recovery off) | −5.5 [−16.2, +0.0] | **−47.6 [−80.8, −15.8]** |
+| `proposed_nogap` (knowledge-gap off) | +1.2 [+0.0, +2.9] | 0.0 |
+| `proposed_noinfo` (info scoring off) | 0.0 | 0.0 |
 | `proposed_nohold` (hold off) | 0.0 | 0.0 |
 | `proposed_nodecomp` (decomposition off) | 0.0 | 0.0 |
 
@@ -86,15 +86,14 @@ noisy cell (4.14 → 0.27); successful-episode steps are flat
 
 ## Negative / open findings (reported honestly)
 
-- **Noisy observations: proposed is worse (−10.8 pp, CI excludes 0).**
+- **Noisy observations: proposed is worse (−12.1 pp, CI excludes 0).**
   Recovery/held probes burn budget under unreliable readings, and the
   binary door-event extraction from corrupted observations injects false
   events into memory. No denoising was implemented (documented as future
   work); this cell needs a dedicated treatment.
 - Hold, knowledge-gap and info-scoring mechanisms show **no measurable
-  success contribution** on these cells (0 or ~0 Δ); their value is
-  currently limited to secondary metrics (e.g. fewer repeated probes in
-  conflict: 0.50 → 0.15).
+  success contribution** on these cells (0 or ~1 Δ, CIs include 0);
+  their value is currently limited to secondary metrics.
 - Classic cells are not fully powered: 8 seeds × 60 eps leaves wide CIs;
   the effect sizes on classic/tight/conflict should be treated as
   directional until a confirmatory run.
@@ -108,9 +107,24 @@ noisy cell (4.14 → 0.27); successful-episode steps are flat
 - `docs/RESEARCH_COGNITIVE_EXPLORATION.md` — protocol, diagnosis, proposed memory-interface changes;
 - `results/academy_v01/cognitive_exploration/*.json` — raw summaries.
 
+## Review finalization
+
+- **`_plan_cached()` cap-aware**: cache entries now store the BFS cap;
+  success reused across caps, failure only reused when the cached cap ≥
+  requested cap (a smaller search may be provisional). Legacy entries
+  normalized under the default cap on load.
+- **Goal prefilter default-off**: gated behind `cognitive_exploration`;
+  baseline uses the exact original goal-planning path (regression test
+  asserts the prefilter is never invoked with default flags).
+- **Seed/count reconciliation**: artifacts are main 8×60, ablations
+  6×40; harness defaults now match; a guard test checks the committed
+  JSON metadata. All comparisons rerun post-fix with matched seeds
+  (base 20261112, `PYTHONHASHSEED=0`); changed outcomes (if any) noted
+  in Results/Ablations. Noisy-observation regression remains explicit.
+
 ## Verification
 
-- Academy suite + new tests pass;
+- Academy suite + new regression tests pass;
 - `scripts/check_repo.py` clean;
 - Leakage audit (forbidden hidden-simulator tokens) still clean.
 

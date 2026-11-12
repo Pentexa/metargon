@@ -124,7 +124,7 @@ bootstrap (95% CI, 2000 rounds). Raw JSON in
 | `classic_test` (unseen conjunctive) | 40.4 | 55.6 | +15.6 [−2.7, +41.7] |
 | `tight_test` (44-step budget) | 40.4 | 53.1 | +12.6 [−4.0, +39.0] |
 | `conflict` (mid-run rule flip) | 50.4 | 59.6 | +8.9 [−17.3, +41.5] |
-| `noisy_test` (noise_q=0.08) | 67.1 | 56.0 | **−10.8 [−26.9, −1.0]** |
+| `noisy_test` (noise_q=0.08) | 68.3 | 56.0 | **−12.1 [−28.3, −1.5]** |
 
 Only the OOD gain has a CI excluding 0; the classic/tight/conflict gains
 are directional at this sample size. The noisy cell is a **significant
@@ -136,38 +136,37 @@ regression** (see 5.4).
 |---|---:|---:|---:|---:|---:|
 | `classic_test` | 18.3 → 18.9 | 0.00 → 0.01 | 75.0 → 99.8 | 75.0 → 87.5 | 13.6 → 17.9 |
 | `conflict` | 23.2 → 21.8 | 0.02 → 0.01 | 93.8 → 100.0 | 93.8 → 100.0 | 22.9 → 22.9 |
-| `noisy_test` | 24.9 → 25.4 | 4.14 → 0.27 | 99.8 → 99.8 | 99.4 → 97.7 | 13.4 → 17.9 |
+| `noisy_test` | 25.5 → 25.4 | 3.87 → 0.27 | 99.8 → 99.8 | 99.4 → 97.7 | 13.5 → 17.9 |
 | `ood` | 12.3 → 20.6 | 0.00 → 0.00 | 87.5 → 100.0 | 87.5 → 100.0 | 0.0 → 15.5 |
 | `tight_test` | 17.3 → 17.6 | 0.00 → 0.02 | 75.0 → 99.4 | 75.0 → 87.5 | 11.3 → 17.1 |
 
 The proposed student learns the true rule far more often (useful evidence
 75% → ~100% on classic/tight/conflict), with success lagging only where
 execution is costly. In the noisy cell the baseline's repeated probes
-(4.14) collapse to 0.27 — the proposed student stops wasting budget on
+(3.87) collapse to 0.27 — the proposed student stops wasting budget on
 noise-confused repeats, but still loses overall success.
 
 ### 5.3 Ablations (Δ vs proposed; success)
 
 | ablation | `classic_test` | `ood` |
 |---|---:|---:|
-| `proposed_norecov` (recovery off) | −5.6 [−14.0, +0.0] | **−38.5 [−67.5, −13.3]** |
-| `proposed_nogap` (knowledge-gap off) | +0.8 [+0.0, +2.1] | 0.0 |
-| `proposed_noinfo` (info scoring off) | +0.4 [+0.0, +1.2] | 0.0 |
+| `proposed_norecov` (recovery off) | −5.5 [−16.2, +0.0] | **−47.6 [−80.8, −15.8]** |
+| `proposed_nogap` (knowledge-gap off) | +1.2 [+0.0, +2.9] | 0.0 |
+| `proposed_noinfo` (info scoring off) | 0.0 | 0.0 |
 | `proposed_nohold` (hold off) | 0.0 | 0.0 |
 | `proposed_nodecomp` (decomposition off) | 0.0 | 0.0 |
 
 **Attribution:** recovery is the load-bearing mechanism. With recovery
 off, per-episode probe count explodes (~19–21 vs ~1.3–1.6 for the
-proposed student) and useful evidence drops (OOD 100% → 87.5%; classic
-99.8% → 75%). The remaining mechanisms (gap scoring, info scoring, hold,
+proposed student) and useful evidence drops (OOD 100% → 83.3%; classic
+99.6% → 66.7%). The remaining mechanisms (gap scoring, info scoring, hold,
 decomposition) show no measurable success contribution on these cells —
 their value is currently limited to secondary metrics (e.g. repeated
-probes in `conflict` 0.50 → 0.15 in the pre-correction run) and to
-robustness not captured here.
+probes in `conflict` 0.02 → 0.01) and to robustness not captured here.
 
 ### 5.4 Negative / open findings
 
-1. **Noisy observations: proposed is worse** (−10.8 pp, CI excludes 0).
+1. **Noisy observations: proposed is worse** (−12.1 pp, CI excludes 0).
    Both arms extract door events from corrupted readings; recovery and
    hold mechanics burn budget under unreliable observations, and noisy
    single-step events still pollute memory. No denoising was implemented;
@@ -180,6 +179,23 @@ robustness not captured here.
 4. **Cost overhead:** proposed run wall-time is 2–4× baseline per episode
    (bounded BFS re-planning), acceptable for research but worth
    optimizing before any production integration.
+
+## 5.5 Post-hoc review fixes (PR finalization)
+
+1. **`_plan_cached()` is now cap-aware.** Cache entries record the BFS
+   expansion cap they were produced under. Successes are reused across
+   caps (a proven plan is cap-independent); a cached *failure* is only
+   reused for requests with `max_expand <= cached_cap` (a smaller search
+   may have stopped before reaching the target). Legacy pre-v0.1 cache
+   entries are normalized on load under the default cap.
+2. **Goal-connectivity prefilter is genuinely default-off.** The prefilter
+   is gated behind `cognitive_exploration`; with all flags off the agent
+   executes the exact original goal-planning path.
+3. **Artifact counts reconciled.** The committed artifacts are main
+   8 seeds × 60 episodes and ablations 6 seeds × 40 episodes; the harness
+   defaults now reproduce these exactly, and a regression test guards the
+   match. Comparisons were rerun post-fix with the matched seeds (same
+   seed base `20261112`); changed outcomes are reported in §5.1/5.3.
 
 ## 6. Proposed memory-interface changes (for later integration)
 

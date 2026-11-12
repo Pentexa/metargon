@@ -396,14 +396,24 @@ class MetargonAcademyAgent:
         are deterministic; repeated probes are common).
 
         ``max_expand`` overrides the default per-plan expansion cap
-        (used by cognitive exploration to keep low-tier probes cheap)."""
+        (used by cognitive exploration to keep low-tier probes cheap).
+
+        Cache entries store the BFS cap they were produced under. A
+        *success* (a concrete plan) is cap-independent and safe to reuse
+        for any request. A *failure* under a cap ``c`` is only safe to
+        reuse for requests with ``max_expand <= c``: a larger budget
+        could still find a plan (the smaller search may have stopped
+        before reaching it). Entries from pre-v0.1 checkpoints carry no
+        cap and are treated as produced under the default cap."""
         if max_expand is None:
             max_expand = self.planner_max_expand
         key = (state_key(state), to_pos, tuple(sorted(target)))
         hit = self.plan_cache.get(key)
         if hit is not None:
-            self.plan_cache_hits += 1
-            return hit or None
+            hit_cap, hit_plan = hit
+            if hit_plan or hit_cap >= max_expand:
+                self.plan_cache_hits += 1
+                return hit_plan or None
         if to_pos is not None:
             plan = plan_to_pos(state, to_pos, self.geom,
                                max_expand=max_expand,
@@ -415,7 +425,7 @@ class MetargonAcademyAgent:
         if len(self.plan_cache) > 2000:
             for k in list(self.plan_cache)[:400]:
                 del self.plan_cache[k]
-        self.plan_cache[key] = plan or []
+        self.plan_cache[key] = (max_expand, plan or [])
         return plan
 
     def _target_cells(self, target) -> list:
@@ -839,7 +849,15 @@ class MetargonAcademyAgent:
         if (pattern not in self._goal_infeasible
                 or self._steps_since_goal_check >= 8
                 or self.belief.pos == self.geom.goal):
-            if self._goal_component_reachable():
+            # The goal-connectivity prefilter is a cognitive-exploration
+            # optimization: it skips the goal BFS when the goal is in a
+            # different connected component. It is gated behind
+            # ``cognitive_exploration`` so the baseline path is exactly
+            # the original one.
+            may_plan_goal = (self.cognitive_exploration
+                              and self._goal_component_reachable()) \
+                or not self.cognitive_exploration
+            if may_plan_goal:
                 plan = self._plan_cached(self.belief, (), on_expand,
                                          to_pos=self.geom.goal)
                 if plan is not None:
@@ -1436,7 +1454,14 @@ class MetargonAcademyAgent:
         self.plan_calls = state["plan_calls"]
         self.plan_cache = {}
         for k, v in state.get("plan_cache", {}).items():
-            self.plan_cache[eval(k)] = v
+            if (isinstance(v, list) and len(v) == 2
+                    and isinstance(v[0], int)):
+                # current format: [cap, plan]
+                self.plan_cache[eval(k)] = (v[0], v[1])
+            else:
+                # legacy format (pre-v0.1): raw plan list, no cap recorded;
+                # assume it was produced under the default cap
+                self.plan_cache[eval(k)] = (self.planner_max_expand, v)
         self.plan_cache_hits = state.get("plan_cache_hits", 0)
         self.steps = state["steps"]
         self.episodes = state["episodes"]

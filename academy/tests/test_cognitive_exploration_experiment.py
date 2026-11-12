@@ -52,10 +52,12 @@ RESULTS_DIR = os.path.join(
     "cognitive_exploration")
 
 SEED_BASE = 20261112
-N_SEEDS_MAIN = 12
-EPISODES_MAIN = 100
-N_SEEDS_ABLATION = 8
-EPISODES_ABLATION = 60
+# Reported/committed artifact sizes: the CLI defaults reproduce the
+# artifact runs exactly (main 8x60, ablations 6x40).
+N_SEEDS_MAIN = 8
+EPISODES_MAIN = 60
+N_SEEDS_ABLATION = 6
+EPISODES_ABLATION = 40
 
 CONDITIONS = {
     "classic_test": dict(pool="test", noise=0.0, max_steps=80,
