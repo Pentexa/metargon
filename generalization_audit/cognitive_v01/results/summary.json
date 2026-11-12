@@ -1,0 +1,2047 @@
+{
+ "meta": {
+  "benchmark": "METARGON Cognitive Intelligence Benchmark v0.1",
+  "date": "2026-11-12",
+  "git_head": "ccb1627f3f1fd504c62ee471c17d7df017fc415f",
+  "seeds": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "sizes": {
+   "train": 24,
+   "eval": 8,
+   "revisit": 7,
+   "switch_half": 10
+  },
+  "splits": {
+   "enumerated": 624,
+   "ood": 25,
+   "solvable": 245,
+   "test": 49,
+   "train": 147,
+   "val": 49
+  },
+  "train_truths": 7,
+  "train_distinct_configs": 24,
+  "train_stream_signature_len": 24,
+  "train_stream_first": [
+   "{'topology': 'TP1', 'D1': [(('empty', 'P1'), ('sw', 'S2', False))], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': False, 'delay2': True}",
+   "{'topology': 'TP1', 'D1': [(('empty', 'P1'), ('sw', 'S2', False))], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': True, 'delay2': False}",
+   "{'topology': 'TP1', 'D1': [(('empty', 'P1'), ('sw', 'S2', False))], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': True, 'delay2': True}"
+  ],
+  "switch_pair": [
+   "{'topology': 'TP1', 'D1': [(('sw', 'S2', False),)], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': True, 'delay2': False}",
+   "{'topology': 'TP1', 'D1': [(('sw', 'S2', False),)], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': True, 'delay2': False}"
+  ],
+  "switch_target_door": "D1",
+  "switch_split": 10,
+  "revisit_occurrences": {
+   "{'topology': 'TP1', 'D1': [(('empty', 'P1'), ('sw', 'S2', False))], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': False, 'delay2': True}": [
+    0,
+    3,
+    6
+   ],
+   "{'topology': 'TP1', 'D1': [(('empty', 'P1'), ('sw', 'S2', False))], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': True, 'delay2': False}": [
+    1,
+    4
+   ],
+   "{'topology': 'TP1', 'D1': [(('empty', 'P1'), ('sw', 'S2', False))], 'D2': [(('empty', 'P2'), ('sw', 'S1', False))], 'delay1': True, 'delay2': True}": [
+    2,
+    5
+   ]
+  },
+  "protocols": [
+   "train",
+   "eval_val",
+   "eval_test",
+   "eval_ood",
+   "revisit",
+   "switch",
+   "restart"
+  ]
+ },
+ "dimensions": {
+  "causal_discovery": {
+   "title": "Causal discovery",
+   "metrics": {
+    "metargon_trained.verified_correct": {
+     "mean": 1.75,
+     "sem": 0.25,
+     "ci": [
+      1.056,
+      2.444
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.verified_wrong": {
+     "mean": 7,
+     "sem": 1.6832508230603462,
+     "ci": [
+      2.327295715184479,
+      11.67270428481552
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.candidates_correct": {
+     "mean": 0,
+     "sem": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.contradicted_truth": {
+     "mean": 5.25,
+     "sem": 0.25,
+     "ci": [
+      4.556,
+      5.944
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.hypotheses_total": {
+     "mean": 54.5,
+     "sem": 7.262919523166975,
+     "ci": [
+      34.33813540368848,
+      74.66186459631152
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.discovery_coverage": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8793527963418923,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "metargon_trained.verified_precision": {
+     "mean": 0.2,
+     "sem": null,
+     "ci": [
+      0.10042319445900805,
+      0.3589193660946251
+     ],
+     "n": 4,
+     "n_events": 35,
+     "method": "wilson"
+    },
+    "metargon_muted.verified_correct": {
+     "mean": 1.75,
+     "sem": 0.25,
+     "ci": [
+      1.056,
+      2.444
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.verified_wrong": {
+     "mean": 7,
+     "sem": 1.6832508230603462,
+     "ci": [
+      2.327295715184479,
+      11.67270428481552
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.candidates_correct": {
+     "mean": 0,
+     "sem": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.contradicted_truth": {
+     "mean": 5.25,
+     "sem": 0.25,
+     "ci": [
+      4.556,
+      5.944
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.hypotheses_total": {
+     "mean": 54.5,
+     "sem": 7.262919523166975,
+     "ci": [
+      34.33813540368848,
+      74.66186459631152
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.discovery_coverage": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8793527963418923,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "metargon_muted.verified_precision": {
+     "mean": 0.2,
+     "sem": null,
+     "ci": [
+      0.10042319445900805,
+      0.3589193660946251
+     ],
+     "n": 4,
+     "n_events": 35,
+     "method": "wilson"
+    }
+   }
+  },
+  "learning_efficiency": {
+   "title": "Learning efficiency",
+   "metrics": {
+    "metargon_trained.episodes_to_first_success": {
+     "mean": 1,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.episodes_to_first_verified_correct": {
+     "mean": 1,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.mean_steps_to_success_second_half": {
+     "mean": 20.064204545454544,
+     "sem": 3.384813603841124,
+     "ci": [
+      10.667961981191585,
+      29.460447109717503
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.success_rate": {
+     "mean": 0.6979166666666666,
+     "sem": null,
+     "ci": [
+      0.5999131207004743,
+      0.7806897542534527
+     ],
+     "n": 4,
+     "n_events": 96,
+     "method": "wilson"
+    },
+    "metargon_trained.success_rate_first_half": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.4029083309494732,
+      0.6742497814544648
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "metargon_trained.success_rate_second_half": {
+     "mean": 0.8541666666666666,
+     "sem": null,
+     "ci": [
+      0.7283255295714138,
+      0.9275184258620602
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "metargon_muted.episodes_to_first_success": {
+     "mean": 1,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.episodes_to_first_verified_correct": {
+     "mean": 1,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.mean_steps_to_success_second_half": {
+     "mean": 20.064204545454544,
+     "sem": 3.384813603841124,
+     "ci": [
+      10.667961981191585,
+      29.460447109717503
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.success_rate": {
+     "mean": 0.6979166666666666,
+     "sem": null,
+     "ci": [
+      0.5999131207004743,
+      0.7806897542534527
+     ],
+     "n": 4,
+     "n_events": 96,
+     "method": "wilson"
+    },
+    "metargon_muted.success_rate_first_half": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.4029083309494732,
+      0.6742497814544648
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "metargon_muted.success_rate_second_half": {
+     "mean": 0.8541666666666666,
+     "sem": null,
+     "ci": [
+      0.7283255295714138,
+      0.9275184258620602
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    }
+   }
+  },
+  "knowledge_retention": {
+   "title": "Knowledge retention",
+   "metrics": {
+    "metargon_trained.retention_preserved": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.7574992425007574,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
+    },
+    "metargon_trained.success_early": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.7574992425007574,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
+    },
+    "metargon_trained.success_late": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.7574992425007574,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
+    },
+    "metargon_trained.restart_parity": {
+     "mean": 1.0,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.restart_success_restored": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.6469050424507756,
+      0.9111057606383721
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_muted.retention_preserved": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.7574992425007574,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
+    },
+    "metargon_muted.success_early": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.7574992425007574,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
+    },
+    "metargon_muted.success_late": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.7574992425007574,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 12,
+     "method": "wilson"
+    },
+    "metargon_muted.restart_parity": {
+     "mean": 1.0,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.restart_success_restored": {
+     "mean": 0.71875,
+     "sem": null,
+     "ci": [
+      0.546251630618882,
+      0.8443559315435214
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   }
+  },
+  "generalization": {
+   "title": "Generalization",
+   "metrics": {
+    "metargon_trained.eval_val.success_rate": {
+     "mean": 0.78125,
+     "sem": null,
+     "ci": [
+      0.6124466920955516,
+      0.8897630306846815
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_val.mean_steps_to_success": {
+     "mean": 23.375,
+     "sem": 2.726222967159265,
+     "ci": [
+      15.80700504316588,
+      30.94299495683412
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_val.success_rate": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.33630614316859386,
+      0.6636938568314061
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_fresh.eval_val.mean_steps_to_success": {
+     "mean": 10.25,
+     "sem": 0.14433756729740643,
+     "ci": [
+      9.8493189131824,
+      10.6506810868176
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.eval_test.success_rate": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.6469050424507756,
+      0.9111057606383721
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_test.mean_steps_to_success": {
+     "mean": 18.333333333333332,
+     "sem": 2.141269252944487,
+     "ci": [
+      12.389169887159436,
+      24.277496779507228
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_test.success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5789310822975338,
+      0.8674775601737845
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_fresh.eval_test.mean_steps_to_success": {
+     "mean": 21.38095238095238,
+     "sem": 3.812944892446581,
+     "ci": [
+      10.796217359520671,
+      31.965687402384088
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.eval_ood.success_rate": {
+     "mean": 0.15625,
+     "sem": null,
+     "ci": [
+      0.06864319106627216,
+      0.31754492553566527
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_ood.mean_steps_to_success": {
+     "mean": 12.5,
+     "sem": 2.5,
+     "ci": [
+      1.7424999999999997,
+      23.2575
+     ],
+     "n": 2,
+     "method": "t"
+    },
+    "metargon_fresh.eval_ood.success_rate": {
+     "mean": 0.3125,
+     "sem": null,
+     "ci": [
+      0.17952352116618736,
+      0.4856699969803239
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_fresh.eval_ood.mean_steps_to_success": {
+     "mean": 15.600000000000001,
+     "sem": 1.0000000000000009,
+     "ci": [
+      11.296999999999997,
+      19.903000000000006
+     ],
+     "n": 2,
+     "method": "t"
+    },
+    "metargon_trained.eval_val.zero_shot_coverage": {
+     "mean": 0.4375,
+     "sem": null,
+     "ci": [
+      0.2816508596944317,
+      0.6067469796877387
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_test.zero_shot_coverage": {
+     "mean": 0.46875,
+     "sem": null,
+     "ci": [
+      0.30869129901682335,
+      0.6355076206742619
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_ood.zero_shot_coverage": {
+     "mean": 0.5625,
+     "sem": null,
+     "ci": [
+      0.3932530203122613,
+      0.7183491403055682
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   }
+  },
+  "adaptability": {
+   "title": "Adaptability",
+   "metrics": {
+    "metargon_trained.success_before": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.9123754607496077,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
+    },
+    "metargon_trained.success_after": {
+     "mean": 0.6,
+     "sem": null,
+     "ci": [
+      0.44595619827393507,
+      0.7365188938759863
+     ],
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
+    },
+    "metargon_trained.recovery_lag": {
+     "mean": 1,
+     "sem": 0.0,
+     "ci": [
+      1.0,
+      1.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.wrong_belief_correction": {
+     "mean": 0.5263157894736842,
+     "sem": null,
+     "ci": [
+      0.31707482511825114,
+      0.7267049451255145
+     ],
+     "n": 4,
+     "n_events": 19,
+     "method": "wilson"
+    },
+    "metargon_muted.success_before": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.9123754607496077,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
+    },
+    "metargon_muted.success_after": {
+     "mean": 0.625,
+     "sem": null,
+     "ci": [
+      0.47032160054531913,
+      0.7577722646420829
+     ],
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
+    },
+    "metargon_muted.recovery_lag": {
+     "mean": 1.5,
+     "sem": 0.28867513459481287,
+     "ci": [
+      0.6986378263647995,
+      2.3013621736352006
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_muted.wrong_belief_correction": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.9398260695220669,
+      0.9999999999999999
+     ],
+     "n": 4,
+     "n_events": 60,
+     "method": "wilson"
+    },
+    "metargon_fresh.success_before": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.9123754607496077,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
+    },
+    "metargon_fresh.success_after": {
+     "mean": 0.45,
+     "sem": null,
+     "ci": [
+      0.30705075280944694,
+      0.6017117011155924
+     ],
+     "n": 4,
+     "n_events": 40,
+     "method": "wilson"
+    },
+    "metargon_fresh.recovery_lag": {
+     "mean": 2.5,
+     "sem": 0.8660254037844386,
+     "ci": [
+      0.09591347909439873,
+      4.904086520905601
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   }
+  },
+  "planning_efficiency": {
+   "title": "Planning efficiency",
+   "metrics": {
+    "metargon_trained.eval_test.fallback_rate": {
+     "mean": 0.16804979253112035,
+     "sem": null,
+     "ci": [
+      0.14577347816420197,
+      0.19296129000447362
+     ],
+     "n": 4,
+     "n_events": 964,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_test.invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.003969244554067526
+     ],
+     "n": 4,
+     "n_events": 964,
+     "method": "wilson"
+    },
+    "metargon_trained.eval_test.planner_ops_per_step": {
+     "mean": 177.82071405572236,
+     "sem": 25.265010609907147,
+     "ci": [
+      107.68504460262012,
+      247.95638350882462
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.eval_test.plan_cache_hits_per_step": {
+     "mean": 2.9063331555235488,
+     "sem": 0.035862569098536745,
+     "ci": [
+      2.8067786637060106,
+      3.005887647341087
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_trained.eval_test.plans_used_per_step": {
+     "mean": 0.5476543817485461,
+     "sem": 0.06949470636616946,
+     "ci": [
+      0.3547370768760597,
+      0.7405716866210325
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_test.fallback_rate": {
+     "mean": 0.24581939799331104,
+     "sem": null,
+     "ci": [
+      0.22225612313824528,
+      0.2710103213657626
+     ],
+     "n": 4,
+     "n_events": 1196,
+     "method": "wilson"
+    },
+    "metargon_fresh.eval_test.invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.003201755965120729
+     ],
+     "n": 4,
+     "n_events": 1196,
+     "method": "wilson"
+    },
+    "metargon_fresh.eval_test.planner_ops_per_step": {
+     "mean": 289.38561844850807,
+     "sem": 26.036078478192643,
+     "ci": [
+      217.1094645930453,
+      361.66177230397085
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_test.plan_cache_hits_per_step": {
+     "mean": 2.419573389820836,
+     "sem": 0.18589755069156344,
+     "ci": [
+      1.9035217891010556,
+      2.935624990540616
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "metargon_fresh.eval_test.plans_used_per_step": {
+     "mean": 0.4963342606519254,
+     "sem": 0.028447130095865303,
+     "ci": [
+      0.4173650275058033,
+      0.5753034937980475
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   }
+  }
+ },
+ "per_seed": {
+  "0": {
+   "metargon_trained": {
+    "train": {
+     "n": 24,
+     "success": 0.7083333333333334
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.25
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.75
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.7
+    }
+   },
+   "metargon_muted": {
+    "train": {
+     "n": 24,
+     "success": 0.7083333333333334
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.625
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.625
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.5
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.9
+    }
+   },
+   "metargon_fresh": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.375
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.625
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.6
+    }
+   },
+   "random": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "episodic": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "qlearning": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.375
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.125
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.25
+    }
+   },
+   "oracle": {
+    "eval_val": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 1.0
+    }
+   }
+  },
+  "1": {
+   "metargon_trained": {
+    "train": {
+     "n": 24,
+     "success": 0.75
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.375
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.75
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.9
+    }
+   },
+   "metargon_muted": {
+    "train": {
+     "n": 24,
+     "success": 0.75
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.625
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.5
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.875
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.75
+    }
+   },
+   "metargon_fresh": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.625
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.8
+    }
+   },
+   "random": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.125
+    }
+   },
+   "episodic": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.125
+    }
+   },
+   "qlearning": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.375
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.375
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.125
+    }
+   },
+   "oracle": {
+    "eval_val": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 1.0
+    }
+   }
+  },
+  "2": {
+   "metargon_trained": {
+    "train": {
+     "n": 24,
+     "success": 0.5
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.875
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.8
+    }
+   },
+   "metargon_muted": {
+    "train": {
+     "n": 24,
+     "success": 0.5
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.75
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.8
+    }
+   },
+   "metargon_fresh": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.75
+    }
+   },
+   "random": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.125
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "episodic": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.125
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "qlearning": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.25
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "oracle": {
+    "eval_val": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 1.0
+    }
+   }
+  },
+  "3": {
+   "metargon_trained": {
+    "train": {
+     "n": 24,
+     "success": 0.8333333333333334
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.875
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.8
+    }
+   },
+   "metargon_muted": {
+    "train": {
+     "n": 24,
+     "success": 0.8333333333333334
+    },
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.75
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    },
+    "restart": {
+     "n": 8,
+     "success": 0.75
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.8
+    }
+   },
+   "metargon_fresh": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.5
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.875
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    },
+    "revisit": {
+     "n": 7,
+     "success": 1.0
+    },
+    "switch": {
+     "n": 20,
+     "success": 0.75
+    }
+   },
+   "random": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "episodic": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "qlearning": {
+    "eval_val": {
+     "n": 8,
+     "success": 0.375
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 0.25
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 0.0
+    }
+   },
+   "oracle": {
+    "eval_val": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_test": {
+     "n": 8,
+     "success": 1.0
+    },
+    "eval_ood": {
+     "n": 8,
+     "success": 1.0
+    }
+   }
+  }
+ },
+ "indicators": {
+  "causal_discovery": {
+   "coverage": 1.0,
+   "verified_precision": 0.2
+  },
+  "learning_efficiency": {
+   "success_rate_second_half": 0.8541666666666666,
+   "first_verified_rule": 1.0
+  },
+  "knowledge_retention": {
+   "revisit_preserved": 1.0,
+   "restart_parity": 1.0
+  },
+  "generalization": {
+   "zero_shot_test_coverage": 0.46875,
+   "test_success_rate": 0.8125
+  },
+  "adaptability": {
+   "success_after_switch": 0.6,
+   "recovery_speed": 0.5,
+   "wrong_belief_correction": 0.5263157894736842
+  },
+  "planning_efficiency": {
+   "fallback_reduction": 0.8319502074688796,
+   "steps_to_success_improvement": 0.1425389755011136
+  }
+ },
+ "baselines": {
+  "eval_val": {
+   "metargon_trained": {
+    "success_rate": {
+     "mean": 0.78125,
+     "sem": null,
+     "ci": [
+      0.6124466920955516,
+      0.8897630306846815
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 23.375,
+     "sem": 2.726222967159265,
+     "ci": [
+      15.80700504316588,
+      30.94299495683412
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.8064516129032258,
+     "sem": null,
+     "ci": [
+      0.6371939644454013,
+      0.9081311641365236
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    }
+   },
+   "metargon_fresh": {
+    "success_rate": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.33630614316859386,
+      0.6636938568314061
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.25,
+     "sem": 0.14433756729740643,
+     "ci": [
+      9.8493189131824,
+      10.6506810868176
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.5161290322580645,
+     "sem": null,
+     "ci": [
+      0.34840118286973176,
+      0.6803001396872117
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    }
+   },
+   "random": {
+    "success_rate": {
+     "mean": 0.03125,
+     "sem": null,
+     "ci": [
+      0.005537717362550945,
+      0.15744607800372734
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 28,
+     "sem": null,
+     "ci": null,
+     "n": 1,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.034482758620689655,
+     "sem": null,
+     "ci": [
+      0.006113056614032261,
+      0.1717589106470025
+     ],
+     "n": 4,
+     "n_events": 29,
+     "method": "wilson"
+    }
+   },
+   "episodic": {
+    "success_rate": {
+     "mean": 0.03125,
+     "sem": null,
+     "ci": [
+      0.005537717362550945,
+      0.15744607800372734
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 28,
+     "sem": null,
+     "ci": null,
+     "n": 1,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.034482758620689655,
+     "sem": null,
+     "ci": [
+      0.006113056614032261,
+      0.1717589106470025
+     ],
+     "n": 4,
+     "n_events": 29,
+     "method": "wilson"
+    }
+   },
+   "qlearning": {
+    "success_rate": {
+     "mean": 0.40625,
+     "sem": null,
+     "ci": [
+      0.255194024803138,
+      0.5774027342701177
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 37.04166666666667,
+     "sem": 0.7709271714654395,
+     "ci": [
+      34.90157283867861,
+      39.18176049465473
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.4482758620689655,
+     "sem": null,
+     "ci": [
+      0.2841291114874579,
+      0.6245233293193238
+     ],
+     "n": 4,
+     "n_events": 29,
+     "method": "wilson"
+    }
+   },
+   "oracle": {
+    "success_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8928172849426366,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 12.875,
+     "sem": 0.0,
+     "ci": [
+      12.875,
+      12.875
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8928172849426366,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   }
+  },
+  "eval_test": {
+   "metargon_trained": {
+    "success_rate": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.6469050424507756,
+      0.9111057606383721
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 18.333333333333332,
+     "sem": 2.141269252944487,
+     "ci": [
+      12.389169887159436,
+      24.277496779507228
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.8387096774193549,
+     "sem": null,
+     "ci": [
+      0.6736529727502113,
+      0.9290748009456006
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    }
+   },
+   "metargon_fresh": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5789310822975338,
+      0.8674775601737845
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 21.38095238095238,
+     "sem": 3.812944892446581,
+     "ci": [
+      10.796217359520671,
+      31.965687402384088
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5789310822975338,
+      0.8674775601737845
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   },
+   "random": {
+    "success_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.1071827150573635
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.11025900073475385
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    }
+   },
+   "episodic": {
+    "success_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.1071827150573635
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.11025900073475385
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    }
+   },
+   "qlearning": {
+    "success_rate": {
+     "mean": 0.25,
+     "sem": null,
+     "ci": [
+      0.1325224398262155,
+      0.42106891770246624
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 34.166666666666664,
+     "sem": 4.4503433076062295,
+     "ci": [
+      21.81251364475177,
+      46.520819688581554
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.2857142857142857,
+     "sem": null,
+     "ci": [
+      0.15253815848329969,
+      0.470596357370175
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    }
+   },
+   "oracle": {
+    "success_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8928172849426366,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 14.25,
+     "sem": 0.28867513459481287,
+     "ci": [
+      13.4486378263648,
+      15.0513621736352
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8928172849426366,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   }
+  },
+  "eval_ood": {
+   "metargon_trained": {
+    "success_rate": {
+     "mean": 0.15625,
+     "sem": null,
+     "ci": [
+      0.06864319106627216,
+      0.31754492553566527
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 12.5,
+     "sem": 2.5,
+     "ci": [
+      1.7424999999999997,
+      23.2575
+     ],
+     "n": 2,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.15625,
+     "sem": null,
+     "ci": [
+      0.06864319106627216,
+      0.31754492553566527
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   },
+   "metargon_fresh": {
+    "success_rate": {
+     "mean": 0.3125,
+     "sem": null,
+     "ci": [
+      0.17952352116618736,
+      0.4856699969803239
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 15.600000000000001,
+     "sem": 1.0000000000000009,
+     "ci": [
+      11.296999999999997,
+      19.903000000000006
+     ],
+     "n": 2,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.3125,
+     "sem": null,
+     "ci": [
+      0.17952352116618736,
+      0.4856699969803239
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   },
+   "random": {
+    "success_rate": {
+     "mean": 0.03125,
+     "sem": null,
+     "ci": [
+      0.005537717362550945,
+      0.15744607800372734
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 40,
+     "sem": null,
+     "ci": null,
+     "n": 1,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.03333333333333333,
+     "sem": null,
+     "ci": [
+      0.0059084379948573795,
+      0.16670751396958874
+     ],
+     "n": 4,
+     "n_events": 30,
+     "method": "wilson"
+    }
+   },
+   "episodic": {
+    "success_rate": {
+     "mean": 0.03125,
+     "sem": null,
+     "ci": [
+      0.005537717362550945,
+      0.15744607800372734
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 40,
+     "sem": null,
+     "ci": null,
+     "n": 1,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.03333333333333333,
+     "sem": null,
+     "ci": [
+      0.0059084379948573795,
+      0.16670751396958874
+     ],
+     "n": 4,
+     "n_events": 30,
+     "method": "wilson"
+    }
+   },
+   "qlearning": {
+    "success_rate": {
+     "mean": 0.09375,
+     "sem": null,
+     "ci": [
+      0.032400962626319516,
+      0.24218499335778831
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 60.75,
+     "sem": 4.249999999999999,
+     "ci": [
+      42.462250000000004,
+      79.03774999999999
+     ],
+     "n": 2,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 0.1111111111111111,
+     "sem": null,
+     "ci": [
+      0.03851964789498727,
+      0.2805818254397294
+     ],
+     "n": 4,
+     "n_events": 27,
+     "method": "wilson"
+    }
+   },
+   "oracle": {
+    "success_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8928172849426366,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 15.96875,
+     "sem": 0.6929236820651079,
+     "ci": [
+      14.045193858587261,
+      17.89230614141274
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "within_episode_adaptation": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8928172849426366,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 32,
+     "method": "wilson"
+    }
+   }
+  }
+ }
+}
