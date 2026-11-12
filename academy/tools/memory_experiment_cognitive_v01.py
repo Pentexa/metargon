@@ -668,8 +668,13 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                                  max_steps)
             if name == "fresh":
                 stream = []
+            stream = list(stream)
+            half = len(stream) // 2
             t0 = time.perf_counter()
-            for spec in stream:
+            for spec in stream[:half]:
+                run_one_episode(agent, spec)
+            mid_state = None if name == "fresh" else agent.save_state()
+            for spec in stream[half:]:
                 run_one_episode(agent, spec)
             wall = time.perf_counter() - t0
             if getattr(agent, "_wipe", False):
@@ -726,20 +731,19 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                 substrate=substrate, max_steps=max_steps,
                 episodes_per_config=base["retention_eps_per_cfg"],
                 seeds=(0,), label=name)
-            if state is not None:
-                retention.run_probe(state, lambda s, _k=kwargs:
-                                    MetargonAcademyAgent(seed=s, **_k),
-                                    episode_i=0)
-                retention.run_probe(state, lambda s, _k=kwargs:
-                                    MetargonAcademyAgent(seed=s, **_k),
-                                    episode_i=1)
+            _ret_factory = lambda s, _k=kwargs: MetargonAcademyAgent(
+                seed=s, **_k)
+            # genuine early-vs-late retention: probe the mid-training state
+            # (after the first half of the stream) and the final state.
+            # (Probing the same state twice yields a degenerate Δ=0.)
+            if mid_state is not None:
+                retention.run_probe(mid_state, _ret_factory, episode_i=0)
             else:
-                retention.run_probe(None, lambda s, _k=kwargs:
-                                    MetargonAcademyAgent(seed=s, **_k),
-                                    episode_i=0)
-                retention.run_probe(None, lambda s, _k=kwargs:
-                                    MetargonAcademyAgent(seed=s, **_k),
-                                    episode_i=1)
+                retention.run_probe(None, _ret_factory, episode_i=0)
+            if state is not None:
+                retention.run_probe(state, _ret_factory, episode_i=1)
+            else:
+                retention.run_probe(None, _ret_factory, episode_i=1)
 
             rlearn = None
             if run_repeated and name not in ("fresh", "memory_wiped",
