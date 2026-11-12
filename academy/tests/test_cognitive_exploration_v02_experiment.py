@@ -97,6 +97,23 @@ CONFIRMATORY_CELLS = ("classic_q08", "classic_q15", "ood_clean",
 ABLATION_CELLS = ("classic_q08", "classic_q15", "ood_clean")
 
 
+def true_clause_match(h, config, door):
+    """Match regardless of status (used for false-contradiction counting:
+    a contradicted hypothesis that matches a true clause is a false
+    contradiction)."""
+    if h.door != door or h.predicted_opens is not True:
+        return False
+    for clause in (config.rule_for(door)
+                   if not isinstance(config.rule_for(door), tuple)
+                   else config.rule_for(door)):
+        if isinstance(clause, frozenset) and h.antecedent == clause:
+            return True
+        if isinstance(clause, frozenset) and h.antecedent <= clause \
+                and h.antecedent:
+            return True
+    return False
+
+
 def false_contradictions(agent, config):
     """Count hypotheses whose antecedent matches a true clause for their
     door but ended the episode with status CONTRADICTED (a false
@@ -104,8 +121,9 @@ def false_contradictions(agent, config):
     from academy.agents.memory import CONTRADICTED
     count = 0
     for h in agent.memory.hypotheses:
-        if h.status == CONTRADICTED and hypothesis_matches(h, config,
-                                                          h.door):
+        if h.status == CONTRADICTED and any(
+                true_clause_match(h, config, door)
+                for door in ("D1", "D2")):
             count += 1
     return count
 
