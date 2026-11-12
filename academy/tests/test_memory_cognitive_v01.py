@@ -109,23 +109,38 @@ class TestCognitiveRetrievalOrder(unittest.TestCase):
         q2 = m.query("D1", opens=True)
         self.assertEqual(q2[0], h2)
 
-    def test_first_failure_demotes_stale_below_neutral(self):
+    def test_single_failure_tolerated_above_neutral(self):
+        # a transient failure (e.g. a delay artifact) must not demote a
+        # verified hypothesis below neutral exploration
         m = _cognitive()
         h = m._add(R1, D1_OPEN)
         n = m._add(R2, D1_OPEN)
         _verify_in(m, h, (0, 1))
         m.begin_episode(2)
         self.assertEqual(m.query("D1", opens=True)[0], h)
-        # one completed failure window: h is demoted below neutral n
         for _ in range(3):
             m.observe_nonevent(R1, "D1", True)
         self.assertEqual(h.consecutive_failures, 1)
+        q = m.query("D1", opens=True)
+        self.assertEqual(q[0], h)          # still ranked above neutral
+
+    def test_repeated_failures_demote_stale_below_neutral(self):
+        m = _cognitive()
+        h = m._add(R1, D1_OPEN)
+        n = m._add(R2, D1_OPEN)
+        _verify_in(m, h, (0, 1))
+        m.begin_episode(2)
+        self.assertEqual(m.query("D1", opens=True)[0], h)
+        # two completed failure windows: h is demoted below neutral n
+        for _ in range(6):
+            m.observe_nonevent(R1, "D1", True)
+        self.assertEqual(h.consecutive_failures, 2)
         q = m.query("D1", opens=True)
         self.assertEqual(q[0], n)
         # but h is not destroyed: evidence and history are intact
         self.assertIn(h, m.hypotheses)
         self.assertEqual(h.verified_epoch_count, 2)
-        self.assertEqual(h.con, 1)
+        self.assertEqual(h.con, 2)
         self.assertEqual(h.sup, 6)
 
     def test_fresh_support_revives_previously_failing_hypothesis(self):

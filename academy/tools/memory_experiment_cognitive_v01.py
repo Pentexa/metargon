@@ -579,14 +579,17 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                   fresh_control["noisy_frozen"]["config_mean_success"]))
 
     for name in variants:
-        kwargs = {k: v for k, v in VARIANTS_COGNITIVE[name].items()
+        raw = VARIANTS_COGNITIVE[name]
+        kwargs = {k: v for k, v in raw.items()
                   if not k.startswith("_") and k != "_memory_factory"}
-        factory = VARIANTS_COGNITIVE[name].get("_memory_factory")
+        factory = raw.get("_memory_factory")
         if factory is not None:
             kwargs["memory_factory"] = factory
         per_seed = []
         for ts in train_seeds:
-            agent = CognitiveVariantAgent(seed=0, _shuffle_seed=ts, **kwargs)
+            # pass the FULL variant dict (including underscore hooks) so
+            # the wipe/shuffle controls actually fire
+            agent = CognitiveVariantAgent(seed=0, _shuffle_seed=ts, **raw)
             stream = make_stream(splits, base["train_episodes"], ts,
                                  max_steps)
             if name == "fresh":
@@ -597,8 +600,17 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
             wall = time.perf_counter() - t0
             if getattr(agent, "_wipe", False):
                 agent.maybe_wipe()
+                assert len(agent.memory.hypotheses) == 0, \
+                    "memory wipe control did not fire"
             if getattr(agent, "_shuffle", False):
+                pre_antes = [h.antecedent for h in agent.memory.hypotheses]
                 agent.maybe_shuffle()
+                # guard: the shuffle control must have permuted at least
+                # one antecedent (proves the control actually ran)
+                assert any(
+                    h.antecedent != pre
+                    for h, pre in zip(agent.memory.hypotheses, pre_antes)), \
+                    "shuffle control did not fire"
             state = None if name == "fresh" else agent.save_state()
 
             classic_frozen = eval_grid(state, compat_pool, max_steps,

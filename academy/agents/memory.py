@@ -586,10 +586,14 @@ class CompositionalMemory:
 
         Current-context applicability is primary (status bonus scaled by
         reliability); historical verification adds only a bounded bonus.
-        Repeated prediction failures subtract a fixed penalty each, so a
-        previously verified hypothesis that has started failing in this
-        task drops below neutral exploration — without destroying its
-        evidence — and fresh support re-promotes it.
+        Repeated prediction failures — *two or more* completed failure
+        windows — subtract a fixed penalty per failure, so a previously
+        verified hypothesis that keeps failing in this task drops below
+        neutral exploration without destroying its evidence. A single
+        isolated failure window (which may be a transient delay artifact)
+        only lowers reliability slightly and does not demote the
+        hypothesis below neutral exploration; fresh support re-promotes
+        it in either case.
         """
         rel = self._cognitive_reliability(h)
         hist = min(h.verified_epoch_count, self.cognitive_history_cap)
@@ -600,7 +604,9 @@ class CompositionalMemory:
         else:
             sb = 0.0
         streak = min(h.consecutive_failures, 4)
-        penalty = self.cognitive_failure_penalty * streak
+        # first failure window is tolerated (may be a delay artifact);
+        # repeated failures demote (2nd failure -> -8, 3rd -> -16, ...)
+        penalty = self.cognitive_failure_penalty * max(0, streak - 1)
         return (sb * rel + hist * 1.5 + rel * 2.0
                 - penalty - 0.0001 * h.last_update)
 
