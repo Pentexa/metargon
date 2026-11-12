@@ -1,0 +1,454 @@
+{
+ "conditions": {
+  "classic_test": {
+   "ablations": {
+    "proposed_nodecomp": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "mean": 0.0
+     },
+     "result": {
+      "exact_evidence_rate": 0.875,
+      "fallback_fraction": 0.17887783038759714,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 0.0,
+      "mean_first_open": 3.8126410835214446,
+      "mean_holds": 0.8291666666666667,
+      "mean_probes": 1.6125,
+      "mean_recovery_steps": 20.779166666666665,
+      "mean_repeated_probes": 0.010416666666666666,
+      "mean_stalls": 2.683333333333333,
+      "mean_steps_all": 45.989583333333336,
+      "mean_steps_ok": 18.857677902621724,
+      "n_episodes": 480,
+      "per_seed_success": [
+       0.0,
+       1.0,
+       0.0,
+       0.3333333333333333,
+       1.0,
+       1.0,
+       1.0,
+       0.11666666666666667
+      ],
+      "repeat_probe_rate": 0.006459948320413436,
+      "success_rate": 0.55625,
+      "useful_evidence_rate": 0.9979166666666667,
+      "wall_s": 62.4
+     }
+    },
+    "proposed_nogap": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       2.08
+      ],
+      "mean": 0.84
+     },
+     "result": {
+      "exact_evidence_rate": 0.875,
+      "fallback_fraction": 0.17507528919121465,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 2.222916666666667,
+      "mean_first_open": 3.8456375838926173,
+      "mean_holds": 0.8291666666666667,
+      "mean_probes": 1.6645833333333333,
+      "mean_recovery_steps": 20.63125,
+      "mean_repeated_probes": 0.00625,
+      "mean_stalls": 2.7416666666666667,
+      "mean_steps_all": 45.827083333333334,
+      "mean_steps_ok": 19.472324723247233,
+      "n_episodes": 480,
+      "per_seed_success": [
+       0.0,
+       1.0,
+       0.016666666666666666,
+       0.38333333333333336,
+       1.0,
+       1.0,
+       1.0,
+       0.11666666666666667
+      ],
+      "repeat_probe_rate": 0.003754693366708386,
+      "success_rate": 0.5645833333333333,
+      "useful_evidence_rate": 0.9979166666666667,
+      "wall_s": 79.9
+     }
+    },
+    "proposed_nohold": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "mean": 0.0
+     },
+     "result": {
+      "exact_evidence_rate": 0.875,
+      "fallback_fraction": 0.17794980035273408,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 2.345833333333333,
+      "mean_first_open": 3.799097065462754,
+      "mean_holds": 0.0,
+      "mean_probes": 1.6208333333333333,
+      "mean_recovery_steps": 20.933333333333334,
+      "mean_repeated_probes": 0.010416666666666666,
+      "mean_stalls": 2.754166666666667,
+      "mean_steps_all": 46.08125,
+      "mean_steps_ok": 19.02247191011236,
+      "n_episodes": 480,
+      "per_seed_success": [
+       0.0,
+       1.0,
+       0.0,
+       0.3333333333333333,
+       1.0,
+       1.0,
+       1.0,
+       0.11666666666666667
+      ],
+      "repeat_probe_rate": 0.006426735218508997,
+      "success_rate": 0.55625,
+      "useful_evidence_rate": 0.9979166666666667,
+      "wall_s": 82.6
+     }
+    },
+    "proposed_noinfo": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       1.25
+      ],
+      "mean": 0.41
+     },
+     "result": {
+      "exact_evidence_rate": 0.875,
+      "fallback_fraction": 0.17750968688969399,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 2.183333333333333,
+      "mean_first_open": 3.8126410835214446,
+      "mean_holds": 0.83125,
+      "mean_probes": 1.6145833333333333,
+      "mean_recovery_steps": 20.783333333333335,
+      "mean_repeated_probes": 0.010416666666666666,
+      "mean_stalls": 2.7979166666666666,
+      "mean_steps_all": 45.88125,
+      "mean_steps_ok": 19.118959107806692,
+      "n_episodes": 480,
+      "per_seed_success": [
+       0.0,
+       1.0,
+       0.0,
+       0.3333333333333333,
+       1.0,
+       1.0,
+       1.0,
+       0.15
+      ],
+      "repeat_probe_rate": 0.0064516129032258064,
+      "success_rate": 0.5604166666666667,
+      "useful_evidence_rate": 0.9979166666666667,
+      "wall_s": 77.8
+     }
+    },
+    "proposed_norecov": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       -13.96,
+       0.0
+      ],
+      "mean": -5.64
+     },
+     "result": {
+      "exact_evidence_rate": 0.75,
+      "fallback_fraction": 7.812500000000002e-05,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 2.075,
+      "mean_first_open": 2.188888888888889,
+      "mean_holds": 0.8625,
+      "mean_probes": 21.0125,
+      "mean_recovery_steps": 0.0,
+      "mean_repeated_probes": 0.0,
+      "mean_stalls": 0.0,
+      "mean_steps_all": 48.6375,
+      "mean_steps_ok": 17.275,
+      "n_episodes": 480,
+      "per_seed_success": [
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       1.0,
+       1.0,
+       1.0,
+       0.0
+      ],
+      "repeat_probe_rate": 0.0,
+      "success_rate": 0.5,
+      "useful_evidence_rate": 0.75,
+      "wall_s": 87.7
+     }
+    }
+   },
+   "proposed": {
+    "exact_evidence_rate": 0.875,
+    "fallback_fraction": 0.17887783038759714,
+    "loop_fraction": 0.0,
+    "mean_decomposed": 2.183333333333333,
+    "mean_first_open": 3.8126410835214446,
+    "mean_holds": 0.8291666666666667,
+    "mean_probes": 1.6125,
+    "mean_recovery_steps": 20.779166666666665,
+    "mean_repeated_probes": 0.010416666666666666,
+    "mean_stalls": 2.683333333333333,
+    "mean_steps_all": 45.989583333333336,
+    "mean_steps_ok": 18.857677902621724,
+    "n_episodes": 480,
+    "per_seed_success": [
+     0.0,
+     1.0,
+     0.0,
+     0.3333333333333333,
+     1.0,
+     1.0,
+     1.0,
+     0.11666666666666667
+    ],
+    "repeat_probe_rate": 0.006459948320413436,
+    "success_rate": 0.55625,
+    "useful_evidence_rate": 0.9979166666666667,
+    "wall_s": 88.7
+   }
+  },
+  "ood": {
+   "ablations": {
+    "proposed_nodecomp": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "mean": 0.0
+     },
+     "result": {
+      "exact_evidence_rate": 1.0,
+      "fallback_fraction": 0.1549979432379473,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 0.0,
+      "mean_first_open": 3.2,
+      "mean_holds": 0.6145833333333334,
+      "mean_probes": 1.2979166666666666,
+      "mean_recovery_steps": 13.429166666666667,
+      "mean_repeated_probes": 0.0020833333333333333,
+      "mean_stalls": 1.4104166666666667,
+      "mean_steps_all": 34.920833333333334,
+      "mean_steps_ok": 20.554945054945055,
+      "n_episodes": 480,
+      "per_seed_success": [
+       1.0,
+       0.36666666666666664,
+       0.4,
+       1.0,
+       1.0,
+       1.0,
+       0.3,
+       1.0
+      ],
+      "repeat_probe_rate": 0.0016051364365971107,
+      "success_rate": 0.7583333333333333,
+      "useful_evidence_rate": 1.0,
+      "wall_s": 92.7
+     }
+    },
+    "proposed_nogap": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "mean": 0.0
+     },
+     "result": {
+      "exact_evidence_rate": 1.0,
+      "fallback_fraction": 0.1549979432379473,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 5.002083333333333,
+      "mean_first_open": 3.2,
+      "mean_holds": 0.6145833333333334,
+      "mean_probes": 1.2979166666666666,
+      "mean_recovery_steps": 13.429166666666667,
+      "mean_repeated_probes": 0.0020833333333333333,
+      "mean_stalls": 1.4104166666666667,
+      "mean_steps_all": 34.920833333333334,
+      "mean_steps_ok": 20.554945054945055,
+      "n_episodes": 480,
+      "per_seed_success": [
+       1.0,
+       0.36666666666666664,
+       0.4,
+       1.0,
+       1.0,
+       1.0,
+       0.3,
+       1.0
+      ],
+      "repeat_probe_rate": 0.0016051364365971107,
+      "success_rate": 0.7583333333333333,
+      "useful_evidence_rate": 1.0,
+      "wall_s": 153.4
+     }
+    },
+    "proposed_nohold": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "mean": 0.0
+     },
+     "result": {
+      "exact_evidence_rate": 1.0,
+      "fallback_fraction": 0.1549979432379473,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 5.46875,
+      "mean_first_open": 3.2,
+      "mean_holds": 0.0,
+      "mean_probes": 1.2979166666666666,
+      "mean_recovery_steps": 13.429166666666667,
+      "mean_repeated_probes": 0.0020833333333333333,
+      "mean_stalls": 1.4104166666666667,
+      "mean_steps_all": 34.920833333333334,
+      "mean_steps_ok": 20.554945054945055,
+      "n_episodes": 480,
+      "per_seed_success": [
+       1.0,
+       0.36666666666666664,
+       0.4,
+       1.0,
+       1.0,
+       1.0,
+       0.3,
+       1.0
+      ],
+      "repeat_probe_rate": 0.0016051364365971107,
+      "success_rate": 0.7583333333333333,
+      "useful_evidence_rate": 1.0,
+      "wall_s": 111.6
+     }
+    },
+    "proposed_noinfo": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       0.0,
+       0.0
+      ],
+      "mean": 0.0
+     },
+     "result": {
+      "exact_evidence_rate": 1.0,
+      "fallback_fraction": 0.1549979432379473,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 5.1,
+      "mean_first_open": 3.2,
+      "mean_holds": 0.6145833333333334,
+      "mean_probes": 1.2979166666666666,
+      "mean_recovery_steps": 13.429166666666667,
+      "mean_repeated_probes": 0.0020833333333333333,
+      "mean_stalls": 1.4104166666666667,
+      "mean_steps_all": 34.920833333333334,
+      "mean_steps_ok": 20.554945054945055,
+      "n_episodes": 480,
+      "per_seed_success": [
+       1.0,
+       0.36666666666666664,
+       0.4,
+       1.0,
+       1.0,
+       1.0,
+       0.3,
+       1.0
+      ],
+      "repeat_probe_rate": 0.0016051364365971107,
+      "success_rate": 0.7583333333333333,
+      "useful_evidence_rate": 1.0,
+      "wall_s": 147.9
+     }
+    },
+    "proposed_norecov": {
+     "paired_success_delta_vs_proposed": {
+      "ci": [
+       -67.5,
+       -13.33
+      ],
+      "mean": -38.51
+     },
+     "result": {
+      "exact_evidence_rate": 0.875,
+      "fallback_fraction": 0.0,
+      "loop_fraction": 0.0,
+      "mean_decomposed": 3.1708333333333334,
+      "mean_first_open": 2.5714285714285716,
+      "mean_holds": 0.36875,
+      "mean_probes": 19.258333333333333,
+      "mean_recovery_steps": 0.0,
+      "mean_repeated_probes": 0.0,
+      "mean_stalls": 0.0,
+      "mean_steps_all": 54.62916666666667,
+      "mean_steps_ok": 12.344444444444445,
+      "n_episodes": 480,
+      "per_seed_success": [
+       1.0,
+       0.0,
+       0.0,
+       1.0,
+       0.0,
+       0.0,
+       0.0,
+       1.0
+      ],
+      "repeat_probe_rate": 0.0,
+      "success_rate": 0.375,
+      "useful_evidence_rate": 0.875,
+      "wall_s": 109.6
+     }
+    }
+   },
+   "proposed": {
+    "exact_evidence_rate": 1.0,
+    "fallback_fraction": 0.1549979432379473,
+    "loop_fraction": 0.0,
+    "mean_decomposed": 5.1,
+    "mean_first_open": 3.2,
+    "mean_holds": 0.6145833333333334,
+    "mean_probes": 1.2979166666666666,
+    "mean_recovery_steps": 13.429166666666667,
+    "mean_repeated_probes": 0.0020833333333333333,
+    "mean_stalls": 1.4104166666666667,
+    "mean_steps_all": 34.920833333333334,
+    "mean_steps_ok": 20.554945054945055,
+    "n_episodes": 480,
+    "per_seed_success": [
+     1.0,
+     0.36666666666666664,
+     0.4,
+     1.0,
+     1.0,
+     1.0,
+     0.3,
+     1.0
+    ],
+    "repeat_probe_rate": 0.0016051364365971107,
+    "success_rate": 0.7583333333333333,
+    "useful_evidence_rate": 1.0,
+    "wall_s": 117.2
+   }
+  }
+ },
+ "episodes": 60,
+ "n_seeds": 8,
+ "run_id": "cognitive-exploration-v01-ablations",
+ "seed_base": 20261112
+}

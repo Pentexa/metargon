@@ -120,9 +120,21 @@ def match_summary(agent, config):
 # ---------------------------------------------------------------------------
 # Episode runner with instrumentation.
 # ---------------------------------------------------------------------------
+TRACE_COUNTERS = (
+    "probes_new", "probes_repeat", "loop_steps", "stalls_detected",
+    "recovery_steps", "random_fallback_steps", "plans_used",
+    "memory_correct", "memory_incorrect", "gap_guided_candidates",
+    "decomposed_candidates", "holds_started", "holds_resolved_open",
+    "holds_resolved_fail", "holds_interrupted",
+)
+
+
 def run_episode(agent, spec):
     env = MechanismGrid(spec.config, spec.max_steps, spec.noise_q)
     obs = env.reset(spec.spec_seed)
+    # trace counters are cumulative across a run: snapshot before the
+    # episode and measure deltas (per-episode values)
+    prev = agent.probe_trace()
     agent.episode_start(spec_for(agent, spec), env.geom)
     steps = 0
     opened = 0
@@ -143,20 +155,24 @@ def run_episode(agent, spec):
             break
     agent.finish_episode(success)
     tr = agent.probe_trace()
+    delta = {k: tr.get(k, 0) - prev.get(k, 0) for k in TRACE_COUNTERS}
     rec = {
         "success": success,
         "steps": steps,
         "door_events": opened,
         "first_open_step": first_open_step,
-        "probes": tr.get("probes_new", 0),
-        "repeated_probes": tr.get("probes_repeat", 0),
-        "loop_steps": tr.get("loop_steps", 0),
-        "stalls": tr.get("stalls_detected", 0),
-        "recovery_steps": tr.get("recovery_steps", 0),
-        "random_fallback": tr.get("random_fallback_steps", 0),
-        "plans_used": tr.get("plans_used", 0),
-        "memory_correct": tr.get("memory_correct", 0),
-        "memory_incorrect": tr.get("memory_incorrect", 0),
+        "probes": delta["probes_new"],
+        "repeated_probes": delta["probes_repeat"],
+        "loop_steps": delta["loop_steps"],
+        "stalls": delta["stalls_detected"],
+        "recovery_steps": delta["recovery_steps"],
+        "random_fallback": delta["random_fallback_steps"],
+        "plans_used": delta["plans_used"],
+        "memory_correct": delta["memory_correct"],
+        "memory_incorrect": delta["memory_incorrect"],
+        "gap_guided": delta["gap_guided_candidates"],
+        "decomposed": delta["decomposed_candidates"],
+        "holds": delta["holds_started"],
         "match": match_summary(agent, spec.config),
     }
     rec["useful_evidence"] = any(v is not None
@@ -219,6 +235,10 @@ def _summarize(per_seed, all_records, wall):
     exact = [1.0 if r["exact_evidence"] else 0.0 for r in all_records]
     first_open = [r["first_open_step"] for r in all_records
                   if r["first_open_step"] is not None]
+    stalls = [r["stalls"] for r in all_records]
+    recovery = [r["recovery_steps"] for r in all_records]
+    holds = [r["holds"] for r in all_records]
+    decomp = [r["decomposed"] for r in all_records]
     return {
         "n_episodes": n,
         "wall_s": round(wall, 1),
@@ -234,6 +254,10 @@ def _summarize(per_seed, all_records, wall):
         "useful_evidence_rate": _mean(useful),
         "exact_evidence_rate": _mean(exact),
         "mean_first_open": _mean(first_open),
+        "mean_stalls": _mean(stalls),
+        "mean_recovery_steps": _mean(recovery),
+        "mean_holds": _mean(holds),
+        "mean_decomposed": _mean(decomp),
         "per_seed_success": [p["success_rate"] for p in per_seed],
     }
 
