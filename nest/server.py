@@ -24,185 +24,53 @@ from .agent_session import (
     STATUS_STOPPED, STATUS_FINISHED,
 )
 from .command_interpreter import HELP_TEXT, INTENTS, OpenAICompatibleAdapter, interpret
+from .conversation import ConversationEngine
+from .llm import OpenAICompatibleClient
 from .storage import NestStorage
 
 STATIC_DIR = Path(__file__).resolve().parent / "static"
 
 
 class NestApp:
-    """Ties session + interpreter together and answers from real telemetry."""
+    """Ties session + conversation engine together."""
 
-    def __init__(self, storage_root=None, api_adapter=None):
+    def __init__(self, storage_root=None, api_adapter=None, llm_client=None):
         self.storage = NestStorage(storage_root)
         self.session = NestSession(storage=self.storage)
         self.api_adapter = api_adapter
+        self.llm_client = llm_client if llm_client is not None else OpenAICompatibleClient()
+        self.engine = ConversationEngine(
+            session=self.session,
+            client=self.llm_client,
+            interpreter=lambda text: interpret(text, api_adapter=self.api_adapter),
+        )
         self._lock = threading.RLock()
-        self.reply_cache = {}
 
-    # -- conversational replies (deterministic, from real state) --------
+    # -- conversational replies (from real state) ------------------------
     def handle_command(self, text: str) -> dict:
-        cmd = interpret(text, api_adapter=self.api_adapter)
-        reply = self._execute(cmd)
-        return {"command": cmd.as_dict(), "reply": reply,
-                "snapshot": self.session.snapshot()}
-
-    def _execute(self, cmd) -> str:
-        intent = cmd.intent
-        if cmd.direct_answer:
-            return cmd.direct_answer
-        if intent == "hello":
-            return ("Hello! I'm Metargon. I explore the Academy, learn door rules from evidence, "
-                    "and remember what I find. Ask me what I remember, or give me a challenge.")
-        if intent == "help":
-            return HELP_TEXT
-        if intent == "memory_what_remember":
-            return self._reply_what_remember()
-        if intent == "memory_current_hypothesis":
-            return self._reply_hypotheses()
-        if intent == "memory_learned_today":
-            return self._reply_learned_today()
-        if intent == "goal_open_door_d1" or intent == "goal_open_door_d2":
-            door = "D1" if intent.endswith("d1") else "D2"
-            return self._start_challenge_for_door(door)
-        if intent == "goal_reach":
-            return self._start_goal_challenge()
-        if intent == "challenge_easier":
-            return self._start_difficulty("easy")
-        if intent == "challenge_harder":
-            return self._start_difficulty("hard")
-        if intent == "challenge_new":
-            return self._start_difficulty("medium")
-        if intent == "control_start":
-            self.session.start()
-            return "Starting. I'm running my observe → plan → act → learn cycle."
-        if intent == "control_pause":
-            self.session.pause()
-            return "Paused."
-        if intent == "control_continue":
-            self.session.continue_running()
-            return "Continuing."
-        if intent == "control_step":
-            self.session.single_step()
-            return "One step executed."
-        if intent == "control_stop":
-            self.session.stop()
-            return "Stopped."
-        if intent == "control_reset":
-            self.session.reset_episode()
-            return "Episode reset (memory kept)."
-        if intent == "persistence_save":
-            info = self.session.save()
-            return (f"Progress saved. Learned memory checkpoint written to "
-                    f"{info['agent_state']}.")
-        if intent == "persistence_restore":
-            meta = self.session.restore()
-            if meta is None:
-                return "No saved checkpoint found — nothing to restore."
-            return ("Restored saved progress. Learned memory is intact: "
-                    f"{meta.get('episode_index', 0)} episodes, "
-                    f"{meta.get('episode_successes', 0)} successes.")
-        if intent == "persistence_fresh":
-            self.session.fresh()
-            return "Fresh start. All learned memory cleared."
-        if intent == "why_last_action":
-            return self._reply_why_last_action()
-        return ("I don't understand that yet. I won't pretend I did it. "
-                "Say 'help' to see what I can do.")
-
-    # -- telemetry-based replies ----------------------------------------
-    def _reply_what_remember(self):
-        mem = self.session.memory_snapshot()
-        stats = mem["stats"]
-        verified = stats.get("verified", 0)
-        contradicted = stats.get("contradicted", 0)
-        pending = stats.get("hypothesis", 0) + stats.get("predicted", 0)
-        hv = [h for h in mem["hypotheses"] if h["status"] == "verified"]
-        # choose the most confident verified hypothesis to speak about
-        if hv:
-            h = max(hv, key=lambda x: x["confidence"])
-            return (f"I remember {verified} verified rule{'s' if verified != 1 else ''} "
-                    f"(and {contradicted} contradicted, {pending} uncertain). "
-                    f"My strongest verified belief: door {h['door']} opens when "
-                    f"{self._atoms_text(h['antecedent_text'])}. I only say this "
-                    f"because the evidence supports it.")
-        if contradicted:
-            return (f"I remember {contradicted} contradicted hypotheses and {pending} uncertain. "
-                    f"None are verified yet — so I can't claim I know a door rule.")
-        return "I don't remember any verified rules yet. I'm still exploring."
-
-    def _reply_hypotheses(self):
-        mem = self.session.memory_snapshot()
-        hs = mem["hypotheses"]
-        if not hs:
-            return "I have no hypotheses yet — I haven't observed enough."
-        lines = []
-        actionable = [h for h in hs if h["status"] in ("hypothesis", "predicted")]
-        for h in hs[:8]:
-            status = h["status"]
-            lines.append(f"- door {h['door']} opens when {self._atoms_text(h['antecedent_text'])} "
-                         f"[{status}, support {h['sup']}, contradiction {h['con']}]")
-        tail = f" … and {len(hs)-8} more" if len(hs) > 8 else ""
-        return "Current hypotheses:\n" + "\n".join(lines) + tail
-
-    def _reply_learned_today(self):
-        mem = self.session.memory_snapshot()
-        stats = mem["stats"]
-        session = self.session
-        return (f"This session so far: {session.episode_index} episodes, "
-                f"{session.episode_successes} successful. Memory: "
-                f"{stats.get('verified', 0)} verified, {stats.get('contradicted', 0)} "
-                f"contradicted, {mem['generated']} generated total.")
-
-    def _start_challenge_for_door(self, door: str) -> str:
-        ch = Challenge(pool_tag="train", difficulty="medium",
-                       focus_door=door, seed=self.session.episode_index,
-                       description=f"open door {door}")
-        self.session.new_challenge(ch)
-        return f"Challenge set: try to open door {door}. I'm using my real planner and learning. (Use Start/Step to run.)"
-
-    def _start_goal_challenge(self) -> str:
-        ch = Challenge(pool_tag="train", difficulty="medium",
-                       seed=self.session.episode_index,
-                       description="reach the goal")
-        self.session.new_challenge(ch)
-        return "Challenge set: reach the goal cell. I'll plan and learn along the way."
-
-    def _start_difficulty(self, difficulty: str) -> str:
-        ch = Challenge(pool_tag="train", difficulty=difficulty,
-                       seed=self.session.episode_index,
-                       description=f"{difficulty} challenge")
-        self.session.new_challenge(ch)
-        return f"New {difficulty} challenge set. (My memory is retained.)"
-
-    def _reply_why_last_action(self):
-        s = self.session
-        if s.last_action is None:
-            return "I haven't acted yet."
-        tr = s.trace_snapshot()
-        src = None
-        for key, count in tr.items():
-            if key.startswith("source_") and count:
-                src = key.replace("source_", "")
-                break
-        if s.last_action_reason:
-            reason = s.last_action_reason
-        elif src:
-            reason = f"source: {src}"
-        else:
-            reason = "I picked an action from my planner/probe logic."
-        return (f"My last action was {s.last_action} ({reason}). "
-                f"It came from my actual planning/learning loop, not from a script.")
-
-    @staticmethod
-    def _atoms_text(antecedent_text: str) -> str:
-        return antecedent_text.replace(" ∧ ", ", ") if antecedent_text else "(empty)"
+        result = self.engine.respond(text)
+        return {"command": {"intent": result.get("intent") or result.get("action")
+                            or "conversation",
+                            "text": text},
+                "reply": result["reply"],
+                "mode": result["mode"],
+                "action": result.get("action"),
+                "action_note": result.get("action_note"),
+                "grounded": result.get("grounded", True),
+                "snapshot": result["snapshot"]}
 
     # -- lifecycle -------------------------------------------------------
     def config(self):
         return {
-            "api_mode": ("provider" if (self.api_adapter and self.api_adapter.enabled) else "none"),
-            "api_provider": self.api_adapter.base_url if (self.api_adapter and self.api_adapter.enabled) else None,
+            "api_mode": self.engine.mode,
+            "api_provider": (self.llm_client.base_url
+                             if self.llm_client.enabled else None),
+            "api_model": (self.llm_client.model
+                          if self.llm_client.enabled else None),
+            "llm_budget": (self.llm_client.budget.as_dict()
+                           if self.llm_client.enabled else None),
             "intents": list(INTENTS),
+            "conversation_mode": self.engine.mode,
             "storage_root": str(self.storage.root),
             "checkpoint": self.storage.checkpoint_info(),
             "max_global_steps": 4000,
@@ -233,6 +101,22 @@ class NestApp:
             self.session.fresh()
         else:
             raise ValueError(f"unknown control op: {op}")
+        return self.session.snapshot()
+
+    def teaching(self, payload: dict) -> dict:
+        """Teaching endpoint: input (guidance/claim/objective) or clear."""
+        kind = payload.get("kind", "input")
+        text = (payload.get("text") or "").strip()
+        if kind == "clear":
+            self.session.teaching.clear_all()
+        else:
+            from .teaching import parse_teaching_text
+            ti = parse_teaching_text(text)
+            if ti is None:
+                raise ValueError(
+                    "could not parse teaching input (e.g. 'try switch S1', "
+                    "'I think S1 opens door D1', 'discover how to open D1')")
+            self.session.teaching.apply(ti)
         return self.session.snapshot()
 
 
@@ -284,6 +168,11 @@ class NestHandler(BaseHTTPRequestHandler):
         if parsed.path == "/api/control":
             try:
                 return self._send(200, self.app.control(body.get("op", ""), body.get("params")))
+            except Exception as exc:
+                return self._send(400, {"error": str(exc)})
+        if parsed.path == "/api/teaching":
+            try:
+                return self._send(200, self.app.teaching(body))
             except Exception as exc:
                 return self._send(400, {"error": str(exc)})
         return self._send(404, {"error": "unknown endpoint"})

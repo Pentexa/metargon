@@ -1,12 +1,9 @@
 """NEST frontend validation (CI-friendly).
 
 1. Extracts the inline <script> from nest/static/index.html.
-2. Runs `node --check` on it when Node is available (catches syntax
-   errors like the one that broke the original UI).
-3. Falls back to a brace/backtick balance check when Node is absent.
-4. Optionally runs the Node DOM smoke test (nest/tools/frontend_smoke.node.js)
-   to exercise initial render, conversation send, memory panel, and
-   control-wiring code paths.
+2. Runs `node --check` on it when Node is available.
+3. Falls back to brace/backtick balance checks when Node is absent.
+4. Optionally runs the Node DOM smoke test.
 """
 from __future__ import annotations
 
@@ -36,8 +33,7 @@ def balance_check(js: str) -> list[str]:
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--smoke", action="store_true",
-                    help="also run the Node DOM smoke test")
+    ap.add_argument("--smoke", action="store_true")
     args = ap.parse_args()
 
     text = HTML.read_text(encoding="utf-8")

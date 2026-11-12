@@ -1,13 +1,4 @@
-// METARGON NEST — frontend DOM smoke test (node, no deps).
-//
-// Loads the real inline script from nest/static/index.html and executes it
-// inside a minimal DOM stub backed by snapshot data shaped exactly like the
-// NEST backend API. Asserts the runtime behaviours that previously broke:
-//   1. initial welcome message appended to the conversation panel
-//   2. world canvas receives drawing calls (renders)
-//   3. memory panel HTML contains verified/generated statistics
-//   4. typing + Enter (or Send) posts a user message and receives a reply
-//   5. control buttons are wired (clicking "start" calls /api/control)
+// METARGON NEST v0.2 — frontend DOM smoke test (node, no deps).
 'use strict';
 
 const fs = require('fs');
@@ -19,7 +10,6 @@ const m = html.match(/<script>([\s\S]*?)<\/script>/);
 if (!m) { console.error('no inline script'); process.exit(1); }
 const scriptSrc = m[1];
 
-// ---- snapshot data mirroring the backend API shapes ----
 const SNAPSHOT = {
   status: 'idle',
   episode_index: 0,
@@ -67,22 +57,36 @@ const SNAPSHOT = {
   notice: '',
   worker_error: null,
   messages_tail: [],
+  teaching: {
+    inputs: [{ kind: 'claim', atoms: [['sw', 'S1', true]], door: 'D1',
+               label: 'I think switch S1 opens door D1' },
+             { kind: 'guidance', atoms: [['sw', 'S1', true]], door: null,
+               label: 'try switch S1' }],
+    objectives: [{ text: 'learn to open D1' }],
+    experiments_tail: [{ action: 'Toggle', door: 'D1', event: 'open',
+                         note: '' }],
+    stats: { guidance_applied: 2, claims_added: 1, claims_removed: 0,
+             teacher_claim_probes: 0 },
+    memory_delta: { before: { hypotheses: 0, verified: 0 },
+                    after: { hypotheses: 12, verified: 1 } },
+  },
 };
 
 const REPLY = {
-  command: { intent: 'hello', text: 'Hello, Metargon!' },
-  reply: "Hello! I'm Metargon, a little learning agent. I explore the Academy world, learn door rules from evidence, and remember what I discover. You can ask me what I remember, tell me to open a door, or ask for help.",
+  command: { intent: 'goal_open_door_d1', text: 'Try opening door D1.' },
+  reply: "I'll try to open door D1. I haven't succeeded yet — let me work on it.",
+  mode: 'command',
+  action: 'goal_open_door_d1',
+  action_note: 'Goal accepted: open door D1. Use Start/Step to execute.',
+  grounded: true,
   snapshot: SNAPSHOT,
 };
 
-// ---- minimal DOM stub ----
 let ctxCalls = 0;
 const ctx2d = new Proxy({}, {
   get(t, p) {
     if (p === 'canvas') return { width: 420, height: 300 };
-    if (!(p in t)) {
-      t[p] = (...a) => { ctxCalls += 1; };
-    }
+    if (!(p in t)) t[p] = (...a) => { ctxCalls += 1; };
     return t[p];
   },
 });
@@ -113,14 +117,31 @@ class FakeEl {
     };
   }
   appendChild(el) { this.children.push(el); return el; }
+  removeChild(el) {
+    const i = this.children.indexOf(el);
+    if (i >= 0) this.children.splice(i, 1);
+    return el;
+  }
+  querySelector(sel) {
+    if (sel.includes('.msg.sys')) {
+      for (let i = this.children.length - 1; i >= 0; i--) {
+        if (this.children[i].className && String(this.children[i].className).includes('sys')) {
+          return this.children[i];
+        }
+      }
+    }
+    return null;
+  }
   addEventListener(type, fn) { (this._handlers[type] = this._handlers[type] || []).push(fn); }
   dispatch(type, ev) { (this._handlers[type] || []).forEach(fn => fn(ev)); }
+  focus() { /* no-op in test DOM */ }
   getContext() { return ctx2d; }
 }
 
 const els = {};
 ['status-pill', 'chat', 'input', 'send', 'cv', 'world-meta', 'memory',
- 'api-badge', 'notice-bar', 'challenge']
+ 'api-badge', 'notice-bar', 'challenge', 'teach-input', 'teach-send',
+ 'teach-area']
   .forEach(id => { els[id] = new FakeEl(id); });
 
 const controlButtons = ['start', 'pause', 'continue', 'step', 'stop',
@@ -149,21 +170,18 @@ global.fetch = async (url, opts) => {
   let payload = SNAPSHOT;
   if (url === '/api/command') payload = REPLY;
   else if (url === '/api/control') payload = SNAPSHOT;
-  else if (url === '/api/config') payload = { api_mode: 'none' };
-  return { json: async () => payload };
+  else if (url === '/api/config') payload = { conversation_mode: 'command', api_mode: 'none' };
+  return { ok: true, status: 200, json: async () => payload };
 };
 
 global.setInterval = () => 0;
-// keep real timers so async tick()/fetch can settle in the test
 global.setTimeout = global.setTimeout || setTimeout;
 
-// surface async errors for diagnosis
 process.on('unhandledRejection', (err) => {
   console.error('UNHANDLED REJECTION:', err && err.stack || err);
   process.exitCode = 1;
 });
 
-// ---- execute the page script ----
 try {
   (0, eval)(scriptSrc);
 } catch (e) {
@@ -171,9 +189,7 @@ try {
   process.exit(1);
 }
 
-// allow the async tick() -> fetch -> render pipeline to complete
 (async () => {
-  // call render synchronously to surface any render error
   try {
     globalThis.__nest.render(SNAPSHOT);
   } catch (e) {
@@ -187,49 +203,64 @@ try {
     process.exitCode = 1;
   }
   await new Promise(r => setTimeout(r, 20));
-  runAssertions();
+  await runAssertions();
 })();
 
-function runAssertions() {
-const chatTexts = els.chat.children.map(c => c.textContent || '');
-const ok = (cond, msg) => {
-  if (!cond) { console.error('ASSERT FAILED: ' + msg); process.exitCode = 1; }
-  console.log((cond ? 'PASS ' : 'FAIL ') + msg);
-};
+async function runAssertions() {
+  const flush = () => new Promise(r => setTimeout(r, 40));
+  const chatTexts = els.chat.children.map(c => c.textContent || '');
+  const ok = (cond, msg) => {
+    if (!cond) { console.error('ASSERT FAILED: ' + msg); process.exitCode = 1; }
+    console.log((cond ? 'PASS ' : 'FAIL ') + msg);
+  };
 
-ok(chatTexts.some(t => t.includes("Hello! I'm Metargon")),
-   'initial welcome message appears in conversation');
-ok(ctxCalls > 0, 'world canvas received drawing calls (' + ctxCalls + ')');
-ok(els['world-meta'].innerHTML.includes('steps 0/80'),
-   'world meta shows real steps summary');
-ok(els.memory.innerHTML.includes('verified') && els.memory.innerHTML.includes('generated'),
-   'memory panel shows verified/generated statistics');
-ok(els.memory.innerHTML.includes('empty(P1)'),
-   'memory panel lists the hypothesis');
-ok(els.challenge.innerHTML.includes('Challenge'),
-   'challenge card renders');
-ok(els['api-badge'].textContent.includes('API:'),
-   'api badge renders');
+  ok(chatTexts.some(t => t.includes("Hello! I'm Metargon")),
+     'initial welcome message appears in conversation');
+  ok(ctxCalls > 0, 'world canvas received drawing calls (' + ctxCalls + ')');
+  ok(els['world-meta'].innerHTML.includes('steps 0/80'),
+     'world meta shows real steps summary');
+  ok(els.memory.innerHTML.includes('verified') && els.memory.innerHTML.includes('generated'),
+     'memory panel shows verified/generated statistics');
+  ok(els.memory.innerHTML.includes('empty(P1)'),
+     'memory panel lists the hypothesis');
+  ok(els.challenge.innerHTML.includes('Challenge'),
+     'challenge card renders');
+  ok(els['api-badge'].textContent.includes('mode:'),
+     'mode badge renders');
+  ok(els['teach-area'].innerHTML.includes('guidance applied'),
+     'teaching panel renders stats');
+  ok(els['teach-area'].innerHTML.includes('claim'),
+     'teaching panel lists inputs by kind');
 
-// send via Enter
-els.input.value = 'Hello, Metargon!';
-els.input.dispatch('keydown', { key: 'Enter' });
-const afterEnter = els.chat.children.map(c => c.textContent || '');
-ok(afterEnter.some(t => t.includes('Hello, Metargon!')), 'user message appears');
-ok(afterEnter.some(t => t.includes("I'm Metargon")), 'bot reply appears after send');
+  // click the Send button (not just Enter)
+  els.input.value = 'Try opening door D1.';
+  if (typeof els.send.onclick === 'function') {
+    els.send.onclick();
+  } else {
+    console.error('send button not wired');
+    process.exitCode = 1;
+  }
+  await flush();
+  const afterClick = els.chat.children.map(c => c.textContent || '');
+  ok(afterClick.some(t => t.includes('Try opening door D1.')), 'user message appears (send button)');
+  ok(afterClick.some(t => t.includes("I'll try to open door D1")), 'bot reply appears after send');
+  ok(afterClick.some(t => t.includes('Goal accepted')), 'action-accept line appears');
 
-// chip click sends a message
-const chip0 = chips[0];
-ok(typeof chip0.onclick === 'function', 'chip is wired');
-chip0.onclick();
-const afterChip = els.chat.children.map(c => c.textContent || '');
-ok(afterChip.some(t => t.includes('Hello, Metargon!')), 'chip sends user message');
+  // Enter path
+  els.input.value = 'Open door D2.';
+  els.input.dispatch('keydown', { key: 'Enter' });
+  await flush();
+  const afterEnter = els.chat.children.map(c => c.textContent || '');
+  ok(afterEnter.some(t => t.includes('Open door D2.')), 'Enter path posts message');
 
-// control button wiring
-const startBtn = controlButtons.find(b => b.dataset.op === 'start');
-ok(typeof startBtn.onclick === 'function', 'start button is wired');
-startBtn.onclick();
+  const chip0 = chips[0];
+  ok(typeof chip0.onclick === 'function', 'chip is wired');
+  chip0.onclick();
 
-console.log('ctxCalls total:', ctxCalls);
-process.exit(process.exitCode || 0);
+  const startBtn = controlButtons.find(b => b.dataset.op === 'start');
+  ok(typeof startBtn.onclick === 'function', 'start button is wired');
+  startBtn.onclick();
+
+  console.log('ctxCalls total:', ctxCalls);
+  process.exit(process.exitCode || 0);
 }

@@ -1,0 +1,41 @@
+METARGON NEST v0.2 - genuine conversation demonstration
+language layer: grounding-aware demo model (offline); bridge identical to the API path
+==============================================================================
+
+-- Turn 1 (TR): what do you remember? --
+  founder:  Metargon, ne hatırlıyorsun?
+  mode:     llm
+  metargon: Henüz doğrulanmış kuralım yok, bu yüzden bir kapı kuralı bildiğimi iddia edemem. [[ACTION:none]]
+
+-- Turn 2: teach by running a real episode --
+  ran 80 real steps; verified=10 generated=10
+
+-- Turn 3 (EN): what do you remember now? --
+  founder:  What do you remember?
+  metargon: Sana 10 doğrulanmış kuraldan söz edebilirim. En güçlüsü: kapı D1 açılır empty(P1) - bu doğrulanmış, bu yüzden söyleyebilirim.
+
+-- Turn 4: remember what you learned (save checkpoint) --
+  founder:  Remember what you learned.
+  action:   persistence_save | note: Saved. Checkpoint at C:\Users\USER\AppData\Local\Temp\tmp_d72f75g\agent_state.json.
+
+-- Turn 5: try opening door D1 --
+  founder:  Metargon, try opening that door.
+  action:   goal_open_door_d1
+  note:     Goal accepted: open door D1. Use Start/Step to execute.
+  reality:  40 steps; doors {'D1': False, 'D2': False}; last action Toggle
+
+-- Turn 6: why did that fail? --
+  founder:  Why did that fail?
+  metargon: Deneme hedefe ulaşmadı. Son aksiyonum Toggle idi ve bölüm bitmedi - bu yüzden başarı iddia edemem. [[ACTION:none]]
+
+-- Turn 7: try another approach --
+  founder:  Try another approach.
+  action:   challenge_new | note: Goal accepted: new challenge. Use Start/Step to execute.
+  reality:  another 80 steps; generated now=10
+
+-- Restart with fresh app, same storage, restore --
+  restore ok=True; memory identical=True (generated 10 vs 10)
+  metargon (after restore): Sana 10 doğrulanmış kuraldan söz edebilirim. En güçlüsü: kapı D1 açılır empty(P1) - bu doğrulanmış, bu yüzden söyleyebilirim.
+
+==============================================================================
+End of v0.2 conversation demonstration.

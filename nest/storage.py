@@ -25,6 +25,59 @@ SESSION_META = "session_meta.json"
 MIN_AGENT_KEYS = {"seed", "rng", "memory", "steps", "episodes"}
 
 
+def _jsonable(obj):
+    """Recursively convert non-JSON types to JSON-safe forms.
+
+    Tuple dict keys become ``repr`` strings (restored by ``_unjsonable``);
+    tuple/set VALUES become lists. The student's checkpoint semantics are
+    unchanged — only the file encoding differs.
+    """
+    if isinstance(obj, dict):
+        out = {}
+        for k, v in obj.items():
+            if isinstance(k, tuple):
+                out[repr(k)] = _jsonable(v)
+            else:
+                out[k] = _jsonable(v)
+        return out
+    if isinstance(obj, (list, tuple)):
+        return [_jsonable(v) for v in obj]
+    if isinstance(obj, frozenset):
+        return sorted((_jsonable(v) for v in obj), key=repr)
+    if isinstance(obj, set):
+        return sorted((_jsonable(v) for v in obj), key=repr)
+    return obj
+
+
+def _unjsonable(obj, preserve_str_keys=False):
+    """Restore the in-memory shapes the Academy loader expects (tuple dict
+    keys that were stored as repr strings). ``preserve_str_keys`` keeps
+    string keys untouched (used for plan_cache which the loader re-evals)."""
+    import ast
+    if isinstance(obj, dict):
+        out = {}
+        for k, v in obj.items():
+            if preserve_str_keys:
+                out[k] = _unjsonable(v, preserve_str_keys=True)
+                continue
+            if k in ("plan_cache", "goal_infeasible"):
+                out[k] = _unjsonable(v, preserve_str_keys=True)
+                continue
+            if isinstance(k, str):
+                try:
+                    parsed = ast.literal_eval(k)
+                except Exception:
+                    parsed = None
+                if isinstance(parsed, tuple):
+                    out[parsed] = _unjsonable(v)
+                    continue
+            out[k] = _unjsonable(v)
+        return out
+    if isinstance(obj, list):
+        return [_unjsonable(v, preserve_str_keys) for v in obj]
+    return obj
+
+
 class NestStorage:
     def __init__(self, root: Optional[Path] = None):
         self.root = Path(root) if root else self._default_root()
@@ -57,7 +110,7 @@ class NestStorage:
             raise ValueError(f"refusing to save incompatible checkpoint: {why}")
         agent_path = self.root / AGENT_STATE
         tmp = agent_path.with_suffix(".tmp")
-        tmp.write_text(json.dumps(state), encoding="utf-8")
+        tmp.write_text(json.dumps(_jsonable(state)), encoding="utf-8")
         os.replace(tmp, agent_path)
         meta_path = self.root / SESSION_META
         meta_path.write_text(json.dumps(meta, indent=1), encoding="utf-8")
@@ -75,7 +128,7 @@ class NestStorage:
         ok, why = self.agent_state_compatible(state)
         if not ok:
             raise ValueError(f"checkpoint incompatible: {why}")
-        agent.load_state(state)
+        agent.load_state(_unjsonable(state))
         meta_path = self.root / SESSION_META
         meta = {}
         if meta_path.exists():
