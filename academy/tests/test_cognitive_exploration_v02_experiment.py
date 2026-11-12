@@ -254,10 +254,11 @@ def run_cell(flags: dict, splits, cell: str, seed_base: int,
 
 def run_main(seed_base=SEED_BASE, n_seeds=N_SEEDS_MAIN,
              episodes=EPISODES_MAIN, results_dir=RESULTS_DIR,
-             cells=MAIN_CELLS, agents=None):
+             cells=MAIN_CELLS, agents=None, out_name="main_summary.json",
+             run_id="cognitive-exploration-v02-main"):
     splits = cached_splits()
     agents = agents or AGENTS
-    out = {"run_id": "cognitive-exploration-v02-main",
+    out = {"run_id": run_id,
            "seed_base": seed_base, "n_seeds": n_seeds,
            "episodes": episodes, "conditions": {}}
     for ci, cell in enumerate(cells):
@@ -295,7 +296,7 @@ def run_main(seed_base=SEED_BASE, n_seeds=N_SEEDS_MAIN,
             for name in out["conditions"][cell]["agents"]) +
             f" | v02-vs-v01 {out['conditions'][cell].get('v02_vs_v01', {})}")
     os.makedirs(results_dir, exist_ok=True)
-    path = os.path.join(results_dir, "main_summary.json")
+    path = os.path.join(results_dir, out_name)
     tmp = path + ".tmp"
     with open(tmp, "w", encoding="utf-8") as f:
         json.dump(out, f, indent=1, sort_keys=True)
@@ -348,7 +349,8 @@ def run_confirmatory(seed_base=SEED_BASE + 900,
                      cells=CONFIRMATORY_CELLS):
     return run_main(seed_base=seed_base, n_seeds=n_seeds,
                     episodes=episodes, results_dir=results_dir,
-                    cells=cells)
+                    cells=cells, out_name="confirmatory_summary.json",
+                    run_id="cognitive-exploration-v02-confirmatory")
 
 
 def main():

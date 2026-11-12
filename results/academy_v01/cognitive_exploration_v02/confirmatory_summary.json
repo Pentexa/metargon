@@ -1,0 +1,440 @@
+{
+ "conditions": {
+  "classic_clean": {
+   "agents": {
+    "baseline": {
+     "exact_evidence_rate": 0.875,
+     "fallback_fraction": 0.06623875110892966,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 1.5809523809523809,
+     "mean_probes": 11.372916666666667,
+     "mean_repeated_probes": 0.0,
+     "mean_steps_ok": 15.85483870967742,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.0,
+      0.2,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "success_rate": 0.775,
+     "useful_evidence_rate": 0.875,
+     "wall_s": 45.8
+    },
+    "v01": {
+     "exact_evidence_rate": 0.9958333333333333,
+     "fallback_fraction": 0.09725155982411768,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 2.6975169300225734,
+     "mean_probes": 1.4770833333333333,
+     "mean_repeated_probes": 0.0,
+     "mean_steps_ok": 15.569190600522193,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.31666666666666665,
+      0.06666666666666667,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "success_rate": 0.7979166666666667,
+     "useful_evidence_rate": 0.9958333333333333,
+     "wall_s": 36.9
+    },
+    "v02": {
+     "exact_evidence_rate": 0.9958333333333333,
+     "fallback_fraction": 0.09725155982411768,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 1.7520833333333334,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 2.6975169300225734,
+     "mean_probes": 1.4770833333333333,
+     "mean_repeated_probes": 0.0,
+     "mean_steps_ok": 15.569190600522193,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.31666666666666665,
+      0.06666666666666667,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "success_rate": 0.7979166666666667,
+     "useful_evidence_rate": 0.9958333333333333,
+     "wall_s": 36.7
+    }
+   },
+   "v02_vs_v01": {
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "mean": 0.0
+   },
+   "vs_baseline": {
+    "v01": {
+     "ci": [
+      -5.0,
+      11.87
+     ],
+     "mean": 2.29
+    },
+    "v02": {
+     "ci": [
+      -5.0,
+      11.87
+     ],
+     "mean": 2.29
+    }
+   }
+  },
+  "classic_q08": {
+   "agents": {
+    "baseline": {
+     "exact_evidence_rate": 1.0,
+     "fallback_fraction": 0.07858709173243059,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 2.0230125523012554,
+     "mean_probes": 3.0,
+     "mean_repeated_probes": 1.3416666666666666,
+     "mean_steps_ok": 20.426506024096387,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.9833333333333333,
+      0.1,
+      1.0,
+      1.0,
+      0.9666666666666667,
+      0.8833333333333333,
+      1.0,
+      0.9833333333333333
+     ],
+     "success_rate": 0.8645833333333334,
+     "useful_evidence_rate": 1.0,
+     "wall_s": 126.5
+    },
+    "v01": {
+     "exact_evidence_rate": 1.0,
+     "fallback_fraction": 0.08414265588879154,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 2.3060344827586206,
+     "mean_probes": 2.34375,
+     "mean_repeated_probes": 0.15833333333333333,
+     "mean_steps_ok": 20.562962962962963,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.7166666666666667,
+      0.1,
+      1.0,
+      1.0,
+      0.9833333333333333,
+      0.9666666666666667,
+      0.9833333333333333,
+      1.0
+     ],
+     "success_rate": 0.84375,
+     "useful_evidence_rate": 1.0,
+     "wall_s": 48.8
+    },
+    "v02": {
+     "exact_evidence_rate": 0.7875,
+     "fallback_fraction": 0.1409894423875742,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 2.3875,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 3.0069444444444446,
+     "mean_probes": 1.4645833333333333,
+     "mean_repeated_probes": 0.004166666666666667,
+     "mean_steps_ok": 18.593220338983052,
+     "mean_unconfirmed_flips": 18.002083333333335,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.43333333333333335,
+      0.13333333333333333,
+      1.0,
+      0.75,
+      1.0,
+      0.6,
+      1.0,
+      0.9833333333333333
+     ],
+     "success_rate": 0.7375,
+     "useful_evidence_rate": 0.83125,
+     "wall_s": 55.3
+    }
+   },
+   "v02_vs_v01": {
+    "ci": [
+     -21.46,
+     -1.46
+    ],
+    "mean": -10.87
+   },
+   "vs_baseline": {
+    "v01": {
+     "ci": [
+      -9.79,
+      3.12
+     ],
+     "mean": -2.08
+    },
+    "v02": {
+     "ci": [
+      -27.08,
+      0.42
+     ],
+     "mean": -12.71
+    }
+   }
+  },
+  "classic_q15": {
+   "agents": {
+    "baseline": {
+     "exact_evidence_rate": 0.9979166666666667,
+     "fallback_fraction": 0.08522739445997711,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 2.3019271948608138,
+     "mean_probes": 4.59375,
+     "mean_repeated_probes": 3.6625,
+     "mean_steps_ok": 27.813157894736843,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.6,
+      0.25,
+      1.0,
+      1.0,
+      0.8666666666666667,
+      0.7333333333333333,
+      1.0,
+      0.8833333333333333
+     ],
+     "success_rate": 0.7916666666666666,
+     "useful_evidence_rate": 1.0,
+     "wall_s": 222.9
+    },
+    "v01": {
+     "exact_evidence_rate": 0.9979166666666667,
+     "fallback_fraction": 0.1045648410851796,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 2.3030973451327434,
+     "mean_probes": 3.252083333333333,
+     "mean_repeated_probes": 0.9666666666666667,
+     "mean_steps_ok": 28.352459016393443,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.48333333333333334,
+      0.06666666666666667,
+      1.0,
+      1.0,
+      0.9166666666666666,
+      0.6833333333333333,
+      1.0,
+      0.95
+     ],
+     "success_rate": 0.7625,
+     "useful_evidence_rate": 1.0,
+     "wall_s": 87.5
+    },
+    "v02": {
+     "exact_evidence_rate": 0.7604166666666666,
+     "fallback_fraction": 0.14062898671941731,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 2.9833333333333334,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 3.9729119638826185,
+     "mean_probes": 1.5770833333333334,
+     "mean_repeated_probes": 0.027083333333333334,
+     "mean_steps_ok": 19.73389355742297,
+     "mean_unconfirmed_flips": 31.797916666666666,
+     "n_episodes": 480,
+     "per_seed_success": [
+      0.38333333333333336,
+      0.05,
+      1.0,
+      0.9666666666666667,
+      1.0,
+      0.6,
+      0.9666666666666667,
+      0.9833333333333333
+     ],
+     "success_rate": 0.74375,
+     "useful_evidence_rate": 0.8625,
+     "wall_s": 62.5
+    }
+   },
+   "v02_vs_v01": {
+    "ci": [
+     -5.42,
+     2.08
+    ],
+    "mean": -1.84
+   },
+   "vs_baseline": {
+    "v01": {
+     "ci": [
+      -8.54,
+      2.08
+     ],
+     "mean": -2.92
+    },
+    "v02": {
+     "ci": [
+      -13.12,
+      3.54
+     ],
+     "mean": -4.79
+    }
+   }
+  },
+  "ood_clean": {
+   "agents": {
+    "baseline": {
+     "exact_evidence_rate": 0.625,
+     "fallback_fraction": 0.0,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 3.0,
+     "mean_probes": 29.129166666666666,
+     "mean_repeated_probes": 0.0,
+     "mean_steps_ok": 15.0,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      1.0,
+      0.0,
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      1.0,
+      0.0
+     ],
+     "success_rate": 0.375,
+     "useful_evidence_rate": 0.625,
+     "wall_s": 24.8
+    },
+    "v01": {
+     "exact_evidence_rate": 1.0,
+     "fallback_fraction": 0.20529147692893843,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 0.0,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 6.995073891625616,
+     "mean_probes": 1.0583333333333333,
+     "mean_repeated_probes": 0.0,
+     "mean_steps_ok": 23.21875,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      1.0,
+      0.2,
+      1.0,
+      0.4,
+      1.0,
+      0.3333333333333333,
+      1.0,
+      0.4
+     ],
+     "success_rate": 0.6666666666666666,
+     "useful_evidence_rate": 1.0,
+     "wall_s": 102.8
+    },
+    "v02": {
+     "exact_evidence_rate": 1.0,
+     "fallback_fraction": 0.20529147692893843,
+     "false_contradiction_rate": 0.0,
+     "loop_fraction": 0.0,
+     "mean_confirmed_events": 1.5270833333333333,
+     "mean_false_contradictions": 0.0,
+     "mean_first_open": 6.995073891625616,
+     "mean_probes": 1.0583333333333333,
+     "mean_repeated_probes": 0.0,
+     "mean_steps_ok": 23.21875,
+     "mean_unconfirmed_flips": 0.0,
+     "n_episodes": 480,
+     "per_seed_success": [
+      1.0,
+      0.2,
+      1.0,
+      0.4,
+      1.0,
+      0.3333333333333333,
+      1.0,
+      0.4
+     ],
+     "success_rate": 0.6666666666666666,
+     "useful_evidence_rate": 1.0,
+     "wall_s": 91.6
+    }
+   },
+   "v02_vs_v01": {
+    "ci": [
+     0.0,
+     0.0
+    ],
+    "mean": 0.0
+   },
+   "vs_baseline": {
+    "v01": {
+     "ci": [
+      10.0,
+      54.17
+     ],
+     "mean": 29.17
+    },
+    "v02": {
+     "ci": [
+      10.0,
+      54.17
+     ],
+     "mean": 29.17
+    }
+   }
+  }
+ },
+ "episodes": 60,
+ "n_seeds": 8,
+ "run_id": "cognitive-exploration-v02-confirmatory",
+ "seed_base": 20261201
+}

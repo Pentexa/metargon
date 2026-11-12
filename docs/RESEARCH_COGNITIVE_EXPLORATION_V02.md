@@ -90,9 +90,61 @@ Harness: `academy/tests/test_cognitive_exploration_v02_experiment.py`
 * Ablations (6×40): `v02_noiseoff` (= v01), `v02_norecov`,
   `v02_nohold`, `v02_nogap`.
 
-## 4. Findings (filled after runs)
+## 4. Findings
 
-> Tables populated from `results/academy_v01/cognitive_exploration_v02/`.
+Runs: main 6 seeds × 40 episodes (all 8 conditions); confirmatory
+8 seeds × 60 episodes on the four key cells; ablations 6 × 40;
+`PYTHONHASHSEED=0`; matched streams; paired bootstrap 95% CI.
+Raw JSON in `results/academy_v01/cognitive_exploration_v02/`.
+
+### 4.1 Success
+
+| cell | base% | v01% | v02% | v02−v01 pp [CI] |
+|---|---:|---:|---:|---:|
+| `classic_clean` (8×60) | 77.5 | 79.8 | 79.8 | 0.0 [0.0, 0.0] |
+| `classic_q04` (6×40) | 87.9 | 73.8 | 72.9 | −0.9 [−3.8, +0.8] |
+| `classic_q08` (8×60) | 86.5 | 84.4 | 73.8 | **−10.9 [−21.5, −1.5]** |
+| `classic_q15` (8×60) | 79.2 | 76.2 | 74.4 | −1.8 [−5.4, +2.1] |
+| `ood_clean` (8×60) | 37.5 | 66.7 | 66.7 | 0.0 [0.0, 0.0] |
+| `conflict` (6×40) | 62.1 | 57.9 | 57.9 | 0.0 [0.0, 0.0] |
+| `tight` (6×40) | 67.5 | 70.4 | 70.4 | 0.0 [0.0, 0.0] |
+
+**Verdict (honest):** the v0.2 mechanism preserves all clean/OOD/
+conflict/tight performance exactly and removes phantom-driven false
+contradictions, but it does **not** improve the noisy conditions at the
+confirmatory scale: q=0.08 is a significant regression (−10.9 pp, CI
+excludes 0), q=0.15 is neutral (−1.8 pp, CI includes 0). The success
+criterion for the noisy cell is **not met**; the negative result is
+preserved here and in the committed artifacts.
+
+### 4.2 Secondary metrics (confirmatory, base→v01→v02)
+
+| cell | useful evidence% | false contradictions |
+|---|---:|---:|
+| `classic_clean` | 87.5→99.6→99.6 | 0.00→0.00→0.00 |
+| `classic_q08` | 100.0→100.0→83.1 | 0.00→0.00→0.00 |
+| `classic_q15` | 100.0→100.0→86.2 | 0.00→0.00→0.00 |
+| `ood_clean` | 62.5→100.0→100.0 | 0.00→0.00→0.00 |
+
+False contradictions are non-zero only for the baseline track
+(pre-v0.2; counted for all agents in the artifacts). The v0.2 student
+books fewer but more truthful events (lower useful-evidence rate on
+noisy cells because transient single-step opens are exploited only when
+a traversal confirms them).
+
+### 4.3 Ablations (6×40)
+
+| ablation | `classic_q08` | `classic_q15` | `ood_clean` |
+|---|---:|---:|---:|
+| `v02_noiseoff` (= v01) | +6.8 [−1.7, +17.5] | −1.3 [−7.1, +4.6] | 0.0 |
+| `v02_norecov` | −9.4 [−20.8, +1.2] | **−14.2 [−25.0, −4.6]** | **−33.8 [−61.7, −10.0]** |
+| `v02_nohold` | −2.2 [−10.8, +5.0] | −0.9 [−3.8, +1.2] | +19.6 [0.0, +41.7] |
+| `v02_nogap` | −5.8 [−13.3, +0.8] | +1.6 [0.0, +4.2] | 0.0 |
+
+Recovery remains the load-bearing mechanism everywhere. The noise
+mechanism itself (v02 − v01) costs ~7 pp at q=0.08 in this sample and
+helps ~1.3 pp at q=0.15. Hold is neutral-to-harmful on clean OOD
+(+19.6 pp when removed) — a targeted follow-up candidate.
 
 ## 5. Proposed memory-interface changes (for later integration)
 
