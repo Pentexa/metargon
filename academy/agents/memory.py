@@ -28,6 +28,21 @@ CONTRADICT_WINDOW = 3
 CANDIDATES_PER_EVENT = 10
 PAIR_BASE = 5
 
+# -- Cognitive Memory v0.1 (reliability layer) ----------------------------
+# Retrieval order separates *historical verification* from *current-context
+# applicability*. Current applicability is a Laplace-smoothed support
+# proportion over the active evidence basis (per-epoch, per-context,
+# windowed, else cumulative); history contributes only a bounded bonus.
+# Repeated prediction failures (completed contradiction windows) subtract a
+# per-failure penalty, so a hypothesis that has started failing in the
+# current task is demoted before it can dominate exploration — but its
+# evidence is never erased and it is re-promoted by fresh support.
+COGNITIVE_RELIABILITY_DEFAULT = False
+COGNITIVE_HISTORY_CAP = 5          # max epochs counted toward history bonus
+COGNITIVE_FAILURE_PENALTY = 8.0    # rank penalty per repeated failure window
+COGNITIVE_STATUS_BONUS_VERIFIED = 30.0
+COGNITIVE_STATUS_BONUS_PREDICTED = 15.0
+
 HYPOTHESIS = "hypothesis"
 PREDICTED = "predicted"
 VERIFIED = "verified"
@@ -80,6 +95,10 @@ class Hypothesis:
     sup_by_epoch: dict = field(default_factory=dict)
     con_by_epoch: dict = field(default_factory=dict)
     verified_epochs: list = field(default_factory=list)   # sorted ints
+    # CM v0.1: consecutive completed failure windows since last support in
+    # the current context (reset at task boundaries). Only maintained in
+    # cognitive-reliability mode; default 0 for checkpoint compatibility.
+    consecutive_failures: int = 0
 
     @property
     def door(self) -> str:
@@ -142,6 +161,7 @@ class Hypothesis:
             "sup_by_epoch": {str(k): v for k, v in self.sup_by_epoch.items()},
             "con_by_epoch": {str(k): v for k, v in self.con_by_epoch.items()},
             "verified_epochs": self.verified_epochs,
+            "consecutive_failures": self.consecutive_failures,
         }
 
     @classmethod
@@ -159,6 +179,7 @@ class Hypothesis:
             sup_by_epoch={int(k): v for k, v in d.get("sup_by_epoch", {}).items()},
             con_by_epoch={int(k): v for k, v in d.get("con_by_epoch", {}).items()},
             verified_epochs=list(d.get("verified_epochs", [])),
+            consecutive_failures=int(d.get("consecutive_failures", 0)),
         )
 
 
@@ -225,6 +246,27 @@ class CompositionalMemory:
         cumulative; returns 0.0 when the active context has no local
         evidence (so stale cross-task hypotheses are not trusted
         verbatim in a new task unless they have support there).
+
+    CM v0.1 (cognitive reliability layer; off by default):
+      * ``cognitive_reliability`` — split retrieval priority into
+        *current-context applicability* (primary) and *historical
+        verification* (bounded bonus). Current applicability is a
+        Laplace-smoothed support proportion over the active evidence
+        basis (per-epoch when ``episode_scoped``, per-context when
+        ``context_scoped``, windowed, else cumulative), so it resets at
+        task boundaries and reflects only recent evidence.
+      * Repeated prediction failures are tracked as completed
+        contradiction windows (``consecutive_failures``, reset by any
+        support or at a task boundary) and subtract a fixed penalty per
+        failure from retrieval priority. A previously verified
+        hypothesis that has started failing in the current task is
+        demoted below neutral exploration — but its evidence is never
+        erased (no historical destruction) and fresh support re-promotes
+        it, so previously useful knowledge becomes relevant again when
+        new evidence supports it.
+      * ``CognitiveMemoryV01`` is a ready-made subclass that turns the
+        layer on (construct via ``MetargonAcademyAgent(memory_factory=
+        CognitiveMemoryV01, ...)``).
     """
 
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES,
@@ -245,7 +287,10 @@ class CompositionalMemory:
                  atom_transfer: bool = False,
                  bank_refresh_on_contradiction: bool = False,
                  episode_scoped: bool = False,
-                 min_verified_epochs_for_transfer: int = 2):
+                 min_verified_epochs_for_transfer: int = 2,
+                 cognitive_reliability: bool = COGNITIVE_RELIABILITY_DEFAULT,
+                 cognitive_history_cap: int = COGNITIVE_HISTORY_CAP,
+                 cognitive_failure_penalty: float = COGNITIVE_FAILURE_PENALTY):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -267,6 +312,10 @@ class CompositionalMemory:
         self.episode_scoped = bool(episode_scoped)
         self.min_verified_epochs_for_transfer = int(
             min_verified_epochs_for_transfer)
+        # CM v0.1
+        self.cognitive_reliability = bool(cognitive_reliability)
+        self.cognitive_history_cap = max(0, int(cognitive_history_cap))
+        self.cognitive_failure_penalty = float(cognitive_failure_penalty)
         self.current_ctx = None
         self._current_epoch = None
         self.hypotheses: list[Hypothesis] = []
@@ -329,6 +378,14 @@ class CompositionalMemory:
           candidate in the new task.
         """
         self._current_epoch = int(epoch)
+        if self.cognitive_reliability:
+            # CM v0.1: a task boundary resets *current-context*
+            # applicableity (repeated-failure streaks). Historical
+            # verification (verified_epochs, sup/con) is untouched, so
+            # previously useful knowledge can be re-evaluated in the new
+            # task at neutral priority.
+            for h in self.hypotheses:
+                h.consecutive_failures = 0
         if self.episode_scoped:
             self._continuous_true.clear()
             for h in self.hypotheses:
@@ -368,7 +425,10 @@ class CompositionalMemory:
                     and h.ctx_support(self.current_ctx) <= 0):
                 continue
             out.append(h)
-        if self.episode_scoped:
+        if self.cognitive_reliability:
+            out.sort(key=lambda h: (-self._cognitive_retrieval_key(h),
+                                    h.h_id))
+        elif self.episode_scoped:
             out.sort(key=lambda h: (-self._retrieval_key(h), h.h_id))
         else:
             out.sort(key=lambda h: (-h.confidence, -h.sup))
@@ -494,8 +554,11 @@ class CompositionalMemory:
         With ``context_scoped``, the *active* context's counts decide;
         a context with zero local evidence yields confidence 0.0 (the
         hypothesis is not trusted verbatim in a new task). Otherwise
-        the global cumulative counts are used.
+        the global cumulative counts are used. In cognitive-reliability
+        mode this returns the current-context reliability estimate.
         """
+        if self.cognitive_reliability:
+            return self._cognitive_reliability(h)
         if self.context_scoped and self.current_ctx is not None:
             sup = h.ctx_support(self.current_ctx)
             con = h.ctx_contradiction(self.current_ctx)
@@ -504,6 +567,42 @@ class CompositionalMemory:
             return (sup + 1.0) / (sup + con + 2.0)
         sup, con = self._ctx_counts(h)
         return (sup + 1.0) / (sup + con + 2.0)
+
+    # -- CM v0.1: cognitive reliability ----------------------------------
+    def _cognitive_reliability(self, h: Hypothesis) -> float:
+        """Current-context applicability estimate in [0, 1].
+
+        Laplace-smoothed support proportion over the *active* evidence
+        basis (per-epoch when ``episode_scoped``, per-context when
+        ``context_scoped``, windowed, else cumulative). Because it is
+        derived from the active basis it resets at task boundaries and
+        is independent of historical verification (``verified_epochs``).
+        """
+        sup, con = self._ctx_counts(h)
+        return (sup + 1.0) / (sup + con + 2.0)
+
+    def _cognitive_retrieval_key(self, h: Hypothesis) -> float:
+        """Retrieval priority in cognitive-reliability mode.
+
+        Current-context applicability is primary (status bonus scaled by
+        reliability); historical verification adds only a bounded bonus.
+        Repeated prediction failures subtract a fixed penalty each, so a
+        previously verified hypothesis that has started failing in this
+        task drops below neutral exploration — without destroying its
+        evidence — and fresh support re-promotes it.
+        """
+        rel = self._cognitive_reliability(h)
+        hist = min(h.verified_epoch_count, self.cognitive_history_cap)
+        if h.status == VERIFIED:
+            sb = COGNITIVE_STATUS_BONUS_VERIFIED
+        elif h.status == PREDICTED:
+            sb = COGNITIVE_STATUS_BONUS_PREDICTED
+        else:
+            sb = 0.0
+        streak = min(h.consecutive_failures, 4)
+        penalty = self.cognitive_failure_penalty * streak
+        return (sb * rel + hist * 1.5 + rel * 2.0
+                - penalty - 0.0001 * h.last_update)
 
     # -- v0.6: atom-level cross-task evidence ------------------------------
     def _note_atom_evidence(self, h: Hypothesis, sign: int) -> None:
@@ -759,6 +858,9 @@ class CompositionalMemory:
         h.sup += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
+        if self.cognitive_reliability:
+            # any support ends the repeated-failure streak
+            h.consecutive_failures = 0
         if record_ctx:
             self._record_evidence(h, "s")
         self._recompute_status(h)
@@ -767,6 +869,9 @@ class CompositionalMemory:
         h.con += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
+        if self.cognitive_reliability:
+            # one more completed failure window (repeated prediction failure)
+            h.consecutive_failures += 1
         if record_ctx:
             self._record_evidence(h, "c")
         self._recompute_status(h)
@@ -873,6 +978,9 @@ class CompositionalMemory:
             "episode_scoped": self.episode_scoped,
             "min_verified_epochs_for_transfer":
                 self.min_verified_epochs_for_transfer,
+            "cognitive_reliability": self.cognitive_reliability,
+            "cognitive_history_cap": self.cognitive_history_cap,
+            "cognitive_failure_penalty": self.cognitive_failure_penalty,
             "current_epoch": self._current_epoch,
             "current_ctx": self.current_ctx,
             "evidence_bank": [
@@ -931,6 +1039,12 @@ class CompositionalMemory:
         self.episode_scoped = bool(state.get("episode_scoped", False))
         self.min_verified_epochs_for_transfer = int(state.get(
             "min_verified_epochs_for_transfer", 2))
+        self.cognitive_reliability = bool(state.get(
+            "cognitive_reliability", COGNITIVE_RELIABILITY_DEFAULT))
+        self.cognitive_history_cap = max(0, int(state.get(
+            "cognitive_history_cap", COGNITIVE_HISTORY_CAP)))
+        self.cognitive_failure_penalty = float(state.get(
+            "cognitive_failure_penalty", COGNITIVE_FAILURE_PENALTY))
         self._current_epoch = state.get("current_epoch")
         self.current_ctx = state.get("current_ctx")
         self.evidence_bank_cap = int(state.get("evidence_bank_cap", 0))
@@ -1012,4 +1126,33 @@ class CompositionalMemory:
             "cross_epoch_verified": sum(
                 1 for h in self.hypotheses
                 if h.verified_epoch_count >= self.min_verified_epochs_for_transfer),
+            "cognitive_reliability": self.cognitive_reliability,
+            "cognitive_reliability_mean": (
+                sum(self._cognitive_reliability(h)
+                    for h in self.hypotheses) / len(self.hypotheses)
+                if self.hypotheses else 0.0),
+            "cognitive_high_reliability": sum(
+                1 for h in self.hypotheses
+                if self._cognitive_reliability(h) >= 0.7),
+            "cognitive_under_attack": sum(
+                1 for h in self.hypotheses
+                if h.consecutive_failures > 0),
+            "cognitive_streak_max": max(
+                (h.consecutive_failures for h in self.hypotheses),
+                default=0),
         }
+
+
+class CognitiveMemoryV01(CompositionalMemory):
+    """Cognitive Memory v0.1: the reliability-based retrieval layer,
+    wired onto the episode-scoped evidence base.
+
+    Use via ``MetargonAcademyAgent(memory_factory=CognitiveMemoryV01,
+    memory_episode_scoped=True, probe_reset_per_episode=True)`` so the
+    agent constructs this memory without any change to the agent itself.
+    """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("cognitive_reliability", True)
+        kwargs.setdefault("episode_scoped", True)
+        super().__init__(*args, **kwargs)
