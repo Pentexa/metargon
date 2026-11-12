@@ -130,3 +130,47 @@ def target_feasible(state: WS, target: frozenset, geom) -> bool:
             if sc not in comp or comp[sc] != c_agent:
                 return False
     return True
+
+
+def maximal_feasible_subset(state: WS, target: frozenset, geom) -> frozenset:
+    """Largest subset of ``target`` that is feasible under the current door
+    belief (component filter), in deterministic (sorted) atom order.
+
+    Used to decompose an infeasible conjunctive probe into compact probes
+    that still deliver partial information: when a conjunction cannot be
+    fully satisfied (e.g. an object sits behind a closed door), probing a
+    feasible subset of its atoms still discriminates candidate rules.
+    """
+    if not target:
+        return frozenset()
+    comp = components(state, geom)
+    agent = state.pos
+    if agent not in comp:
+        return frozenset()
+    c_agent = comp[agent]
+    out = []
+    for atom in sorted(target, key=str):
+        k = atom[0]
+        if k in ("load", "loadany"):
+            plate = atom[1]
+            pc = geom.plate_cell[plate]
+            if pc not in comp:
+                continue
+            if k == "load":
+                obj = atom[2]
+                oc = state.objs.get(obj)
+                if oc is None or oc not in comp or comp[oc] != comp[pc] \
+                        or comp[oc] != c_agent:
+                    continue
+            elif comp[pc] != c_agent:
+                continue
+        elif k == "empty":
+            pc = geom.plate_cell[atom[1]]
+            if pc not in comp or comp[pc] != c_agent:
+                continue
+        elif k == "sw":
+            sc = geom.switch_cell[atom[1]]
+            if sc not in comp or comp[sc] != c_agent:
+                continue
+        out.append(atom)
+    return frozenset(out)
