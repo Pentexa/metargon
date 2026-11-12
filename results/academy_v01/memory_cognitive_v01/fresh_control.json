@@ -1,0 +1,570 @@
+{
+ "classic_frozen": {
+  "n_configs": 16,
+  "config_mean_success": 0.25,
+  "per_config": {
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0,
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)": 0.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
+   "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), True, False)": 0.0
+  }
+ },
+ "classic_frozen_per_config": [
+  0.0,
+  0.0,
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  1.0,
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "classic_adapt": {
+  "n_configs": 16,
+  "config_mean_success": 0.515625,
+  "per_config": {
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.25,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0,
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+   "('TP1', frozenset({('loadany', 'P1')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)": 0.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
+   "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), True, False)": 1.0
+  }
+ },
+ "classic_adapt_per_config": [
+  1.0,
+  1.0,
+  1.0,
+  0.25,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  0.0,
+  1.0,
+  1.0,
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0
+ ],
+ "conflict_frozen": {
+  "n_configs": 12,
+  "config_mean_success": 0.16666666666666666,
+  "per_config": {
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)": 0.0,
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', False)}), frozenset({('sw', 'S2', False), ('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), False, True)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.0
+  }
+ },
+ "conflict_frozen_per_config": [
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0,
+  0.0
+ ],
+ "conflict_adapt": {
+  "n_configs": 12,
+  "config_mean_success": 0.3055555555555555,
+  "per_config": {
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), False, True)": 0.0,
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', False)}), frozenset({('sw', 'S2', False), ('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 1.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), False, True)": 0.0,
+   "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, False)": 0.3333,
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.6667,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.6667
+  }
+ },
+ "conflict_adapt_per_config": [
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  1.0,
+  0.0,
+  0.0,
+  0.0,
+  0.3333333333333333,
+  0.6666666666666666,
+  0.0,
+  0.6666666666666666
+ ],
+ "noisy_frozen": {
+  "n_configs": 10,
+  "config_mean_success": 0.5666666666666667,
+  "per_config": {
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.3333,
+   "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.3333,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, True)": 0.6667,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, True)": 1.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)": 0.6667,
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), False, True)": 0.6667,
+   "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', False)}), False, False)": 1.0
+  }
+ },
+ "noisy_frozen_per_config": [
+  0.3333333333333333,
+  0.3333333333333333,
+  1.0,
+  0.0,
+  0.6666666666666666,
+  1.0,
+  0.6666666666666666,
+  0.0,
+  0.6666666666666666,
+  1.0
+ ],
+ "noisy_adapt": {
+  "n_configs": 10,
+  "config_mean_success": 0.5999999999999999,
+  "per_config": {
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.3333,
+   "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 1.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0,
+   "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, True)": 0.6667,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, True)": 1.0,
+   "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), True, False)": 0.6667,
+   "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), True, True)": 0.0,
+   "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', True)}), False, True)": 0.3333,
+   "('TP2', frozenset({('sw', 'S2', False)}), frozenset({('sw', 'S1', False)}), False, False)": 1.0
+  }
+ },
+ "noisy_adapt_per_config": [
+  0.3333333333333333,
+  1.0,
+  1.0,
+  0.0,
+  0.6666666666666666,
+  1.0,
+  0.6666666666666666,
+  0.0,
+  0.3333333333333333,
+  1.0
+ ],
+ "pool_fingerprint": [
+  12,
+  [
+   [
+    "TP1",
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    false,
+    true
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    false,
+    true
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    true,
+    false
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    false,
+    false
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    true,
+    false
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    false,
+    true
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "sw",
+       "S1",
+       true
+      ],
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    true,
+    true
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    false,
+    false
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    false,
+    true
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "loadany",
+       "P1"
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "sw",
+       "S1",
+       false
+      ],
+      [
+       "sw",
+       "S2",
+       true
+      ]
+     ]
+    ],
+    true,
+    false
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "empty",
+       "P2"
+      ],
+      [
+       "sw",
+       "S1",
+       true
+      ]
+     ]
+    ],
+    true,
+    true
+   ],
+   [
+    "TP1",
+    [
+     [
+      [
+       "sw",
+       "S2",
+       false
+      ]
+     ]
+    ],
+    [
+     [
+      [
+       "load",
+       "P1",
+       "A"
+      ],
+      [
+       "sw",
+       "S1",
+       false
+      ]
+     ]
+    ],
+    true,
+    false
+   ]
+  ],
+  12,
+  3,
+  16,
+  4
+ ]
+}

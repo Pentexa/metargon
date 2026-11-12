@@ -1,0 +1,1569 @@
+{
+ "run_id": "memory-cognitive-v01",
+ "episodes": 40,
+ "train_seeds": [
+  20261107
+ ],
+ "eval_seed": 20261108,
+ "conflict_seed": 20261110,
+ "noisy_seed": 20261111,
+ "base": {
+  "train_episodes": 40,
+  "test_grid_n": 6,
+  "test_eps_per_cfg": 2,
+  "conflict_grid_n": 6,
+  "conflict_eps_per_cfg": 2,
+  "noisy_grid_n": 4,
+  "noisy_eps_per_cfg": 2,
+  "substrate_n": 4,
+  "retention_eps_per_cfg": 1,
+  "focus_n": 4,
+  "focus_eps_per_cfg": 2,
+  "conflict_n": 8,
+  "rlearn_phase_a": 20,
+  "rlearn_phase_b": 16,
+  "rlearn_phase_a2": 16
+ },
+ "variants": [
+  "original",
+  "epoch_reset",
+  "cognitive"
+ ],
+ "hash_randomization": false,
+ "python_version": "3.11.0",
+ "started_at": 1794498807.8930945,
+ "comparison_convention": "candidate - baseline (positive = candidate better)",
+ "preregistration": {
+  "note": "Classic/conflict grids reuse the v0.6/v0.7 base eval seed 20261108 for comparability; noisy grid uses 20261108+3; repeated-learning uses 20261107+47. Controls: fresh, original, memory_wiped, epoch, epoch_reset, cognitive, cognitive_shuffled.",
+  "controls": [
+   "fresh",
+   "original",
+   "memory_wiped",
+   "epoch",
+   "epoch_reset",
+   "cognitive",
+   "cognitive_shuffled"
+  ]
+ },
+ "conditions_detail": {
+  "original": {
+   "train_success_mean": 0.475,
+   "classic_frozen_per_config": [
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "classic_frozen": {
+    "config_mean_success": 0.16666666666666666
+   },
+   "classic_adapt": {
+    "config_mean_success": 0.5
+   },
+   "conflict_frozen_per_config": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "conflict_frozen": {
+    "config_mean_success": 0.0
+   },
+   "conflict_adapt": {
+    "config_mean_success": 0.0
+   },
+   "noisy_frozen_per_config": [
+    0.5,
+    0.5,
+    1.0,
+    0.0
+   ],
+   "noisy_frozen": {
+    "config_mean_success": 0.5
+   },
+   "noisy_adapt": {
+    "config_mean_success": 0.5
+   },
+   "retention_delta_mean": 0.0,
+   "attribution_mean_classic": {
+    "memory_incorrect": 0.0,
+    "cross_epoch_transfer_retrieved": 0.0,
+    "memory_correct": 0.0,
+    "rows_without_memory": 12.0,
+    "source_hypothesis": 0.0,
+    "plans_used": 1548.0,
+    "success_without_memory": 0.16666666666666666,
+    "success_with_memory": null,
+    "rows_with_memory": 0.0,
+    "memory_actions": 0.0,
+    "memory_attributable_improvement": null
+   },
+   "attribution_mean_conflict": {
+    "memory_incorrect": 0.0,
+    "cross_epoch_transfer_retrieved": 0.0,
+    "memory_correct": 0.0,
+    "rows_without_memory": 12.0,
+    "source_hypothesis": 0.0,
+    "plans_used": 1872.0,
+    "success_without_memory": 0.0,
+    "success_with_memory": null,
+    "rows_with_memory": 0.0,
+    "memory_actions": 0.0,
+    "memory_attributable_improvement": null
+   },
+   "memory_mean": {
+    "contradicted": 70.0,
+    "bank_size": 0.0,
+    "bank_retrievals": 0.0,
+    "context_specific": 0.0,
+    "atom_profile_size": 0.0,
+    "cross_epoch_verified": 0.0,
+    "verified_epochs_total": 42.0
+   },
+   "per_seed": [
+    {
+     "seed": 20261107,
+     "train_success": 0.475,
+     "wall_s": 8.25,
+     "classic_frozen": {
+      "n_configs": 6,
+      "config_mean_success": 0.16666666666666666,
+      "per_config": {
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+      }
+     },
+     "classic_frozen_per_config": [
+      0.0,
+      0.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "classic_frozen_attribution": {
+      "memory_actions": 0,
+      "memory_correct": 0,
+      "memory_incorrect": 0,
+      "cross_epoch_transfer_retrieved": 0,
+      "source_hypothesis": 0,
+      "plans_used": 1548,
+      "rows_with_memory": 0,
+      "rows_without_memory": 12,
+      "success_with_memory": null,
+      "success_without_memory": 0.16666666666666666,
+      "memory_attributable_improvement": null
+     },
+     "classic_frozen_trace": {
+      "source_hypothesis": 0,
+      "source_bank": 0,
+      "source_atom_single": 0,
+      "source_atom_pair": 0,
+      "source_novel_single": 1548,
+      "source_conjunctive_probe": 0,
+      "source_conjunction": 0,
+      "source_other": 0,
+      "skipped_tried": 0,
+      "skipped_infeasible": 38,
+      "probes_evaluated": 0,
+      "plans_used": 1548,
+      "random_fallback_steps": 0,
+      "door_open_after_probe": 0,
+      "door_open_after_hypothesis": 0,
+      "door_open_after_bank": 0,
+      "door_open_after_atom_single": 0,
+      "door_open_after_atom_pair": 0,
+      "door_open_after_novel_single": 0,
+      "door_open_after_conjunction": 0,
+      "door_open_after_other": 0,
+      "query_calls": 2040,
+      "query_useful": 0,
+      "hypothesis_candidates": 0,
+      "hypothesis_skipped_lowconf": 0,
+      "hypothesis_retrieved": 0,
+      "cross_epoch_transfer_retrieved": 0,
+      "memory_actions": 0,
+      "memory_correct": 0,
+      "memory_incorrect": 0
+     },
+     "classic_frozen_relevance": {
+      "n": 1548,
+      "exact": 4,
+      "partial": 604,
+      "irrelevant": 940,
+      "by_source": {
+       "novel_single": {
+        "n": 1548,
+        "exact": 4,
+        "partial": 604,
+        "irrelevant": 940
+       }
+      }
+     },
+     "classic_adapt": {
+      "n_configs": 6,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+      }
+     },
+     "conflict_frozen": {
+      "n_configs": 6,
+      "config_mean_success": 0.0,
+      "per_config": {
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+      }
+     },
+     "conflict_frozen_per_config": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "conflict_frozen_attribution": {
+      "memory_actions": 0,
+      "memory_correct": 0,
+      "memory_incorrect": 0,
+      "cross_epoch_transfer_retrieved": 0,
+      "source_hypothesis": 0,
+      "plans_used": 1872,
+      "rows_with_memory": 0,
+      "rows_without_memory": 12,
+      "success_with_memory": null,
+      "success_without_memory": 0.0,
+      "memory_attributable_improvement": null
+     },
+     "conflict_adapt": {
+      "n_configs": 6,
+      "config_mean_success": 0.0,
+      "per_config": {
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+      }
+     },
+     "noisy_frozen": {
+      "n_configs": 4,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.5,
+       "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.5,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0
+      }
+     },
+     "noisy_frozen_per_config": [
+      0.5,
+      0.5,
+      1.0,
+      0.0
+     ],
+     "noisy_adapt": {
+      "n_configs": 4,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.5,
+       "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.5,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0
+      }
+     },
+     "retention": {
+      "label": "original",
+      "substrate_n": 4,
+      "substrate_keys": [
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, True)",
+       "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)",
+       "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, True)"
+      ],
+      "snapshots": [
+       {
+        "episode_seen": 0,
+        "success_rate": 0.5,
+        "mean_steps": 46.25,
+        "n": 4
+       },
+       {
+        "episode_seen": 1,
+        "success_rate": 0.5,
+        "mean_steps": 46.25,
+        "n": 4
+       }
+      ],
+      "retention_delta": 0.0,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": {
+        "first": 1.0,
+        "last": 1.0,
+        "delta": 0.0
+       },
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       },
+       "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       },
+       "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, True)": {
+        "first": 1.0,
+        "last": 1.0,
+        "delta": 0.0
+       }
+      }
+     },
+     "memory": {
+      "size": 70,
+      "status_counts": {
+       "contradicted": 70
+      },
+      "generated": 70,
+      "evictions": 0,
+      "context_specific": 0,
+      "bank_size": 0,
+      "bank_retrievals": 0,
+      "atom_profile_size": 0,
+      "verified_then_contradicted": null,
+      "episode_scoped": false,
+      "current_epoch": 39,
+      "cross_epoch_verified": 0,
+      "verified_epochs_total": 42
+     },
+     "memory_cognitive": {},
+     "repeated_learning": null
+    }
+   ]
+  },
+  "epoch_reset": {
+   "train_success_mean": 0.5,
+   "classic_frozen_per_config": [
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "classic_frozen": {
+    "config_mean_success": 0.5
+   },
+   "classic_adapt": {
+    "config_mean_success": 0.6666666666666666
+   },
+   "conflict_frozen_per_config": [
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "conflict_frozen": {
+    "config_mean_success": 0.0
+   },
+   "conflict_adapt": {
+    "config_mean_success": 0.4166666666666667
+   },
+   "noisy_frozen_per_config": [
+    0.0,
+    0.5,
+    1.0,
+    0.0
+   ],
+   "noisy_frozen": {
+    "config_mean_success": 0.375
+   },
+   "noisy_adapt": {
+    "config_mean_success": 0.375
+   },
+   "retention_delta_mean": 0.0,
+   "attribution_mean_classic": {
+    "memory_incorrect": 0.0,
+    "cross_epoch_transfer_retrieved": 25308.0,
+    "memory_correct": 0.0,
+    "rows_without_memory": 0.0,
+    "source_hypothesis": 660.0,
+    "plans_used": 988.0,
+    "success_without_memory": null,
+    "success_with_memory": 0.5,
+    "rows_with_memory": 12.0,
+    "memory_actions": 660.0,
+    "memory_attributable_improvement": null
+   },
+   "attribution_mean_conflict": {
+    "memory_incorrect": 0.0,
+    "cross_epoch_transfer_retrieved": 60724.0,
+    "memory_correct": 0.0,
+    "rows_without_memory": 0.0,
+    "source_hypothesis": 1608.0,
+    "plans_used": 1904.0,
+    "success_without_memory": null,
+    "success_with_memory": 0.0,
+    "rows_with_memory": 12.0,
+    "memory_actions": 1608.0,
+    "memory_attributable_improvement": null
+   },
+   "memory_mean": {
+    "verified": 20.0,
+    "hypothesis": 22.0,
+    "bank_size": 0.0,
+    "bank_retrievals": 0.0,
+    "context_specific": 0.0,
+    "atom_profile_size": 0.0,
+    "cross_epoch_verified": 38.0,
+    "verified_epochs_total": 585.0
+   },
+   "per_seed": [
+    {
+     "seed": 20261107,
+     "train_success": 0.5,
+     "wall_s": 17.74,
+     "classic_frozen": {
+      "n_configs": 6,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+      }
+     },
+     "classic_frozen_per_config": [
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "classic_frozen_attribution": {
+      "memory_actions": 660,
+      "memory_correct": 0,
+      "memory_incorrect": 0,
+      "cross_epoch_transfer_retrieved": 25308,
+      "source_hypothesis": 660,
+      "plans_used": 988,
+      "rows_with_memory": 12,
+      "rows_without_memory": 0,
+      "success_with_memory": 0.5,
+      "success_without_memory": null,
+      "memory_attributable_improvement": null
+     },
+     "classic_frozen_trace": {
+      "source_hypothesis": 660,
+      "source_bank": 0,
+      "source_atom_single": 0,
+      "source_atom_pair": 0,
+      "source_novel_single": 328,
+      "source_conjunctive_probe": 0,
+      "source_conjunction": 0,
+      "source_other": 0,
+      "skipped_tried": 636,
+      "skipped_infeasible": 48,
+      "probes_evaluated": 0,
+      "plans_used": 988,
+      "random_fallback_steps": 0,
+      "door_open_after_probe": 0,
+      "door_open_after_hypothesis": 0,
+      "door_open_after_bank": 0,
+      "door_open_after_atom_single": 0,
+      "door_open_after_atom_pair": 0,
+      "door_open_after_novel_single": 0,
+      "door_open_after_conjunction": 0,
+      "door_open_after_other": 0,
+      "query_calls": 1332,
+      "query_useful": 1332,
+      "hypothesis_candidates": 3996,
+      "hypothesis_skipped_lowconf": 0,
+      "hypothesis_retrieved": 27996,
+      "cross_epoch_transfer_retrieved": 25308,
+      "memory_actions": 660,
+      "memory_correct": 0,
+      "memory_incorrect": 0
+     },
+     "classic_frozen_relevance": {
+      "n": 988,
+      "exact": 36,
+      "partial": 156,
+      "irrelevant": 796,
+      "by_source": {
+       "hypothesis": {
+        "n": 660,
+        "exact": 4,
+        "partial": 16,
+        "irrelevant": 640
+       },
+       "novel_single": {
+        "n": 328,
+        "exact": 32,
+        "partial": 140,
+        "irrelevant": 156
+       }
+      }
+     },
+     "classic_adapt": {
+      "n_configs": 6,
+      "config_mean_success": 0.6666666666666666,
+      "per_config": {
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.5,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.5
+      }
+     },
+     "conflict_frozen": {
+      "n_configs": 6,
+      "config_mean_success": 0.0,
+      "per_config": {
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+      }
+     },
+     "conflict_frozen_per_config": [
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "conflict_frozen_attribution": {
+      "memory_actions": 1608,
+      "memory_correct": 0,
+      "memory_incorrect": 0,
+      "cross_epoch_transfer_retrieved": 60724,
+      "source_hypothesis": 1608,
+      "plans_used": 1904,
+      "rows_with_memory": 12,
+      "rows_without_memory": 0,
+      "success_with_memory": 0.0,
+      "success_without_memory": null,
+      "memory_attributable_improvement": null
+     },
+     "conflict_adapt": {
+      "n_configs": 6,
+      "config_mean_success": 0.4166666666666667,
+      "per_config": {
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.5,
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+      }
+     },
+     "noisy_frozen": {
+      "n_configs": 4,
+      "config_mean_success": 0.375,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.5,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0
+      }
+     },
+     "noisy_frozen_per_config": [
+      0.0,
+      0.5,
+      1.0,
+      0.0
+     ],
+     "noisy_adapt": {
+      "n_configs": 4,
+      "config_mean_success": 0.375,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.5,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0
+      }
+     },
+     "retention": {
+      "label": "epoch_reset",
+      "substrate_n": 4,
+      "substrate_keys": [
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, True)",
+       "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)",
+       "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, True)"
+      ],
+      "snapshots": [
+       {
+        "episode_seen": 0,
+        "success_rate": 0.25,
+        "mean_steps": 62.5,
+        "n": 4
+       },
+       {
+        "episode_seen": 1,
+        "success_rate": 0.25,
+        "mean_steps": 62.5,
+        "n": 4
+       }
+      ],
+      "retention_delta": 0.0,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": {
+        "first": 1.0,
+        "last": 1.0,
+        "delta": 0.0
+       },
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       },
+       "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       },
+       "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       }
+      }
+     },
+     "memory": {
+      "size": 42,
+      "status_counts": {
+       "verified": 20,
+       "hypothesis": 22
+      },
+      "generated": 42,
+      "evictions": 0,
+      "context_specific": 0,
+      "bank_size": 0,
+      "bank_retrievals": 0,
+      "atom_profile_size": 0,
+      "verified_then_contradicted": null,
+      "episode_scoped": true,
+      "current_epoch": 39,
+      "cross_epoch_verified": 38,
+      "verified_epochs_total": 585
+     },
+     "memory_cognitive": {},
+     "repeated_learning": null
+    }
+   ]
+  },
+  "cognitive": {
+   "train_success_mean": 0.55,
+   "classic_frozen_per_config": [
+    1.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "classic_frozen": {
+    "config_mean_success": 0.5
+   },
+   "classic_adapt": {
+    "config_mean_success": 0.5
+   },
+   "conflict_frozen_per_config": [
+    0.0,
+    0.0,
+    1.0,
+    1.0,
+    0.0,
+    0.0
+   ],
+   "conflict_frozen": {
+    "config_mean_success": 0.3333333333333333
+   },
+   "conflict_adapt": {
+    "config_mean_success": 0.3333333333333333
+   },
+   "noisy_frozen_per_config": [
+    1.0,
+    0.0,
+    1.0,
+    1.0
+   ],
+   "noisy_frozen": {
+    "config_mean_success": 0.75
+   },
+   "noisy_adapt": {
+    "config_mean_success": 0.5
+   },
+   "retention_delta_mean": 0.0,
+   "attribution_mean_classic": {
+    "memory_incorrect": 0.0,
+    "cross_epoch_transfer_retrieved": 32916.0,
+    "memory_correct": 0.0,
+    "rows_without_memory": 0.0,
+    "source_hypothesis": 972.0,
+    "plans_used": 1004.0,
+    "success_without_memory": null,
+    "success_with_memory": 0.5,
+    "rows_with_memory": 12.0,
+    "memory_actions": 972.0,
+    "memory_attributable_improvement": null
+   },
+   "attribution_mean_conflict": {
+    "memory_incorrect": 0.0,
+    "cross_epoch_transfer_retrieved": 33116.0,
+    "memory_correct": 0.0,
+    "rows_without_memory": 0.0,
+    "source_hypothesis": 1256.0,
+    "plans_used": 1256.0,
+    "success_without_memory": null,
+    "success_with_memory": 0.3333333333333333,
+    "rows_with_memory": 12.0,
+    "memory_actions": 1256.0,
+    "memory_attributable_improvement": null
+   },
+   "memory_mean": {
+    "verified": 20.0,
+    "hypothesis": 22.0,
+    "bank_size": 0.0,
+    "bank_retrievals": 0.0,
+    "context_specific": 0.0,
+    "atom_profile_size": 0.0,
+    "cross_epoch_verified": 40.0,
+    "verified_epochs_total": 596.0
+   },
+   "per_seed": [
+    {
+     "seed": 20261107,
+     "train_success": 0.55,
+     "wall_s": 14.21,
+     "classic_frozen": {
+      "n_configs": 6,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+      }
+     },
+     "classic_frozen_per_config": [
+      1.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0,
+      0.0
+     ],
+     "classic_frozen_attribution": {
+      "memory_actions": 972,
+      "memory_correct": 0,
+      "memory_incorrect": 0,
+      "cross_epoch_transfer_retrieved": 32916,
+      "source_hypothesis": 972,
+      "plans_used": 1004,
+      "rows_with_memory": 12,
+      "rows_without_memory": 0,
+      "success_with_memory": 0.5,
+      "success_without_memory": null,
+      "memory_attributable_improvement": null
+     },
+     "classic_frozen_trace": {
+      "source_hypothesis": 972,
+      "source_bank": 0,
+      "source_atom_single": 0,
+      "source_atom_pair": 0,
+      "source_novel_single": 32,
+      "source_conjunctive_probe": 0,
+      "source_conjunction": 0,
+      "source_other": 0,
+      "skipped_tried": 948,
+      "skipped_infeasible": 48,
+      "probes_evaluated": 0,
+      "plans_used": 1004,
+      "random_fallback_steps": 0,
+      "door_open_after_probe": 0,
+      "door_open_after_hypothesis": 0,
+      "door_open_after_bank": 0,
+      "door_open_after_atom_single": 0,
+      "door_open_after_atom_pair": 0,
+      "door_open_after_novel_single": 0,
+      "door_open_after_conjunction": 0,
+      "door_open_after_other": 0,
+      "query_calls": 1660,
+      "query_useful": 1660,
+      "hypothesis_candidates": 4980,
+      "hypothesis_skipped_lowconf": 0,
+      "hypothesis_retrieved": 34292,
+      "cross_epoch_transfer_retrieved": 32916,
+      "memory_actions": 972,
+      "memory_correct": 0,
+      "memory_incorrect": 0
+     },
+     "classic_frozen_relevance": {
+      "n": 1004,
+      "exact": 32,
+      "partial": 640,
+      "irrelevant": 332,
+      "by_source": {
+       "hypothesis": {
+        "n": 972,
+        "exact": 0,
+        "partial": 640,
+        "irrelevant": 332
+       },
+       "novel_single": {
+        "n": 32,
+        "exact": 32,
+        "partial": 0,
+        "irrelevant": 0
+       }
+      }
+     },
+     "classic_adapt": {
+      "n_configs": 6,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+      }
+     },
+     "conflict_frozen": {
+      "n_configs": 6,
+      "config_mean_success": 0.3333333333333333,
+      "per_config": {
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+      }
+     },
+     "conflict_frozen_per_config": [
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0,
+      0.0
+     ],
+     "conflict_frozen_attribution": {
+      "memory_actions": 1256,
+      "memory_correct": 0,
+      "memory_incorrect": 0,
+      "cross_epoch_transfer_retrieved": 33116,
+      "source_hypothesis": 1256,
+      "plans_used": 1256,
+      "rows_with_memory": 12,
+      "rows_without_memory": 0,
+      "success_with_memory": 0.3333333333333333,
+      "success_without_memory": null,
+      "memory_attributable_improvement": null
+     },
+     "conflict_adapt": {
+      "n_configs": 6,
+      "config_mean_success": 0.3333333333333333,
+      "per_config": {
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+       "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+      }
+     },
+     "noisy_frozen": {
+      "n_configs": 4,
+      "config_mean_success": 0.75,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 1.0,
+       "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 1.0
+      }
+     },
+     "noisy_frozen_per_config": [
+      1.0,
+      0.0,
+      1.0,
+      1.0
+     ],
+     "noisy_adapt": {
+      "n_configs": 4,
+      "config_mean_success": 0.5,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.5,
+       "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.0,
+       "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+       "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.5
+      }
+     },
+     "retention": {
+      "label": "cognitive",
+      "substrate_n": 4,
+      "substrate_keys": [
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, True)",
+       "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)",
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)",
+       "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, True)"
+      ],
+      "snapshots": [
+       {
+        "episode_seen": 0,
+        "success_rate": 0.25,
+        "mean_steps": 62.5,
+        "n": 4
+       },
+       {
+        "episode_seen": 1,
+        "success_rate": 0.25,
+        "mean_steps": 62.5,
+        "n": 4
+       }
+      ],
+      "retention_delta": 0.0,
+      "per_config": {
+       "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": {
+        "first": 1.0,
+        "last": 1.0,
+        "delta": 0.0
+       },
+       "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       },
+       "('TP1', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', True)}), True, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       },
+       "('TP2', frozenset({('sw', 'S2', True)}), frozenset({('sw', 'S1', False)}), False, True)": {
+        "first": 0.0,
+        "last": 0.0,
+        "delta": 0.0
+       }
+      }
+     },
+     "memory": {
+      "size": 42,
+      "status_counts": {
+       "verified": 20,
+       "hypothesis": 22
+      },
+      "generated": 42,
+      "evictions": 0,
+      "context_specific": 0,
+      "bank_size": 0,
+      "bank_retrievals": 0,
+      "atom_profile_size": 0,
+      "verified_then_contradicted": null,
+      "episode_scoped": true,
+      "current_epoch": 39,
+      "cross_epoch_verified": 40,
+      "verified_epochs_total": 596
+     },
+     "memory_cognitive": {
+      "reliability_mean": 0.6999389499389499,
+      "under_attack": 0,
+      "streak_max": 0,
+      "verified_history_avg": 14.19047619047619
+     },
+     "repeated_learning": null
+    }
+   ],
+   "memory_cognitive_mean": {
+    "reliability_mean": 0.6999389499389499,
+    "under_attack": 0.0,
+    "streak_max": 0.0,
+    "verified_history_avg": 14.19047619047619
+   }
+  }
+ },
+ "repeated_learning": {},
+ "comparisons": {
+  "epoch_reset_vs_original": {
+   "classic_frozen": {
+    "mean": 0.34458333333333335,
+    "ci": [
+     0.0,
+     0.6666666666666667
+    ]
+   },
+   "conflict_frozen": {
+    "mean": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "noisy_frozen": {
+    "mean": -0.129875,
+    "ci": [
+     -0.375,
+     0.0
+    ]
+   },
+   "train_delta": 0.025000000000000022
+  },
+  "cognitive_vs_original": {
+   "classic_frozen": {
+    "mean": 0.34458333333333335,
+    "ci": [
+     0.0,
+     0.6666666666666667
+    ]
+   },
+   "conflict_frozen": {
+    "mean": 0.324,
+    "ci": [
+     0.0,
+     0.6666666666666666
+    ]
+   },
+   "noisy_frozen": {
+    "mean": 0.2413125,
+    "ci": [
+     -0.25,
+     0.75
+    ]
+   },
+   "train_delta": 0.07500000000000007
+  },
+  "original_vs_fresh": {
+   "classic_frozen": {
+    "mean": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "conflict_frozen": {
+    "mean": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "noisy_frozen": {
+    "mean": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   }
+  },
+  "epoch_reset_vs_fresh": {
+   "classic_frozen": {
+    "mean": 0.34458333333333335,
+    "ci": [
+     0.0,
+     0.6666666666666667
+    ]
+   },
+   "conflict_frozen": {
+    "mean": 0.0,
+    "ci": [
+     0.0,
+     0.0
+    ]
+   },
+   "noisy_frozen": {
+    "mean": -0.129875,
+    "ci": [
+     -0.375,
+     0.0
+    ]
+   }
+  },
+  "cognitive_vs_fresh": {
+   "classic_frozen": {
+    "mean": 0.34458333333333335,
+    "ci": [
+     0.0,
+     0.6666666666666667
+    ]
+   },
+   "conflict_frozen": {
+    "mean": 0.324,
+    "ci": [
+     0.0,
+     0.6666666666666666
+    ]
+   },
+   "noisy_frozen": {
+    "mean": 0.2413125,
+    "ci": [
+     -0.25,
+     0.75
+    ]
+   }
+  }
+ },
+ "fresh_control": {
+  "classic_frozen": {
+   "n_configs": 6,
+   "config_mean_success": 0.16666666666666666,
+   "per_config": {
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 0.0,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+    "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.0,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+   }
+  },
+  "classic_frozen_per_config": [
+   0.0,
+   0.0,
+   1.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "classic_adapt": {
+   "n_configs": 6,
+   "config_mean_success": 0.5416666666666666,
+   "per_config": {
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, False)": 1.0,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S1', False)}), False, False)": 1.0,
+    "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), False, False)": 0.25,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, True)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', True), ('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), False, False)": 0.0
+   }
+  },
+  "classic_adapt_per_config": [
+   1.0,
+   1.0,
+   1.0,
+   0.25,
+   0.0,
+   0.0
+  ],
+  "conflict_frozen": {
+   "n_configs": 6,
+   "config_mean_success": 0.0,
+   "per_config": {
+    "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+    "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+   }
+  },
+  "conflict_frozen_per_config": [
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0,
+   0.0
+  ],
+  "conflict_adapt": {
+   "n_configs": 6,
+   "config_mean_success": 0.16666666666666666,
+   "per_config": {
+    "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0,
+    "('TP1', frozenset({('loadany', 'P1'), ('sw', 'S2', True)}), frozenset({('sw', 'S2', True), ('sw', 'S1', False)}), True, False)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False), ('load', 'P1', 'A')}), True, False)": 0.5,
+    "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('sw', 'S1', False)}), True, False)": 0.5,
+    "('TP1', frozenset({('sw', 'S2', False)}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), True, True)": 0.0,
+    "('TP1', frozenset({('sw', 'S2', False), ('load', 'P1', 'A')}), frozenset({('empty', 'P2'), ('sw', 'S1', True)}), False, True)": 0.0
+   }
+  },
+  "conflict_adapt_per_config": [
+   0.0,
+   0.0,
+   0.5,
+   0.5,
+   0.0,
+   0.0
+  ],
+  "noisy_frozen": {
+   "n_configs": 4,
+   "config_mean_success": 0.5,
+   "per_config": {
+    "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.5,
+    "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 0.5,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+    "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0
+   }
+  },
+  "noisy_frozen_per_config": [
+   0.5,
+   0.5,
+   1.0,
+   0.0
+  ],
+  "noisy_adapt": {
+   "n_configs": 4,
+   "config_mean_success": 0.625,
+   "per_config": {
+    "('TP1', frozenset({('sw', 'S2', False), ('loadany', 'P1')}), frozenset({('empty', 'P2'), ('sw', 'S1', False)}), False, True)": 0.5,
+    "('TP1', frozenset({('sw', 'S2', True), ('empty', 'P1')}), frozenset({('sw', 'S1', True)}), False, True)": 1.0,
+    "('TP1', frozenset({('empty', 'P1')}), frozenset({('empty', 'P2')}), False, False)": 1.0,
+    "('TP1', frozenset({('load', 'P1', 'A')}), frozenset({('load', 'P1', 'A'), ('sw', 'S1', True)}), True, True)": 0.0
+   }
+  },
+  "noisy_adapt_per_config": [
+   0.5,
+   1.0,
+   1.0,
+   0.0
+  ],
+  "pool_fingerprint": [
+   8,
+   [
+    [
+     "TP1",
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "empty",
+        "P2"
+       ],
+       [
+        "sw",
+        "S1",
+        true
+       ]
+      ]
+     ],
+     false,
+     true
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ],
+       [
+        "sw",
+        "S2",
+        false
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "empty",
+        "P2"
+       ],
+       [
+        "sw",
+        "S1",
+        true
+       ]
+      ]
+     ],
+     false,
+     true
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ],
+       [
+        "sw",
+        "S2",
+        false
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ],
+       [
+        "sw",
+        "S1",
+        false
+       ]
+      ]
+     ],
+     true,
+     false
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ],
+       [
+        "sw",
+        "S2",
+        false
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "sw",
+        "S1",
+        false
+       ]
+      ]
+     ],
+     true,
+     false
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ],
+       [
+        "sw",
+        "S2",
+        true
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "load",
+        "P1",
+        "A"
+       ],
+       [
+        "sw",
+        "S1",
+        false
+       ]
+      ]
+     ],
+     false,
+     true
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "loadany",
+        "P1"
+       ],
+       [
+        "sw",
+        "S2",
+        true
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "sw",
+        "S1",
+        false
+       ],
+       [
+        "sw",
+        "S2",
+        true
+       ]
+      ]
+     ],
+     false,
+     true
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "loadany",
+        "P1"
+       ],
+       [
+        "sw",
+        "S2",
+        true
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "sw",
+        "S1",
+        false
+       ],
+       [
+        "sw",
+        "S2",
+        true
+       ]
+      ]
+     ],
+     true,
+     false
+    ],
+    [
+     "TP1",
+     [
+      [
+       [
+        "sw",
+        "S2",
+        false
+       ]
+      ]
+     ],
+     [
+      [
+       [
+        "empty",
+        "P2"
+       ],
+       [
+        "sw",
+        "S1",
+        true
+       ]
+      ]
+     ],
+     true,
+     true
+    ]
+   ],
+   6,
+   2,
+   6,
+   2
+  ]
+ },
+ "relevance_mean": {
+  "original": {
+   "n": 1548,
+   "exact": 4,
+   "partial": 604,
+   "irrelevant": 940,
+   "by_source": {
+    "novel_single": {
+     "n": 1548,
+     "exact": 4,
+     "partial": 604,
+     "irrelevant": 940
+    }
+   },
+   "irrelevant_frac": 0.6072351421188631,
+   "exact_frac": 0.002583979328165375
+  },
+  "epoch_reset": {
+   "n": 988,
+   "exact": 36,
+   "partial": 156,
+   "irrelevant": 796,
+   "by_source": {
+    "hypothesis": {
+     "n": 660,
+     "exact": 4,
+     "partial": 16,
+     "irrelevant": 640
+    },
+    "novel_single": {
+     "n": 328,
+     "exact": 32,
+     "partial": 140,
+     "irrelevant": 156
+    }
+   },
+   "irrelevant_frac": 0.805668016194332,
+   "exact_frac": 0.03643724696356275
+  },
+  "cognitive": {
+   "n": 1004,
+   "exact": 32,
+   "partial": 640,
+   "irrelevant": 332,
+   "by_source": {
+    "hypothesis": {
+     "n": 972,
+     "exact": 0,
+     "partial": 640,
+     "irrelevant": 332
+    },
+    "novel_single": {
+     "n": 32,
+     "exact": 32,
+     "partial": 0,
+     "irrelevant": 0
+    }
+   },
+   "irrelevant_frac": 0.33067729083665337,
+   "exact_frac": 0.03187250996015936
+  }
+ },
+ "finished_at": 1794498990.9166465
+}
