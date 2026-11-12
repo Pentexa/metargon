@@ -63,6 +63,7 @@ from academy.evren.retention import RetentionSuite, sample_substrate  # noqa: E4
 from academy.learning.loop import run_one_episode  # noqa: E402
 from academy.tools.memory_experiment_v06 import (  # noqa: E402
     check_frozen_integrity, compare_delta, memory_tracking,
+    summarize_probe_relevance,
 )
 from academy.tools.memory_experiment_v07 import (  # noqa: E402
     attribution_metrics, memory_tracking_v07,
@@ -375,6 +376,7 @@ def eval_grid_cognitive(agent_state, configs, max_steps, n_configs,
             }
             if collect_trace:
                 row["trace"] = dict(agent.trace)
+                row["relevance"] = summarize_probe_relevance(planned_all, cfgc)
             rows.append(row)
     per_config = {}
     for r in rows:
