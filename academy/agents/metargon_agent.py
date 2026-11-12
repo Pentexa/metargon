@@ -21,12 +21,25 @@ from typing import Optional
 from .common import atoms_from_observation, belief_from_obs, state_key, valid_actions
 from .memory import CompositionalMemory, consequence_key
 from .planner import (
-    atoms_of_state, plan_to_atoms, plan_to_pos, target_feasible,
+    atoms_of_state, maximal_feasible_subset, plan_to_atoms, plan_to_pos,
+    target_feasible,
 )
 from ..envs.gridworld import public_next
 
 MAX_EXPANSIONS = 1500
 PROBE_MAX_PLANS = 4
+
+# ---- cognitive exploration (v0.1) tuning constants ----------------------
+RECOVERY_BUDGET = 12          # steps of directed anti-loop movement
+RECOVERY_STALL_WINDOW = 8     # revisit window used to detect loops
+RECOVERY_MAX_TRIGGERS_PER_EPISODE = 4
+MAX_PLANNER_BUDGET_PER_ACT = 4000   # global BFS budget per act() call
+HOLD_BUDGET = 10              # steps a held probe waits for a delayed open
+
+
+class _BudgetExhausted(Exception):
+    """Internal: the per-act() planner budget ran out (bounded act()
+    cost under cognitive exploration)."""
 
 
 def _vocabulary_singles() -> list:
@@ -98,7 +111,16 @@ class MetargonAcademyAgent:
                  probe_bank_reuse: bool = False,
                  memory_episode_scoped: bool = False,
                  memory_min_verified_epochs_for_transfer: int = 2,
-                 memory_factory=None):
+                 memory_factory=None,
+                 cognitive_exploration: bool = False,
+                 cog_knowledge_gaps: Optional[bool] = None,
+                 cog_info_gain: Optional[bool] = None,
+                 cog_recovery: Optional[bool] = None,
+                 cog_decompose: Optional[bool] = None,
+                 cog_probe_hold: Optional[bool] = None,
+                 recovery_budget: int = RECOVERY_BUDGET,
+                 hold_budget: int = HOLD_BUDGET,
+                 planner_budget_per_act: int = MAX_PLANNER_BUDGET_PER_ACT):
         self.seed = seed
         self.rng = random.Random(seed)
         self.replay_enabled = replay_enabled
@@ -134,6 +156,50 @@ class MetargonAcademyAgent:
             probe_min_effective_confidence)
         self.probe_bank_reuse = bool(probe_bank_reuse)
         self.probe_adaptive = bool(probe_adaptive)
+        # ---- cognitive exploration (v0.1) flags ---------------------
+        # Independent, all off by default (baseline behavior is unchanged
+        # when every flag is off). ``cognitive_exploration`` is a master
+        # switch: each sub-mechanism defaults to the master value unless
+        # set explicitly (used for ablations).
+        self.cognitive_exploration = bool(cognitive_exploration)
+        self.cog_knowledge_gaps = bool(
+            cog_knowledge_gaps if cog_knowledge_gaps is not None
+            else cognitive_exploration)
+        self.cog_info_gain = bool(
+            cog_info_gain if cog_info_gain is not None
+            else cognitive_exploration)
+        self.cog_recovery = bool(
+            cog_recovery if cog_recovery is not None
+            else cognitive_exploration)
+        self.cog_decompose = bool(
+            cog_decompose if cog_decompose is not None
+            else cognitive_exploration)
+        self.cog_probe_hold = bool(
+            cog_probe_hold if cog_probe_hold is not None
+            else cognitive_exploration)
+        self.recovery_budget = int(recovery_budget)
+        self.hold_budget = int(hold_budget)
+        self.planner_budget_per_act = int(planner_budget_per_act)
+        # runtime state for the cognitive mechanisms (ephemeral unless
+        # checkpointed; seeded deterministically)
+        self._recent_states = deque(maxlen=24)
+        self._recent_actions = deque(maxlen=16)
+        self._invalid_streak = 0
+        self._last_state_key = None
+        self._steps_since_state_change = 0
+        self._loop_steps = 0
+        self._recovery_steps_left = 0
+        self._stall_triggers = 0
+        self._active_hold = None
+        self._pending_hold_target = None
+        self._pending_hold_since = 0
+        self._local_atom_evidence = {}
+        self._attempts_per_antecedent = {}
+        self._act_planner_budget = 0
+        # probe-attempt instrumentation (ephemeral, used by the research
+        # harness to separate fresh from repeated experiments)
+        self._trace_last_probe = None
+        self._trace_completed_probes = set()
         # Diagnostic control: disable candidate probing entirely while
         # keeping door-pass and goal-planning steps (isolates the value
         # of vocabulary probing vs planning).
@@ -189,6 +255,21 @@ class MetargonAcademyAgent:
             "memory_actions": 0,
             "memory_correct": 0,
             "memory_incorrect": 0,
+            # v0.1 cognitive exploration trace
+            "stalls_detected": 0,
+            "recoveries_triggered": 0,
+            "recovery_steps": 0,
+            "decomposed_candidates": 0,
+            "holds_started": 0,
+            "holds_resolved_open": 0,
+            "holds_resolved_fail": 0,
+            "holds_interrupted": 0,
+            "hold_preserve_steps": 0,
+            "loop_steps": 0,
+            "gap_guided_candidates": 0,
+            "probes_new": 0,
+            "probes_repeat": 0,
+            "skipped_search_failed": 0,
         }
 
     # -- perception ------------------------------------------------------
@@ -202,6 +283,21 @@ class MetargonAcademyAgent:
         self._steps_since_goal_check = 0
         self._episode_mem_step = self.memory.step
         self._ctx_signature = None
+        # cognitive-exploration per-episode state
+        self._recent_states.clear()
+        self._recent_actions.clear()
+        self._invalid_streak = 0
+        self._last_state_key = None
+        self._steps_since_state_change = 0
+        self._loop_steps = 0
+        self._recovery_steps_left = 0
+        self._stall_triggers = 0
+        self._active_hold = None
+        self._pending_hold_target = None
+        self._pending_hold_since = 0
+        self._attempts_per_antecedent = {}
+        self._trace_last_probe = None
+        self._trace_completed_probes = set()
         # v0.7: each episode is an evidence epoch (task boundary); the
         # memory resets consecutive-nonevent windows and scopes evidence
         # per epoch so cross-task contradictions do not destroy verified
@@ -278,6 +374,15 @@ class MetargonAcademyAgent:
         self._comp_cache = (pattern, comp)
         return comp, pattern
 
+    def _goal_component_reachable(self) -> bool:
+        """Cheap component pre-filter: if the goal is not even in the same
+        connected region as the agent under the current door belief, the
+        full goal-plan BFS cannot succeed — skip it entirely."""
+        comp = self._components()[0]
+        pos = self.belief.pos
+        goal = self.geom.goal
+        return (pos in comp and goal in comp and comp[pos] == comp[goal])
+
     def _novel_singles(self, door):
         return [s for s in VOCAB_SINGLES if s not in self.tried[door]]
 
@@ -285,9 +390,15 @@ class MetargonAcademyAgent:
         tried = self.tried[door]
         return [p for p in _vocabulary_pairs(tried) if p not in tried]
 
-    def _plan_cached(self, state, target, on_expand, to_pos=None):
+    def _plan_cached(self, state, target, on_expand, to_pos=None,
+                     max_expand=None):
         """Planning with a bounded cache keyed by state+target (BFS results
-        are deterministic; repeated probes are common)."""
+        are deterministic; repeated probes are common).
+
+        ``max_expand`` overrides the default per-plan expansion cap
+        (used by cognitive exploration to keep low-tier probes cheap)."""
+        if max_expand is None:
+            max_expand = self.planner_max_expand
         key = (state_key(state), to_pos, tuple(sorted(target)))
         hit = self.plan_cache.get(key)
         if hit is not None:
@@ -295,11 +406,11 @@ class MetargonAcademyAgent:
             return hit or None
         if to_pos is not None:
             plan = plan_to_pos(state, to_pos, self.geom,
-                               max_expand=self.planner_max_expand,
+                               max_expand=max_expand,
                                on_expand=on_expand)
         else:
             plan = plan_to_atoms(state, target, self.geom,
-                                 max_expand=self.planner_max_expand,
+                                 max_expand=max_expand,
                                  on_expand=on_expand)
         if len(self.plan_cache) > 2000:
             for k in list(self.plan_cache)[:400]:
@@ -321,11 +432,17 @@ class MetargonAcademyAgent:
                     cells.append(self.belief.objs[atom[2]])
         return cells
 
-    def _first_preserving_action(self, state, target) -> Optional[str]:
+    def _first_preserving_action(self, state, target,
+                                 strict: bool = False) -> Optional[str]:
         """When a probe antecedent already holds, the door can open on the
         next transition. Return an action whose resulting public state
         still satisfies the antecedent (so the condition is not broken),
-        preferring actions that make progress toward the relevant cells."""
+        preferring actions that make progress toward the relevant cells.
+
+        With ``strict=True`` (used by the hold mechanism) the fallback to
+        an arbitrary valid action is disabled: None is returned when no
+        preserving action exists at all (so the caller knows the condition
+        cannot be sustained)."""
         from .planner import atoms_of_state
         valid = valid_actions(state, self.geom)
         targets = self._target_cells(target)
@@ -341,7 +458,9 @@ class MetargonAcademyAgent:
                     for c in targets)
             if best_d is None or d < best_d:
                 best, best_d = a, d
-        return best if best is not None else (valid[0] if valid else None)
+        if best is not None:
+            return best
+        return None if strict else (valid[0] if valid else None)
 
     def _protected_atoms(self) -> frozenset:
         """Atoms believed to keep an open, *not-yet-passed* door open.
@@ -457,6 +576,250 @@ class MetargonAcademyAgent:
             out.append((door, s, 1, "novel_single"))
         return out
 
+    # -- cognitive exploration (v0.1) -----------------------------------
+    # Bounded mechanisms for deciding *which* experiment to run when the
+    # current beliefs are insufficient: local knowledge-gap coverage,
+    # information-value scoring, stagnation detection with recovery, and
+    # hold-based probe attribution (fixes mid-plan expiry and delayed
+    # doors). All are independent, gated by the cog_* flags, and never
+    # touch hidden state.
+
+    def _bump_attempts(self, door, ante):
+        key = (door, frozenset(ante))
+        self._attempts_per_antecedent[key] = \
+            self._attempts_per_antecedent.get(key, 0) + 1
+
+    def _probe_key(self, door, ante, src):
+        return (door, frozenset(ante), src)
+
+    def _log_probe_attempt(self, door, ante, src):
+        """Record a probe attempt (fresh vs repeated) for the research
+        harness. A selection is only logged when it starts a new attempt
+        (differs from the previous selection) — continuation steps of the
+        same plan are not attempts."""
+        if not self._collect_probe_log:
+            return
+        key = self._probe_key(door, ante, src)
+        self.trace.setdefault("planned_probes", []).append(
+            [door, sorted(list(ante)), src])
+        if key == self._trace_last_probe:
+            return
+        self._trace_last_probe = key
+        if key in self._trace_completed_probes:
+            self.trace["probes_repeat"] = \
+                self.trace.get("probes_repeat", 0) + 1
+        else:
+            self.trace["probes_new"] = self.trace.get("probes_new", 0) + 1
+
+    def _mark_probe_completed(self, door, ante, src):
+        """A probe attempt reached a definite outcome (door opened, budget
+        exhausted, or the condition could no longer be sustained)."""
+        if not self._collect_probe_log:
+            return
+        self._trace_completed_probes.add(
+            self._probe_key(door, ante, src))
+
+    def _local_vocab(self) -> frozenset:
+        """Vocabulary atoms for the local knowledge-gap model (the fixed
+        public probe vocabulary; both switch polarities and all plate
+        load combos)."""
+        return frozenset().union(*VOCAB_SINGLES) if VOCAB_SINGLES \
+            else frozenset()
+
+    def _uncovered_atoms(self, door) -> set:
+        """Atoms with no decisive local evidence for ``door``: not yet
+        classified by this task's own observations. Bounded and small."""
+        vocab = self._local_vocab()
+        ev = self._local_atom_evidence.get(door, {})
+        out = set()
+        for a in vocab:
+            p, n = ev.get(a, (0, 0))
+            if not (p >= 2 and p > n) and not (n >= 2 and n > p):
+                out.add(a)
+        return out
+
+    def _note_local_evidence(self, door, atoms, opened: bool):
+        """Update the local per-door atom evidence profile from this step's
+        observation (positive: atoms present before an opening event;
+        negative: atoms present while the door stayed closed)."""
+        ev = self._local_atom_evidence.setdefault(door, {})
+        for a in atoms:
+            p, n = ev.get(a, (0, 0))
+            if opened:
+                ev[a] = (p + 1, n)
+            else:
+                ev[a] = (p, n + 1)
+
+    def _candidate_score(self, door, ante, prio, src, plan_len) -> float:
+        """Deterministic information-value score for a candidate probe.
+
+        * knowledge-gap term: novelty over uncovered atoms;
+        * discrimination term: weighted overlap with live hypotheses
+          (bounded to keep the score stable);
+        * attempt penalty: demote antecedents that already failed/incon-
+          clusively resolved this episode;
+        * cost term: shorter plans win ties (matches baseline tie-break).
+        """
+        score = 0.0
+        if self.cog_knowledge_gaps:
+            unc = self._uncovered_atoms(door)
+            novelty = sum(1 for a in ante if a in unc)
+            score += 2.0 * novelty
+        if self.cog_info_gain:
+            disc = 0.0
+            for h in self.memory.query(door, opens=True)[:8]:
+                if h.antecedent & ante:
+                    disc += h.confidence
+            score += 1.5 * min(disc, 4.0)
+            attempts = self._attempts_per_antecedent.get(
+                (door, frozenset(ante)), 0)
+            score -= 1.0 * attempts
+        score -= 0.05 * plan_len
+        return score
+
+    def _gap_guided_candidates(self, door) -> list:
+        """Pairs of currently-uncovered atoms (never in the fixed pair
+        list because of its 64-entry bound). Used when exploration is
+        escalated after repeated stalls."""
+        uncovered = sorted(self._uncovered_atoms(door), key=str)
+        tried = self.tried[door]
+        out = []
+        for i in range(len(uncovered)):
+            for j in range(i + 1, len(uncovered)):
+                p = frozenset({uncovered[i], uncovered[j]})
+                if p not in tried:
+                    # prio 2: fallback tier — only used once ordinary
+                    # probes are exhausted or infeasible
+                    out.append((door, p, 2, "gap"))
+                if len(out) >= 8:
+                    return out
+        return out
+
+    def _note_step(self):
+        """Per-step bookkeeping for stagnation detection (bounded)."""
+        key = state_key(self.belief)
+        if self._last_state_key is None:
+            self._last_state_key = key
+            self._recent_states.append(key)
+            return
+        if key != self._last_state_key:
+            self._steps_since_state_change = 0
+            self._last_state_key = key
+        else:
+            self._steps_since_state_change += 1
+        self._recent_states.append(key)
+        recent = list(self._recent_states)
+        if len(recent) >= 5 and recent.count(key) >= 3:
+            self._loop_steps += 1
+
+    def _detect_stall(self) -> bool:
+        """True when the student is making no progress: repeated invalid
+        actions, no state change for many steps, or revisiting the same
+        state within a short window."""
+        if self._active_hold is not None or self._pending_hold_target:
+            return False            # a held probe is productive waiting
+        if self._invalid_streak >= 3:
+            return True
+        if self._steps_since_state_change >= 10:
+            return True
+        rec = list(self._recent_states)
+        if len(rec) >= 6 and rec.count(rec[-1]) >= 3:
+            return True
+        return False
+
+    def _recovery_plan(self) -> Optional[list]:
+        """Directed anti-loop movement: pick a valid action whose resulting
+        state is least recently visited, preferring movement away from the
+        current cell. Bounded (<= 9 actions), deterministic, public-only."""
+        st = self.belief
+        valid = valid_actions(st, self.geom)
+        if not valid:
+            return None
+        recent = set(self._recent_states)
+        best = None
+        best_score = None
+        pos = st.pos
+        for a in valid:
+            nxt = public_next(st, a, self.geom)
+            if nxt is None:
+                continue
+            k = state_key(nxt)
+            score = 10.0 if k not in recent else -5.0
+            score += 0.5 * (abs(nxt.pos[0] - pos[0])
+                             + abs(nxt.pos[1] - pos[1]))
+            if best_score is None or score > best_score:
+                best_score = score
+                best = a
+        return [best] if best is not None else None
+
+    def _maybe_start_hold(self, door, ante, src) -> bool:
+        """Begin holding a model-backed probe once its antecedent currently
+        holds. Holding waits through delayed openings and prevents the
+        agent from cancelling a probe mid-attempt."""
+        if not self.cog_probe_hold:
+            return False
+        if src not in ("hypothesis", "bank"):
+            return False
+        if self._active_hold is not None:
+            return False
+        if ante <= atoms_of_state(self.belief):
+            self._active_hold = {
+                "door": door, "ante": frozenset(ante), "src": src,
+                "held_steps": 0,
+            }
+            self.trace["holds_started"] += 1
+            return True
+        return False
+
+    def _resolve_hold(self):
+        """Advance an active held probe. Returns (plan, door):
+
+        * ([preserving_action], door) — keep waiting for a delayed open;
+        * (None, door) — the hold resolved (door opened); caller falls
+          through to the normal open-door pass-through;
+        * (None, None) — no hold / hold ended without opening.
+        """
+        h = self._active_hold
+        if h is None:
+            return None, None
+        door = h["door"]
+        ante = h["ante"]
+        if self.belief.door_open.get(door, False):
+            # success: the door opened while the condition was held
+            self._mark_probe_completed(door, ante, h["src"])
+            self._active_hold = None
+            self._pending_hold_target = None
+            self.trace["holds_resolved_open"] += 1
+            return None, door
+        if not (ante <= atoms_of_state(self.belief)):
+            # the condition was broken before the door opened: inconclusive
+            self._mark_probe_completed(door, ante, h["src"])
+            self._active_hold = None
+            self.trace["holds_interrupted"] += 1
+            self._bump_attempts(door, ante)
+            return None, None
+        if h["held_steps"] < self.hold_budget:
+            pres = self._first_preserving_action(self.belief, ante,
+                                                 strict=True)
+            if pres is not None:
+                h["held_steps"] += 1
+                self.trace["hold_preserve_steps"] += 1
+                return [pres], door
+            self._mark_probe_completed(door, ante, h["src"])
+            self._active_hold = None
+            self.trace["holds_interrupted"] += 1
+            self._bump_attempts(door, ante)
+            return None, None
+        # held for the full budget without opening: genuine failure
+        self._mark_probe_completed(door, ante, h["src"])
+        self._active_hold = None
+        self._pending_hold_target = None
+        self.tried.setdefault(door, set()).add(ante)
+        self.trace["holds_resolved_fail"] += 1
+        if h["src"] == "hypothesis":
+            self.trace["memory_incorrect"] += 1
+        return None, None
+
     def _choose_probe(self):
         def on_expand():
             self.planner_ops += 1
@@ -476,14 +839,43 @@ class MetargonAcademyAgent:
         if (pattern not in self._goal_infeasible
                 or self._steps_since_goal_check >= 8
                 or self.belief.pos == self.geom.goal):
-            plan = self._plan_cached(self.belief, (), on_expand,
-                                     to_pos=self.geom.goal)
+            if self._goal_component_reachable():
+                plan = self._plan_cached(self.belief, (), on_expand,
+                                         to_pos=self.geom.goal)
+                if plan is not None:
+                    self._steps_since_goal_check = 0
+                    return plan, None
             self._steps_since_goal_check = 0
-            if plan is not None:
-                return plan, None
             self._goal_infeasible[pattern] = True
         if self.probe_vocab_disabled:
             return None, None
+        # hold-based probe attribution (cognitive path): keep a model-backed
+        # probe's condition true while waiting for a (possibly delayed)
+        # opening, instead of the fixed selection-time deadline.
+        if self.cog_probe_hold:
+            plan_h, door_h = self._resolve_hold()
+            if plan_h:
+                return plan_h, door_h
+            if self._pending_hold_target is not None:
+                pd, pa, ps = self._pending_hold_target
+                if pa <= atoms_of_state(self.belief):
+                    if self._maybe_start_hold(pd, pa, ps):
+                        self._pending_hold_target = None
+                        plan_h, door_h = self._resolve_hold()
+                        if plan_h:
+                            return plan_h, door_h
+                elif self.memory.step - self._pending_hold_since \
+                        > self.probe_timeout + 4:
+                    self._pending_hold_target = None
+        if not self.cognitive_exploration:
+            return self._choose_probe_baseline()
+        return self._choose_probe_cognitive()
+
+    def _choose_probe_baseline(self):
+        """The original probe-selection path (identical to the pre-v0.1
+        behavior; used when cognitive exploration is off)."""
+        def on_expand():
+            self.planner_ops += 1
         # 2. candidates grouped by priority:
         #    prio 0: hypothesis-backed antecedents (strongest information)
         #    prio 1: probes that require changing the world (novel info)
@@ -584,15 +976,202 @@ class MetargonAcademyAgent:
             if src == "hypothesis":
                 self.trace["memory_actions"] += 1
             self.pending_probe[door] = (ante, self.memory.step + self.probe_timeout, src)
-            if self._collect_probe_log:
-                self.trace.setdefault("planned_probes", []).append(
-                    [door, sorted(list(ante)), src])
+            self._log_probe_attempt(door, ante, src)
+            return plan, door
+        return None, None
+
+    def _choose_probe_cognitive(self):
+        """Cognitive probe selection (v0.1): bounded information-value
+        scoring within priority tiers, decomposition of infeasible
+        conjunctive antecedents, gap-guided escalation after stalls, and
+        a global planner budget per act() call."""
+        def on_expand():
+            self.planner_ops += 1
+            self._act_planner_budget -= 1
+            if self._act_planner_budget <= 0:
+                raise _BudgetExhausted()
+        current = atoms_of_state(self.belief)
+        candidates = []
+        for door in self.geom.door_cell:
+            if self.belief.door_open[door]:
+                continue
+            if self.probe_adaptive:
+                candidates.extend(self._adaptive_probe_candidates(door, current))
+                if self._stall_triggers >= 2:
+                    gap = self._gap_guided_candidates(door)
+                    self.trace["gap_guided_candidates"] += len(gap)
+                    candidates.extend(gap)
+                continue
+            hyps = self.memory.query(door, opens=True)
+            self.trace["query_calls"] += 1
+            if hyps:
+                self.trace["query_useful"] += 1
+            self.trace["hypothesis_retrieved"] += len(hyps)
+            if self.memory.episode_scoped:
+                self.trace["cross_epoch_transfer_retrieved"] += sum(
+                    1 for h in hyps
+                    if h.verified_epoch_count
+                    >= self.memory.min_verified_epochs_for_transfer)
+            if self.probe_episode_local:
+                hyps = [h for h in hyps
+                        if h.last_update >= self._episode_mem_step]
+            for h in hyps[:3]:
+                eff_conf = self.memory.effective_confidence(h)
+                if eff_conf < self.probe_min_effective_confidence:
+                    self.trace["hypothesis_skipped_lowconf"] += 1
+                    continue
+                self.trace["hypothesis_candidates"] += 1
+                prio = 0 if (len(h.antecedent) <= 2
+                             and eff_conf >= 0.75) else 1
+                candidates.append((door, h.antecedent, prio, "hypothesis"))
+            if self.probe_bank_reuse and self.memory.evidence_bank_cap > 0:
+                for ante, cons in self.memory.bank_entries():
+                    if cons.split(":")[1] != door:
+                        continue
+                    if ante not in self.tried[door]:
+                        candidates.append((door, ante, 0, "bank"))
+                        self.memory.mark_retrieval()
+            if self.memory_atom_transfer:
+                atoms = self.memory.transfer_atoms(door, k=6)
+                for a in atoms[:4]:
+                    p = frozenset({a})
+                    if p not in self.tried[door]:
+                        candidates.append((door, p, 1, "atom_single"))
+                for p in self.memory.transfer_pairs(door, k=4):
+                    if p not in self.tried[door]:
+                        candidates.append((door, p, 1, "atom_pair"))
+            probes = self._novel_singles(door) + self._conjunctive_probes(door)
+            need_change = [s for s in probes if not (s <= current)]
+            already_true = [s for s in probes if s <= current]
+            for s in need_change[:self.probe_max_plans]:
+                candidates.append((door, s, 1, "novel_single"))
+            for s in already_true[:2]:
+                candidates.append((door, s, 2, "other"))
+            if self._stall_triggers >= 2:
+                gap = self._gap_guided_candidates(door)
+                self.trace["gap_guided_candidates"] += len(gap)
+                candidates.extend(gap)
+        candidates.sort(key=lambda x: x[2])
+        protected = self._protected_atoms()
+        best_by_prio = {}
+        evaluated = 0
+        try:
+            for door, ante, prio, src in candidates:
+                if ante in self.tried[door]:
+                    self.trace["skipped_tried"] += 1
+                    continue
+                if not target_feasible(self.belief, ante, self.geom):
+                    # Infeasible under the current belief: never burn the
+                    # antecedent (connectivity changes cheaply re-check it
+                    # next time). Decompose into a feasible subset when
+                    # enabled so partial evidence is still collected.
+                    if self.cog_decompose:
+                        sub = maximal_feasible_subset(
+                            self.belief, ante, self.geom)
+                        if sub and sub != ante and sub not in self.tried[door]:
+                            ante = sub
+                            self.trace["decomposed_candidates"] += 1
+                        else:
+                            self.trace["skipped_infeasible"] += 1
+                            continue
+                    else:
+                        self.trace["skipped_infeasible"] += 1
+                        continue
+                # Model-backed probes get the full planning budget; low-
+                # tier vocabulary/gap probes use a cheaper cap so wasted
+                # searches cannot dominate the action budget.
+                me = 1500 if src in ("hypothesis", "bank") else 700
+                plan = self._plan_cached(self.belief, ante, on_expand,
+                                         max_expand=me)
+                self.plan_calls += 1
+                evaluated += 1
+                if plan:
+                    if self._plan_breaks_protection(plan, protected):
+                        continue
+                    score = self._candidate_score(
+                        door, ante, prio, src, len(plan))
+                    cur = best_by_prio.get(prio)
+                    if cur is None or score > cur[0]:
+                        best_by_prio[prio] = (score, plan, door, ante, src)
+                elif ante <= atoms_of_state(self.belief):
+                    pres = self._first_preserving_action(self.belief, ante,
+                                                        strict=True)
+                    if pres is not None and not self._plan_breaks_protection(
+                            [pres], protected):
+                        score = self._candidate_score(
+                            door, ante, prio, src, 1)
+                        cur = best_by_prio.get(prio)
+                        if cur is None or score > cur[0]:
+                            best_by_prio[prio] = (
+                                score, [pres], door, ante, src)
+                    else:
+                        self.tried[door].add(ante)
+                else:
+                    # no plan within the expansion cap: the full search is
+                    # expensive, so do not re-run it on every step. Mark
+                    # the antecedent as attempted (bounded); decomposition
+                    # and gap-guided candidates keep alternative routes
+                    # available.
+                    self.tried[door].add(ante)
+                    self.trace["skipped_search_failed"] += 1
+                if evaluated >= self.probe_max_plans:
+                    break
+        except _BudgetExhausted:
+            pass
+        if best_by_prio:
+            prio = min(best_by_prio)
+            _, plan, door, ante, src = best_by_prio[prio]
+            key = f"source_{src}"
+            if key not in self.trace:
+                key = "source_other"
+            self.trace[key] += 1
+            self.trace["plans_used"] += 1
+            if src == "hypothesis":
+                self.trace["memory_actions"] += 1
+            if self.cog_probe_hold and src in ("hypothesis", "bank"):
+                if ante <= atoms_of_state(self.belief):
+                    if self._maybe_start_hold(door, ante, src):
+                        self._log_probe_attempt(door, ante, src)
+                        return plan, door
+                    self._pending_hold_target = (door, ante, src)
+                    self._pending_hold_since = self.memory.step
+                else:
+                    self._pending_hold_target = (door, ante, src)
+                    self._pending_hold_since = self.memory.step
+            else:
+                self.pending_probe[door] = (
+                    ante, self.memory.step + self.probe_timeout, src)
+            self._log_probe_attempt(door, ante, src)
             return plan, door
         return None, None
 
     # -- interface -------------------------------------------------------
     def act(self, obs) -> str:
         self._sync(obs)
+        if self.cognitive_exploration:
+            self._note_step()
+            self._act_planner_budget = self.planner_budget_per_act
+            if self.cog_recovery:
+                if self._recovery_steps_left > 0:
+                    plan = self._recovery_plan()
+                    if plan:
+                        self._recovery_steps_left -= 1
+                        self.trace["recovery_steps"] += 1
+                        return plan[0]
+                    self._recovery_steps_left = 0
+                if self._detect_stall():
+                    self._stall_triggers += 1
+                    self.trace["stalls_detected"] += 1
+                    if self._stall_triggers \
+                            <= RECOVERY_MAX_TRIGGERS_PER_EPISODE:
+                        self._recovery_steps_left = self.recovery_budget
+                        self.trace["recoveries_triggered"] += 1
+                        self._recent_states.clear()
+                        plan = self._recovery_plan()
+                        if plan:
+                            self._recovery_steps_left -= 1
+                            self.trace["recovery_steps"] += 1
+                            return plan[0]
         plan, _ = self._choose_probe()
         if plan:
             return plan[0]
@@ -607,17 +1186,38 @@ class MetargonAcademyAgent:
         before_atoms = atoms_from_observation(obs_before)
         after_obs = result.observation
         after_atoms = atoms_from_observation(after_obs)
+        if self.cognitive_exploration:
+            if result.valid:
+                self._invalid_streak = 0
+            else:
+                self._invalid_streak += 1
+            self._recent_actions.append(action)
         # door events from the public observation stream
         event_happened = False
+        event_doors = set()
         for door in self.geom.door_cell:
             before_open = getattr(obs_before, "d1" if door == "D1" else "d2")
             after_open = getattr(after_obs, "d1" if door == "D1" else "d2")
             if not before_open and after_open:
                 self.memory.observe_event(before_atoms, door, True, after_atoms)
                 event_happened = True
+                event_doors.add(door)
                 self.passed[door] = False
+                if self.cog_knowledge_gaps:
+                    self._note_local_evidence(door, before_atoms, True)
+                if self._active_hold is not None \
+                        and self._active_hold["door"] == door:
+                    if self._active_hold["src"] == "hypothesis":
+                        self.trace["memory_correct"] += 1
+                    self._mark_probe_completed(
+                        door, self._active_hold["ante"],
+                        self._active_hold["src"])
+                    self._active_hold = None
+                    self._pending_hold_target = None
+                    self.trace["holds_resolved_open"] += 1
                 if door in self.pending_probe:
                     _, _, src = self.pending_probe[door]
+                    self._mark_probe_completed(door, self.pending_probe[door][0], src)
                     self.trace["door_open_after_probe"] += 1
                     self.trace[f"door_open_after_{src}"] += 1
                     if src == "hypothesis":
@@ -626,14 +1226,23 @@ class MetargonAcademyAgent:
             elif before_open and not after_open:
                 self.memory.observe_event(before_atoms, door, False, after_atoms)
                 event_happened = True
+                event_doors.add(door)
         if event_happened:
             # connectivity/rule information changed: probe feasibility may
-            # have changed for every door, so reset all tried sets.
-            for d in self.geom.door_cell:
-                self.tried[d] = set()
+            # have changed. The baseline resets every door's tried set on
+            # ANY event (a diagnosed source of repeated probes). The
+            # cognitive path never resets tried sets: content-feasible
+            # antecedents are re-checked cheaply every time, and executed-
+            # failed antecedents stay excluded (they were genuinely tried),
+            # so no budget is re-burned on the same experiment.
+            if not self.cognitive_exploration:
+                for d in self.geom.door_cell:
+                    self.tried[d] = set()
         # nonevents for doors that did not change as expected
         for door in self.geom.door_cell:
             after_open = getattr(after_obs, "d1" if door == "D1" else "d2")
+            if self.cog_knowledge_gaps and not after_open:
+                self._note_local_evidence(door, after_atoms, False)
             if not after_open:
                 self.memory.observe_nonevent(after_atoms, door, True)
             else:
@@ -642,6 +1251,7 @@ class MetargonAcademyAgent:
         self.memory.step_advance()
         for door, (ante, deadline, _src) in list(self.pending_probe.items()):
             if self.memory.step >= deadline:
+                self._mark_probe_completed(door, ante, _src)
                 self.tried[door].add(ante)
                 if _src == "hypothesis":
                     self.trace["memory_incorrect"] += 1
@@ -723,6 +1333,20 @@ class MetargonAcademyAgent:
             "planner_max_expand": self.planner_max_expand,
             "probe_max_plans": self.probe_max_plans,
             "probe_timeout": self.probe_timeout,
+            "cognitive_exploration": self.cognitive_exploration,
+            "cog_knowledge_gaps": self.cog_knowledge_gaps,
+            "cog_info_gain": self.cog_info_gain,
+            "cog_recovery": self.cog_recovery,
+            "cog_decompose": self.cog_decompose,
+            "cog_probe_hold": self.cog_probe_hold,
+            "recovery_budget": self.recovery_budget,
+            "hold_budget": self.hold_budget,
+            "planner_budget_per_act": self.planner_budget_per_act,
+            "local_atom_evidence": {
+                door: {tuple(a): list(e)
+                       for a, e in ev.items()}
+                for door, ev in self._local_atom_evidence.items()
+            },
             "tried": {
                 d: [sorted(list(ante)) for ante in t]
                 for d, t in self.tried.items()
@@ -773,6 +1397,27 @@ class MetargonAcademyAgent:
         self.planner_max_expand = state["planner_max_expand"]
         self.probe_max_plans = state["probe_max_plans"]
         self.probe_timeout = state["probe_timeout"]
+        self.cognitive_exploration = bool(state.get(
+            "cognitive_exploration", False))
+        self.cog_knowledge_gaps = bool(state.get(
+            "cog_knowledge_gaps", self.cognitive_exploration))
+        self.cog_info_gain = bool(state.get(
+            "cog_info_gain", self.cognitive_exploration))
+        self.cog_recovery = bool(state.get(
+            "cog_recovery", self.cognitive_exploration))
+        self.cog_decompose = bool(state.get(
+            "cog_decompose", self.cognitive_exploration))
+        self.cog_probe_hold = bool(state.get(
+            "cog_probe_hold", self.cognitive_exploration))
+        self.recovery_budget = int(state.get(
+            "recovery_budget", RECOVERY_BUDGET))
+        self.hold_budget = int(state.get("hold_budget", HOLD_BUDGET))
+        self.planner_budget_per_act = int(state.get(
+            "planner_budget_per_act", MAX_PLANNER_BUDGET_PER_ACT))
+        self._local_atom_evidence = {}
+        for door, ev in state.get("local_atom_evidence", {}).items():
+            self._local_atom_evidence[door] = {
+                tuple(a): tuple(e) for a, e in ev.items()}
         self.tried = {
             d: {frozenset(map(tuple, atoms)) for atoms in t}
             for d, t in state["tried"].items()
