@@ -44,6 +44,22 @@ MAX_GLOBAL_STEPS = 4000          # safety cap across all sessions
 STEP_SLEEP = 0.01               # cadence between steps while running
 
 
+def _json_safe(obj):
+    """Recursively convert non-JSON-native containers at the API boundary.
+
+    The scientific memory representation (frozenset antecedents, sets,
+    tuples) is preserved in the agent; only the serialized view is made
+    JSON-safe. Sets/frozensets become deterministically sorted lists.
+    """
+    if isinstance(obj, (set, frozenset)):
+        return sorted((_json_safe(v) for v in obj), key=repr)
+    if isinstance(obj, (list, tuple)):
+        return [_json_safe(v) for v in obj]
+    if isinstance(obj, dict):
+        return {k: _json_safe(v) for k, v in obj.items()}
+    return obj
+
+
 @dataclass
 class Challenge:
     """A supported challenge. The goal is expressed over public state."""
@@ -325,6 +341,15 @@ class NestSession:
     def _default_challenge(self):
         return Challenge(description="reach the goal in the training academy")
 
+    def ensure_world(self):
+        """Make an initialized Academy environment visible without starting
+        autonomous training. If no episode exists yet, create the default
+        challenge and leave it paused so the UI always has a world to
+        render. Never runs steps on its own."""
+        with self._lock:
+            if self.env is None:
+                self.new_challenge(self.challenge or self._default_challenge())
+
     # ------------------------------------------------------------------ #
     # Persistence
     # ------------------------------------------------------------------ #
@@ -352,6 +377,8 @@ class NestSession:
                 if c:
                     self.challenge = Challenge(**c)
                 self.trace("Restored saved progress. Learned memory is intact.")
+            # always return to a visible world after restoring
+            self.ensure_world()
             return meta
 
     def fresh(self):
@@ -367,6 +394,8 @@ class NestSession:
             self.global_steps = 0
             self.status = STATUS_IDLE
             self.trace("Fresh start. No memory.")
+            # keep a visible world after wiping (still paused; no training)
+            self.ensure_world()
 
     # ------------------------------------------------------------------ #
     # Telemetry / rendering
@@ -384,7 +413,8 @@ class NestSession:
             hyps.append({
                 "id": h.h_id,
                 "door": h.door,
-                "antecedent": h.antecedent,
+                # API boundary: frozenset -> sorted list (memory untouched)
+                "antecedent": sorted(h.antecedent, key=repr),
                 "antecedent_text": " ∧ ".join(sorted(
                     f"{a[0]}({','.join(map(str, a[1:]))})" for a in h.antecedent)),
                 "status": h.status,
@@ -445,7 +475,7 @@ class NestSession:
 
     def snapshot(self) -> dict:
         with self._lock:
-            return {
+            return _json_safe({
                 "status": self.status,
                 "episode_index": self.episode_index,
                 "episode_successes": self.episode_successes,
@@ -460,4 +490,4 @@ class NestSession:
                 "last_guidance": self.last_guidance,
                 "teaching": self.teaching.as_dict(),
                 "messages_tail": self.messages[-20:],
-            }
+            })
