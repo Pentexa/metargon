@@ -687,6 +687,8 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                 "classic_frozen_per_config": classic_frozen["per_config_list"],
                 "classic_frozen_attribution": attribution_metrics(
                     classic_frozen["rows"]),
+                "classic_frozen_trace": classic_frozen.get("trace_agg"),
+                "classic_frozen_relevance": classic_frozen.get("relevance_agg"),
                 "classic_adapt": classic_adapt["summary"],
                 "conflict_frozen": conflict_frozen["summary"],
                 "conflict_frozen_per_config": conflict_frozen["per_config_list"],
@@ -778,6 +780,28 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                 for k in cog_vals[0]
             }
         summary["conditions_detail"][name] = agg
+        # aggregate probe-relevance across seeds (classic frozen)
+        rel_rows = [p["classic_frozen_relevance"] for p in per_seed
+                    if p.get("classic_frozen_relevance")]
+        if rel_rows:
+            rel_agg = {"n": 0, "exact": 0, "partial": 0, "irrelevant": 0,
+                       "by_source": {}}
+            for r in rel_rows:
+                rel_agg["n"] += r.get("n", 0)
+                rel_agg["exact"] += r.get("exact", 0)
+                rel_agg["partial"] += r.get("partial", 0)
+                rel_agg["irrelevant"] += r.get("irrelevant", 0)
+                for src, s in r.get("by_source", {}).items():
+                    bs = rel_agg["by_source"].setdefault(
+                        src, {"n": 0, "exact": 0, "partial": 0,
+                              "irrelevant": 0})
+                    for k in ("n", "exact", "partial", "irrelevant"):
+                        bs[k] += s.get(k, 0)
+            rel_agg["irrelevant_frac"] = (
+                rel_agg["irrelevant"] / rel_agg["n"]) if rel_agg["n"] else None
+            rel_agg["exact_frac"] = (
+                rel_agg["exact"] / rel_agg["n"]) if rel_agg["n"] else None
+            summary.setdefault("relevance_mean", {})[name] = rel_agg
         if run_repeated:
             rl = [p["repeated_learning"] for p in per_seed
                   if p["repeated_learning"]]
