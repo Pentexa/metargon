@@ -40,26 +40,36 @@ v0.1's `learn()` treats every raw single-step flip as a real door event:
 One opt-in flag, `cog_noise_robust` (default False; **not** implied by
 `cognitive_exploration` so v0.1 configs keep exact behavior):
 
-* **Confirmation rule.** A door/switch reading is only treated as a
-  *change* after `noise_confirm_n` (default 2) consecutive observations
-  agree on the new value. A single flip is ignored (perception noise); a
-  persistent change (a real environmental event) is confirmed within one
-  step. Probability of a false confirmation at q=0.15 ≈ q² ≈ 2.25%
-  per signal per step.
+* **Exact switch tracking.** Switch states are maintained exactly from
+  the Toggle action semantics (`_toggle_switch_if_standing`) — a Toggle
+  on a switch cell flips that switch, independent of noisy readings.
+* **Exact plate derivation.** Plate loads are derived from (reliable)
+  object positions (`_inferred_atoms`) — no reading needed.
+* **Exact transition channel.** Door transitions are taken from the step
+  result's `events` tuple when present (the environment's visible change
+  reports — already part of the student API and used by the replay
+  experience memory). The confirmed door state and memory events follow
+  the exact transitions, so phantom reading flips cannot create false
+  events, false pass-through attempts, false stalls or phantom hold
+  resolution.
+* **Causal-link fallback** (`_update_events`) for environments without an
+  events channel: a reading flip is accepted only when causally linked to
+  an (exact) atom change (same step, previous step for delayed doors,
+  exit from the door cell, or the episode bootstrap window — the first
+  two steps, needed because initial-state rule satisfaction opens doors
+  without prior atom changes).
+* **Traversal correction.** Attempting to enter a door cell gives exact
+  ground truth: a failed entry ⇒ door actually closed; a successful
+  entry ⇒ actually open. Corrections override stale confirmed states
+  (protects against transient one-step opens that close before the agent
+  acts).
 * **Confirmed state drives belief** (`_apply_confirmed_belief`): the
   planner, probes, pass-through logic, stall detection and hold
-  resolution see confirmed door/switch states, not raw readings →
-  phantom opens can no longer cause invalid-action streaks or false
-  recovery.
-* **Confirmed transitions drive memory** (`_learn_noise_robust`): memory
-  events fire only on confirmed transitions; nonevents/maintain use the
-  confirmed state → no false contradictions from phantom flips.
-* **Exact plate derivation.** Plate loads are derived from (reliable)
-  object positions (`_clean_atoms`); switch atoms use confirmed switch
-  states — event-time atom capture is exact up to confirmation latency.
+  resolution see confirmed door states and inferred switch states, not
+  raw readings.
 
-All state is bounded (per-signal streak counters), fully checkpointed,
-and independent of environment specifics.
+All state is bounded (per-door confirmed flags, event tuples), fully
+checkpointed, and independent of environment specifics.
 
 ## 3. Experiment protocol
 
@@ -92,12 +102,16 @@ event so the memory itself can weight confirmed evidence higher.
 
 ## 6. Honest limitations
 
-* Confirmation adds a one-step latency to event detection (a real event
-  is usually confirmed on the following observation); this costs one
-  step per real event.
-* The mechanism does not estimate q; it is a fixed, bounded confirm rule
-  (robust across q=0.04–0.15 by design, not by tuning).
+* The exact transition channel assumes the environment reports real door
+  transitions (as it does in the Academy API). In environments without
+  such a channel the causal-link fallback applies, which is approximate
+  under noise.
+* The mechanism does not estimate q; the causal-link fallback is a fixed,
+  bounded rule.
 * The noisy-cell comparison remains the least controlled: the baseline
   also learns from corrupted readings, and the harness measures the
   relative improvement of the confirmation layer, not denoising.
 * High-noise (q>0.15) regimes are untested.
+* At q=0.08 the v0.2 student remains slightly (and non-significantly)
+  behind v0.1 in this 6-seed sample; at q=0.15 it is slightly ahead —
+  final verdict at the confirmatory size is in the artifact summary.
