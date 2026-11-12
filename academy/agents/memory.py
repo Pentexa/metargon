@@ -28,6 +28,30 @@ CONTRADICT_WINDOW = 3
 CANDIDATES_PER_EVENT = 10
 PAIR_BASE = 5
 
+# -- Cognitive Memory v0.2 (protect exploration) --------------------------
+# v0.1 (PR #50, re-ranking) is treated as a negative finding: re-ranking
+# all hypotheses by reliability starved exact novel-single discovery and
+# broke repeated learning. v0.2 therefore changes *nothing* about the
+# retrieval order (the ``epoch_reset`` order is kept). It adds instead a
+# minimal, context-sensitive eligibility filter on hypothesis *reuse*:
+#   * a hypothesis may be reused only when it has at least
+#     ``protection_min_active_support`` support events in the *active*
+#     evidence basis (per-epoch / per-context / cumulative) — otherwise it
+#     is treated as unexplored and the agent explores;
+#   * hypotheses with more than ``protection_max_failures`` repeated
+#     failure windows are excluded from reuse (evidence kept; revived by
+#     fresh support or a task boundary);
+#   * at most ``protection_max_reuse_per_door`` hypotheses are returned
+#     for probing per door, so remaining candidate slots always go to
+#     exploration (novel singles, bank, atom transfer).
+# All flags default off ⇒ baseline behavior, evidence and checkpoints are
+# untouched.
+PROTECT_EXPLORATION_DEFAULT = False
+PROTECTION_MIN_ACTIVE_SUPPORT = 1
+PROTECTION_MAX_FAILURES = 1
+PROTECTION_MAX_REUSE_PER_DOOR = 1
+PROTECTION_ALLOW_TRUSTED_TRANSFER_DEFAULT = False
+
 HYPOTHESIS = "hypothesis"
 PREDICTED = "predicted"
 VERIFIED = "verified"
@@ -80,6 +104,11 @@ class Hypothesis:
     sup_by_epoch: dict = field(default_factory=dict)
     con_by_epoch: dict = field(default_factory=dict)
     verified_epochs: list = field(default_factory=list)   # sorted ints
+    # CM v0.2: consecutive completed failure windows since last support in
+    # the current context (reset at task boundaries). Used only by the
+    # protect-exploration eligibility filter; default 0 keeps legacy
+    # checkpoints byte-compatible.
+    consecutive_failures: int = 0
 
     @property
     def door(self) -> str:
@@ -142,6 +171,7 @@ class Hypothesis:
             "sup_by_epoch": {str(k): v for k, v in self.sup_by_epoch.items()},
             "con_by_epoch": {str(k): v for k, v in self.con_by_epoch.items()},
             "verified_epochs": self.verified_epochs,
+            "consecutive_failures": self.consecutive_failures,
         }
 
     @classmethod
@@ -159,6 +189,7 @@ class Hypothesis:
             sup_by_epoch={int(k): v for k, v in d.get("sup_by_epoch", {}).items()},
             con_by_epoch={int(k): v for k, v in d.get("con_by_epoch", {}).items()},
             verified_epochs=list(d.get("verified_epochs", [])),
+            consecutive_failures=int(d.get("consecutive_failures", 0)),
         )
 
 
@@ -225,6 +256,35 @@ class CompositionalMemory:
         cumulative; returns 0.0 when the active context has no local
         evidence (so stale cross-task hypotheses are not trusted
         verbatim in a new task unless they have support there).
+
+    CM v0.2 (protect exploration; each off by default):
+      * ``protect_exploration`` — do **not** re-rank hypotheses.
+        Retrieval order is unchanged (the ``epoch_reset`` order).
+        Instead, hypothesis *reuse* is gated by a minimal context-sensitive
+        eligibility filter that guarantees exploration slots:
+        - ``protection_min_active_support``: a hypothesis is eligible for
+          reuse only once it has this many support events in the active
+          evidence basis (per-epoch when ``episode_scoped``, per-context
+          when ``context_scoped``, else cumulative). Without local
+          evidence the hypothesis is treated as unexplored and the agent
+          explores.
+        - ``protection_max_failures``: hypotheses with more repeated
+          failure windows than this are excluded from reuse (evidence
+          kept; revived by support or a task boundary).
+        - ``protection_allow_trusted_transfer``: hypotheses verified in
+          >= ``min_verified_epochs_for_transfer`` past epochs and not
+          currently under repeated-failure attack are also eligible
+          (bounded trusted-transfer tier — the v0.7 cross-epoch
+          retrieval, but capped by ``protection_max_reuse_per_door``).
+        - ``protection_max_reuse_per_door``: at most this many reusable
+          hypotheses are returned per door for probing, so the remaining
+          candidate slots always go to exploration (novel singles, bank,
+          atom transfer).
+        This prevents conflicting or repeatedly failing memories from
+        monopolizing the action budget without suppressing exploration.
+      * ``CognitiveMemoryV02`` is a ready-made subclass: episode-scoped
+        evidence + protect-exploration on (including the trusted-transfer
+        tier).
     """
 
     def __init__(self, max_hypotheses: int = MAX_HYPOTHESES,
@@ -245,7 +305,12 @@ class CompositionalMemory:
                  atom_transfer: bool = False,
                  bank_refresh_on_contradiction: bool = False,
                  episode_scoped: bool = False,
-                 min_verified_epochs_for_transfer: int = 2):
+                 min_verified_epochs_for_transfer: int = 2,
+                 protect_exploration: bool = PROTECT_EXPLORATION_DEFAULT,
+                 protection_min_active_support: int = PROTECTION_MIN_ACTIVE_SUPPORT,
+                 protection_max_failures: int = PROTECTION_MAX_FAILURES,
+                 protection_max_reuse_per_door: int = PROTECTION_MAX_REUSE_PER_DOOR,
+                 protection_allow_trusted_transfer: bool = PROTECTION_ALLOW_TRUSTED_TRANSFER_DEFAULT):
         self.max_hypotheses = max_hypotheses
         self.verify_support = verify_support
         self.max_contradict = max_contradict
@@ -267,6 +332,17 @@ class CompositionalMemory:
         self.episode_scoped = bool(episode_scoped)
         self.min_verified_epochs_for_transfer = int(
             min_verified_epochs_for_transfer)
+        # CM v0.2
+        self.protect_exploration = bool(protect_exploration)
+        self.protection_min_active_support = max(
+            0, int(protection_min_active_support))
+        self.protection_max_failures = max(0, int(protection_max_failures))
+        self.protection_max_reuse_per_door = max(
+            1, int(protection_max_reuse_per_door))
+        self.protection_allow_trusted_transfer = bool(
+            protection_allow_trusted_transfer)
+        self.reuse_filtered = 0
+        self.reuse_eligible = 0
         self.current_ctx = None
         self._current_epoch = None
         self.hypotheses: list[Hypothesis] = []
@@ -329,6 +405,12 @@ class CompositionalMemory:
           candidate in the new task.
         """
         self._current_epoch = int(epoch)
+        if self.protect_exploration:
+            # CM v0.2: a task boundary resets *current-context* failure
+            # streaks. Historical verification is untouched, so old
+            # hypotheses start neutral in the new task.
+            for h in self.hypotheses:
+                h.consecutive_failures = 0
         if self.episode_scoped:
             self._continuous_true.clear()
             for h in self.hypotheses:
@@ -368,11 +450,56 @@ class CompositionalMemory:
                     and h.ctx_support(self.current_ctx) <= 0):
                 continue
             out.append(h)
+        if self.protect_exploration and opens is not None:
+            # CM v0.2: eligibility filter on *probe retrieval* only
+            # (``opens`` specified). Protection/other queries (opens=None)
+            # are untouched.
+            eligible = []
+            for h in out:
+                if self._reuse_eligible(h):
+                    eligible.append(h)
+                else:
+                    self.reuse_filtered += 1
+            out = eligible
+            self.reuse_eligible += len(out)
         if self.episode_scoped:
             out.sort(key=lambda h: (-self._retrieval_key(h), h.h_id))
         else:
             out.sort(key=lambda h: (-h.confidence, -h.sup))
+        if self.protect_exploration and opens is not None:
+            # cap AFTER sorting: return the top-N reusable hypotheses by
+            # the baseline order (never a ranking change).
+            out = out[:self.protection_max_reuse_per_door]
         return out
+
+    def _active_support(self, h: Hypothesis) -> int:
+        """Support in the *active* evidence basis (epoch > context >
+        cumulative windowed), used by the v0.2 eligibility filter."""
+        sup, _ = self._ctx_counts(h)
+        return sup
+
+    def _reuse_eligible(self, h: Hypothesis) -> bool:
+        """Context-sensitive eligibility for hypothesis reuse (v0.2).
+
+        A hypothesis is reusable only if it has accumulated at least
+        ``protection_min_active_support`` support events in the active
+        evidence basis AND is not under repeated-failure attack. This is
+        a *gate*, not a ranking change: eligible hypotheses keep the
+        baseline retrieval order.
+        """
+        if h.consecutive_failures > self.protection_max_failures:
+            return False
+        if self._active_support(h) >= self.protection_min_active_support:
+            return True
+        if (self.protection_allow_trusted_transfer
+                and h.verified_epoch_count
+                >= self.min_verified_epochs_for_transfer):
+            # bounded trusted-transfer tier: historically verified across
+            # >= K epochs, not under repeated-failure attack, and untested
+            # in the active epoch -> eligible as a *transfer candidate*
+            # (still subject to the per-door cap).
+            return True
+        return False
 
     def _retrieval_key(self, h: Hypothesis) -> float:
         """Retrieval priority in episode-scoped mode.
@@ -759,6 +886,9 @@ class CompositionalMemory:
         h.sup += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
+        if self.protect_exploration:
+            # any support ends the repeated-failure streak
+            h.consecutive_failures = 0
         if record_ctx:
             self._record_evidence(h, "s")
         self._recompute_status(h)
@@ -767,6 +897,9 @@ class CompositionalMemory:
         h.con += 1
         h.last_update = self.step
         self._continuous_true.pop(h.h_id, None)
+        if self.protect_exploration:
+            # one more completed failure window (repeated prediction failure)
+            h.consecutive_failures += 1
         if record_ctx:
             self._record_evidence(h, "c")
         self._recompute_status(h)
@@ -873,6 +1006,13 @@ class CompositionalMemory:
             "episode_scoped": self.episode_scoped,
             "min_verified_epochs_for_transfer":
                 self.min_verified_epochs_for_transfer,
+            "protect_exploration": self.protect_exploration,
+            "protection_min_active_support": self.protection_min_active_support,
+            "protection_max_failures": self.protection_max_failures,
+            "protection_max_reuse_per_door":
+                self.protection_max_reuse_per_door,
+            "protection_allow_trusted_transfer":
+                self.protection_allow_trusted_transfer,
             "current_epoch": self._current_epoch,
             "current_ctx": self.current_ctx,
             "evidence_bank": [
@@ -931,6 +1071,20 @@ class CompositionalMemory:
         self.episode_scoped = bool(state.get("episode_scoped", False))
         self.min_verified_epochs_for_transfer = int(state.get(
             "min_verified_epochs_for_transfer", 2))
+        self.protect_exploration = bool(state.get(
+            "protect_exploration", PROTECT_EXPLORATION_DEFAULT))
+        self.protection_min_active_support = max(0, int(state.get(
+            "protection_min_active_support", PROTECTION_MIN_ACTIVE_SUPPORT)))
+        self.protection_max_failures = max(0, int(state.get(
+            "protection_max_failures", PROTECTION_MAX_FAILURES)))
+        self.protection_max_reuse_per_door = max(1, int(state.get(
+            "protection_max_reuse_per_door",
+            PROTECTION_MAX_REUSE_PER_DOOR)))
+        self.protection_allow_trusted_transfer = bool(state.get(
+            "protection_allow_trusted_transfer",
+            PROTECTION_ALLOW_TRUSTED_TRANSFER_DEFAULT))
+        self.reuse_filtered = 0
+        self.reuse_eligible = 0
         self._current_epoch = state.get("current_epoch")
         self.current_ctx = state.get("current_ctx")
         self.evidence_bank_cap = int(state.get("evidence_bank_cap", 0))
@@ -1012,4 +1166,26 @@ class CompositionalMemory:
             "cross_epoch_verified": sum(
                 1 for h in self.hypotheses
                 if h.verified_epoch_count >= self.min_verified_epochs_for_transfer),
+            "protect_exploration": self.protect_exploration,
+            "reuse_eligible": self.reuse_eligible,
+            "reuse_filtered": self.reuse_filtered,
+            "reuse_filtered_streak": sum(
+                1 for h in self.hypotheses
+                if h.consecutive_failures > self.protection_max_failures),
         }
+
+
+class CognitiveMemoryV02(CompositionalMemory):
+    """Cognitive Memory v0.2: protect exploration.
+
+    Episode-scoped evidence (v0.7) + the v0.2 eligibility filter/cap for
+    hypothesis reuse. Construct via ``MetargonAcademyAgent(memory_factory=
+    CognitiveMemoryV02, memory_episode_scoped=True,
+    probe_reset_per_episode=True)`` — no agent changes required.
+    """
+
+    def __init__(self, *args, **kwargs):
+        kwargs.setdefault("protect_exploration", True)
+        kwargs.setdefault("episode_scoped", True)
+        kwargs.setdefault("protection_allow_trusted_transfer", True)
+        super().__init__(*args, **kwargs)
