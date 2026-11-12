@@ -62,7 +62,7 @@ from academy.eval.metrics import summarize_episodes  # noqa: E402
 from academy.evren.retention import RetentionSuite, sample_substrate  # noqa: E402
 from academy.learning.loop import run_one_episode  # noqa: E402
 from academy.tools.memory_experiment_v06 import (  # noqa: E402
-    check_frozen_integrity, compare_delta, eval_grid, memory_tracking,
+    check_frozen_integrity, compare_delta, memory_tracking,
 )
 from academy.tools.memory_experiment_v07 import (  # noqa: E402
     attribution_metrics, memory_tracking_v07,
@@ -170,6 +170,30 @@ def make_stream(splits, episodes, seed, max_steps=80):
 
 
 # ---------------------------------------------------------------------------
+# Canonical ordering (hash-seed independent).
+# `str(frozenset(...))` iterates in hash order, so sorting by `str()` is
+# NOT reproducible across PYTHONHASHSEED values; we canonicalize configs
+# by fully ordered clause/atom tuples instead.
+# ---------------------------------------------------------------------------
+def _canonical_key(config) -> tuple:
+    def clauses(r):
+        if isinstance(r, tuple):
+            return tuple(sorted(tuple(sorted(clause)) for clause in r))
+        return (tuple(sorted(r)),)
+    return (config.topology, clauses(config.d1_rule), clauses(config.d2_rule),
+            config.d1_delay, config.d2_delay)
+
+
+def pick_configs(pool, n, seed):
+    """Deterministic sample of `n` configs: canonical sort, then seeded
+    shuffle, then take the head. Independent of hash seed."""
+    items = sorted(pool, key=_canonical_key)
+    rng = random.Random(seed)
+    rng.shuffle(items)
+    return items[:max(0, min(n, len(items)))]
+
+
+# ---------------------------------------------------------------------------
 # Conflicting task family: flipped-polarity configs in the same observable
 # contexts (the negative-transfer scenario).
 # ---------------------------------------------------------------------------
@@ -217,7 +241,6 @@ def build_conflict_pool(splits, seed=CONFLICT_SEED, target=14,
         seen_keys |= {c.key for c in splits[k]}
     rng = random.Random(seed)
     cands = set()
-    tps = list(CORE_RULESETS)
     for tp in CORE_RULESETS:
         d1f = _flipped_door_rules(tp, "D1")
         d2f = _flipped_door_rules(tp, "D2")
@@ -228,8 +251,11 @@ def build_conflict_pool(splits, seed=CONFLICT_SEED, target=14,
         d2f = {r for r in d2f if sum(len(c) for c in
                                       (r if isinstance(r, tuple) else (r,))) <= 2}
         d1c, d2c = CORE_RULESETS[tp]
-        d1_opt = [r for r in d1c if len(r) <= 2] + sorted(d1f, key=str)
-        d2_opt = [r for r in d2c if len(r) <= 2] + sorted(d2f, key=str)
+        # canonical order for the sampling draws (hash-seed independent)
+        d1_opt = [r for r in d1c if len(r) <= 2] + sorted(
+            d1f, key=lambda r: tuple(sorted(r)))
+        d2_opt = [r for r in d2c if len(r) <= 2] + sorted(
+            d2f, key=lambda r: tuple(sorted(r)))
         if not d1f and not d2f:
             continue
         for _ in range(max_tries):
@@ -253,7 +279,7 @@ def build_conflict_pool(splits, seed=CONFLICT_SEED, target=14,
     # prefer easy configs (few atoms, no delay) for a clean conflict signal
     order = {"easy": 0, "medium": 1, "hard": 2}
     pool = sorted(cands, key=lambda c: (order[difficulty_of(c).bin],
-                                        c.has_delay(), str(c.key)))
+                                        c.has_delay(), _canonical_key(c)))
     return pool[:max(4, target)]
 
 
@@ -289,11 +315,14 @@ def build_focus_pools(splits, seed=FOCUS_SEED):
 # Noisy evaluation grid (fork of memory_experiment_v06.eval_grid with a
 # noise_q parameter; identical integrity checks).
 # ---------------------------------------------------------------------------
-def eval_grid_noisy(agent_state, configs, max_steps, n_configs,
-                    episodes_per_config, seeds, seed, frozen=False,
-                    agent_kwargs=None, collect_trace=False, noise_q=0.0):
+def eval_grid_cognitive(agent_state, configs, max_steps, n_configs,
+                        episodes_per_config, seeds, seed, frozen=False,
+                        agent_kwargs=None, collect_trace=False, noise_q=0.0):
+    """Fork of ``memory_experiment_v06.eval_grid`` that uses canonical
+    config picking (``pick_configs``) so results are reproducible across
+    PYTHONHASHSEED values. Identical integrity checks and semantics."""
     agent_kwargs = dict(agent_kwargs or {})
-    picks = sample_substrate(list(configs), n_configs, seed)
+    picks = pick_configs(list(configs), n_configs, seed)
     rows = []
     for i, cfgc in enumerate(picks):
         for seed_i in seeds:
@@ -362,6 +391,34 @@ def eval_grid_noisy(agent_state, configs, max_steps, n_configs,
     out = {"summary": summary, "per_config_list": rates, "rows": rows}
     if collect_trace:
         out["trace_agg"] = _aggregate_trace(rows)
+        out["relevance_agg"] = _aggregate_relevance(rows)
+    return out
+
+
+def eval_grid_noisy(agent_state, configs, max_steps, n_configs,
+                    episodes_per_config, seeds, seed, frozen=False,
+                    agent_kwargs=None, collect_trace=False, noise_q=0.0):
+    return eval_grid_cognitive(
+        agent_state, configs, max_steps, n_configs, episodes_per_config,
+        seeds, seed, frozen=frozen, agent_kwargs=agent_kwargs,
+        collect_trace=collect_trace, noise_q=noise_q)
+
+
+def _aggregate_relevance(rows):
+    out = {"n": 0, "exact": 0, "partial": 0, "irrelevant": 0,
+           "by_source": {}}
+    for r in rows:
+        rel = r.get("relevance", {})
+        if not rel:
+            continue
+        for k in ("n", "exact", "partial", "irrelevant"):
+            out[k] += rel.get(k, 0)
+        for src, s in rel.get("by_source", {}).items():
+            bs = out["by_source"].setdefault(src, {"n": 0, "exact": 0,
+                                                   "partial": 0,
+                                                   "irrelevant": 0})
+            for k in ("n", "exact", "partial", "irrelevant"):
+                bs[k] += s.get(k, 0)
     return out
 
 
@@ -404,10 +461,11 @@ def run_repeated_learning(agent, compat_pool, conflict_pool, seed,
         return succ / max(1, len(stream))
 
     def eval_frozen(pool, n_configs, tag, seed_i):
-        g = eval_grid(agent.save_state(), pool, max_steps, n_configs,
-                      base["focus_eps_per_cfg"], (seed_i,), seed,
-                      frozen=True, agent_kwargs=agent_kwargs_of(agent),
-                      collect_trace=collect_trace)
+        g = eval_grid_cognitive(agent.save_state(), pool, max_steps,
+                                n_configs, base["focus_eps_per_cfg"],
+                                (seed_i,), seed, frozen=True,
+                                agent_kwargs=agent_kwargs_of(agent),
+                                collect_trace=collect_trace)
         return g
 
     def agent_kwargs_of(agent):
@@ -519,22 +577,24 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                                  RETENTION_SEED)
 
     def compute_fresh():
-        ff = eval_grid(None, compat_pool, max_steps,
-                       base["test_grid_n"], base["test_eps_per_cfg"],
-                       (0, 1), EVAL_SEED, frozen=True,
-                       collect_trace=collect_trace)
-        fa = eval_grid(None, compat_pool, max_steps,
-                       base["test_grid_n"], base["test_eps_per_cfg"],
-                       (0, 1), EVAL_SEED, frozen=False,
-                       collect_trace=collect_trace)
-        cf = eval_grid(None, conflict_pool, max_steps,
-                       base["conflict_grid_n"], base["conflict_eps_per_cfg"],
-                       (0, 1), CONFLICT_SEED, frozen=True,
-                       collect_trace=collect_trace)
-        ca = eval_grid(None, conflict_pool, max_steps,
-                       base["conflict_grid_n"], base["conflict_eps_per_cfg"],
-                       (0, 1), CONFLICT_SEED, frozen=False,
-                       collect_trace=collect_trace)
+        ff = eval_grid_cognitive(None, compat_pool, max_steps,
+                                 base["test_grid_n"], base["test_eps_per_cfg"],
+                                 (0, 1), EVAL_SEED, frozen=True,
+                                 collect_trace=collect_trace)
+        fa = eval_grid_cognitive(None, compat_pool, max_steps,
+                                 base["test_grid_n"], base["test_eps_per_cfg"],
+                                 (0, 1), EVAL_SEED, frozen=False,
+                                 collect_trace=collect_trace)
+        cf = eval_grid_cognitive(None, conflict_pool, max_steps,
+                                 base["conflict_grid_n"],
+                                 base["conflict_eps_per_cfg"],
+                                 (0, 1), CONFLICT_SEED, frozen=True,
+                                 collect_trace=collect_trace)
+        ca = eval_grid_cognitive(None, conflict_pool, max_steps,
+                                 base["conflict_grid_n"],
+                                 base["conflict_eps_per_cfg"],
+                                 (0, 1), CONFLICT_SEED, frozen=False,
+                                 collect_trace=collect_trace)
         nf = eval_grid_noisy(None, compat_pool, max_steps,
                              base["noisy_grid_n"], base["noisy_eps_per_cfg"],
                              (0,), NOISY_SEED, frozen=True,
@@ -558,12 +618,24 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
             "noisy_adapt_per_config": na["per_config_list"],
         }
 
+    # fresh-control cache is keyed by a fingerprint of the pools and eval
+    # settings, so a stale cache (e.g. from a different hash seed or code
+    # version) is never reused.
+    fp_items = [tuple(_canonical_key(c)) for c in conflict_pool]
+    fp_items.sort()
+    fresh_fingerprint = (
+        len(conflict_pool), tuple(fp_items),
+        base["conflict_grid_n"], base["conflict_eps_per_cfg"],
+        base["test_grid_n"], base["test_eps_per_cfg"])
     fresh_control = None
     if fresh_cache_path and os.path.exists(fresh_cache_path):
         with open(fresh_cache_path, "r", encoding="utf-8") as f:
-            fresh_control = json.load(f)
+            cached = json.load(f)
+        if cached.get("pool_fingerprint") == fresh_fingerprint:
+            fresh_control = cached
     if fresh_control is None:
         fresh_control = compute_fresh()
+        fresh_control["pool_fingerprint"] = fresh_fingerprint
         if fresh_cache_path:
             os.makedirs(os.path.dirname(fresh_cache_path), exist_ok=True)
             tmp = fresh_cache_path + ".tmp"
@@ -613,30 +685,26 @@ def run_cognitive_experiment(splits=None, base=None, variants=None,
                     "shuffle control did not fire"
             state = None if name == "fresh" else agent.save_state()
 
-            classic_frozen = eval_grid(state, compat_pool, max_steps,
-                                       base["test_grid_n"],
-                                       base["test_eps_per_cfg"],
-                                       (0, 1), EVAL_SEED, frozen=True,
-                                       agent_kwargs=kwargs,
-                                       collect_trace=collect_trace)
-            classic_adapt = eval_grid(state, compat_pool, max_steps,
-                                      base["test_grid_n"],
-                                      base["test_eps_per_cfg"],
-                                      (0, 1), EVAL_SEED, frozen=False,
-                                      agent_kwargs=kwargs,
-                                      collect_trace=False)
-            conflict_frozen = eval_grid(state, conflict_pool, max_steps,
-                                        base["conflict_grid_n"],
-                                        base["conflict_eps_per_cfg"],
-                                        (0, 1), CONFLICT_SEED, frozen=True,
-                                        agent_kwargs=kwargs,
-                                        collect_trace=collect_trace)
-            conflict_adapt = eval_grid(state, conflict_pool, max_steps,
-                                       base["conflict_grid_n"],
-                                       base["conflict_eps_per_cfg"],
-                                       (0, 1), CONFLICT_SEED, frozen=False,
-                                       agent_kwargs=kwargs,
-                                       collect_trace=False)
+            classic_frozen = eval_grid_cognitive(
+                state, compat_pool, max_steps,
+                base["test_grid_n"], base["test_eps_per_cfg"],
+                (0, 1), EVAL_SEED, frozen=True,
+                agent_kwargs=kwargs, collect_trace=collect_trace)
+            classic_adapt = eval_grid_cognitive(
+                state, compat_pool, max_steps,
+                base["test_grid_n"], base["test_eps_per_cfg"],
+                (0, 1), EVAL_SEED, frozen=False,
+                agent_kwargs=kwargs, collect_trace=False)
+            conflict_frozen = eval_grid_cognitive(
+                state, conflict_pool, max_steps,
+                base["conflict_grid_n"], base["conflict_eps_per_cfg"],
+                (0, 1), CONFLICT_SEED, frozen=True,
+                agent_kwargs=kwargs, collect_trace=collect_trace)
+            conflict_adapt = eval_grid_cognitive(
+                state, conflict_pool, max_steps,
+                base["conflict_grid_n"], base["conflict_eps_per_cfg"],
+                (0, 1), CONFLICT_SEED, frozen=False,
+                agent_kwargs=kwargs, collect_trace=False)
             noisy_frozen = eval_grid_noisy(state, compat_pool, max_steps,
                                            base["noisy_grid_n"],
                                            base["noisy_eps_per_cfg"],
