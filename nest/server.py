@@ -37,6 +37,9 @@ class NestApp:
     def __init__(self, storage_root=None, api_adapter=None, llm_client=None):
         self.storage = NestStorage(storage_root)
         self.session = NestSession(storage=self.storage)
+        # show an initialized Academy environment immediately (paused, not
+        # running) so the UI never starts at "No world loaded".
+        self.session.ensure_world()
         self.api_adapter = api_adapter
         self.llm_client = llm_client if llm_client is not None else OpenAICompatibleClient()
         self.engine = ConversationEngine(
@@ -114,8 +117,10 @@ class NestApp:
             ti = parse_teaching_text(text)
             if ti is None:
                 raise ValueError(
-                    "could not parse teaching input (e.g. 'try switch S1', "
-                    "'I think S1 opens door D1', 'discover how to open D1')")
+                    "could not parse teaching input. Supported examples: "
+                    "'try switch S1', 'load P1', "
+                    "'discover how to open D1', "
+                    "'I think S1 opens door D1'.")
             self.session.teaching.apply(ti)
         return self.session.snapshot()
 
