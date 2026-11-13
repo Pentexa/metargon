@@ -1,0 +1,5732 @@
+{
+ "meta": {
+  "benchmark": "METARGON Cognitive Evaluation v0.2",
+  "date": "2026-11-12",
+  "git_head": "0d1a71c70b4d2f18ac02c2b9b92894c09a804e29",
+  "seeds": [
+   0,
+   1,
+   2,
+   3
+  ],
+  "sizes": {
+   "train": 12,
+   "eval": 6,
+   "ab_train": 8,
+   "ab_eval": 4
+  },
+  "phases": [
+   "standard",
+   "ab"
+  ],
+  "splits": {
+   "enumerated": 624,
+   "ood": 25,
+   "solvable": 245,
+   "test": 49,
+   "train": 147,
+   "val": 49
+  },
+  "arms": {
+   "trained": {
+    "trained": {
+     "kwargs": {}
+    },
+    "epoch_reset": {
+     "kwargs": {
+      "memory_episode_scoped": true,
+      "probe_reset_per_episode": true
+     }
+    },
+    "explore": {
+     "kwargs": {
+      "cognitive_exploration": true
+     }
+    },
+    "explore_epoch_reset": {
+     "kwargs": {
+      "cognitive_exploration": true,
+      "memory_episode_scoped": true,
+      "probe_reset_per_episode": true
+     }
+    }
+   },
+   "controls": {
+    "fresh": {
+     "kind": "fresh",
+     "base": null
+    },
+    "muted": {
+     "kind": "transform",
+     "base": "trained",
+     "transform": "wipe"
+    },
+    "shuffled": {
+     "kind": "transform",
+     "base": "trained",
+     "transform": "shuffle"
+    }
+   }
+  },
+  "stream_seed_base": 20261121,
+  "questions": [
+   "Do cognitive improvements reflect genuine learning, memory transfer and adaptation, or more search effort?",
+   "Does a trained agent outperform a fresh agent with identical action and computation budgets?",
+   "Do apparent gains disappear when learned memory is removed (muted) or its associations are randomized (shuffled)?",
+   "Separating within-episode discovery from cross-episode knowledge transfer.",
+   "Catastrophic forgetting after a conflicting A/B/A task sequence.",
+   "Distinguishing improved planning from improved causal knowledge."
+  ],
+  "methodology": [
+   "Frozen train/val/test/OOD splits (snapshotted and verified); matched deterministic episode streams per seed for every arm.",
+   "Arms: trained (default agent), epoch_reset (v0.7 episode-scoped evidence + per-episode probe reset), explore (Cognitive Exploration v0.1 on), explore+epoch_reset, fresh, muted (declarative memory wiped), shuffled (associations randomized).",
+   "Bounded probability metrics use pooled 95% Wilson intervals; unbounded metrics use mean \u00b1 95% t intervals; paired comparisons use bootstrap 95% CIs.",
+   "Zero-shot coverage is measured from pre-evaluation memory against the true rules of each evaluation pool.",
+   "Within-episode discovery marks episodes where a new verified-correct hypothesis was created inside the episode.",
+   "A/B/A: train rule A, eval A', train conflicting rule B, eval B', retrain A, eval A'' \u2014 A'' vs A' quantifies forgetting; B' quantifies recovery after the mechanism change."
+  ],
+  "limitations": [
+   "Budgets and seeds are finite; results describe this student on the Academy gridworld distribution (80-step cap).",
+   "Muted/shuffled controls still allow within-episode learning during evaluation; they remove only cross-episode declarative knowledge.",
+   "Zero-shot coverage is a knowledge-content measure, distinct from task success (which also involves planning/exploration).",
+   "The shuffle control preserves counts/support levels and only randomizes associations; it does not remove all structure."
+  ]
+ },
+ "arms": {
+  "trained": {
+   "train": {
+    "success_rate": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.4029083309494732,
+      0.6742497814544648
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.08695410039453223,
+      0.29578100037396254
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.7142857142857143,
+     "sem": null,
+     "ci": [
+      0.529403642629825,
+      0.8474618415167003
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": 0.12903225806451613,
+     "sem": null,
+     "ci": [
+      0.05134201164644764,
+      0.28852756954385356
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.11527237354085604,
+     "sem": null,
+     "ci": [
+      0.10217989401084761,
+      0.12979988540520074
+     ],
+     "n": 4,
+     "n_events": 2056,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.001864997774586162
+     ],
+     "n": 4,
+     "n_events": 2056,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 1,
+     "sem": 0.408248290463863,
+     "ci": [
+      -0.13329725432768358,
+      2.1332972543276836
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 6.75,
+     "sem": 1.4930394055974097,
+     "ci": [
+      2.6053226100615907,
+      10.894677389938408
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 38.5,
+     "sem": 7.354137157636736,
+     "ci": [
+      18.08491525040042,
+      58.91508474959958
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 96.11788839529012,
+     "sem": 34.74066447835544,
+     "ci": [
+      -0.3221961966245743,
+      192.55797298720483
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.125,
+     "sem": 0.667317390751957,
+     "ci": [
+      9.272526923272567,
+      12.977473076727433
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.4583333333333333,
+     "sem": null,
+     "ci": [
+      0.27891058351681425,
+      0.6492544644689338
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 0.7916666666666666,
+     "sem": null,
+     "ci": [
+      0.5952915551476452,
+      0.9075531089521192
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13798057582897535
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.13043478260869565,
+     "sem": null,
+     "ci": [
+      0.04537576514344702,
+      0.32127897973018194
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.06396255850234009,
+     "sem": null,
+     "ci": [
+      0.05182765114266984,
+      0.07870289009973515
+     ],
+     "n": 4,
+     "n_events": 1282,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0029876152708078504
+     ],
+     "n": 4,
+     "n_events": 1282,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 100.86362209769318,
+     "sem": 23.355864539829483,
+     "ci": [
+      36.027742135126545,
+      165.69950206025982
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 4.105776009523149,
+     "sem": 0.26075267498762794,
+     "ci": [
+      3.381926583757494,
+      4.829625435288804
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.8229484129047916,
+     "sem": 0.1106445102486353,
+     "ci": [
+      0.51579925245458,
+      1.1300975733550032
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 19.116666666666667,
+     "sem": 7.7446935238121455,
+     "ci": [
+      -5.52694812610358,
+      43.76028145943691
+     ],
+     "n": 3,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5510017468789357,
+      0.8800079652065766
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.20833333333333334,
+     "sem": null,
+     "ci": [
+      0.0924468910478809,
+      0.40470844485235474
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.16,
+     "sem": null,
+     "ci": [
+      0.06403347608577989,
+      0.34654013980238163
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.2777777777777778,
+     "sem": null,
+     "ci": [
+      0.24894498145120575,
+      0.3085779582188907
+     ],
+     "n": 4,
+     "n_events": 864,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.004426614257717077
+     ],
+     "n": 4,
+     "n_events": 864,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 209.13389580641416,
+     "sem": 29.147186612149035,
+     "ci": [
+      128.22130577108845,
+      290.04648584173987
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 2.8022505962411364,
+     "sem": 0.28913700515991575,
+     "ci": [
+      1.9996062699172104,
+      3.6048949225650624
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.4750542253437241,
+     "sem": 0.03150079567853044,
+     "ci": [
+      0.3876080165401236,
+      0.5625004341473245
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 20.270833333333332,
+     "sem": 3.2366847965506653,
+     "ci": [
+      11.285796338108685,
+      29.25587032855798
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.8333333333333334,
+     "sem": null,
+     "ci": [
+      0.6414652961213058,
+      0.9332143199927109
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.16,
+     "sem": null,
+     "ci": [
+      0.06403347608577989,
+      0.34654013980238163
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0644468313641246,
+     "sem": null,
+     "ci": [
+      0.05039461348509314,
+      0.08207873815009295
+     ],
+     "n": 4,
+     "n_events": 931,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0053705692803437165,
+     "sem": null,
+     "ci": [
+      0.0022960689868553787,
+      0.012510289651870154
+     ],
+     "n": 4,
+     "n_events": 931,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 445.9498146744007,
+     "sem": 80.09436988733339,
+     "ci": [
+      223.60784386716327,
+      668.2917854816382
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 1.683940516281638,
+     "sem": 0.18162963928688192,
+     "ci": [
+      1.179736637621254,
+      2.1881443949420225
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.5638374396817427,
+     "sem": 0.03790814396999268,
+     "ci": [
+      0.45860443202104306,
+      0.6690704473424424
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 29.875,
+     "sem": 3.8547319405288527,
+     "ci": [
+      19.174264133091906,
+      40.57573586690809
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.375,
+     "sem": null,
+     "ci": [
+      0.21159133433631458,
+      0.5729038096209293
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.08333333333333333,
+     "sem": null,
+     "ci": [
+      0.02315832784297353,
+      0.2584921520145059
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.06678568000728924,
+      0.3585347038786943
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0028887650980387444
+     ],
+     "n": 4,
+     "n_events": 1326,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0028887650980387444
+     ],
+     "n": 4,
+     "n_events": 1326,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 113.228734347683,
+     "sem": 29.526453204975716,
+     "ci": [
+      31.26330025067041,
+      195.1941684446956
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 6.04762886856267,
+     "sem": 0.3400299377389477,
+     "ci": [
+      5.103705761399351,
+      6.991551975725989
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.9330556378499346,
+     "sem": 0.018886706731833576,
+     "ci": [
+      0.8806261399623646,
+      0.9854851357375046
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 13.833333333333332,
+     "sem": 1.3642254619787415,
+     "ci": [
+      10.046243450880347,
+      17.620423215786317
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.034976749337057134,
+      0.3602333143674828
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 148.92045454545453,
+     "sem": 14.509340287501438,
+     "ci": [
+      108.64252590735055,
+      189.19838318355852
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008005975305184045
+     ],
+     "n": 4,
+     "n_events": 476,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 13.0,
+     "sem": 0.0,
+     "ci": [
+      13.0,
+      13.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 36.63025210084034,
+     "sem": 5.432631751558391,
+     "ci": [
+      21.549266358514245,
+      51.71123784316643
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8063865817272802,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.020024853837749476
+     ],
+     "n": 4,
+     "n_events": 188,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.75,
+     "sem": 0.0,
+     "ci": [
+      11.75,
+      11.75
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 134.4255319148936,
+     "sem": 0.1276595744680833,
+     "ci": [
+      134.0711489361702,
+      134.77991489361702
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8063865817272802,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.3244156195108769
+     ],
+     "n": 4,
+     "n_events": 8,
+     "method": "wilson"
+    }
+   }
+  },
+  "epoch_reset": {
+   "train": {
+    "success_rate": {
+     "mean": 0.5833333333333334,
+     "sem": null,
+     "ci": [
+      0.44281082215364653,
+      0.7115054026542299
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.08695410039453223,
+      0.29578100037396254
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.566439747592954,
+      0.8732366505779922
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": 0.25925925925925924,
+     "sem": null,
+     "ci": [
+      0.16118507964793902,
+      0.38931144880217294
+     ],
+     "n": 4,
+     "n_events": 54,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.26887232059645855,
+     "sem": null,
+     "ci": [
+      0.2505384944080801,
+      0.28803216121603653
+     ],
+     "n": 4,
+     "n_events": 2146,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0017869223481395094
+     ],
+     "n": 4,
+     "n_events": 2146,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 3.5,
+     "sem": 0.28867513459481287,
+     "ci": [
+      2.6986378263647994,
+      4.301362173635201
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 10,
+     "sem": 2.1213203435596424,
+     "ci": [
+      4.111214726278433,
+      15.888785273721567
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 33.25,
+     "sem": 7.674362079895197,
+     "ci": [
+      11.945970866210935,
+      54.554029133789065
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 272.97034260427864,
+     "sem": 31.42380894806608,
+     "ci": [
+      185.7378489644472,
+      360.2028362441101
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 18.90625,
+     "sem": 3.543982148750649,
+     "ci": [
+      9.0681555550682,
+      28.744344444931798
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.5833333333333334,
+     "sem": null,
+     "ci": [
+      0.3883433764938864,
+      0.7553265275346177
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.041666666666666664,
+     "sem": null,
+     "ci": [
+      0.007393265354805112,
+      0.20242226248842232
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.5652173913043478,
+     "sem": null,
+     "ci": [
+      0.3681104930501695,
+      0.7436563166780135
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.3823805060918463,
+     "sem": null,
+     "ci": [
+      0.353692109479494,
+      0.41191281285449094
+     ],
+     "n": 4,
+     "n_events": 1067,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0035874586867002552
+     ],
+     "n": 4,
+     "n_events": 1067,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 257.89844413780287,
+     "sem": 33.93493168979742,
+     "ci": [
+      163.69507376692525,
+      352.1018145086805
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 3.135454668826318,
+     "sem": 0.2234878372824282,
+     "ci": [
+      2.5150524325302976,
+      3.7558569051223385
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.49268052614888175,
+     "sem": 0.005547005011273475,
+     "ci": [
+      0.4772820402375866,
+      0.5080790120601769
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 18.2375,
+     "sem": 3.878110310877365,
+     "ci": [
+      7.471865777004435,
+      29.003134222995566
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.875,
+     "sem": null,
+     "ci": [
+      0.6899571185214243,
+      0.9565574496068442
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.06678568000728924,
+      0.3585347038786943
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.48,
+     "sem": null,
+     "ci": [
+      0.30031003928960015,
+      0.6650178204685269
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.2411674347158218,
+     "sem": null,
+     "ci": [
+      0.20988493960220128,
+      0.27548678998858833
+     ],
+     "n": 4,
+     "n_events": 651,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0058664568652938365
+     ],
+     "n": 4,
+     "n_events": 651,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 233.63531240886928,
+     "sem": 28.69235370539159,
+     "ci": [
+      153.98533852270225,
+      313.2852862950363
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 1.6426825547452923,
+     "sem": 0.44150268225460465,
+     "ci": [
+      0.41707110880651,
+      2.8682940006840747
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.40585898152616984,
+     "sem": 0.08834043939152214,
+     "ci": [
+      0.16062592177530438,
+      0.6510920412770353
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 19.65833333333333,
+     "sem": 1.9422388284314231,
+     "ci": [
+      14.266678345607701,
+      25.04998832105896
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.8333333333333334,
+     "sem": null,
+     "ci": [
+      0.6414652961213058,
+      0.9332143199927109
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.375,
+     "sem": null,
+     "ci": [
+      0.21159133433631458,
+      0.5729038096209293
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.48,
+     "sem": null,
+     "ci": [
+      0.30031003928960015,
+      0.6650178204685269
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0876803551609323,
+     "sem": null,
+     "ci": [
+      0.0709192561606599,
+      0.10794254683336689
+     ],
+     "n": 4,
+     "n_events": 901,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.003329633740288568,
+     "sem": null,
+     "ci": [
+      0.0011329876309200673,
+      0.00974361220710683
+     ],
+     "n": 4,
+     "n_events": 901,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 376.7024445804957,
+     "sem": 28.914023267794747,
+     "ci": [
+      296.4371159890975,
+      456.9677731718939
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.8479454096265651,
+     "sem": 0.13179027636253585,
+     "ci": [
+      0.4820956024441656,
+      1.2137952168089645
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.5010125710605108,
+     "sem": 0.026305708534895365,
+     "ci": [
+      0.42798792416764125,
+      0.5740372179533804
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 29.25,
+     "sem": 5.130022381006698,
+     "ci": [
+      15.009057870325409,
+      43.49094212967459
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.04344255039315584,
+      0.3100428814785757
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13798057582897535
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.4166666666666667,
+     "sem": null,
+     "ci": [
+      0.24467347246538232,
+      0.6116566235061137
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002241514034902642
+     ],
+     "n": 4,
+     "n_events": 1710,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002241514034902642
+     ],
+     "n": 4,
+     "n_events": 1710,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 139.5182725071736,
+     "sem": 8.51763117332036,
+     "ci": [
+      115.87332837003629,
+      163.16321664431092
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 5.896372847919656,
+     "sem": 0.29826338659475754,
+     "ci": [
+      5.068393686732609,
+      6.724352009106703
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.9826219512195122,
+     "sem": 0.011806563996385815,
+     "ci": [
+      0.9498469295655452,
+      1.0153969728734793
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 2,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8063865817272802,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.020024853837749476
+     ],
+     "n": 4,
+     "n_events": 188,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.75,
+     "sem": 0.0,
+     "ci": [
+      11.75,
+      11.75
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 146.97872340425533,
+     "sem": 0.8284222269758227,
+     "ci": [
+      144.67902330217046,
+      149.2784235063402
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.523109243697479,
+     "sem": null,
+     "ci": [
+      0.49135201240933324,
+      0.5546807193738409
+     ],
+     "n": 4,
+     "n_events": 952,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 35.166666666666664,
+     "sem": 7.04548712928275,
+     "ci": [
+      15.60839439577775,
+      54.72493893755558
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 245.8918089232356,
+     "sem": 13.217157224511158,
+     "ci": [
+      209.20098046799262,
+      282.5826373784786
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8063865817272802,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.020024853837749476
+     ],
+     "n": 4,
+     "n_events": 188,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.75,
+     "sem": 0.0,
+     "ci": [
+      11.75,
+      11.75
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 148.53191489361703,
+     "sem": 0.8723404255319167,
+     "ci": [
+      146.11029787234042,
+      150.95353191489363
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8063865817272802,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8063865817272802,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.6755843804891231,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 8,
+     "method": "wilson"
+    }
+   }
+  },
+  "explore": {
+   "train": {
+    "success_rate": {
+     "mean": 0.5625,
+     "sem": null,
+     "ci": [
+      0.4227477150100165,
+      0.6929894535958907
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.22916666666666666,
+     "sem": null,
+     "ci": [
+      0.13307691028989044,
+      0.36539535908451154
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.8214285714285714,
+     "sem": null,
+     "ci": [
+      0.644082084514089,
+      0.9212161417056989
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": 0.07142857142857142,
+     "sem": null,
+     "ci": [
+      0.024589963551172864,
+      0.19009713288525165
+     ],
+     "n": 4,
+     "n_events": 42,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.12001752080595707,
+     "sem": null,
+     "ci": [
+      0.10732076653418166,
+      0.1339909185427384
+     ],
+     "n": 4,
+     "n_events": 2283,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.001679871487382423
+     ],
+     "n": 4,
+     "n_events": 2283,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 0.75,
+     "sem": 0.47871355387816905,
+     "ci": [
+      -0.5789088255657973,
+      2.0789088255657973
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 9.75,
+     "sem": 1.1086778913041726,
+     "ci": [
+      6.672310173739617,
+      12.827689826260382
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 71.5,
+     "sem": 5.722761571129799,
+     "ci": [
+      55.61361387854368,
+      87.38638612145633
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 114.6741446930083,
+     "sem": 8.804581116957918,
+     "ci": [
+      90.23262751233312,
+      139.11566187368348
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 22.525,
+     "sem": 2.961313053359945,
+     "ci": [
+      14.304394963872792,
+      30.745605036127206
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.7083333333333334,
+     "sem": null,
+     "ci": [
+      0.508319363412903,
+      0.8508553966583573
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.04344255039315584,
+      0.3100428814785757
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.13043478260869565,
+     "sem": null,
+     "ci": [
+      0.04537576514344702,
+      0.32127897973018194
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.2836438923395445,
+     "sem": null,
+     "ci": [
+      0.25611811160038517,
+      0.31288367178362314
+     ],
+     "n": 4,
+     "n_events": 966,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.003961059208019123
+     ],
+     "n": 4,
+     "n_events": 966,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 86.92784448607658,
+     "sem": 12.379541467366778,
+     "ci": [
+      52.56223737266641,
+      121.29345159948676
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.4658603544792803,
+     "sem": 0.056041830662816323,
+     "ci": [
+      0.3102882325593022,
+      0.6214324763992585
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.09898827195822081,
+     "sem": 0.01684903885670549,
+     "ci": [
+      0.05221534009200637,
+      0.14576120382443525
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 25.370833333333334,
+     "sem": 5.286436063171482,
+     "ci": [
+      10.6956868219693,
+      40.04597984469737
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.6666666666666666,
+     "sem": null,
+     "ci": [
+      0.4670595949408046,
+      0.8202802131162036
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 0.875,
+     "sem": null,
+     "ci": [
+      0.6899571185214243,
+      0.9565574496068442
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.04344255039315584,
+      0.3100428814785757
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.12,
+     "sem": null,
+     "ci": [
+      0.04166741357068093,
+      0.2995619218337349
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.20662983425414364,
+     "sem": null,
+     "ci": [
+      0.18151702547105938,
+      0.23422274700414422
+     ],
+     "n": 4,
+     "n_events": 905,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.004226919190318753
+     ],
+     "n": 4,
+     "n_events": 905,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 74.23363868860365,
+     "sem": 33.45094761265733,
+     "ci": [
+      -18.626191884133092,
+      167.09346926134037
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.5099447199406566,
+     "sem": 0.051974816463497046,
+     "ci": [
+      0.3656626294379888,
+      0.6542268104433244
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.1662391830158998,
+     "sem": 0.01897622621891849,
+     "ci": [
+      0.11356117903218207,
+      0.2189171869996175
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 16.666666666666668,
+     "sem": 1.1118053386771947,
+     "ci": [
+      13.580295046498776,
+      19.75303828683456
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.625,
+     "sem": null,
+     "ci": [
+      0.42709619037907065,
+      0.7884086656636855
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 0.9166666666666666,
+     "sem": null,
+     "ci": [
+      0.741507847985494,
+      0.9768416721570266
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.3333333333333333,
+     "sem": null,
+     "ci": [
+      0.17971978688379642,
+      0.5329404050591954
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.12,
+     "sem": null,
+     "ci": [
+      0.04166741357068093,
+      0.2995619218337349
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.17361784675072744,
+     "sem": null,
+     "ci": [
+      0.15171922135531424,
+      0.19793970229058477
+     ],
+     "n": 4,
+     "n_events": 1031,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.004849660523763337,
+     "sem": null,
+     "ci": [
+      0.002073180153288225,
+      0.01130239346106976
+     ],
+     "n": 4,
+     "n_events": 1031,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 85.25155702193926,
+     "sem": 37.39087148738526,
+     "ci": [
+      -18.54550222704222,
+      189.04861627092075
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.4987226340432377,
+     "sem": 0.028147729344677186,
+     "ci": [
+      0.42058453738241386,
+      0.5768607307040615
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.20480210731375692,
+     "sem": 0.01832209055687331,
+     "ci": [
+      0.1539399839278766,
+      0.25566423069963723
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 20.783333333333335,
+     "sem": 2.4371165415377734,
+     "ci": [
+      14.017897814024476,
+      27.548768852642194
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.08333333333333333,
+     "sem": null,
+     "ci": [
+      0.02315832784297353,
+      0.2584921520145059
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.04344255039315584,
+      0.3100428814785757
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.34720496894409936,
+     "sem": null,
+     "ci": [
+      0.32433809328839364,
+      0.37079927335279345
+     ],
+     "n": 4,
+     "n_events": 1610,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0023804070981935277
+     ],
+     "n": 4,
+     "n_events": 1610,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 269.4752673419877,
+     "sem": 11.825055617347516,
+     "ci": [
+      236.64891294823101,
+      302.30162173574445
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.4792222617500912,
+     "sem": 0.1126283229112246,
+     "ci": [
+      0.1665660373485317,
+      0.7918784861516507
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.06001267169352395,
+     "sem": 0.002949351895447909,
+     "ci": [
+      0.051825270831760556,
+      0.06820007255528734
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 39.916666666666664,
+     "sem": 15.69346112947116,
+     "ci": [
+      -3.6483814287452745,
+      83.48171476207861
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 0.9375,
+     "sem": null,
+     "ci": [
+      0.7167073163197013,
+      0.9888809426916687
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.00796812749003984,
+     "sem": null,
+     "ci": [
+      0.002187828822923071,
+      0.028582657628268567
+     ],
+     "n": 4,
+     "n_events": 251,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.3125,
+     "sem": 0.4375,
+     "ci": [
+      10.098,
+      12.527
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 52.95701160541586,
+     "sem": 26.208787352812468,
+     "ci": [
+      -19.798582085991555,
+      125.71260529682327
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.375,
+     "sem": null,
+     "ci": [
+      0.18480982554752806,
+      0.613593529020652
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.28815261044176704,
+     "sem": null,
+     "ci": [
+      0.2608813628623844,
+      0.31705178174772186
+     ],
+     "n": 4,
+     "n_events": 996,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 32.666666666666664,
+     "sem": 11.289129481250734,
+     "ci": [
+      -3.2553433426731715,
+      68.5886766760065
+     ],
+     "n": 3,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 66.16257768351659,
+     "sem": 16.704753222939775,
+     "ci": [
+      19.790182736635778,
+      112.53497263039739
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.5699064013154177,
+      0.9340852122641324
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.1968503937007874,
+     "sem": null,
+     "ci": [
+      0.1600348281096165,
+      0.23971821314164116
+     ],
+     "n": 4,
+     "n_events": 381,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.770833333333334,
+     "sem": 0.4530950660610739,
+     "ci": [
+      9.513041429947792,
+      12.028625236718876
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 92.61910906376191,
+     "sem": 40.848241415946674,
+     "ci": [
+      -20.775609106906046,
+      206.01382723442987
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": 0.9375,
+     "sem": null,
+     "ci": [
+      0.7167073163197013,
+      0.9888809426916687
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.5699064013154177,
+      0.9340852122641324
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": 0.375,
+     "sem": null,
+     "ci": [
+      0.18480982554752806,
+      0.613593529020652
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.3244156195108769
+     ],
+     "n": 4,
+     "n_events": 8,
+     "method": "wilson"
+    }
+   }
+  },
+  "explore_epoch_reset": {
+   "train": {
+    "success_rate": {
+     "mean": 0.5208333333333334,
+     "sem": null,
+     "ci": [
+      0.3832899563598438,
+      0.6552890998421255
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.3125,
+     "sem": null,
+     "ci": [
+      0.19945512167731494,
+      0.4533333725049633
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.9642857142857143,
+     "sem": null,
+     "ci": [
+      0.8228742388150135,
+      0.9936676435024582
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.1824141606186338,
+      0.43179527736167544
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.08350818296265212,
+     "sem": null,
+     "ci": [
+      0.0730595727933457,
+      0.09529747276845447
+     ],
+     "n": 4,
+     "n_events": 2383,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0016094909691535455
+     ],
+     "n": 4,
+     "n_events": 2383,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 3.5,
+     "sem": 0.5,
+     "ci": [
+      2.112,
+      4.888
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 8.5,
+     "sem": 1.5,
+     "ci": [
+      4.336,
+      12.664
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 66.5,
+     "sem": 4.9749371855331,
+     "ci": [
+      52.68957437296012,
+      80.31042562703988
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 153.08266604216604,
+     "sem": 4.655950609548157,
+     "ci": [
+      140.15774715006035,
+      166.00758493427173
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 20.208333333333332,
+     "sem": 5.2163271987524364,
+     "ci": [
+      5.727809029596569,
+      34.68885763707009
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.875,
+     "sem": null,
+     "ci": [
+      0.6899571185214243,
+      0.9565574496068442
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13798057582897535
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.4782608695652174,
+     "sem": null,
+     "ci": [
+      0.2923686953994572,
+      0.6703757013578151
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.06371911573472042,
+     "sem": null,
+     "ci": [
+      0.048531123467983314,
+      0.08324439172167523
+     ],
+     "n": 4,
+     "n_events": 769,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.004970746916315064
+     ],
+     "n": 4,
+     "n_events": 769,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 117.5221792497616,
+     "sem": 8.974719192045615,
+     "ci": [
+      92.60835877264299,
+      142.43599972688023
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.49213565133319714,
+     "sem": 0.1052847726605492,
+     "ci": [
+      0.1998651224275126,
+      0.7844061802388818
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.23189205390999132,
+     "sem": 0.057712426493192186,
+     "ci": [
+      0.07168235796488984,
+      0.39210174985509283
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 25.666666666666668,
+     "sem": 3.9422920575049565,
+     "ci": [
+      14.72286391503291,
+      36.610469418300426
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.8333333333333334,
+     "sem": null,
+     "ci": [
+      0.6414652961213058,
+      0.9332143199927109
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.041666666666666664,
+     "sem": null,
+     "ci": [
+      0.007393265354805112,
+      0.20242226248842232
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.44,
+     "sem": null,
+     "ci": [
+      0.2666537494700257,
+      0.6293298298043557
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.053409090909090906,
+     "sem": null,
+     "ci": [
+      0.04039990686076545,
+      0.07030047203065581
+     ],
+     "n": 4,
+     "n_events": 880,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0043464801837795365
+     ],
+     "n": 4,
+     "n_events": 880,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 100.04863076431658,
+     "sem": 7.308882844398756,
+     "ci": [
+      79.75917198826563,
+      120.33808954036753
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.34077708327528233,
+     "sem": 0.08535174064670682,
+     "ci": [
+      0.1038406512400242,
+      0.5777135153105405
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.2549578844072977,
+     "sem": 0.03883144919110292,
+     "ci": [
+      0.14716178145279601,
+      0.3627539873617994
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 28.375,
+     "sem": 4.154078205900888,
+     "ci": [
+      16.843278900419136,
+      39.906721099580864
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.31427131627763083,
+      0.6857286837223692
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.25,
+     "sem": null,
+     "ci": [
+      0.1199920347934233,
+      0.4489982531210644
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.44,
+     "sem": null,
+     "ci": [
+      0.2666537494700257,
+      0.6293298298043557
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.02754399387911247,
+     "sem": null,
+     "ci": [
+      0.019961141341668903,
+      0.03789603987687039
+     ],
+     "n": 4,
+     "n_events": 1307,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0038255547054322878,
+     "sem": null,
+     "ci": [
+      0.0016350975469765364,
+      0.008924225562695905
+     ],
+     "n": 4,
+     "n_events": 1307,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 129.0259084057598,
+     "sem": 20.07317859493046,
+     "ci": [
+      73.30276462623283,
+      184.74905218528676
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 0.34420028897595706,
+     "sem": 0.048371563652689846,
+     "ci": [
+      0.20992082827609004,
+      0.4784797496758241
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.2147238638039049,
+     "sem": 0.008208259837146807,
+     "ci": [
+      0.19193773449598536,
+      0.23750999311182444
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 30.291666666666668,
+     "sem": 6.007084937342275,
+     "ci": [
+      13.615998880604515,
+      46.96733445272882
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13798057582897535
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.4166666666666667,
+     "sem": null,
+     "ci": [
+      0.24467347246538232,
+      0.6116566235061137
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.09831824062095731,
+     "sem": null,
+     "ci": [
+      0.08445680922275267,
+      0.11417097312610158
+     ],
+     "n": 4,
+     "n_events": 1546,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0024787049205544616
+     ],
+     "n": 4,
+     "n_events": 1546,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 372.47210224273664,
+     "sem": 18.267932891512483,
+     "ci": [
+      321.760320535898,
+      423.18388394957526
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 1.6490328153430436,
+     "sem": 0.31835892628262463,
+     "ci": [
+      0.7652684359824776,
+      2.5327971947036096
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.31562555499609635,
+     "sem": 0.030936110911430312,
+     "ci": [
+      0.2297469111059658,
+      0.4015041988862269
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 35.0,
+     "sem": 13.335416503931677,
+     "ci": [
+      -2.019116214914334,
+      72.01911621491433
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 28.881818181818183,
+     "sem": 3.754545454545455,
+     "ci": [
+      18.459200000000003,
+      39.30443636363636
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.034976749337057134,
+      0.3602333143674828
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.11892797319932999,
+     "sem": null,
+     "ci": [
+      0.10177765965385858,
+      0.13852256034184035
+     ],
+     "n": 4,
+     "n_events": 1194,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 37.0,
+     "sem": null,
+     "ci": null,
+     "n": 1,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 155.92381810897436,
+     "sem": 8.59287339514908,
+     "ci": [
+      132.07000156404052,
+      179.7776346539082
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.19361341827271994
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 76.58863636363637,
+     "sem": 22.826135090764232,
+     "ci": [
+      13.22328535167486,
+      139.95398737559788
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.034976749337057134,
+      0.3602333143674828
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.6755843804891231,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 8,
+     "method": "wilson"
+    }
+   }
+  },
+  "fresh": {
+   "train": {
+    "success_rate": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.12064720365810762
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.48990002040399916
+     ],
+     "n": 4,
+     "n_events": 4,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.48990002040399916
+     ],
+     "n": 4,
+     "n_events": 4,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 0,
+     "sem": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 0,
+     "sem": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 0,
+     "sem": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 0.0,
+     "sem": 0.0,
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.4583333333333333,
+     "sem": null,
+     "ci": [
+      0.27891058351681425,
+      0.6492544644689338
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 0.9583333333333334,
+     "sem": null,
+     "ci": [
+      0.7975777375115778,
+      0.992606734645195
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.14312112541726274
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0026086956521739132,
+     "sem": null,
+     "ci": [
+      0.0008875638361435264,
+      0.0076418564933020405
+     ],
+     "n": 4,
+     "n_events": 1150,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.003329399806697903
+     ],
+     "n": 4,
+     "n_events": 1150,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 134.6934422657952,
+     "sem": 20.740397422982646,
+     "ci": [
+      77.11809901959538,
+      192.26878551199502
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 3.703709150326797,
+     "sem": 0.18902132049888995,
+     "ci": [
+      3.1789859646218788,
+      4.228432336031716
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.8734014161220044,
+     "sem": 0.03323394995189586,
+     "ci": [
+      0.7811439710555415,
+      0.9656588611884673
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.7916666666666666,
+     "sem": null,
+     "ci": [
+      0.5952915551476452,
+      0.9075531089521192
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13319649395317873
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.3163265306122449,
+     "sem": null,
+     "ci": [
+      0.28648811961813037,
+      0.3477580029392209
+     ],
+     "n": 4,
+     "n_events": 882,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.004336666961678025
+     ],
+     "n": 4,
+     "n_events": 882,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 312.7958020897681,
+     "sem": 7.887298584347762,
+     "ci": [
+      290.9006612196187,
+      334.69094295991744
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 2.2044990479122366,
+     "sem": 0.25858654213736115,
+     "ci": [
+      1.486662806938922,
+      2.9223352888855514
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.38821711542552073,
+     "sem": 0.08681668491774902,
+     "ci": [
+      0.14721399809384947,
+      0.629220232757192
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 22.641666666666666,
+     "sem": 4.649439930428898,
+     "ci": [
+      9.734821419796047,
+      35.54851191353728
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.875,
+     "sem": null,
+     "ci": [
+      0.6899571185214243,
+      0.9565574496068442
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.375,
+     "sem": null,
+     "ci": [
+      0.21159133433631458,
+      0.5729038096209293
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13319649395317873
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.06233766233766234,
+     "sem": null,
+     "ci": [
+      0.047337891934080355,
+      0.08168282755166453
+     ],
+     "n": 4,
+     "n_events": 770,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0025974025974025974,
+     "sem": null,
+     "ci": [
+      0.0007125757877161102,
+      0.009420764161958344
+     ],
+     "n": 4,
+     "n_events": 770,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 484.20005535119486,
+     "sem": 101.76254639266998,
+     "ci": [
+      201.70722656514306,
+      766.6928841372467
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 1.007895234344701,
+     "sem": 0.16348860586104572,
+     "ci": [
+      0.5540508644744381,
+      1.461739604214964
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.4689719993009165,
+     "sem": 0.055870684049044904,
+     "ci": [
+      0.31387498038076783,
+      0.6240690182210651
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 25.21666666666667,
+     "sem": 3.189929176039517,
+     "ci": [
+      16.361423273980968,
+      34.07191005935237
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.25,
+     "sem": null,
+     "ci": [
+      0.1199920347934233,
+      0.4489982531210644
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.06678568000728924,
+      0.3585347038786943
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13798057582897535
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002512752138612659
+     ],
+     "n": 4,
+     "n_events": 1525,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002512752138612659
+     ],
+     "n": 4,
+     "n_events": 1525,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 70.90161446975964,
+     "sem": 5.2173819445334235,
+     "ci": [
+      56.41816219173485,
+      85.38506674778442
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 3.63301595358047,
+     "sem": 0.10527403443751951,
+     "ci": [
+      3.340775233981916,
+      3.925256673179024
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.904775578364288,
+     "sem": 0.02652728019207486,
+     "ci": [
+      0.8311358485510882,
+      0.9784153081774878
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 14.166666666666668,
+     "sem": 1.1666666666666667,
+     "ci": [
+      9.1465,
+      19.186833333333336
+     ],
+     "n": 2,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 249.79090909090908,
+     "sem": 0.0,
+     "ci": [
+      249.79090909090908,
+      249.79090909090908
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.3125,
+     "sem": null,
+     "ci": [
+      0.14164435051961052,
+      0.5559606813326594
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.4375,
+     "sem": null,
+     "ci": [
+      0.2309836333518552,
+      0.6682180439322347
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.5360824742268041,
+     "sem": null,
+     "ci": [
+      0.5060831327235896,
+      0.5658229269588134
+     ],
+     "n": 4,
+     "n_events": 1067,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 35.75,
+     "sem": 6.342646661029343,
+     "ci": [
+      18.142812868982546,
+      53.357187131017454
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 256.8790293828479,
+     "sem": 80.82469089673783,
+     "ci": [
+      32.50968745350366,
+      481.2483713121921
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 249.79090909090908,
+     "sem": 0.0,
+     "ci": [
+      249.79090909090908,
+      249.79090909090908
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    }
+   }
+  },
+  "muted": {
+   "train": {
+    "success_rate": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.4029083309494732,
+      0.6742497814544648
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.08695410039453223,
+      0.29578100037396254
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.7142857142857143,
+     "sem": null,
+     "ci": [
+      0.529403642629825,
+      0.8474618415167003
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": 0.12903225806451613,
+     "sem": null,
+     "ci": [
+      0.05134201164644764,
+      0.28852756954385356
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.11527237354085604,
+     "sem": null,
+     "ci": [
+      0.10217989401084761,
+      0.12979988540520074
+     ],
+     "n": 4,
+     "n_events": 2056,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.001864997774586162
+     ],
+     "n": 4,
+     "n_events": 2056,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 1,
+     "sem": 0.408248290463863,
+     "ci": [
+      -0.13329725432768358,
+      2.1332972543276836
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 6.75,
+     "sem": 1.4930394055974097,
+     "ci": [
+      2.6053226100615907,
+      10.894677389938408
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 38.5,
+     "sem": 7.354137157636736,
+     "ci": [
+      18.08491525040042,
+      58.91508474959958
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 96.11788839529012,
+     "sem": 34.74066447835544,
+     "ci": [
+      -0.3221961966245743,
+      192.55797298720483
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.125,
+     "sem": 0.667317390751957,
+     "ci": [
+      9.272526923272567,
+      12.977473076727433
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.35074553553106635,
+      0.7210894164831857
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 0.9583333333333334,
+     "sem": null,
+     "ci": [
+      0.7975777375115778,
+      0.992606734645195
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.3333333333333333,
+     "sem": null,
+     "ci": [
+      0.17971978688379642,
+      0.5329404050591954
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.14312112541726274
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.002952755905511811,
+     "sem": null,
+     "ci": [
+      0.0010046823975880708,
+      0.008645443661203803
+     ],
+     "n": 4,
+     "n_events": 1016,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0037668594809233116
+     ],
+     "n": 4,
+     "n_events": 1016,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 68.1627500018575,
+     "sem": 8.98415323237235,
+     "ci": [
+      43.22274062879186,
+      93.10275937492315
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 3.660828736003685,
+     "sem": 0.22073314666674862,
+     "ci": [
+      3.048073520856791,
+      4.273583951150579
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.841177984456382,
+     "sem": 0.03658941638811779,
+     "ci": [
+      0.739605764562967,
+      0.9427502043497971
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.4375,
+     "sem": 0.2576941016011038,
+     "ci": [
+      9.722141173955336,
+      11.152858826044664
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.8333333333333334,
+     "sem": null,
+     "ci": [
+      0.6414652961213058,
+      0.9332143199927109
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13319649395317873
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.18463611859838275,
+     "sem": null,
+     "ci": [
+      0.15836686737919212,
+      0.21415405395316586
+     ],
+     "n": 4,
+     "n_events": 742,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.005150691514123105
+     ],
+     "n": 4,
+     "n_events": 742,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 206.79309635196972,
+     "sem": 20.539043062743133,
+     "ci": [
+      149.7767128097948,
+      263.80947989414466
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 2.3566806960625506,
+     "sem": 0.39444130097389485,
+     "ci": [
+      1.2617116445590186,
+      3.4516497475660826
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.43077186467016976,
+     "sem": 0.07316561485623237,
+     "ci": [
+      0.2276641178292687,
+      0.6338796115110708
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 20.766666666666666,
+     "sem": 1.2017733809912994,
+     "ci": [
+      17.43054376103482,
+      24.102789572298512
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.875,
+     "sem": null,
+     "ci": [
+      0.6899571185214243,
+      0.9565574496068442
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.4166666666666667,
+     "sem": null,
+     "ci": [
+      0.24467347246538232,
+      0.6116566235061137
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13319649395317873
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0906801007556675,
+     "sem": null,
+     "ci": [
+      0.07262810802865469,
+      0.11267383661800201
+     ],
+     "n": 4,
+     "n_events": 794,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.004814990845300621
+     ],
+     "n": 4,
+     "n_events": 794,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 390.47766837790493,
+     "sem": 84.1184212110745,
+     "ci": [
+      156.96493109596213,
+      623.9904056598477
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 1.3983762335329943,
+     "sem": 0.17343584155586805,
+     "ci": [
+      0.9169183373739047,
+      1.879834129692084
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.46386179531231114,
+     "sem": 0.05615769956533643,
+     "ci": [
+      0.3079680213189372,
+      0.6197555693056851
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 26.224999999999998,
+     "sem": 4.221930728242006,
+     "ci": [
+      14.50492029840019,
+      37.94507970159981
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.25,
+     "sem": null,
+     "ci": [
+      0.1199920347934233,
+      0.4489982531210644
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.06678568000728924,
+      0.3585347038786943
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.13798057582897535
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002519343648546839
+     ],
+     "n": 4,
+     "n_events": 1521,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002519343648546839
+     ],
+     "n": 4,
+     "n_events": 1521,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 107.46959571678322,
+     "sem": 19.230803149917826,
+     "ci": [
+      54.084886172611334,
+      160.8543052609551
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 5.124732663170163,
+     "sem": 0.06163264160986283,
+     "ci": [
+      4.953640450061184,
+      5.295824876279142
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.9527622377622378,
+     "sem": 0.027272749686202018,
+     "ci": [
+      0.877053084633341,
+      1.0284713908911345
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 13.5,
+     "sem": 1.8333333333333337,
+     "ci": [
+      5.611166666666665,
+      21.388833333333334
+     ],
+     "n": 2,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 246.01136363636363,
+     "sem": 7.152468196961092,
+     "ci": [
+      226.15611192159963,
+      265.8666153511276
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.5285388127853882,
+     "sem": null,
+     "ci": [
+      0.49542906488412214,
+      0.5613993460480275
+     ],
+     "n": 4,
+     "n_events": 876,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 31.666666666666664,
+     "sem": 9.186342519680446,
+     "ci": [
+      6.1653798320337465,
+      57.16795350129958
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 213.1631491530539,
+     "sem": 11.84739768316056,
+     "ci": [
+      180.27477318460018,
+      246.0515251215076
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 0.75,
+     "sem": null,
+     "ci": [
+      0.5050123107060135,
+      0.8981809801576265
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.5,
+     "sem": null,
+     "ci": [
+      0.2799923761135083,
+      0.7200076238864916
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.008655340103316136
+     ],
+     "n": 4,
+     "n_events": 440,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 10.0,
+     "sem": 0.0,
+     "ci": [
+      10.0,
+      10.0
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 246.01136363636363,
+     "sem": 7.152468196961092,
+     "ci": [
+      226.15611192159963,
+      265.8666153511276
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    }
+   }
+  },
+  "shuffled": {
+   "train": {
+    "success_rate": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.4029083309494732,
+      0.6742497814544648
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.08695410039453223,
+      0.29578100037396254
+     ],
+     "n": 4,
+     "n_events": 48,
+     "method": "wilson"
+    },
+    "coverage": {
+     "mean": 0.7142857142857143,
+     "sem": null,
+     "ci": [
+      0.529403642629825,
+      0.8474618415167003
+     ],
+     "n": 4,
+     "n_events": 28,
+     "method": "wilson"
+    },
+    "precision": {
+     "mean": 0.12903225806451613,
+     "sem": null,
+     "ci": [
+      0.05134201164644764,
+      0.28852756954385356
+     ],
+     "n": 4,
+     "n_events": 31,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.11527237354085604,
+     "sem": null,
+     "ci": [
+      0.10217989401084761,
+      0.12979988540520074
+     ],
+     "n": 4,
+     "n_events": 2056,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.001864997774586162
+     ],
+     "n": 4,
+     "n_events": 2056,
+     "method": "wilson"
+    },
+    "verified_correct": {
+     "mean": 1,
+     "sem": 0.408248290463863,
+     "ci": [
+      -0.13329725432768358,
+      2.1332972543276836
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "verified_wrong": {
+     "mean": 6.75,
+     "sem": 1.4930394055974097,
+     "ci": [
+      2.6053226100615907,
+      10.894677389938408
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "hypotheses_total": {
+     "mean": 38.5,
+     "sem": 7.354137157636736,
+     "ci": [
+      18.08491525040042,
+      58.91508474959958
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 96.11788839529012,
+     "sem": 34.74066447835544,
+     "ci": [
+      -0.3221961966245743,
+      192.55797298720483
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.125,
+     "sem": 0.667317390751957,
+     "ci": [
+      9.272526923272567,
+      12.977473076727433
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "val_clean": {
+    "success_rate": {
+     "mean": 0.4583333333333333,
+     "sem": null,
+     "ci": [
+      0.27891058351681425,
+      0.6492544644689338
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 0.9166666666666666,
+     "sem": null,
+     "ci": [
+      0.741507847985494,
+      0.9768416721570266
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.16666666666666666,
+     "sem": null,
+     "ci": [
+      0.06678568000728924,
+      0.3585347038786943
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.17391304347826086,
+     "sem": null,
+     "ci": [
+      0.06978540350612772,
+      0.37138054785295666
+     ],
+     "n": 4,
+     "n_events": 23,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.06577916992952232,
+     "sem": null,
+     "ci": [
+      0.05344302356822952,
+      0.08072001423441524
+     ],
+     "n": 4,
+     "n_events": 1277,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.002999277974731614
+     ],
+     "n": 4,
+     "n_events": 1277,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 65.94773648161862,
+     "sem": 32.70262374869991,
+     "ci": [
+      -24.834747044772314,
+      156.73022000800955
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 4.118767764550576,
+     "sem": 0.25053154013791057,
+     "ci": [
+      3.423292209127736,
+      4.814243319973415
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.8250537766554408,
+     "sem": 0.10712645239358375,
+     "ci": [
+      0.5276707448108523,
+      1.1224368085000291
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 16.483333333333334,
+     "sem": 6.047060810380895,
+     "ci": [
+      -0.3033074762840293,
+      33.2699741429507
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_clean": {
+    "success_rate": {
+     "mean": 0.8333333333333334,
+     "sem": null,
+     "ci": [
+      0.6414652961213058,
+      0.9332143199927109
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.25,
+     "sem": null,
+     "ci": [
+      0.1199920347934233,
+      0.4489982531210644
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.2,
+     "sem": null,
+     "ci": [
+      0.08860454100652487,
+      0.3913133553653824
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.24864864864864866,
+     "sem": null,
+     "ci": [
+      0.21885757757945415,
+      0.28103594813892474
+     ],
+     "n": 4,
+     "n_events": 740,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.005164540407527624
+     ],
+     "n": 4,
+     "n_events": 740,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 236.75761900120418,
+     "sem": 28.153754068576713,
+     "ci": [
+      158.60279770683522,
+      314.9124402955731
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 2.5865828215851976,
+     "sem": 0.21446134464564443,
+     "ci": [
+      1.9912381288488887,
+      3.1819275143215062
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.44595769013683006,
+     "sem": 0.07595649848786258,
+     "ci": [
+      0.23510245033452357,
+      0.6568129299391365
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 20.583333333333332,
+     "sem": 2.2528377166981595,
+     "ci": [
+      14.329455831779242,
+      26.837210834887422
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "test_noisy": {
+    "success_rate": {
+     "mean": 0.7916666666666666,
+     "sem": null,
+     "ci": [
+      0.5952915551476452,
+      0.9075531089521192
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.5416666666666666,
+     "sem": null,
+     "ci": [
+      0.35074553553106635,
+      0.7210894164831857
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.2,
+     "sem": null,
+     "ci": [
+      0.08860454100652487,
+      0.3913133553653824
+     ],
+     "n": 4,
+     "n_events": 25,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.12318840579710146,
+     "sem": null,
+     "ci": [
+      0.10252652582661843,
+      0.14733065852194022
+     ],
+     "n": 4,
+     "n_events": 828,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.004830917874396135,
+     "sem": null,
+     "ci": [
+      0.0018801749478828131,
+      0.012355227561441074
+     ],
+     "n": 4,
+     "n_events": 828,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 392.3275938362412,
+     "sem": 123.0976039749972,
+     "ci": [
+      50.60864520164898,
+      734.0465424708334
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 1.5758521139801849,
+     "sem": 0.35055357994250297,
+     "ci": [
+      0.6027153760597967,
+      2.548988851900573
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.44171467403157955,
+     "sem": 0.07388114112642141,
+     "ci": [
+      0.23662062626463373,
+      0.6468087217985253
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 22.4375,
+     "sem": 3.0385971955273487,
+     "ci": [
+      14.002354185216081,
+      30.87264581478392
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ood": {
+    "success_rate": {
+     "mean": 0.2916666666666667,
+     "sem": null,
+     "ci": [
+      0.14914460334164278,
+      0.49168063658709704
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "door_open_rate": {
+     "mean": 1.0,
+     "sem": null,
+     "ci": [
+      0.8620194241710247,
+      1.0
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.04344255039315584,
+      0.3100428814785757
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "zero_shot_coverage": {
+     "mean": 0.125,
+     "sem": null,
+     "ci": [
+      0.04344255039315584,
+      0.3100428814785757
+     ],
+     "n": 4,
+     "n_events": 24,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0026261216525425585
+     ],
+     "n": 4,
+     "n_events": 1459,
+     "method": "wilson"
+    },
+    "invalid_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.0026261216525425585
+     ],
+     "n": 4,
+     "n_events": 1459,
+     "method": "wilson"
+    },
+    "planner_ops_per_step": {
+     "mean": 148.91413268667094,
+     "sem": 29.690411286498048,
+     "ci": [
+      66.49355095535236,
+      231.33471441798952
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plan_cache_hits_per_step": {
+     "mean": 5.315279653998183,
+     "sem": 0.3865422613861444,
+     "ci": [
+      4.242238336390246,
+      6.38832097160612
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "plans_used_per_step": {
+     "mean": 0.9586330571894097,
+     "sem": 0.006642570237300624,
+     "ci": [
+      0.9401932822106632,
+      0.9770728321681562
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "mean_steps_to_success": {
+     "mean": 14.25,
+     "sem": 1.5612494995995996,
+     "ci": [
+      9.915971389111512,
+      18.58402861088849
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A1_eval": {
+    "success_rate": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.5699064013154177,
+      0.9340852122641324
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.1875,
+     "sem": null,
+     "ci": [
+      0.06591478773586765,
+      0.4300935986845823
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.009779005074818959
+     ],
+     "n": 4,
+     "n_events": 389,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.1875,
+     "sem": 1.1875,
+     "ci": [
+      7.891,
+      14.484
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 148.0548536209553,
+     "sem": 51.44815664711098,
+     "ci": [
+      5.234770768575231,
+      290.87493647333537
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.B_eval": {
+    "success_rate": {
+     "mean": 0.6875,
+     "sem": null,
+     "ci": [
+      0.4440393186673406,
+      0.8583556494803894
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.1875,
+     "sem": null,
+     "ci": [
+      0.06591478773586765,
+      0.4300935986845823
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.23627075351213284,
+     "sem": null,
+     "ci": [
+      0.20784885803279513,
+      0.26726786177459694
+     ],
+     "n": 4,
+     "n_events": 783,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 37.333333333333336,
+     "sem": 11.050389636167184,
+     "ci": [
+      6.657451703333237,
+      68.00921496333343
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 211.7096646299749,
+     "sem": 35.55751418090216,
+     "ci": [
+      113.00200526379051,
+      310.41732399615927
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.A2_eval": {
+    "success_rate": {
+     "mean": 0.8125,
+     "sem": null,
+     "ci": [
+      0.5699064013154177,
+      0.9340852122641324
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "within_episode_discovery": {
+     "mean": 0.1875,
+     "sem": null,
+     "ci": [
+      0.06591478773586765,
+      0.4300935986845823
+     ],
+     "n": 4,
+     "n_events": 16,
+     "method": "wilson"
+    },
+    "fallback_rate": {
+     "mean": 0.0,
+     "sem": null,
+     "ci": [
+      0.0,
+      0.009779005074818959
+     ],
+     "n": 4,
+     "n_events": 389,
+     "method": "wilson"
+    },
+    "mean_steps_to_success": {
+     "mean": 11.1875,
+     "sem": 1.1875,
+     "ci": [
+      7.891,
+      14.484
+     ],
+     "n": 4,
+     "method": "t"
+    },
+    "planner_ops_per_step": {
+     "mean": 148.0548536209553,
+     "sem": 51.44815664711098,
+     "ci": [
+      5.234770768575231,
+      290.87493647333537
+     ],
+     "n": 4,
+     "method": "t"
+    }
+   },
+   "ab.retention": {
+    "a1_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "a2_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "b_success": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    },
+    "a_rule_retained_final": {
+     "mean": null,
+     "sem": null,
+     "ci": null,
+     "n": 0,
+     "n_events": 0,
+     "method": "wilson"
+    }
+   }
+  }
+ },
+ "paired": {
+  "trained-fresh.val_clean.success_rate": {
+   "mean": 1.3877787807814457e-17,
+   "ci": [
+    -0.20833333333333331,
+    0.16666666666666669
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "muted-trained.val_clean.success_rate": {
+   "mean": 0.08333333333333331,
+   "ci": [
+    -0.08333333333333338,
+    0.25
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "shuffled-trained.val_clean.success_rate": {
+   "mean": 6.938893903907228e-18,
+   "ci": [
+    -0.12499999999999997,
+    0.125
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "epoch_reset-trained.val_clean.success_rate": {
+   "mean": 0.125,
+   "ci": [
+    0.0,
+    0.25
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore-trained.val_clean.success_rate": {
+   "mean": 0.25,
+   "ci": [
+    0.041666666666666685,
+    0.5416666666666666
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-trained.val_clean.success_rate": {
+   "mean": 0.4166666666666667,
+   "ci": [
+    0.24999999999999997,
+    0.5833333333333334
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-epoch.val_clean.success_rate": {
+   "mean": 0.2916666666666667,
+   "ci": [
+    0.16666666666666666,
+    0.4166666666666667
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "trained-fresh.test_clean.success_rate": {
+   "mean": -0.0416666666666667,
+   "ci": [
+    -0.25000000000000006,
+    0.20833333333333331
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "muted-trained.test_clean.success_rate": {
+   "mean": 0.08333333333333337,
+   "ci": [
+    -0.08333333333333331,
+    0.25000000000000006
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "shuffled-trained.test_clean.success_rate": {
+   "mean": 0.08333333333333337,
+   "ci": [
+    0.0,
+    0.16666666666666674
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "epoch_reset-trained.test_clean.success_rate": {
+   "mean": 0.12500000000000006,
+   "ci": [
+    0.041666666666666685,
+    0.16666666666666674
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore-trained.test_clean.success_rate": {
+   "mean": -0.08333333333333331,
+   "ci": [
+    -0.16666666666666663,
+    0.0
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-trained.test_clean.success_rate": {
+   "mean": 0.08333333333333334,
+   "ci": [
+    0.0,
+    0.25
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-epoch.test_clean.success_rate": {
+   "mean": -0.04166666666666671,
+   "ci": [
+    -0.16666666666666674,
+    0.08333333333333331
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "trained-fresh.test_noisy.success_rate": {
+   "mean": -0.04166666666666666,
+   "ci": [
+    -0.16666666666666669,
+    0.0833333333333334
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "muted-trained.test_noisy.success_rate": {
+   "mean": 0.04166666666666666,
+   "ci": [
+    -0.0833333333333334,
+    0.16666666666666669
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "shuffled-trained.test_noisy.success_rate": {
+   "mean": -0.041666666666666685,
+   "ci": [
+    -0.16666666666666669,
+    0.08333333333333331
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "epoch_reset-trained.test_noisy.success_rate": {
+   "mean": -2.7755575615628914e-17,
+   "ci": [
+    -0.12500000000000006,
+    0.12499999999999997
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore-trained.test_noisy.success_rate": {
+   "mean": -0.20833333333333334,
+   "ci": [
+    -0.2916666666666667,
+    -0.16666666666666663
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-trained.test_noisy.success_rate": {
+   "mean": -0.33333333333333337,
+   "ci": [
+    -0.5,
+    -0.125
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-epoch.test_noisy.success_rate": {
+   "mean": -0.3333333333333333,
+   "ci": [
+    -0.5,
+    -0.125
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "trained-fresh.ood.success_rate": {
+   "mean": 0.125,
+   "ci": [
+    -0.08333333333333334,
+    0.375
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "muted-trained.ood.success_rate": {
+   "mean": -0.125,
+   "ci": [
+    -0.375,
+    0.08333333333333334
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "shuffled-trained.ood.success_rate": {
+   "mean": -0.08333333333333334,
+   "ci": [
+    -0.16666666666666669,
+    0.0
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "epoch_reset-trained.ood.success_rate": {
+   "mean": -0.25,
+   "ci": [
+    -0.4166666666666667,
+    -0.08333333333333333
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore-trained.ood.success_rate": {
+   "mean": -0.08333333333333334,
+   "ci": [
+    -0.33333333333333337,
+    0.16666666666666669
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-trained.ood.success_rate": {
+   "mean": -0.08333333333333334,
+   "ci": [
+    -0.25,
+    0.0
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "explore+epoch-epoch.ood.success_rate": {
+   "mean": 0.16666666666666669,
+   "ci": [
+    0.041666666666666664,
+    0.2916666666666667
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  },
+  "ab.forgetting.trained.a2-a1": {
+   "mean": 0.25,
+   "ci": [
+    0.25,
+    0.25
+   ],
+   "n": 4,
+   "method": "bootstrap"
+  }
+ },
+ "floors": {
+  "random val_clean": {
+   "mean": 0.041666666666666664,
+   "sem": 0.041666666666666664,
+   "ci": [
+    -0.07399999999999998,
+    0.15733333333333333
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "random test_clean": {
+   "mean": 0.0,
+   "sem": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "random test_noisy": {
+   "mean": 0.0,
+   "sem": 0.0,
+   "ci": [
+    0.0,
+    0.0
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "random ood": {
+   "mean": 0.041666666666666664,
+   "sem": 0.041666666666666664,
+   "ci": [
+    -0.07399999999999998,
+    0.15733333333333333
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "oracle val_clean": {
+   "mean": 1.0,
+   "sem": 0.0,
+   "ci": [
+    1.0,
+    1.0
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "oracle test_clean": {
+   "mean": 1.0,
+   "sem": 0.0,
+   "ci": [
+    1.0,
+    1.0
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "oracle test_noisy": {
+   "mean": 1.0,
+   "sem": 0.0,
+   "ci": [
+    1.0,
+    1.0
+   ],
+   "n": 4,
+   "method": "t"
+  },
+  "oracle ood": {
+   "mean": 1.0,
+   "sem": 0.0,
+   "ci": [
+    1.0,
+    1.0
+   ],
+   "n": 4,
+   "method": "t"
+  }
+ }
+}
