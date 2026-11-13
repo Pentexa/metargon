@@ -1,0 +1,3844 @@
+{
+ "phase_episodes": {
+  "A1": 40,
+  "A2": 30,
+  "B": 30
+ },
+ "run_id": "memory-diagnosis-attribution-v01-rlearn",
+ "seed": 20270201,
+ "variants": {
+  "epoch_reset": {
+   "attribution": {
+    "a1_hypotheses_present_after_B": 34,
+    "a1_hypotheses_usable_after_B": 24,
+    "a1_hypotheses_verified_after_B": 10,
+    "a1_status_transitions_during_B": {
+     "contradicted->verified": 10,
+     "hypothesis->hypothesis": 5,
+     "predicted->hypothesis": 5,
+     "verified->contradicted": 10,
+     "verified->hypothesis": 4
+    },
+    "a2_hypothesis_plans": 28,
+    "a2_rediscovered_plans": 0,
+    "a2_retained_plans": 28,
+    "a2_retention_share": 1.0
+   },
+   "eval": {
+    "A1_frozen": {
+     "config_mean_success": 1.0,
+     "n_configs": 4
+    },
+    "A2_frozen": {
+     "config_mean_success": 1.0,
+     "n_configs": 4
+    },
+    "B_frozen": {
+     "config_mean_success": 0.75,
+     "n_configs": 4
+    }
+   },
+   "snapshots": {
+    "A1": {
+     "hypotheses": [
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 1,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 2,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 3,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 4,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 5,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 6,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 7,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 8,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 9,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 10,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 11,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 12,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 13,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 14,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 15,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 16,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 17,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 18,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 19,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 20,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 21,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 22,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 23,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 24,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 25,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 26,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 27,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 28,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 29,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 30,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 31,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 32,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 33,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 34,
+       "status": "hypothesis"
+      }
+     ],
+     "step": 2307
+    },
+    "A2": {
+     "hypotheses": [
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 1,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 2,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 3,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 4,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 5,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 6,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 7,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 8,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 9,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 10,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 11,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 12,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 13,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 14,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 15,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 16,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 17,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 18,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 19,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 20,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 21,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 22,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 23,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 24,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 25,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 26,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 27,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 28,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 29,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 30,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 31,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 32,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 33,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 34,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 35,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 36,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 37,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 38,
+       "status": "hypothesis"
+      }
+     ],
+     "step": 5086
+    },
+    "B": {
+     "hypotheses": [
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 1,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 2,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 3,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 4,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 5,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 6,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 7,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 8,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 9,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 10,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 11,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 12,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 13,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 14,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 15,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 16,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 17,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 18,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 19,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 20,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 21,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 22,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 23,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 24,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 25,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 26,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 27,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 28,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 29,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 30,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 31,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 32,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 33,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 260,
+       "door": "D1",
+       "h_id": 34,
+       "status": "hypothesis"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 35,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 36,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 37,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2636,
+       "door": "D2",
+       "h_id": 38,
+       "status": "verified"
+      }
+     ],
+     "step": 3345
+    }
+   },
+   "success": {
+    "A1": 0.475,
+    "A2": 0.43333333333333335,
+    "B": 0.7333333333333333
+   }
+  },
+  "original": {
+   "attribution": {
+    "a1_hypotheses_present_after_B": 34,
+    "a1_hypotheses_usable_after_B": 0,
+    "a1_hypotheses_verified_after_B": 0,
+    "a1_status_transitions_during_B": {
+     "contradicted->contradicted": 15,
+     "verified->contradicted": 19
+    },
+    "a2_hypothesis_plans": 0,
+    "a2_rediscovered_plans": 0,
+    "a2_retained_plans": 0,
+    "a2_retention_share": null
+   },
+   "eval": {
+    "A1_frozen": {
+     "config_mean_success": 0.75,
+     "n_configs": 4
+    },
+    "A2_frozen": {
+     "config_mean_success": 0.625,
+     "n_configs": 4
+    },
+    "B_frozen": {
+     "config_mean_success": 0.0,
+     "n_configs": 4
+    }
+   },
+   "snapshots": {
+    "A1": {
+     "hypotheses": [
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 1,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 2,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 3,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 4,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 5,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 6,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 7,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 8,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 9,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 10,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 11,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 12,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 13,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 14,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 15,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 16,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 17,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 18,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 19,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 20,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 21,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 22,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 23,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 24,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 25,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 26,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 27,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 28,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 29,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 30,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 31,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 32,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 33,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 34,
+       "status": "contradicted"
+      }
+     ],
+     "step": 2632
+    },
+    "A2": {
+     "hypotheses": [
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 1,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 2,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 3,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 4,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 5,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 6,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 7,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 8,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 9,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 10,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 11,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 12,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 13,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 14,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 15,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 16,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 17,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 18,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 19,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 20,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 21,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 22,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 23,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 24,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 25,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 26,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 27,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 28,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 29,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 30,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 31,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 32,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 33,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 34,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 35,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 36,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 37,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 38,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 39,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 40,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 41,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 42,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 43,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 44,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 45,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 46,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 47,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 48,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 49,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 50,
+       "status": "verified"
+      }
+     ],
+     "step": 5370
+    },
+    "B": {
+     "hypotheses": [
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 1,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 2,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 3,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 4,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 5,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 6,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 7,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 8,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 9,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 0,
+       "door": "D2",
+       "h_id": 10,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 11,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 12,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 13,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 14,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 15,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 16,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 17,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 18,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 19,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 20,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 21,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 22,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 23,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 4,
+       "door": "D1",
+       "h_id": 24,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 25,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 26,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 27,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 28,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 174,
+       "door": "D2",
+       "h_id": 29,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 30,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 31,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 32,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 33,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 980,
+       "door": "D1",
+       "h_id": 34,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 35,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 36,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 37,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 38,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 39,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "load",
+         "P1",
+         "A"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 40,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 41,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 42,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 43,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "load",
+         "P1",
+         "A"
+        ],
+        [
+         "loadany",
+         "P1"
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 44,
+       "status": "contradicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 45,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S2",
+         true
+        ]
+       ],
+       "created_step": 2734,
+       "door": "D1",
+       "h_id": 46,
+       "status": "predicted"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 47,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P1"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 48,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "empty",
+         "P2"
+        ],
+        [
+         "sw",
+         "S1",
+         true
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 49,
+       "status": "verified"
+      },
+      {
+       "antecedent": [
+        [
+         "sw",
+         "S1",
+         true
+        ],
+        [
+         "sw",
+         "S2",
+         false
+        ]
+       ],
+       "created_step": 2961,
+       "door": "D2",
+       "h_id": 50,
+       "status": "verified"
+      }
+     ],
+     "step": 3418
+    }
+   },
+   "success": {
+    "A1": 0.35,
+    "A2": 0.4666666666666667,
+    "B": 0.8666666666666667
+   }
+  }
+ }
+}
