@@ -1,0 +1,971 @@
+{
+ "conditions": {
+  "clean": {
+   "arms": {
+    "baseline": {
+     "mean_steps_all": 35.675,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.0,
+     "per_seed_success": [
+      1.0,
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.0,
+      "claimed_open": 0.10999742002063935,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.0,
+      "true_open": 0.10999742002063935
+     },
+     "success_rate": 0.6666666666666666,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.0,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.0,
+      "holds_started": 0.0,
+      "loop_steps": 0.0,
+      "memory_correct": 1.3,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 12.1
+    },
+    "v01": {
+     "mean_steps_all": 15.325,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.0,
+     "per_seed_success": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.0,
+      "claimed_open": 0.14102167182662523,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.0,
+      "true_open": 0.14102167182662523
+     },
+     "success_rate": 1.0,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.65,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 1.3,
+      "holds_started": 1.3,
+      "loop_steps": 0.0,
+      "memory_correct": 1.3,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 4.5
+    },
+    "v01_nogap": {
+     "mean_steps_all": 15.641666666666667,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.0,
+     "per_seed_success": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.00015151515151515152,
+      "claimed_open": 0.14049582512430792,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.00015151515151515152,
+      "true_open": 0.14049582512430792
+     },
+     "success_rate": 1.0,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.7333333333333333,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.008333333333333333,
+      "holds_resolved_open": 1.3083333333333333,
+      "holds_started": 1.3166666666666667,
+      "loop_steps": 0.0,
+      "memory_correct": 1.3,
+      "memory_incorrect": 0.008333333333333333,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.1,
+      "stalls_detected": 0.008333333333333333
+     },
+     "wall_s": 2.9
+    },
+    "v01_nohold": {
+     "mean_steps_all": 15.325,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.0,
+     "per_seed_success": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.0,
+      "claimed_open": 0.14102167182662523,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.0,
+      "true_open": 0.14102167182662523
+     },
+     "success_rate": 1.0,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.0,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.0,
+      "holds_started": 0.0,
+      "loop_steps": 0.0,
+      "memory_correct": 1.625,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 4.6
+    },
+    "v01_noinfo": {
+     "mean_steps_all": 15.325,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.0,
+     "per_seed_success": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.0,
+      "claimed_open": 0.14102167182662523,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.0,
+      "true_open": 0.14102167182662523
+     },
+     "success_rate": 1.0,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.65,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 1.3,
+      "holds_started": 1.3,
+      "loop_steps": 0.0,
+      "memory_correct": 1.3,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 2.5
+    },
+    "v01_norecov": {
+     "mean_steps_all": 15.325,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.0,
+     "per_seed_success": [
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.0,
+      "claimed_open": 0.14102167182662523,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.0,
+      "true_open": 0.14102167182662523
+     },
+     "success_rate": 1.0,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.65,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 1.3,
+      "holds_started": 1.3,
+      "loop_steps": 0.0,
+      "memory_correct": 1.3,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 5.5
+    }
+   },
+   "comparisons": {
+    "v01_nogap_vs_baseline": {
+     "ci": [
+      0.0,
+      0.6666666666666667
+     ],
+     "mean": 0.32766666666666444
+    },
+    "v01_nogap_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_nohold_vs_baseline": {
+     "ci": [
+      0.0,
+      0.6666666666666667
+     ],
+     "mean": 0.32766666666666444
+    },
+    "v01_nohold_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_noinfo_vs_baseline": {
+     "ci": [
+      0.0,
+      0.6666666666666667
+     ],
+     "mean": 0.32766666666666444
+    },
+    "v01_noinfo_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_norecov_vs_baseline": {
+     "ci": [
+      0.0,
+      0.6666666666666667
+     ],
+     "mean": 0.32766666666666444
+    },
+    "v01_norecov_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_vs_baseline": {
+     "ci": [
+      0.0,
+      0.6666666666666667
+     ],
+     "mean": 0.32766666666666444
+    }
+   }
+  },
+  "noisy": {
+   "arms": {
+    "baseline": {
+     "mean_steps_all": 23.795833333333334,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.05416666666666667,
+     "per_seed_success": [
+      0.825,
+      1.0,
+      1.0,
+      0.975,
+      0.85,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.1506374086889507,
+      "claimed_close": 0.1346961241385331,
+      "claimed_open": 0.22813247487196833,
+      "ground_atom_mismatch": 0.25483721783091057,
+      "invalid_action": 0.0005654761904761905,
+      "missed_true_close": 0.0006799536960646811,
+      "missed_true_open": 0.013095495882096901,
+      "phantom_close": 0.1336395765194855,
+      "phantom_open": 0.13149433581783218,
+      "true_close": 0.0017365013151123,
+      "true_open": 0.1097336349362327
+     },
+     "success_rate": 0.9416666666666667,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.0,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.0,
+      "holds_started": 0.0,
+      "loop_steps": 0.0,
+      "memory_correct": 3.275,
+      "memory_incorrect": 0.008333333333333333,
+      "probes_new": 0.0,
+      "random_fallback_steps": 2.0125,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 41.0
+    },
+    "v01": {
+     "mean_steps_all": 23.879166666666666,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.05416666666666667,
+     "per_seed_success": [
+      0.725,
+      1.0,
+      1.0,
+      0.975,
+      0.95,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.15066656237965756,
+      "claimed_close": 0.13341912049257784,
+      "claimed_open": 0.22631974986605105,
+      "ground_atom_mismatch": 0.2552980732624998,
+      "invalid_action": 0.0007217261904761905,
+      "missed_true_close": 0.00018649193548387095,
+      "missed_true_open": 0.013510937865978019,
+      "phantom_close": 0.13326287049257787,
+      "phantom_open": 0.1328201133350493,
+      "true_close": 0.0003427419354838709,
+      "true_open": 0.10701057439697924
+     },
+     "success_rate": 0.9416666666666667,
+     "trace_per_episode": {
+      "hold_preserve_steps": 1.1083333333333334,
+      "holds_interrupted": 0.25833333333333336,
+      "holds_resolved_fail": 0.008333333333333333,
+      "holds_resolved_open": 1.9375,
+      "holds_started": 2.2041666666666666,
+      "loop_steps": 0.0,
+      "memory_correct": 1.8916666666666666,
+      "memory_incorrect": 0.008333333333333333,
+      "probes_new": 0.0,
+      "random_fallback_steps": 1.8583333333333334,
+      "recovery_steps": 2.8958333333333335,
+      "stalls_detected": 0.3125
+     },
+     "wall_s": 16.1
+    },
+    "v01_nogap": {
+     "mean_steps_all": 23.1375,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.041666666666666664,
+     "per_seed_success": [
+      0.8,
+      1.0,
+      1.0,
+      0.975,
+      0.95,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.14928921966705877,
+      "claimed_close": 0.13262477718344415,
+      "claimed_open": 0.22750401923152389,
+      "ground_atom_mismatch": 0.25363764914155384,
+      "invalid_action": 0.0004092261904761905,
+      "missed_true_close": 0.00023857526881720427,
+      "missed_true_open": 0.012978293200367667,
+      "phantom_close": 0.13246852718344415,
+      "phantom_open": 0.1315627201174,
+      "true_close": 0.0003948252688172043,
+      "true_open": 0.10891959231449107
+     },
+     "success_rate": 0.9541666666666667,
+     "trace_per_episode": {
+      "hold_preserve_steps": 1.0958333333333334,
+      "holds_interrupted": 0.25833333333333336,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 1.8916666666666666,
+      "holds_started": 2.154166666666667,
+      "loop_steps": 0.0,
+      "memory_correct": 1.8458333333333334,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 1.2958333333333334,
+      "recovery_steps": 2.316666666666667,
+      "stalls_detected": 0.25416666666666665
+     },
+     "wall_s": 16.6
+    },
+    "v01_nohold": {
+     "mean_steps_all": 36.31666666666667,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.175,
+     "per_seed_success": [
+      0.325,
+      1.0,
+      0.4,
+      0.975,
+      0.95,
+      0.925
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.15238407836083298,
+      "claimed_close": 0.13609232370376928,
+      "claimed_open": 0.20998192913063093,
+      "ground_atom_mismatch": 0.2526905388270987,
+      "invalid_action": 0.001971726190476191,
+      "missed_true_close": 0.00024687840891382263,
+      "missed_true_open": 0.011644669847600942,
+      "phantom_close": 0.13541524037043598,
+      "phantom_open": 0.13526582271021143,
+      "true_close": 0.000923961742247156,
+      "true_open": 0.08636077626802
+     },
+     "success_rate": 0.7625,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.0,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.0,
+      "holds_started": 0.0,
+      "loop_steps": 0.0,
+      "memory_correct": 2.8041666666666667,
+      "memory_incorrect": 0.04583333333333333,
+      "probes_new": 0.0,
+      "random_fallback_steps": 4.825,
+      "recovery_steps": 10.666666666666666,
+      "stalls_detected": 1.05
+     },
+     "wall_s": 30.2
+    },
+    "v01_noinfo": {
+     "mean_steps_all": 24.9,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.05,
+     "per_seed_success": [
+      0.725,
+      1.0,
+      1.0,
+      0.975,
+      0.95,
+      0.975
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.14990667707838662,
+      "claimed_close": 0.1325427855042222,
+      "claimed_open": 0.2240074124415803,
+      "ground_atom_mismatch": 0.2554478800398164,
+      "invalid_action": 0.0007217261904761905,
+      "missed_true_close": 0.00040579018109790604,
+      "missed_true_open": 0.013375460107163995,
+      "phantom_close": 0.13238653550422222,
+      "phantom_open": 0.13218351238700954,
+      "true_close": 0.0005620401810979061,
+      "true_open": 0.10519936016173428
+     },
+     "success_rate": 0.9375,
+     "trace_per_episode": {
+      "hold_preserve_steps": 1.1833333333333333,
+      "holds_interrupted": 0.2708333333333333,
+      "holds_resolved_fail": 0.0125,
+      "holds_resolved_open": 2.1166666666666667,
+      "holds_started": 2.4,
+      "loop_steps": 0.0,
+      "memory_correct": 2.0833333333333335,
+      "memory_incorrect": 0.0125,
+      "probes_new": 0.0,
+      "random_fallback_steps": 1.8791666666666667,
+      "recovery_steps": 3.216666666666667,
+      "stalls_detected": 0.3541666666666667
+     },
+     "wall_s": 16.5
+    },
+    "v01_norecov": {
+     "mean_steps_all": 30.495833333333334,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.1625,
+     "per_seed_success": [
+      0.05,
+      1.0,
+      1.0,
+      1.0,
+      0.95,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.14764552549833052,
+      "claimed_close": 0.13123245114824994,
+      "claimed_open": 0.21088931058061752,
+      "ground_atom_mismatch": 0.2534932085483524,
+      "invalid_action": 0.00478422619047619,
+      "missed_true_close": 0.0006127493949894123,
+      "missed_true_open": 0.01242547579452457,
+      "phantom_close": 0.13107620114824992,
+      "phantom_open": 0.13010867211225,
+      "true_close": 0.0007689993949894122,
+      "true_open": 0.09320611426289169
+     },
+     "success_rate": 0.8333333333333334,
+     "trace_per_episode": {
+      "hold_preserve_steps": 1.3083333333333333,
+      "holds_interrupted": 0.26666666666666666,
+      "holds_resolved_fail": 0.0125,
+      "holds_resolved_open": 2.754166666666667,
+      "holds_started": 3.0375,
+      "loop_steps": 0.0,
+      "memory_correct": 2.6625,
+      "memory_incorrect": 0.0125,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.5041666666666667,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 25.8
+    }
+   },
+   "comparisons": {
+    "v01_nogap_vs_baseline": {
+     "ci": [
+      -0.012499999999999956,
+      0.04999999999999993
+     ],
+     "mean": 0.011877083333333436
+    },
+    "v01_nogap_vs_v01": {
+     "ci": [
+      0.0,
+      0.03750000000000009
+     ],
+     "mean": 0.01269374999999997
+    },
+    "v01_nohold_vs_baseline": {
+     "ci": [
+      -0.3916666666666666,
+      0.008333333333333526
+     ],
+     "mean": -0.1795187500000014
+    },
+    "v01_nohold_vs_v01": {
+     "ci": [
+      -0.3916666666666665,
+      -0.012499999999999956
+     ],
+     "mean": -0.18231249999999943
+    },
+    "v01_noinfo_vs_baseline": {
+     "ci": [
+      -0.050000000000000155,
+      0.04583333333333339
+     ],
+     "mean": -0.00502291666666665
+    },
+    "v01_noinfo_vs_v01": {
+     "ci": [
+      -0.012500000000000067,
+      0.0
+     ],
+     "mean": -0.004154166666666544
+    },
+    "v01_norecov_vs_baseline": {
+     "ci": [
+      -0.3833333333333334,
+      0.050000000000000155
+     ],
+     "mean": -0.11179166666666482
+    },
+    "v01_norecov_vs_v01": {
+     "ci": [
+      -0.3375,
+      0.012500000000000067
+     ],
+     "mean": -0.11008958333333288
+    },
+    "v01_vs_baseline": {
+     "ci": [
+      -0.050000000000000044,
+      0.04999999999999993
+     ],
+     "mean": -0.0009166666666666561
+    }
+   }
+  },
+  "ood": {
+   "arms": {
+    "baseline": {
+     "mean_steps_all": 46.175,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.16666666666666666,
+     "per_seed_success": [
+      1.0,
+      0.0,
+      0.0,
+      1.0,
+      1.0,
+      0.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.00021929824561403506,
+      "claimed_open": 0.09269220846233205,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.00021929824561403506,
+      "true_open": 0.09269220846233205
+     },
+     "success_rate": 0.5,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.0,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.0,
+      "holds_started": 0.0,
+      "loop_steps": 0.0,
+      "memory_correct": 0.4875,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 11.1
+    },
+    "v01": {
+     "mean_steps_all": 22.7375,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.10833333333333334,
+     "per_seed_success": [
+      1.0,
+      0.325,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.00021929824561403506,
+      "claimed_open": 0.13547996466441634,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.00021929824561403506,
+      "true_open": 0.13547996466441634
+     },
+     "success_rate": 0.8875,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.325,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.975,
+      "holds_started": 0.975,
+      "loop_steps": 0.0,
+      "memory_correct": 0.8125,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 4.670833333333333,
+      "recovery_steps": 5.933333333333334,
+      "stalls_detected": 0.6625
+     },
+     "wall_s": 15.2
+    },
+    "v01_nogap": {
+     "mean_steps_all": 22.954166666666666,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.10833333333333334,
+     "per_seed_success": [
+      1.0,
+      0.325,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.0004225502781343602,
+      "claimed_open": 0.1349786096508662,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.0004225502781343602,
+      "true_open": 0.1349786096508662
+     },
+     "success_rate": 0.8875,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.325,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.9833333333333333,
+      "holds_started": 0.9833333333333333,
+      "loop_steps": 0.0,
+      "memory_correct": 0.8125,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 4.670833333333333,
+      "recovery_steps": 6.033333333333333,
+      "stalls_detected": 0.6708333333333333
+     },
+     "wall_s": 16.0
+    },
+    "v01_nohold": {
+     "mean_steps_all": 22.7375,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.10833333333333334,
+     "per_seed_success": [
+      1.0,
+      0.325,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.00021929824561403506,
+      "claimed_open": 0.13547996466441634,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.00021929824561403506,
+      "true_open": 0.13547996466441634
+     },
+     "success_rate": 0.8875,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.0,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.0,
+      "holds_started": 0.0,
+      "loop_steps": 0.0,
+      "memory_correct": 0.975,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 4.670833333333333,
+      "recovery_steps": 5.933333333333334,
+      "stalls_detected": 0.6625
+     },
+     "wall_s": 15.5
+    },
+    "v01_noinfo": {
+     "mean_steps_all": 22.7375,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.10833333333333334,
+     "per_seed_success": [
+      1.0,
+      0.325,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.00021929824561403506,
+      "claimed_open": 0.13547996466441634,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.00021929824561403506,
+      "true_open": 0.13547996466441634
+     },
+     "success_rate": 0.8875,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.325,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.975,
+      "holds_started": 0.975,
+      "loop_steps": 0.0,
+      "memory_correct": 0.8125,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 4.670833333333333,
+      "recovery_steps": 5.933333333333334,
+      "stalls_detected": 0.6625
+     },
+     "wall_s": 15.5
+    },
+    "v01_norecov": {
+     "mean_steps_all": 24.508333333333333,
+     "n_episodes": 240,
+     "opened_not_used_rate": 0.16666666666666666,
+     "per_seed_success": [
+      1.0,
+      0.0,
+      1.0,
+      1.0,
+      1.0,
+      1.0
+     ],
+     "perception_per_step": {
+      "belief_reality_divergence": 0.0,
+      "claimed_close": 0.00021929824561403506,
+      "claimed_open": 0.13296998624010978,
+      "ground_atom_mismatch": 0.0,
+      "invalid_action": 0.0,
+      "missed_true_close": 0.0,
+      "missed_true_open": 0.0,
+      "phantom_close": 0.0,
+      "phantom_open": 0.0,
+      "true_close": 0.00021929824561403506,
+      "true_open": 0.13296998624010978
+     },
+     "success_rate": 0.8333333333333334,
+     "trace_per_episode": {
+      "hold_preserve_steps": 0.325,
+      "holds_interrupted": 0.0,
+      "holds_resolved_fail": 0.0,
+      "holds_resolved_open": 0.975,
+      "holds_started": 0.975,
+      "loop_steps": 0.0,
+      "memory_correct": 0.8125,
+      "memory_incorrect": 0.0,
+      "probes_new": 0.0,
+      "random_fallback_steps": 0.0,
+      "recovery_steps": 0.0,
+      "stalls_detected": 0.0
+     },
+     "wall_s": 9.3
+    }
+   },
+   "comparisons": {
+    "v01_nogap_vs_baseline": {
+     "ci": [
+      0.054166666666666696,
+      0.7208333333333334
+     ],
+     "mean": 0.3827812499999986
+    },
+    "v01_nogap_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_nohold_vs_baseline": {
+     "ci": [
+      0.054166666666666696,
+      0.7208333333333334
+     ],
+     "mean": 0.3827812499999986
+    },
+    "v01_nohold_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_noinfo_vs_baseline": {
+     "ci": [
+      0.054166666666666696,
+      0.7208333333333334
+     ],
+     "mean": 0.3827812499999986
+    },
+    "v01_noinfo_vs_v01": {
+     "ci": [
+      0.0,
+      0.0
+     ],
+     "mean": 0.0
+    },
+    "v01_norecov_vs_baseline": {
+     "ci": [
+      0.0,
+      0.6666666666666667
+     ],
+     "mean": 0.32766666666666444
+    },
+    "v01_norecov_vs_v01": {
+     "ci": [
+      -0.1625000000000001,
+      0.0
+     ],
+     "mean": -0.05313749999999761
+    },
+    "v01_vs_baseline": {
+     "ci": [
+      0.054166666666666696,
+      0.7208333333333334
+     ],
+     "mean": 0.3827812499999986
+    }
+   }
+  }
+ },
+ "episodes": 40,
+ "n_seeds": 6,
+ "run_id": "exploration-noise-diagnosis-v01",
+ "seed_base": 20261118
+}
