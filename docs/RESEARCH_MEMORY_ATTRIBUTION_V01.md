@@ -156,6 +156,8 @@ A/B/A repeated-learning protocol (A1→B conflict→A2), per-variant:
 | epoch_reset | 0.475 | 0.733 | 0.433 | −0.042 | **1.00** | 10 |
 | original | 0.350 | 0.867 | 0.467 | +0.117 | — | 0 |
 
+**Metric separation (important):** The A/B/A table above reports **training-phase episode success** (`success.A1/B/A2`; for `epoch_reset`, A2 = 0.433) across the 40/30/30 A1/B/A2 training episodes. The **separate frozen evaluation** in `rlearn_summary.json` is measured after each phase on just four held-out configs (`eval.A1_frozen/B_frozen/A2_frozen`); for `epoch_reset`, A2 frozen = 1.000 (4/4), and for `original` A2 frozen = 0.625. These are different denominators, conditions and metrics and must not be compared or described interchangeably. The `a2_retention_share = 1.0` attribution refers only to the 28 hypothesis-sourced A2 frozen evaluation plans, **not** to 100% of actions or a causal proof that all successful episodes required memory. The A/B/A attribution run uses one diagnostic seed (`20270201`); broader replication remains necessary.
+
 - `epoch_reset`: A2 frozen eval success 1.00; 100% of A2 hypothesis
   plans are retained (created in A1, surviving B). A1→B status
   transitions: 10 verified→contradicted but also 10
