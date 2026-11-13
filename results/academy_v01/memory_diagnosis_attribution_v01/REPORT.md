@@ -53,6 +53,8 @@ Run: `memory-diagnosis-attribution-v01-main`; seeds 20270201; train 120 eps/seed
 | epoch_reset | 0.475 | 0.733 | 0.433 | -0.042 | 1.00 | 10 |
 | original | 0.350 | 0.867 | 0.467 | +0.117 | — | 0 |
 
+**How to read the A/B/A metrics:** The `A1`, `B`, `A2`, and `A2−A1` columns above report **training-phase episode success**, not frozen-evaluation accuracy. In the separate post-phase frozen evaluation (four configs each, one diagnostic seed `20270201`), `epoch_reset` scored A1=1.000, B=0.750, A2=1.000; `original` scored A1=0.750, B=0.000, A2=0.625. `retained share=1.00` means 28/28 A2 *hypothesis-sourced plans* came from A1, not that all actions/successes depended on memory. This is mechanism evidence from a small sample, not general proof of causal benefit. See `rlearn_summary.json` for both measurement series.
+
 A1→B status transitions (A1 hypotheses that persist into B):
 
 | variant | transition | count |
