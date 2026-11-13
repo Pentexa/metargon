@@ -246,6 +246,7 @@ class MetargonAcademyAgent:
             "door_open_after_atom_pair": 0,
             "door_open_after_novel_single": 0,
             "door_open_after_conjunction": 0,
+            "door_open_after_gap": 0,
             "door_open_after_other": 0,
             "query_calls": 0, "query_useful": 0,
             "hypothesis_candidates": 0, "hypothesis_skipped_lowconf": 0,
