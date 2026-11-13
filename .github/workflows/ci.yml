@@ -75,7 +75,8 @@ jobs:
         timeout-minutes: 15
 
   # ------------------------------------------------------------------
-  # Independent generalization audit (new family benchmark + tests)
+  # Independent generalization audit (new family benchmark + cognitive
+  # evaluations v0.1 / v0.2)
   # ------------------------------------------------------------------
   generalization-audit:
     name: Generalization audit
@@ -91,6 +92,28 @@ jobs:
       - name: Audit unit tests
         run: python -m unittest discover -s generalization_audit/tests -t . -v
         timeout-minutes: 30
+      - name: Cognitive Benchmark v0.1 tests
+        run: python -m unittest discover -s generalization_audit/cognitive_v01/tests -t . -v
+        timeout-minutes: 40
+      - name: Cognitive Evaluation v0.2 tests
+        run: python -m unittest discover -s generalization_audit/cognitive_v02/tests -t . -v
+        timeout-minutes: 40
+      - name: Cognitive Benchmark v0.1 quick smoke (e2e)
+        run: |
+          rm -rf /tmp/cog_v01_smoke
+          python -m generalization_audit.cognitive_v01.benchmark_cognitive \
+            --quick --out /tmp/cog_v01_smoke
+          test -s /tmp/cog_v01_smoke/summary.json
+          python -c "import json; json.load(open('/tmp/cog_v01_smoke/summary.json'))"
+        timeout-minutes: 20
+      - name: Cognitive Evaluation v0.2 quick smoke (e2e)
+        run: |
+          rm -rf /tmp/cog_v02_smoke
+          python -m generalization_audit.cognitive_v02.runner \
+            --quick --out /tmp/cog_v02_smoke
+          test -s /tmp/cog_v02_smoke/summary.json
+          python -c "import json; json.load(open('/tmp/cog_v02_smoke/summary.json'))"
+        timeout-minutes: 20
       - name: Verify committed example manifests
         run: |
           python -m generalization_audit.tools.verify_experiment \
