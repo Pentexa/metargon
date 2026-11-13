@@ -98,6 +98,9 @@ jobs:
       - name: Cognitive Evaluation v0.2 tests
         run: python -m unittest discover -s generalization_audit/cognitive_v02/tests -t . -v
         timeout-minutes: 40
+      - name: Cognitive Integration v0.1 tests
+        run: python -m unittest discover -s generalization_audit/cognitive_integration_v01/tests -t . -v
+        timeout-minutes: 30
       - name: Cognitive Benchmark v0.1 quick smoke (e2e)
         run: |
           rm -rf /tmp/cog_v01_smoke
@@ -113,6 +116,15 @@ jobs:
             --quick --out /tmp/cog_v02_smoke
           test -s /tmp/cog_v02_smoke/summary.json
           python -c "import json; json.load(open('/tmp/cog_v02_smoke/summary.json'))"
+        timeout-minutes: 20
+      - name: Cognitive Integration v0.1 quick smoke (e2e)
+        run: |
+          rm -rf /tmp/cog_integration_smoke
+          python -m generalization_audit.cognitive_integration_v01.runner \
+            --quick --out /tmp/cog_integration_smoke
+          test -s /tmp/cog_integration_smoke/summary.json
+          python -c "import json; json.load(open('/tmp/cog_integration_smoke/summary.json'))"
+          python -c "import json; json.load(open('/tmp/cog_integration_smoke/analysis.json'))"
         timeout-minutes: 20
       - name: Verify committed example manifests
         run: |
