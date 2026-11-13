@@ -707,9 +707,10 @@ def _rlearn_attribution(a1_snap, b_snap, a2_snap, eval_a2):
 # Report rendering
 # ---------------------------------------------------------------------------
 def _cell_table(cell_data):
-    """Rows: variant | frozen | adaptive | frozen-max | react | ..."""
+    """Rows: variant | frozen | adaptive | retained-exact(usable) | """
+    """false-contradictions | reuse share |"""
     lines = []
-    lines.append("| variant | frozen | adaptive | retained-exact(usable) | "
+    lines.append("| variant | frozen | adaptive | exact-usable | "
                  "false-contradictions | reuse share |")
     lines.append("|---|---:|---:|---:|---:|---:|")
     for name, recs in cell_data.items():
@@ -766,7 +767,7 @@ def render_report(results_dir=None):
             continue
         lines.append(f"## Cell: {cell}")
         lines.append("")
-        lines.append(_cell_table(main["cells"][cell]))
+        lines.append(_cell_table(main["cells"][cell]["variants"]))
         lines.append("")
     if rlearn:
         lines.append("## A/B/A repeated learning")
